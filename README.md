@@ -90,7 +90,12 @@ The files will be generated in `dist/timeforge-frontend/`.
 ---
 
 ## 👥 Contributors
-👤 **Your Name** - [GitHub](https://github.com/your-profile)  
+👤 **Houssem Ellouze** -
+👤 **Hassene Mansouri** -
+👤 **Med Mansour Taleb** -
+👤 **Mohamed Wassim Bahriya Lasghar** -
+👤 **Mahdi Mzoughi**  
+-
 💡 Contributions, ideas, or improvements? Open an **issue** or submit a **pull request**!
 
 ---
