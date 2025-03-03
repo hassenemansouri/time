@@ -90,10 +90,10 @@ The files will be generated in `dist/timeforge-frontend/`.
 ---
 
 ## 👥 Contributors
-👤 **Houssem Ellouze** - [GitHub][(https://github.com/Houssem-Ellouze)])
-👤 **Hassene Mansouri** 
-👤 **Med Mansour Taleb** 
-👤 **Mohamed Wassim Bahriya Lasghar** 
+👤 **Houssem Ellouze** -
+👤 **Hassene Mansouri** -
+👤 **Med Mansour Taleb** -
+👤 **Mohamed Wassim Bahriya Lasghar** -
 👤 **Mahdi Mzoughi** 
 💡 Contributions, ideas, or improvements? Open an **issue** or submit a **pull request**!
 
