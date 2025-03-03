@@ -8,7 +8,10 @@ import {LandingComponent} from './landing/landing.component';
 import {NotFoundComponent} from './not-found/not-found.component';
 
 
+
+
 export const routes: Routes = [
+
   // Routes des Workspaces
   { path: 'workspaces', component: ListWorkspacesComponent },
   { path: 'workspaces/add', component: WorkspaceFormComponent },
@@ -20,8 +23,10 @@ export const routes: Routes = [
   { path: 'workflows/edit/:id', component: WorkflowFormComponent },
 
   // Redirection par défaut
-  { path: 'landing', component: LandingComponent},
-  { path: '**', component: NotFoundComponent }];
+  { path: '', component: LandingComponent},
+  { path: '**', component: NotFoundComponent },
+
+];
 
 @NgModule({
   imports: [RouterModule.forRoot(routes)],
