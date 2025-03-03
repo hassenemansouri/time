@@ -1,0 +1,41 @@
+<div class="container">
+  <div class="card">
+    <h2 class="text-center mb-4">{{ isEdit ? 'Update' : 'Create' }} a Workflow</h2>
+
+    <div class="mb-3">
+      <label for="workflowName" class="form-label fw-bold">Workflow Name</label>
+      <input
+        type="text"
+        id="workflowName"
+        class="form-control"
+        [(ngModel)]="workflow.workflowName"
+        name="workflowName"
+        required
+        minlength="3"
+        #workflowNameCtrl="ngModel"
+        [class.is-invalid]="workflowNameCtrl.invalid && workflowNameCtrl.touched"
+        placeholder="Enter workflow name"
+      />
+      <div class="invalid-feedback" *ngIf="workflowNameCtrl.invalid && workflowNameCtrl.touched">
+        <p *ngIf="workflowNameCtrl.errors?.['required']">Workflow name is required.</p>
+        <p *ngIf="workflowNameCtrl.errors?.['minlength']">Minimum 3 characters required.</p>
+      </div>
+    </div>
+
+    <!-- Liste des étapes -->
+    <label class="form-label">Steps</label>
+    <div *ngFor="let step of workflow.steps; let i = index" class="step-group">
+      <input type="text" [(ngModel)]="workflow.steps[i]" class="form-control" placeholder="Nom de l'étape" />
+      <button type="button" class="btn btn-danger" (click)="removeStep(i)">❌</button>
+    </div>
+    <button type="button" class="btn btn-secondary" (click)="addStep()">➕ Add Step</button>
+
+    <!-- Boutons -->
+    <div class="btn-container">
+      <button type="button" class="btn btn-success" (click)="saveWorkflow()">💾 Save</button>
+    </div>
+    <button type="button" class="btn btn-secondary" (click)="router.navigate(['/workflows'])">
+      ❌ Cancel
+    </button>
+  </div>
+</div>

@@ -1,0 +1,44 @@
+<div class="container">
+  <h2>List Of Workspaces</h2>
+
+  <button class="btn btn-primary" (click)="router.navigate(['workspaces/add'])">
+    ➕ Add a  Workspace
+  </button>
+
+  <div *ngIf="workspaces.length > 0; else noData">
+    <div class="table-responsive">
+      <table class="table table-striped">
+        <thead>
+        <tr>
+          <th>Name</th>
+          <th>Description</th>
+          <th>Actions</th>
+        </tr>
+        </thead>
+        <tbody>
+        <tr *ngFor="let workspace of workspaces">
+          <td data-label="Nom">{{ workspace.workspaceName }}</td>
+          <td data-label="Description">{{ workspace.workspaceDescription }}</td>
+          <td>
+            <div class="btn-container">
+              <button class="btn btn-warning" (click)="router.navigate(['/workspaces/edit', workspace.id])">
+                ✏️ Update
+              </button>
+              <button class="btn btn-danger" (click)="deleteWorkspace(workspace.id)">
+                🗑️ Delete
+              </button>
+            </div>
+          </td>
+        </tr>
+        </tbody>
+      </table>
+    </div>
+  </div>
+
+
+  <ng-template #noData>
+    <div class="alert alert-warning text-center">
+      Aucun espace de travail trouvé.
+    </div>
+  </ng-template>
+</div>

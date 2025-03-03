@@ -1,0 +1,33 @@
+<div class="container">
+  <h2>List of Workflows</h2>
+
+  <button class="btn btn-primary" [routerLink]="['/workflows/add']">
+    ➕ Add a Workflow
+  </button>
+
+  <table class="table">
+    <thead>
+    <tr>
+      <th>Workflow Name</th>
+      <th>Steps</th>
+      <th>Actions</th>
+    </tr>
+    </thead>
+    <tbody>
+    <tr *ngFor="let workflow of workflows;">
+      <td>{{ workflow.workflowName }}</td>
+      <td>{{ workflow.steps.join(', ') }}</td>
+      <td data-label="Actions">
+        <div class="btn-container">
+          <button class="btn btn-warning btn-sm" [routerLink]="['/workflows/edit', workflow.id]">
+            ✏️ Update
+          </button>
+          <button class="btn btn-danger" (click)="deleteWorkflow(workflow.id)">
+            🗑️ Delete
+          </button>
+        </div>
+      </td>
+    </tr>
+    </tbody>
+  </table>
+</div>

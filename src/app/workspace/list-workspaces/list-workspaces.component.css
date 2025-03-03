@@ -1,0 +1,145 @@
+/* 🌟 Conteneur principal plus compact */
+.container {
+  max-width: 900px;
+  margin: 40px auto;
+  background: white;
+  padding: 20px;
+  border-radius: 12px;
+  box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
+}
+
+/* 🎯 Titre */
+h2 {
+  font-size: 26px;
+  text-align: center;
+  margin-bottom: 15px;
+}
+
+/* ✨ Bouton "Ajouter un Workspace" */
+.btn-primary {
+  display: block;
+  margin: 0 auto 15px auto;
+  width: 200px;
+  height: 45px;
+  font-size: 16px;
+  border-radius: 8px;
+}
+
+/* 🏆 Table plus compacte et esthétique */
+.table {
+  width: 100%;
+  border-radius: 8px;
+  overflow: hidden;
+}
+
+.table thead th {
+  background: #007bff;
+  color: white;
+  padding: 12px;
+  text-align: center;
+}
+
+.table tbody tr {
+  border-bottom: 1px solid #ddd;
+}
+
+.table tbody td {
+  text-align: center;
+  padding: 10px;
+  font-size: 16px;
+}
+
+/* 🎭 Boutons "Modifier" & "Supprimer" bien alignés */
+.btn-container {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  gap: 10px;
+}
+
+.btn {
+  font-size: 14px;
+  padding: 8px 14px;
+  border-radius: 6px;
+  height: 40px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 5px;
+  min-width: 100px;
+}
+
+/* 🎨 Boutons stylisés */
+.btn-warning {
+  background: #ffc107;
+  border: none;
+  color: black;
+}
+
+.btn-danger {
+  background: #dc3545;
+  border: none;
+  color: white;
+}
+
+.btn-warning:hover {
+  background: #e0a800;
+}
+
+.btn-danger:hover {
+  background: #c82333;
+}
+
+/* 📱 Responsive */
+@media (max-width: 768px) {
+  .container {
+    max-width: 100%;
+    padding: 15px;
+  }
+
+  .btn-primary {
+    width: 100%;
+  }
+
+  .table thead {
+    display: none; /* Masquer l'en-tête sur mobile */
+  }
+
+  .table tbody,
+  .table tr,
+  .table td {
+    display: block;
+    width: 100%;
+  }
+
+  .table tr {
+    margin-bottom: 15px;
+    border: 1px solid #ddd;
+    padding: 10px;
+    border-radius: 8px;
+  }
+
+  .table td {
+    text-align: right;
+    position: relative;
+    padding-left: 50%;
+  }
+
+  .table td::before {
+    content: attr(data-label);
+    position: absolute;
+    left: 10px;
+    font-weight: bold;
+    text-transform: capitalize;
+  }
+
+  /* 📱 Alignement en colonne pour mobile */
+  .btn-container {
+    flex-direction: column;
+    gap: 5px;
+  }
+
+  .btn {
+    width: 100%;
+  }
+}
