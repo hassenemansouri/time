@@ -5,6 +5,7 @@ import {WorkspaceFormComponent} from './workspace/workspace-form/workspace-form.
 import {WorkflowFormComponent} from './workflow/workflow-form/workflow-form.component';
 import {WorkflowComponent} from './workflow/workflow/workflow.component';
 import {LandingComponent} from './landing/landing.component';
+import {NotFoundComponent} from './not-found/not-found.component';
 
 
 export const routes: Routes = [
@@ -19,9 +20,8 @@ export const routes: Routes = [
   { path: 'workflows/edit/:id', component: WorkflowFormComponent },
 
   // Redirection par défaut
-  { path: '', component: LandingComponent},
-  { path: '**', redirectTo: '/workspaces' } // Gestion des erreurs de routes
-];
+  { path: 'landing', component: LandingComponent},
+  { path: '**', component: NotFoundComponent }];
 
 @NgModule({
   imports: [RouterModule.forRoot(routes)],
