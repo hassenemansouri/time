@@ -4,6 +4,7 @@ import {ListWorkspacesComponent} from './workspace/list-workspaces/list-workspac
 import {WorkspaceFormComponent} from './workspace/workspace-form/workspace-form.component';
 import {WorkflowFormComponent} from './workflow/workflow-form/workflow-form.component';
 import {WorkflowComponent} from './workflow/workflow/workflow.component';
+import {LandingComponent} from './landing/landing.component';
 
 
 export const routes: Routes = [
@@ -18,7 +19,7 @@ export const routes: Routes = [
   { path: 'workflows/edit/:id', component: WorkflowFormComponent },
 
   // Redirection par défaut
-  { path: '', redirectTo: '/workspaces', pathMatch: 'full' },
+  { path: '', component: LandingComponent},
   { path: '**', redirectTo: '/workspaces' } // Gestion des erreurs de routes
 ];
 
