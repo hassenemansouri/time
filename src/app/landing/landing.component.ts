@@ -4,7 +4,6 @@ import { RippleModule } from 'primeng/ripple';
 import { StyleClassModule } from 'primeng/styleclass';
 import { ButtonModule } from 'primeng/button';
 import { DividerModule } from 'primeng/divider';
-import * as THREE from 'three';
 
 @Component({
   selector: 'app-landing',
@@ -16,6 +15,7 @@ import * as THREE from 'three';
 export class LandingComponent implements OnInit {
   ngOnInit(): void {
   }
+
 
 
 }
