@@ -1,56 +1,56 @@
 # TimeForge Frontend
 
-🚀 **TimeForge** est une application de gestion du temps et de la productivité, construite avec **Angular** et **PrimeNG** pour offrir une expérience utilisateur moderne et performante.
+🚀 **TimeForge** is a time management and productivity application built with **Angular** and **PrimeNG** to provide a modern and efficient user experience.
 
-## 📌 Fonctionnalités principales
-✅ Gestion des tâches et des projets 📋  
-✅ Collaboration en temps réel 🧑‍🤝‍🧑  
-✅ Automatisation des workflows ⚡  
-✅ Synchronisation Cloud ☁️  
-✅ Statistiques et analyses avancées 📊  
-
----
-
-## 🛠️ Technologies utilisées
-- **Angular** - Framework frontend
-- **TypeScript** - Langage de programmation
-- **PrimeNG** - Composants UI
-- **Bootstrap** - Design responsive
-- **RxJS** - Gestion des événements asynchrones
+## 📌 Main Features
+✅ Task and project management 📋  
+✅ Real-time collaboration 🧑‍🤝‍🧑  
+✅ Workflow automation ⚡  
+✅ Cloud synchronization ☁️  
+✅ Advanced statistics and analytics 📊  
 
 ---
 
-## 📥 Installation et Exécution
+## 🛠️ Technologies Used
+- **Angular** - Frontend framework
+- **TypeScript** - Programming language
+- **PrimeNG** - UI components
+- **Bootstrap** - Responsive design
+- **RxJS** - Asynchronous event handling
 
-### 1️⃣ Prérequis
-Assurez-vous d'avoir installé **Node.js** et **Angular CLI** :
+---
+
+## 📥 Installation & Setup
+
+### 1️⃣ Prerequisites
+Make sure you have **Node.js** and **Angular CLI** installed:
 ```sh
-node -v  # Vérifier Node.js
-npm install -g @angular/cli  # Installer Angular CLI
+node -v  # Check Node.js
+npm install -g @angular/cli  # Install Angular CLI
 ```
 
-### 2️⃣ Cloner le projet
+### 2️⃣ Clone the Project
 ```sh
-git clone https://github.com/ton-repo/timeforge-frontend.git
+git clone https://github.com/your-repo/timeforge-frontend.git
 cd timeforge-frontend
 ```
 
-### 3️⃣ Installer les dépendances
+### 3️⃣ Install Dependencies
 ```sh
 npm install
 ```
 
-### 4️⃣ Lancer l'application
+### 4️⃣ Run the Application
 ```sh
 ng serve
 ```
-Ensuite, ouvrez **http://localhost:4200/** dans votre navigateur.
+Then, open **http://localhost:4200/** in your browser.
 
 ---
 
 ## 🔧 Configuration
 
-🔹 Modifier les variables d'environnement dans **src/environments/** :
+🔹 Edit environment variables in **src/environments/**:
 ```ts
 export const environment = {
   production: false,
@@ -58,44 +58,45 @@ export const environment = {
 };
 ```
 
-🔹 Remplacez `apiUrl` par l'URL de votre backend.
+🔹 Replace `apiUrl` with your backend URL.
 
 ---
 
-## 📁 Structure du projet
+## 📁 Project Structure
 ```
 timeforge-frontend/
 │── src/
 │   ├── app/
-│   │   ├── components/  # Composants UI
-│   │   ├── pages/       # Pages principales
-│   │   ├── services/    # Services API
-│   │   ├── models/      # Modèles de données
+│   │   ├── components/  # UI components
+│   │   ├── pages/       # Main pages
+│   │   ├── services/    # API services
+│   │   ├── models/      # Data models
 │   ├── assets/          # Images, styles
 │   ├── environments/    # Configuration
-│── angular.json         # Configuration Angular
-│── package.json         # Dépendances
+│── angular.json         # Angular configuration
+│── package.json         # Dependencies
 │── README.md            # Documentation
 ```
 
 ---
 
-## 🚀 Déploiement
-Pour construire l'application en production :
+## 🚀 Deployment
+To build the application for production:
 ```sh
 ng build --prod
 ```
-Les fichiers seront générés dans `dist/timeforge-frontend/`.
+The files will be generated in `dist/timeforge-frontend/`.
 
 ---
 
-## 👥 Contributeurs
-👤 **Ton Nom** - [GitHub](https://github.com/ton-profil)  
-💡 Contributions, idées ou améliorations ? Ouvrez une **issue** ou faites une **pull request** !
+## 👥 Contributors
+👤 **Your Name** - [GitHub](https://github.com/your-profile)  
+💡 Contributions, ideas, or improvements? Open an **issue** or submit a **pull request**!
 
 ---
 
-## 📜 Licence
-Ce projet est sous licence **MIT**. Vous êtes libre de l'utiliser et de le modifier.
+## 📜 License
+This project is licensed under the **MIT** License. You are free to use and modify it.
 
-🔹 **Made with ❤️ by TimeForge Team** 🚀
+🔹 **Made with ❤️ by the TimeForge Team** 🚀
+
