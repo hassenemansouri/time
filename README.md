@@ -1,59 +1,102 @@
-# WorkspaceWorkflow
+# TimeForge Frontend
 
-This project was generated using [Angular CLI](https://github.com/angular/angular-cli) version 19.2.0.
+🚀 **TimeForge** is a time management and productivity application built with **Angular** and **PrimeNG** to provide a modern and efficient user experience.
 
-## Development server
+## 📌 Main Features
+✅ Task and project management 📋  
+✅ Real-time collaboration 🧑‍🤝‍🧑  
+✅ Workflow automation ⚡  
+✅ Cloud synchronization ☁️  
+✅ Advanced statistics and analytics 📊  
 
-To start a local development server, run:
+---
 
-```bash
+## 🛠️ Technologies Used
+- **Angular** - Frontend framework
+- **TypeScript** - Programming language
+- **PrimeNG** - UI components
+- **Bootstrap** - Responsive design
+- **RxJS** - Asynchronous event handling
+
+---
+
+## 📥 Installation & Setup
+
+### 1️⃣ Prerequisites
+Make sure you have **Node.js** and **Angular CLI** installed:
+```sh
+node -v  # Check Node.js
+npm install -g @angular/cli  # Install Angular CLI
+```
+
+### 2️⃣ Clone the Project
+```sh
+git clone https://github.com/your-repo/timeforge-frontend.git
+cd timeforge-frontend
+```
+
+### 3️⃣ Install Dependencies
+```sh
+npm install
+```
+
+### 4️⃣ Run the Application
+```sh
 ng serve
 ```
+Then, open **http://localhost:4200/** in your browser.
 
-Once the server is running, open your browser and navigate to `http://localhost:4200/`. The application will automatically reload whenever you modify any of the source files.
+---
 
-## Code scaffolding
+## 🔧 Configuration
 
-Angular CLI includes powerful code scaffolding tools. To generate a new component, run:
-
-```bash
-ng generate component component-name
+🔹 Edit environment variables in **src/environments/**:
+```ts
+export const environment = {
+  production: false,
+  apiUrl: 'http://localhost:8080/api',
+};
 ```
 
-For a complete list of available schematics (such as `components`, `directives`, or `pipes`), run:
+🔹 Replace `apiUrl` with your backend URL.
 
-```bash
-ng generate --help
+---
+
+## 📁 Project Structure
+```
+timeforge-frontend/
+│── src/
+│   ├── app/
+│   │   ├── components/  # UI components
+│   │   ├── pages/       # Main pages
+│   │   ├── services/    # API services
+│   │   ├── models/      # Data models
+│   ├── assets/          # Images, styles
+│   ├── environments/    # Configuration
+│── angular.json         # Angular configuration
+│── package.json         # Dependencies
+│── README.md            # Documentation
 ```
 
-## Building
+---
 
-To build the project run:
-
-```bash
-ng build
+## 🚀 Deployment
+To build the application for production:
+```sh
+ng build --prod
 ```
+The files will be generated in `dist/timeforge-frontend/`.
 
-This will compile your project and store the build artifacts in the `dist/` directory. By default, the production build optimizes your application for performance and speed.
+---
 
-## Running unit tests
+## 👥 Contributors
+👤 **Your Name** - [GitHub](https://github.com/your-profile)  
+💡 Contributions, ideas, or improvements? Open an **issue** or submit a **pull request**!
 
-To execute unit tests with the [Karma](https://karma-runner.github.io) test runner, use the following command:
+---
 
-```bash
-ng test
-```
+## 📜 License
+This project is licensed under the **MIT** License. You are free to use and modify it.
 
-## Running end-to-end tests
+🔹 **Made with ❤️ by the TimeForge Team** 🚀
 
-For end-to-end (e2e) testing, run:
-
-```bash
-ng e2e
-```
-
-Angular CLI does not come with an end-to-end testing framework by default. You can choose one that suits your needs.
-
-## Additional Resources
-
-For more information on using the Angular CLI, including detailed command references, visit the [Angular CLI Overview and Command Reference](https://angular.dev/tools/cli) page.
