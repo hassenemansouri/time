@@ -1,5 +1,5 @@
 import {Component, OnInit} from '@angular/core';
-import {Router, RouterLink, RouterLinkActive, RouterOutlet} from '@angular/router';
+import {Router, RouterLink, RouterOutlet} from '@angular/router';
 
 import {HTTP_INTERCEPTORS, HttpClientModule} from '@angular/common/http';
 
