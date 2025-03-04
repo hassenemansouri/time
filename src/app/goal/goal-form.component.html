@@ -1,0 +1,52 @@
+<div class="container">
+  <div class="card">
+    <h2 class="text-center mb-4">{{ isEdit ? 'Modifier' : 'Créer' }} un Goal</h2>
+
+    <div class="mb-3">
+      <label for="title" class="form-label fw-bold">Titre</label>
+      <input
+        type="text"
+        id="title"
+        class="form-control"
+        [(ngModel)]="goal.title"
+        name="title"
+        required
+        minlength="3"
+        #titleCtrl="ngModel"
+        [class.is-invalid]="titleCtrl.invalid && titleCtrl.touched"
+        placeholder="Entrez le titre du goal"
+      />
+      <div class="invalid-feedback" *ngIf="titleCtrl.invalid && titleCtrl.touched">
+        <p *ngIf="titleCtrl.errors?.['required']">Le titre est requis.</p>
+        <p *ngIf="titleCtrl.errors?.['minlength']">Au moins 3 caractères sont requis.</p>
+      </div>
+    </div>
+
+    <div class="mb-3">
+      <label for="description" class="form-label fw-bold">Description</label>
+      <textarea
+        id="description"
+        class="form-control"
+        [(ngModel)]="goal.description"
+        name="description"
+        required
+        minlength="5"
+        #descCtrl="ngModel"
+        [class.is-invalid]="descCtrl.invalid && descCtrl.touched"
+        placeholder="Entrez la description du goal"
+      ></textarea>
+      <div class="invalid-feedback" *ngIf="descCtrl.invalid && descCtrl.touched">
+        <p *ngIf="descCtrl.errors?.['required']">La description est requise.</p>
+        <p *ngIf="descCtrl.errors?.['minlength']">Au moins 5 caractères sont requis.</p>
+      </div>
+    </div>
+
+    <!-- Boutons -->
+    <div class="btn-container">
+      <button type="button" class="btn btn-success" (click)="saveGoal()">💾 Enregistrer</button>
+      <button type="button" class="btn btn-secondary" (click)="router.navigate(['/goals'])">
+        ❌ Annuler
+      </button>
+    </div>
+  </div>
+</div>
