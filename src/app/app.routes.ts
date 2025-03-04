@@ -10,6 +10,10 @@ import {NotFoundComponent} from './not-found/not-found.component';
 import {SignUpComponent} from './sign-up/sign-up.component';
 import {DashboardComponent} from './dashboard/dashboard.component';
 import {AuthGuard} from './AuthGuard';
+import {GoalFormComponent} from './goal/goal-form.component';
+import {ListGoalsComponent} from './goal/list-goals.component';
+import {ListRewardsComponent} from './reward/list-rewards.component';
+import {RewardFormComponent} from './reward/reward-form.component';
 
 
 export const routes: Routes = [
@@ -22,12 +26,19 @@ export const routes: Routes = [
   { path: 'workflows', component: WorkflowComponent },
   { path: 'workflows/add', component: WorkflowFormComponent },
   { path: 'workflows/edit/:id', component: WorkflowFormComponent },
+  //Goals Routes
+  { path: 'goals', component: ListGoalsComponent },
+  { path: 'goals/add', component: GoalFormComponent },
+  { path: 'goals/edit/:id', component: GoalFormComponent },
+  { path: 'rewards', component: ListRewardsComponent },
+  { path: 'rewards/add', component: RewardFormComponent },
   //user Routes
   { path: 'login', component: LoginComponent },
   { path: 'dashboard', component: DashboardComponent, canActivate: [AuthGuard]  },
   { path: 'signup', component: SignUpComponent },
   { path: 'home', component: LandingComponent },
   { path: 'error', component: NotFoundComponent },
+
 
   // Redirection par défaut
   { path: '', redirectTo: '/home', pathMatch: 'full' },

@@ -5,13 +5,15 @@ import { AuthService } from '../auth.service';
 import {catchError, of} from 'rxjs';
 import {NgIf} from '@angular/common';
 import {HttpErrorResponse} from '@angular/common/http';
+import {ButtonDirective} from 'primeng/button';
 
 @Component({
   selector: 'app-sign-up',
   templateUrl: './sign-up.component.html',
   imports: [
     ReactiveFormsModule,
-    NgIf
+    NgIf,
+    ButtonDirective
   ],
   styleUrls: ['./sign-up.component.css']
 })
@@ -59,7 +61,7 @@ export class SignUpComponent implements OnInit {
         catchError((error) => {
           // Check the entire error object for more details
           console.error('Registration Error:', error);
-
+          this.router.navigate(['/login']).then(r => console.log('Navigated to login page'));
           // If it's an error response, log more details about it
           if (error instanceof HttpErrorResponse) {
             this.errorMessage = `HTTP Error: ${error.status} - ${error.statusText}`;
@@ -73,7 +75,7 @@ export class SignUpComponent implements OnInit {
         next: (response) => {
           if (response) {
             console.log('User registered successfully', response);
-            this.router.navigate(['/login']);
+            this.router.navigate(['/login']).then(r => console.log('Navigated to login page'));
           }
         }
       });
