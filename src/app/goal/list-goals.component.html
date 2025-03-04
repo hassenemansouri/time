@@ -1,0 +1,31 @@
+<div class="container">
+  <h2>Liste des Goals</h2>
+  <button class="btn btn-primary" [routerLink]="['/add-goal']">
+    ➕ Ajouter un Goal
+  </button>
+  <table class="table">
+    <thead>
+    <tr>
+      <th>Titre</th>
+      <th>Description</th>
+      <th>Actions</th>
+    </tr>
+    </thead>
+    <tbody>
+    <tr *ngFor="let goal of goals">
+      <td>{{ goal.title }}</td>
+      <td>{{ goal.description }}</td>
+      <td>
+        <div class="btn-container">
+          <button class="btn btn-warning btn-sm" [routerLink]="['/goals/edit', goal.goal_id]">
+            ✏️ Modifier
+          </button>
+          <button class="btn btn-danger" (click)="deleteGoal(goal.goal_id)">
+            🗑️ Supprimer
+          </button>
+        </div>
+      </td>
+    </tr>
+    </tbody>
+  </table>
+</div>

@@ -1,0 +1,33 @@
+<div class="container">
+  <h2>Liste des Rewards</h2>
+  <button class="btn btn-primary" [routerLink]="['/add-reward']">
+    ➕ Ajouter une Reward
+  </button>
+  <table class="table">
+    <thead>
+    <tr>
+      <th>Type</th>
+      <th>Description</th>
+      <th>Date d'attribution</th>
+      <th>Actions</th>
+    </tr>
+    </thead>
+    <tbody>
+    <tr *ngFor="let reward of rewards">
+      <td>{{ reward.type }}</td>
+      <td>{{ reward.description }}</td>
+      <td>{{ reward.dateAwarded | date:'shortDate' }}</td>
+      <td>
+        <div class="btn-container">
+          <button class="btn btn-warning btn-sm" [routerLink]="['/rewards/edit', reward.id]">
+            ✏️ Modifier
+          </button>
+          <button class="btn btn-danger" (click)="deleteReward(reward.id)">
+            🗑️ Supprimer
+          </button>
+        </div>
+      </td>
+    </tr>
+    </tbody>
+  </table>
+</div>

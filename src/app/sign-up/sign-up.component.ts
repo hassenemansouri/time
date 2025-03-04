@@ -1,0 +1,85 @@
+import { Component, OnInit } from '@angular/core';
+import {FormBuilder, FormGroup, ReactiveFormsModule, Validators} from '@angular/forms';
+import { Router } from '@angular/router';
+import { AuthService } from '../auth.service';
+import {catchError, of} from 'rxjs';
+import {NgIf} from '@angular/common';
+import {HttpErrorResponse} from '@angular/common/http';
+
+@Component({
+  selector: 'app-sign-up',
+  templateUrl: './sign-up.component.html',
+  imports: [
+    ReactiveFormsModule,
+    NgIf
+  ],
+  styleUrls: ['./sign-up.component.css']
+})
+export class SignUpComponent implements OnInit {
+  signUpForm!: FormGroup;
+  errorMessage: string | null = null;
+
+  constructor(
+    private fb: FormBuilder,
+    private authService: AuthService,
+    private router: Router
+  ) {}
+
+  ngOnInit(): void {
+    // Initialize the form with controls and validation rules
+    this.signUpForm = this.fb.group({
+      name: ['', [Validators.required, Validators.minLength(3)]],
+      email: ['', [Validators.required, Validators.email]],
+      password: ['', [Validators.required, Validators.minLength(6)]],
+      role: ['', [Validators.required]]
+    });
+  }
+
+  // Getter methods to access form controls more easily
+  get nameControl() {
+    return this.signUpForm.get('name');
+  }
+
+  get emailControl() {
+    return this.signUpForm.get('email');
+  }
+
+  get passwordControl() {
+    return this.signUpForm.get('password');
+  }
+
+  get roleControl() {
+    return this.signUpForm.get('role');
+  }
+
+  onSubmit(): void {
+    if (this.signUpForm.valid) {
+      const user = this.signUpForm.value;
+      this.authService.register(user).pipe(
+        catchError((error) => {
+          // Check the entire error object for more details
+          console.error('Registration Error:', error);
+
+          // If it's an error response, log more details about it
+          if (error instanceof HttpErrorResponse) {
+            this.errorMessage = `HTTP Error: ${error.status} - ${error.statusText}`;
+          } else {
+            this.errorMessage = 'There was an error registering the user';
+          }
+
+          return of(null);  // Return a fallback value to complete the observable
+        })
+      ).subscribe({
+        next: (response) => {
+          if (response) {
+            console.log('User registered successfully', response);
+            this.router.navigate(['/login']);
+          }
+        }
+      });
+    } else {
+      this.errorMessage = 'Please fill in all required fields correctly.';
+    }
+  }
+
+}

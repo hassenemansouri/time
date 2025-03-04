@@ -1,0 +1,28 @@
+<div class="login-wrapper">
+  <div class="login-card">
+    <h2>Welcome Back</h2>
+    <p>Please sign in to continue.</p>
+
+    <div class="input-group">
+      <label for="username">Username</label>
+      <input id="username" type="text" pInputText [(ngModel)]="username" class="p-inputtext w-full enhanced-input" />
+    </div>
+
+    <div class="input-group">
+      <label for="password">Password</label>
+      <input id="password" type="password" pInputText [(ngModel)]="password" class="p-inputtext w-full enhanced-input" />
+    </div>
+
+    <button pButton label="Login" icon="pi pi-sign-in" class="w-full login-btn" (click)="login()  "></button>
+
+    <div class="links">
+      <a routerLink="/forgot-password">Forgot Password?</a>
+      <span>|</span>
+      <a routerLink="/signup">Sign Up</a>
+    </div>
+
+    <div *ngIf="errorMessage" class="error-message">
+      <i class="pi pi-exclamation-triangle"></i> {{ errorMessage }}
+    </div>
+  </div>
+</div>
