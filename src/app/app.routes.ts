@@ -10,12 +10,16 @@ import {ListGoalsComponent} from './goal/list-goals.component';
 import {GoalFormComponent} from './goal/goal-form.component';
 import {ListRewardsComponent} from './reward/list-rewards.component';
 import {RewardFormComponent} from './reward/reward-form.component';
+import { ProjectFormComponent } from './project/project-form/project-form.component';
+import { ProjectComponent } from './project/project/project.component';
 
 
 
 
 export const routes: Routes = [
-
+  { path: 'projects', component: ProjectComponent },
+  { path: 'projects/add', component: ProjectFormComponent },
+  { path: 'projects/edit/:id', component: ProjectFormComponent },
   // Routes des Workspaces
   { path: 'workspaces', component: ListWorkspacesComponent },
   { path: 'workspaces/add', component: WorkspaceFormComponent },
