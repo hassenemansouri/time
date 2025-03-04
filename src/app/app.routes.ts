@@ -12,6 +12,8 @@ import {ListRewardsComponent} from './reward/list-rewards.component';
 import {RewardFormComponent} from './reward/reward-form.component';
 import { ProjectFormComponent } from './project/project-form/project-form.component';
 import { ProjectComponent } from './project/project/project.component';
+import { TaskComponent } from './task/task/task.component';
+import { TaskFormComponent } from './task/task-form/task-form.component';
 
 
 
@@ -20,6 +22,10 @@ export const routes: Routes = [
   { path: 'projects', component: ProjectComponent },
   { path: 'projects/add', component: ProjectFormComponent },
   { path: 'projects/edit/:id', component: ProjectFormComponent },
+
+  { path: 'tasks', component: TaskComponent },
+  { path: 'tasks/add', component: TaskFormComponent },
+  { path: 'tasks/edit/:id', component: TaskFormComponent },
   // Routes des Workspaces
   { path: 'workspaces', component: ListWorkspacesComponent },
   { path: 'workspaces/add', component: WorkspaceFormComponent },

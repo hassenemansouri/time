@@ -1,0 +1,102 @@
+<div class="container">
+    <div class="card">
+      <h2 class="text-center mb-4">{{ isEdit ? 'Update' : 'Create' }} a Task</h2>
+  
+      <div class="mb-3">
+        <label for="title" class="form-label fw-bold">Task Title</label>
+        <input
+          type="text"
+          id="title"
+          class="form-control"
+          [(ngModel)]="task.title"
+          name="title"
+          required
+          minlength="3"
+          #titleCtrl="ngModel"
+          [class.is-invalid]="titleCtrl.invalid && titleCtrl.touched"
+          placeholder="Enter project title"
+        />
+        <div class="invalid-feedback" *ngIf="titleCtrl.invalid && titleCtrl.touched">
+          <p *ngIf="titleCtrl.errors?.['required']">Task name is required.</p>
+          <p *ngIf="titleCtrl.errors?.['minlength']">Minimum 3 characters required.</p>
+        </div>
+      </div>
+  
+      <div class="mb-3">
+        <label for="description" class="form-label fw-bold">Description</label>
+        <textarea
+          id="description"
+          class="form-control"
+          [(ngModel)]="task.description"
+          name="description"
+          placeholder="Enter project description"
+          [required]="isEdit ? false : true"
+        ></textarea>
+      </div>
+  
+      <div class="mb-3">
+        <label for="status" class="form-label fw-bold">Status</label>
+        <select
+          id="status"
+          class="form-control"
+          [(ngModel)]="task.status"
+          name="status"
+          required
+        >
+          <option value="to-do">To-Do</option>
+          <option value="in-progress">In Progress</option>
+          <option value="done">Done</option>
+        </select>
+      </div>
+      <div class="mb-3">
+        <label for="priority" class="form-label fw-bold">Priority</label>
+        <select
+          id="status"
+          class="form-control"
+          [(ngModel)]="task.priority"
+          name="status"
+          required
+        >
+          <option value="low">low</option>
+          <option value="medium">medium</option>
+          <option value="high">high</option>
+        </select>
+      </div>  
+
+      <div class="mb-3">
+        <label for="createdDate" class="form-label fw-bold">Created Date</label>
+        <input
+          type="date"
+          id="createdDate"
+          class="form-control"
+          [(ngModel)]="task.createdDate"
+          name="createdDate"
+          required
+        />
+  
+      </div>
+  
+      <div class="mb-3">
+        <label for="dueDate" class="form-label fw-bold">Due Date</label>
+        <input
+          type="date"
+          id="dueDate"
+          class="form-control"
+          [(ngModel)]="task.dueDate"
+          name="dueDate"
+          [min]="task.createdDate"
+          required
+        />
+     
+      </div>
+  
+      <!-- Boutons -->
+      <div class="btn-container">
+        <button type="button" class="btn btn-success" (click)="saveTask()">💾 Save</button>
+      </div>
+      <button type="button" class="btn btn-secondary" (click)="router.navigate(['/tasks'])">
+        ❌ Cancel
+      </button>
+    </div>
+  </div>
+  
