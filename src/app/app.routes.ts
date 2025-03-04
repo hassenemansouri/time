@@ -14,6 +14,7 @@ import {GoalFormComponent} from './goal/goal-form.component';
 import {ListGoalsComponent} from './goal/list-goals.component';
 import {ListRewardsComponent} from './reward/list-rewards.component';
 import {RewardFormComponent} from './reward/reward-form.component';
+import {StrategicparternshipComponent} from './strategicparternship/strategicparternship.component';
 
 
 export const routes: Routes = [
@@ -38,6 +39,9 @@ export const routes: Routes = [
   { path: 'signup', component: SignUpComponent },
   { path: 'home', component: LandingComponent },
   { path: 'error', component: NotFoundComponent },
+
+  { path: 'strategic', component: StrategicparternshipComponent },
+
 
 
   // Redirection par défaut
