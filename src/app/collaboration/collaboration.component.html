@@ -1,0 +1,43 @@
+<div class="collaboration-container">
+  <h2>Collaborations</h2>
+
+  <!-- Form to create a new collaboration -->
+  <div class="form-container">
+    <h3>Create New Collaboration</h3>
+    <form (ngSubmit)="addCollaboration()">
+      <label for="chatTitle">Chat Title:</label>
+      <input
+        type="text"
+        id="chatTitle"
+        [(ngModel)]="newCollaboration.chatTitle"
+        name="chatTitle"
+        required
+      />
+
+      <label for="description">Description:</label>
+      <textarea
+        id="description"
+        [(ngModel)]="newCollaboration.description"
+        name="description"
+        required
+      ></textarea>
+
+      <button type="submit">Create</button>
+    </form>
+  </div>
+
+  <!-- List of collaborations -->
+  <div class="collaboration-list">
+    <h3>Collaboration List</h3>
+    <ul>
+      <li *ngFor="let collab of collaborations">
+        <div class="collaboration-item">
+          <h4>{{ collab.chatTitle }}</h4>
+          <p>{{ collab.description }}</p>
+          <p><strong>Created At:</strong> {{ collab.createdAt | date: 'medium' }}</p>
+          <button (click)="deleteCollaboration(collab.collaborationId)">Delete</button>
+        </div>
+      </li>
+    </ul>
+  </div>
+</div>
