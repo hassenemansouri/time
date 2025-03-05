@@ -1,145 +1,236 @@
-/* 🌟 Conteneur principal plus compact */
+/* Conteneur principal */
 .container {
-  max-width: 900px;  /* 🔽 Réduction de la largeur */
-  margin: 40px auto;
-  background: #8fc8f6;
-  padding: 20px;
-  border-radius: 12px;
-  box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
+  padding: 30px;
+  background: linear-gradient(to top right, #7bcbf4, #e1e3e3);
+  border-radius: 20px;
+  box-shadow: 0 15px 30px rgba(0, 0, 0, 0.1);
+  color: #fff;
+  display: flex;
+  flex-direction: column;
+  align-items: center; /* Centrer horizontalement */
 }
 
-/* 🎯 Titre */
+/* Titre principal */
 h2 {
-  font-size: 26px;
+  font-family: 'Roboto', sans-serif;
+  font-weight: 700;
+  font-size: 2.5rem;
+  color: #fff;
   text-align: center;
-  margin-bottom: 15px;
+  margin-bottom: 40px;
+  text-transform: uppercase;
+  letter-spacing: 2px;
 }
 
-/* ✨ Bouton "Add Workflow" */
-.btn-primary {
-  display: block;
-  margin: 0 auto 15px auto;
-  width: 200px;
-  height: 45px; /* 🔽 Réduction de la hauteur */
+/* Container des boutons d'exportation */
+.export-buttons {
+  display: flex;
+  justify-content: space-between;
+  margin-bottom: 30px;
+  width: 100%; /* Full width for buttons */
+  max-width: 500px; /* Optional: Set max-width */
+}
+
+.export-buttons .btn {
   font-size: 16px;
-  border-radius: 8px;
+  font-weight: 600;
+  border-radius: 50px;
+  padding: 12px 25px;
+  text-transform: uppercase;
+  border: none;
+  transition: all 0.3s ease;
 }
 
-/* 🏆 Table plus compacte et esthétique */
-.table {
-  width: 100%;
-  border-radius: 8px;
-  overflow: hidden;
+.export-buttons .btn-success {
+  background: linear-gradient(90deg, #28a745, #218838);
+  color: white;
 }
 
-.table thead th {
+.export-buttons .btn-danger {
+  background: linear-gradient(90deg, #dc3545, #c82333);
+  color: white;
+}
+
+/* Effet au survol des boutons */
+.export-buttons .btn:hover {
+  transform: scale(1.05);
+  opacity: 0.9;
+  box-shadow: 0 5px 15px rgba(0, 0, 0, 0.2);
+}
+
+/* Bouton "Add a Workflow" */
+.btn.btn-primary {
+  font-size: 18px;
+  padding: 14px 30px;
+  border-radius: 50px;
   background: #007bff;
   color: white;
+  box-shadow: 0 10px 30px rgba(0, 0, 0, 0.15);
+  transition: all 0.4s ease;
+}
+
+.btn.btn-primary:hover {
+  background: #0056b3;
+  transform: translateY(-2px);
+  box-shadow: 0 12px 40px rgba(0, 0, 0, 0.25);
+}
+
+/* Table */
+.table {
+  background: #fff;
+  border-radius: 10px;
+  overflow: hidden;
+  box-shadow: 0 15px 30px rgba(0, 0, 0, 0.1);
+  margin-top: 30px;
+  width: 100%; /* Table takes full width */
+  max-width: 900px; /* Optional: Set max-width */
+  margin-left: auto;
+  margin-right: auto; /* This centers the table */
+}
+
+.table th {
+  background-color: #007bff;
+  color: white;
+  font-size: 16px;
+  text-align: center;
+  font-weight: bold;
+  padding: 15px;
+  text-transform: uppercase;
+  letter-spacing: 1px;
+}
+
+.table td {
   padding: 12px;
   text-align: center;
-}
-
-.table tbody tr {
-  border-bottom: 1px solid #ddd;
-}
-
-.table tbody td {
-  text-align: center;
-  padding: 10px; /* 🔽 Réduction du padding */
-  font-size: 16px;
-}
-
-/* 🎭 Boutons "Update" & "Delete" bien alignés avec Flexbox */
-.btn-container {
-  display: flex;
-  justify-content: center;
-  align-items: center;
-  gap: 10px; /* 🔽 Espacement entre les boutons */
-}
-
-.btn {
   font-size: 14px;
-  padding: 8px 14px; /* 🔽 Réduction du padding */
-  border-radius: 6px;
-  height: 40px; /* 🔽 Réduction de la hauteur */
+  color: #333;
+  transition: background-color 0.3s ease;
+}
+
+/* Effet de survol pour les lignes de la table */
+.table tr:hover {
+  background-color: #f1f1f1;
+  transform: translateY(-5px);
+  box-shadow: 0 5px 20px rgba(0, 0, 0, 0.1);
+}
+
+/* Actions dans la table */
+.table .btn-container {
+  display: flex;
+  justify-content: center;
+  gap: 12px;
+}
+
+.table .btn-warning, .table .btn-danger {
+  padding: 8px 18px;
+  border-radius: 30px;
+  font-size: 14px;
+  transition: all 0.3s ease;
+}
+
+.table .btn-warning {
+  background: #ffc107;
+  color: #fff;
+}
+
+.table .btn-danger {
+  background: #dc3545;
+  color: #fff;
+}
+
+.table .btn-warning:hover {
+  background: #e0a800;
+  transform: scale(1.05);
+}
+
+.table .btn-danger:hover {
+  background: #c82333;
+  transform: scale(1.05);
+}
+
+/* Animations pour les boutons dans la table */
+.table .btn:hover {
+  box-shadow: 0 8px 25px rgba(0, 0, 0, 0.2);
+  transform: scale(1.1);
+  transition: all 0.2s ease-in-out;
+}
+
+/* Table rows styling */
+.table tr {
+  transition: background-color 0.3s ease, transform 0.3s ease;
+}
+
+/* Style pour les actions de la table */
+.table td .btn-container button {
+  font-size: 14px;
+  padding: 5px 20px;
+  border-radius: 50px;
+  box-shadow: 0 5px 20px rgba(0, 0, 0, 0.1);
+  transition: all 0.2s ease;
+}
+
+.table td .btn-container button:hover {
+  transform: scale(1.1);
+  opacity: 0.85;
+}
+
+/* Responsivité mobile */
+@media (max-width: 767px) {
+  .export-buttons {
+    flex-direction: column;
+    align-items: center;
+  }
+
+  .export-buttons .btn {
+    margin-bottom: 10px;
+    width: 100%;
+    text-align: center;
+  }
+
+  .table {
+    margin-top: 20px;
+  }
+
+  .table th, .table td {
+    font-size: 12px;
+    padding: 10px;
+  }
+
+  .table .btn-container {
+    justify-content: space-between;
+  }
+}
+
+/* Style général pour le champ de recherche */
+input.form-control {
+  border-radius: 25px; /* Coins arrondis pour un aspect moderne */
+  padding: 10px 20px; /* Espacement interne pour plus de confort */
+  font-size: 16px; /* Taille de police plus grande pour une meilleure lisibilité */
+  box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1); /* Légère ombre pour donner de la profondeur */
+  border: 2px solid #ced4da; /* Bordure grise claire */
+  transition: all 0.3s ease-in-out; /* Transition douce lors du focus */
+  width: 900px;
+  height: 50px;
+}
+
+input.form-control:focus {
+  border-color: #007bff; /* Bordure bleue au focus pour attirer l'attention */
+  box-shadow: 0 0 8px rgba(0, 123, 255, 0.5); /* Ombre bleue au focus */
+  outline: none; /* Retirer la bordure par défaut du focus */
+}
+
+input.form-control::placeholder {
+  color: #6c757d; /* Couleur grise pour le texte de l'espace réservé */
+  font-style: italic; /* Italique pour un style plus élégant */
+}
+
+/* Style pour les icônes dans les boutons d'exportation (facultatif) */
+button.btn {
   display: flex;
   align-items: center;
   justify-content: center;
-  gap: 5px;
-  min-width: 100px;
 }
 
-/* 🎨 Boutons stylisés */
-.btn-warning {
-  background: #ffc107;
-  border: none;
-  color: black;
-}
-
-.btn-danger {
-  background: #dc3545;
-  border: none;
-  color: white;
-}
-
-.btn-warning:hover {
-  background: #e0a800;
-}
-
-.btn-danger:hover {
-  background: #c82333;
-}
-
-/* 🎭 Responsive */
-@media (max-width: 768px) {
-  .container {
-    max-width: 100%;
-    padding: 15px;
-  }
-
-  .btn-primary {
-    width: 100%;
-  }
-
-  .table thead {
-    display: none; /* Masquer l'en-tête sur mobile */
-  }
-
-  .table tbody,
-  .table tr,
-  .table td {
-    display: block;
-    width: 100%;
-  }
-
-  .table tr {
-    margin-bottom: 15px;
-    border: 1px solid #ddd;
-    padding: 10px;
-    border-radius: 8px;
-  }
-
-  .table td {
-    text-align: right;
-    position: relative;
-    padding-left: 50%;
-  }
-
-  .table td::before {
-    content: attr(data-label);
-    position: absolute;
-    left: 10px;
-    font-weight: bold;
-    text-transform: capitalize;
-  }
-
-  /* 📱 Alignement en colonne pour mobile */
-  .btn-container {
-    flex-direction: column;
-    gap: 5px;
-  }
-
-  .btn {
-    width: 100%;
-  }
+button.btn i {
+  margin-right: 8px; /* Espacement entre l'icône et le texte */
 }
