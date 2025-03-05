@@ -1,0 +1,123 @@
+/* Center the login box */
+.login-wrapper {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  height: 100vh;
+  background: linear-gradient(to right, #1e3c72, #2a5298);
+}
+
+/* Card Styling */
+.login-card {
+  width: 400px;
+  padding: 30px;
+  background: #fff;
+  border-radius: 12px;
+  box-shadow: 0px 6px 15px rgba(0, 0, 0, 0.2);
+  text-align: center;
+  animation: fadeIn 0.5s ease-in-out;
+}
+
+/* Heading */
+.login-card h2 {
+  margin-bottom: 10px;
+  color: #333;
+  font-size: 24px;
+}
+
+.login-card p {
+  font-size: 14px;
+  color: #666;
+  margin-bottom: 20px;
+}
+
+/* Input Group */
+.input-group {
+  margin-bottom: 20px;
+  text-align: left;
+}
+
+/* Labels */
+.input-group label {
+  font-weight: bold;
+  font-size: 14px;
+  color: #444;
+  margin-bottom: 5px;
+  display: block;
+}
+
+/* Enhanced Input Fields */
+.enhanced-input {
+  width: 100%;
+  padding: 12px;
+  font-size: 16px;
+  border: 2px solid #007bff;
+  border-radius: 6px;
+  outline: none;
+  transition: 0.3s;
+  background-color: #f8f9fa;
+}
+
+.enhanced-input:focus {
+  border-color: #0056b3;
+  background-color: #fff;
+  box-shadow: 0px 0px 8px rgba(0, 123, 255, 0.6);
+}
+
+/* Login Button */
+.login-btn {
+  background-color: #007bff !important;
+  border: none !important;
+  font-size: 18px;
+  font-weight: bold;
+  padding: 12px;
+  border-radius: 8px;
+  transition: 0.3s;
+  margin-top: 10px;
+  color: white;
+}
+
+.login-btn:hover {
+  background-color: #0056b3 !important;
+}
+
+/* Bottom Links */
+.links {
+  margin-top: 15px;
+  font-size: 14px;
+}
+
+.links a {
+  color: #007bff;
+  text-decoration: none;
+  transition: 0.3s;
+  font-weight: bold;
+}
+
+.links a:hover {
+  color: #0056b3;
+  text-decoration: underline;
+}
+
+/* Error Message */
+.error-message {
+  color: #ff4d4d;
+  margin-top: 10px;
+  display: flex;
+  align-items: center;
+  gap: 5px;
+  font-size: 0.9em;
+  font-weight: bold;
+}
+
+/* Fade-in Animation */
+@keyframes fadeIn {
+  from {
+    opacity: 0;
+    transform: translateY(-10px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
