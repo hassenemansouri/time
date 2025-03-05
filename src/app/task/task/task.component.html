@@ -1,0 +1,42 @@
+<div class="container">
+    <h2>List of Tasks</h2>
+  
+    <button class="btn btn-primary" [routerLink]="['/tasks/add']">
+      ➕ Add Task
+    </button>
+  
+    <table class="table">
+      <thead>
+        <tr>
+          <th>Title</th>
+          <th>Description</th>
+          <th>Created Date</th>
+          <th>Due Date</th>
+          <th>Status</th>
+          <th>Priority</th>
+
+
+        </tr>
+      </thead>
+      <tbody>
+        <tr *ngFor="let task of tasks">
+          <td>{{ task.title }}</td>
+          <td>{{ task.description }}</td>
+          <td>{{ task.createdDate | date:'yyyy-MM-dd' }}</td>
+          <td>{{ task.dueDate | date:'yyyy-MM-dd' }}</td>
+          <td>{{ task.status }}</td>
+          <td>{{ task.status }}</td>
+          <td data-label="Actions">
+            <div class="btn-container">
+              <button class="btn btn-warning btn-sm" [routerLink]="['/tasks/edit', task.id]">
+                🖊️ Edit
+              </button>
+              <button class="btn btn-danger" (click)="deleteTask(task.id)">
+                🗑️ Remove
+              </button>
+            </div>
+          </td>
+        </tr>
+      </tbody>
+    </table>
+  </div>
