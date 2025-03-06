@@ -6,26 +6,15 @@ import {WorkflowFormComponent} from './workflow/workflow-form/workflow-form.comp
 import {WorkflowComponent} from './workflow/workflow/workflow.component';
 import {LandingComponent} from './landing/landing.component';
 import {NotFoundComponent} from './not-found/not-found.component';
-import {ListGoalsComponent} from './goal/list-goals.component';
-import {GoalFormComponent} from './goal/goal-form.component';
-import {ListRewardsComponent} from './reward/list-rewards.component';
-import {RewardFormComponent} from './reward/reward-form.component';
-import { ProjectFormComponent } from './project/project-form/project-form.component';
 import { ProjectComponent } from './project/project/project.component';
 import { TaskComponent } from './task/task/task.component';
-import { TaskFormComponent } from './task/task-form/task-form.component';
-
-
-
+import {LoginComponent} from './login/login.component';
+import {DashboardComponent} from './dashboard/dashboard.component';
+import {SignUpComponent} from './sign-up/sign-up.component';
+import {AuthGuard} from './AuthGuard';
+import {CollaborationComponent} from './collaboration/collaboration.component';
 
 export const routes: Routes = [
-  { path: 'projects', component: ProjectComponent },
-  { path: 'projects/add', component: ProjectFormComponent },
-  { path: 'projects/edit/:id', component: ProjectFormComponent },
-
-  { path: 'tasks', component: TaskComponent },
-  { path: 'tasks/add', component: TaskFormComponent },
-  { path: 'tasks/edit/:id', component: TaskFormComponent },
   // Routes des Workspaces
   { path: 'workspaces', component: ListWorkspacesComponent },
   { path: 'workspaces/add', component: WorkspaceFormComponent },
@@ -35,10 +24,19 @@ export const routes: Routes = [
   { path: 'workflows', component: WorkflowComponent },
   { path: 'workflows/add', component: WorkflowFormComponent },
   { path: 'workflows/edit/:id', component: WorkflowFormComponent },
-  { path: 'goals', component: ListGoalsComponent },
-  { path: 'add-goal', component: GoalFormComponent },
-  { path: 'rewards', component: ListRewardsComponent },
-  { path: 'add-reward', component: RewardFormComponent }
+  //user Routes
+  { path: 'login', component: LoginComponent },
+  { path: 'dashboard', component: DashboardComponent, canActivate: [AuthGuard]  },
+  { path: 'signup', component: SignUpComponent },
+  { path: 'home', component: LandingComponent },
+  { path: 'error', component: NotFoundComponent },
+  { path: 'collaborations', component: CollaborationComponent },
+  { path: 'tasks', component: TaskComponent },
+  { path: 'projects', component: ProjectComponent },
+
+  // Redirection par défaut
+  { path: '', redirectTo: '/home', pathMatch: 'full' },
+  { path: '**', redirectTo: '/error' } // Gestion des erreurs de routes
 
 ];
 

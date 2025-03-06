@@ -6,8 +6,9 @@ import { CommonModule } from '@angular/common';
 
 @Component({
   selector: 'app-task',
-  imports: [RouterModule,CommonModule],
+  imports: [RouterModule, CommonModule],
   templateUrl: './task.component.html',
+  standalone: true,
   styleUrl: './task.component.css'
 })
 export class TaskComponent {

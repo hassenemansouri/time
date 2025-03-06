@@ -6,8 +6,9 @@ import { Project } from '../../models/project.model';
 
 @Component({
   selector: 'app-project',
-  imports: [RouterModule,CommonModule],
+  imports: [RouterModule, CommonModule],
   templateUrl: './project.component.html',
+  standalone: true,
   styleUrl: './project.component.css'
 })
 export class ProjectComponent {
