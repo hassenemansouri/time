@@ -1,17 +1,19 @@
 import { Component, OnInit } from '@angular/core';
 import { WorkspaceService } from '../workspace.service';
 import { NgForOf, CommonModule } from '@angular/common';
-import {Router, RouterLink} from '@angular/router';
+import {Router, RouterLink, RouterLinkActive} from '@angular/router';
 import { Workspace } from '../workspace.model';
 
 @Component({
   selector: 'app-list-workspaces',
   templateUrl: './list-workspaces.component.html',
   standalone: true,
-  imports: [
-    NgForOf,
-    CommonModule
-  ],
+    imports: [
+        NgForOf,
+        CommonModule,
+        RouterLink,
+        RouterLinkActive
+    ],
   styleUrls: ['./list-workspaces.component.css']
 })
 export class ListWorkspacesComponent implements OnInit {

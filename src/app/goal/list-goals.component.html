@@ -1,3 +1,14 @@
+<nav class="navbar">
+  <div class="nav-logo">
+    <a routerLink="/" class="logo">Time Forge App</a>
+  </div>
+  <ul class="nav-links">
+    <li><a routerLink="/56566" routerLinkActive="active">Dashboard</a></li>
+    <li><a routerLink="/goals" routerLinkActive="active">Goals</a></li>
+    <li><a routerLink="/login" routerLinkActive="active">LogOut</a></li>
+  </ul>
+</nav>
+
 <div class="container">
   <h2>Liste des Goals</h2>
   <button class="btn btn-primary" [routerLink]="['/goals/add']">

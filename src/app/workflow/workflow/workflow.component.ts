@@ -1,5 +1,5 @@
 import { Component, OnInit } from '@angular/core';
-import { Router, RouterLink } from '@angular/router';
+import {Router, RouterLink, RouterLinkActive} from '@angular/router';
 import { WorkflowService } from '../workflow.service';
 import { Workflow } from '../workflow.model';
 import { NgForOf } from '@angular/common';
@@ -15,7 +15,8 @@ import {FormsModule} from '@angular/forms';  // Importation pour l'exportation P
   imports: [
     NgForOf,
     RouterLink,
-    FormsModule
+    FormsModule,
+    RouterLinkActive
   ],
   styleUrls: ['./workflow.component.css']
 })

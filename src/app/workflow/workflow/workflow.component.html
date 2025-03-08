@@ -1,9 +1,20 @@
+<nav class="navbar">
+  <div class="nav-logo">
+    <a routerLink="/" class="logo">Time Forge App</a>
+  </div>
+  <ul class="nav-links">
+    <li><a routerLink="/dashboard" routerLinkActive="active">Home</a></li>
+    <li><a routerLink="/56566" routerLinkActive="active">Dashboard</a></li>
+    <li><a routerLink="/565" routerLinkActive="active">Calender</a></li>
+    <li><a routerLink="/workflows" routerLinkActive="active">Workflows</a></li>
+    <li><a routerLink="/login" routerLinkActive="active">LogOut</a></li>
+  </ul>
+</nav>
+
 <div class="container mt-5">
   <h2 class="text-center text-light mb-4">List of Workflows</h2>
 
   <!-- Barre de recherche -->
-
-
   <!-- Boutons d'exportation -->
   <div class="export-buttons d-flex justify-content-center mb-4">
     <button class="btn btn-success" (click)="exportToExcel()">📂 Export to Excel</button>

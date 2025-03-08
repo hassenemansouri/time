@@ -1,5 +1,5 @@
 import { Component, OnInit } from '@angular/core';
-import { Router, RouterLink } from '@angular/router';
+import {Router, RouterLink, RouterLinkActive} from '@angular/router';
 import { GoalService } from './goal.service';
 import { Goal } from './goal.model';
 import { NgForOf } from '@angular/common';
@@ -9,7 +9,7 @@ import { NgForOf } from '@angular/common';
   templateUrl: './list-goals.component.html',
   styleUrls: ['./list-goals.component.css'],
   standalone: true,
-  imports: [NgForOf, RouterLink]
+    imports: [NgForOf, RouterLink, RouterLinkActive]
 })
 export class ListGoalsComponent implements OnInit {
   goals: Goal[] = [];

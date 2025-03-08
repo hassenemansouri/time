@@ -1,5 +1,5 @@
 import { Component, OnInit } from '@angular/core';
-import { Router, RouterLink } from '@angular/router';
+import {Router, RouterLink, RouterLinkActive} from '@angular/router';
 import { RewardService } from './reward.service';
 import { Reward } from './reward.model';
 import {DatePipe, NgForOf} from '@angular/common';
@@ -9,7 +9,7 @@ import {DatePipe, NgForOf} from '@angular/common';
   templateUrl: './list-rewards.component.html',
   styleUrls: ['./list-rewards.component.css'],
   standalone: true,
-  imports: [NgForOf, RouterLink, DatePipe]
+    imports: [NgForOf, RouterLink, DatePipe, RouterLinkActive]
 })
 export class ListRewardsComponent implements OnInit {
   rewards: Reward[] = [];

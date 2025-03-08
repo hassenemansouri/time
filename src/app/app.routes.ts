@@ -13,6 +13,12 @@ import {DashboardComponent} from './dashboard/dashboard.component';
 import {SignUpComponent} from './sign-up/sign-up.component';
 import {AuthGuard} from './AuthGuard';
 import {CollaborationComponent} from './collaboration/collaboration.component';
+import {ProjectFormComponent} from './project/project-form/project-form.component';
+import {TaskFormComponent} from './task/task-form/task-form.component';
+import {ListGoalsComponent} from './goal/list-goals.component';
+import {GoalFormComponent} from './goal/goal-form.component';
+import {ListRewardsComponent} from './reward/list-rewards.component';
+import {RewardFormComponent} from './reward/reward-form.component';
 
 export const routes: Routes = [
   // Routes des Workspaces
@@ -21,6 +27,7 @@ export const routes: Routes = [
   { path: 'workspaces/edit/:id', component: WorkspaceFormComponent },
 
   // Routes des Workflows
+
   { path: 'workflows', component: WorkflowComponent },
   { path: 'workflows/add', component: WorkflowFormComponent },
   { path: 'workflows/edit/:id', component: WorkflowFormComponent },
@@ -31,8 +38,18 @@ export const routes: Routes = [
   { path: 'home', component: LandingComponent },
   { path: 'error', component: NotFoundComponent },
   { path: 'collaborations', component: CollaborationComponent },
+
+  //Routes des goals and Rewards
+  {path: 'goals' , component:ListGoalsComponent},
+  {path:'goals/add' , component : GoalFormComponent},
+  {path: 'rewards' , component : ListRewardsComponent},
+  {path : 'rewards/add' , component : RewardFormComponent},
+
+  //Routes des projets et tasks
   { path: 'tasks', component: TaskComponent },
   { path: 'projects', component: ProjectComponent },
+  { path: 'projects/add' , component: ProjectFormComponent},
+  { path : 'tasks/add' , component : TaskFormComponent},
 
   // Redirection par défaut
   { path: '', redirectTo: '/home', pathMatch: 'full' },
