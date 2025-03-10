@@ -1,3 +1,65 @@
+/* 🌟 Navbar principale */
+.navbar {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  background: #007bff;
+  padding: 15px 20px;
+  color: white;
+  box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
+}
+
+/* 🎯 Logo */
+.nav-logo .logo {
+  font-size: 22px;
+  font-weight: bold;
+  color: white;
+  text-decoration: none;
+}
+
+/* 📌 Liens */
+.nav-links {
+  list-style: none;
+  display: flex;
+  gap: 20px;
+}
+
+.nav-links li {
+  display: inline;
+}
+
+.nav-links a {
+  text-decoration: none;
+  color: white;
+  font-size: 16px;
+  padding: 8px 12px;
+  border-radius: 5px;
+}
+
+.nav-links a:hover,
+.nav-links a.active {
+  background: rgba(255, 255, 255, 0.2);
+}
+
+/* 🎭 Responsive */
+@media (max-width: 768px) {
+  .navbar {
+    flex-direction: column;
+    align-items: flex-start;
+  }
+
+  .nav-links {
+    flex-direction: column;
+    width: 100%;
+    padding: 10px 0;
+  }
+
+  .nav-links a {
+    display: block;
+    width: 100%;
+    text-align: center;
+  }
+}
 /* 🌟 Conteneur principal plus compact */
 .container {
     max-width: 900px;  /* 🔽 Réduction de la largeur */
@@ -7,14 +69,14 @@
     border-radius: 12px;
     box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
   }
-  
+
   /* 🎯 Titre */
   h2 {
     font-size: 26px;
     text-align: center;
     margin-bottom: 15px;
   }
-  
+
   /* ✨ Bouton "Add Workflow" */
   .btn-primary {
     display: block;
@@ -24,31 +86,31 @@
     font-size: 16px;
     border-radius: 8px;
   }
-  
+
   /* 🏆 Table plus compacte et esthétique */
   .table {
     width: 100%;
     border-radius: 8px;
     overflow: hidden;
   }
-  
+
   .table thead th {
     background: #007bff;
     color: white;
     padding: 12px;
     text-align: center;
   }
-  
+
   .table tbody tr {
     border-bottom: 1px solid #ddd;
   }
-  
+
   .table tbody td {
     text-align: center;
     padding: 10px; /* 🔽 Réduction du padding */
     font-size: 16px;
   }
-  
+
   /* 🎭 Boutons "Update" & "Delete" bien alignés avec Flexbox */
   .btn-container {
     display: flex;
@@ -56,7 +118,7 @@
     align-items: center;
     gap: 10px; /* 🔽 Espacement entre les boutons */
   }
-  
+
   .btn {
     font-size: 14px;
     padding: 8px 14px; /* 🔽 Réduction du padding */
@@ -68,63 +130,63 @@
     gap: 5px;
     min-width: 100px;
   }
-  
+
   /* 🎨 Boutons stylisés */
   .btn-warning {
     background: #ffc107;
     border: none;
     color: black;
   }
-  
+
   .btn-danger {
     background: #dc3545;
     border: none;
     color: white;
   }
-  
+
   .btn-warning:hover {
     background: #e0a800;
   }
-  
+
   .btn-danger:hover {
     background: #c82333;
   }
-  
+
   /* 🎭 Responsive */
   @media (max-width: 768px) {
     .container {
       max-width: 100%;
       padding: 15px;
     }
-  
+
     .btn-primary {
       width: 100%;
     }
-  
+
     .table thead {
       display: none; /* Masquer l'en-tête sur mobile */
     }
-  
+
     .table tbody,
     .table tr,
     .table td {
       display: block;
       width: 100%;
     }
-  
+
     .table tr {
       margin-bottom: 15px;
       border: 1px solid #ddd;
       padding: 10px;
       border-radius: 8px;
     }
-  
+
     .table td {
       text-align: right;
       position: relative;
       padding-left: 50%;
     }
-  
+
     .table td::before {
       content: attr(data-label);
       position: absolute;
@@ -132,15 +194,14 @@
       font-weight: bold;
       text-transform: capitalize;
     }
-  
+
     /* 📱 Alignement en colonne pour mobile */
     .btn-container {
       flex-direction: column;
       gap: 5px;
     }
-  
+
     .btn {
       width: 100%;
     }
   }
-  
