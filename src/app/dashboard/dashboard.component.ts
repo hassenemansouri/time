@@ -9,6 +9,7 @@ import {Router, RouterLink, RouterLinkActive} from '@angular/router';
     RouterLinkActive
   ],
   templateUrl: './dashboard.component.html',
+  standalone: true,
   styleUrl: './dashboard.component.css'
 })
 export class DashboardComponent implements OnInit {

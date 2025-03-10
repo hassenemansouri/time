@@ -40,13 +40,36 @@
   </style>
 </head>
 <body>
+<!-- 🌟 Navbar Bootstrap 5 Modern -->
+<nav class="navbar navbar-expand-lg navbar-dark custom-navbar">
+  <div class="container">
+    <!-- Logo -->
+    <a class="navbar-brand" href="#">
+      <img src="/timeforge_labor_logo.jpeg" alt="Logo" class="logo"> TimeForge
+    </a>
+
+    <!-- Bouton Responsive -->
+    <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav">
+      <span class="navbar-toggler-icon"></span>
+    </button>
+
+    <!-- Liens de Navigation -->
+    <div class="collapse navbar-collapse" id="navbarNav">
+      <!-- Boutons -->
+      <div class="nav-buttons">
+
+        <a routerLink="/home" class="btn btn-primary">Get Started</a>
+      </div>
+    </div>
+  </div>
+</nav>
 
 <!-- Sidebar -->
 <div class="sidebar">
   <h3 class="text-center text-white">TimeForge</h3>
   <a href="#" class="active"><i class="fas fa-tachometer-alt icon"></i> Dashboard</a>
-  <a href="#"><i class="fas fa-tasks icon"></i> Tasks</a>
-  <a href="#"><i class="fas fa-project-diagram icon"></i> Projects</a>
+  <a routerLink="/tasks"><i class="fas fa-tasks icon"></i> Tasks</a>
+  <a routerLink="/projects"><i class="fas fa-project-diagram icon"></i> Projects</a>
 
 
   <!-- New Sidebar Links -->
@@ -55,9 +78,7 @@
     <a routerLink="/workflows" routerLinkActive="active"><i class="fas fa-tasks icon"></i> Workflows</a>
     <a routerLink="/goals" routerLinkActive="active"><i class="fas fa-bullseye icon"></i> Goals</a>
     <a routerLink="/rewards" routerLinkActive="active"><i class="fas fa-gift icon"></i> Rewards</a>
-    <a routerLink="/strategicpartnership" routerLinkActive="active"><i class="fas fa-bullseye icon"></i> strategicpaartnership</a>
-    <a routerLink="/collaborations" routerLinkActive="active"><i class="fas fa-gift icon"></i> collaborations</a>
-
+  <a routerLink="/collaborations" routerLinkActive="active"><i class="fas fa-gift icon"></i> Collaborations</a>
   <a href="#"><i class="fas fa-clock icon"></i> Time Logs</a>
   <a href="#"><i class="fas fa-cogs icon"></i> Settings</a>
 
@@ -66,7 +87,7 @@
 
 <!-- Main Content -->
 <div class="content">
-  <h2>Welcome back, User!</h2>
+  <h2>Welcome back</h2>
   <div class="row">
     <!-- Overview Section -->
     <div class="col-md-6 col-lg-4">
