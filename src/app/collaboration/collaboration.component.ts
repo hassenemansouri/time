@@ -3,15 +3,19 @@ import { CollaborationService } from './collaboration.service';
 import { Collaboration } from './collaboration.model';
 import {FormsModule} from '@angular/forms';
 import {DatePipe, NgForOf} from '@angular/common';
+import {RouterLink, RouterLinkActive} from '@angular/router';
 
 @Component({
   selector: 'app-collaboration',
   templateUrl: './collaboration.component.html',
   styleUrls: ['./collaboration.component.css'],
+  standalone: true,
   imports: [
     FormsModule,
     DatePipe,
-    NgForOf
+    NgForOf,
+    RouterLink,
+    RouterLinkActive
   ]
 })
 export class CollaborationComponent implements OnInit {

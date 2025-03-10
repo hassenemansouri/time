@@ -30,8 +30,6 @@ export const routes: Routes = [
   { path: 'workspaces/add', component: WorkspaceFormComponent },
   { path: 'workspaces/edit/:id', component: WorkspaceFormComponent },
 
-  //For Users
-  {path: 'workspaceUser' , component: WorkspaceUserComponent},
 
   // Routes des Workflows
   { path: 'workflows', component: WorkflowComponent },
