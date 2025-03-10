@@ -45,11 +45,15 @@ export const routes: Routes = [
   { path: 'error', component: NotFoundComponent },
   { path: 'collaborations', component: CollaborationComponent },
 
-  //Routes des goals and Rewards
-  {path: 'goals' , component:ListGoalsComponent},
-  {path:'goals/add' , component : GoalFormComponent},
-  {path: 'rewards' , component : ListRewardsComponent},
-  {path : 'rewards/add' , component : RewardFormComponent},
+  // Routes des Goals
+  { path: 'goals', component: ListGoalsComponent },
+  { path: 'goals/add', component: GoalFormComponent },
+  { path: 'goals/edit/:id', component: GoalFormComponent },
+
+  // Routes des Rewards
+  { path: 'rewards', component: ListRewardsComponent },
+  { path: 'rewards/add', component: RewardFormComponent },
+  { path: 'rewards/edit/:id', component: RewardFormComponent },
 
   //Routes des projets et tasks
   { path: 'tasks', component: TaskComponent },
