@@ -6,11 +6,24 @@
     <li><a routerLink="/dashboard" routerLinkActive="active">Home</a></li>
     <li><a routerLink="/56566" routerLinkActive="active">Dashboard</a></li>
     <li><a routerLink="/workspaces" routerLinkActive="active">Workspaces</a></li>
+    <li><a routerLink="/workspaceUser" routerLinkActive="active">WorkspaceUser</a></li>
+
     <li><a routerLink="/login" routerLinkActive="active">LogOut</a></li>
   </ul>
 </nav>
 <div class="container">
   <h2>List Of Workspaces</h2>
+
+  <div class="export-buttons">
+    <button class="btn btn-success" (click)="exportToExcel()">📂 Export to Excel</button>
+    <input
+      type="text"
+      class="search-input"
+      [(ngModel)]="searchText"
+      placeholder="Search Workflows..."
+    />
+    <button class="btn btn-danger" (click)="exportToPDF()">📝 Export to PDF</button>
+  </div>
 
   <button class="btn btn-primary" (click)="router.navigate(['workspaces/add'])">
     ➕ Add a  Workspace

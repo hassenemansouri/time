@@ -19,15 +19,21 @@ import {ListGoalsComponent} from './goal/list-goals.component';
 import {GoalFormComponent} from './goal/goal-form.component';
 import {ListRewardsComponent} from './reward/list-rewards.component';
 import {RewardFormComponent} from './reward/reward-form.component';
+import {WorkspaceUserComponent} from './workspace-user/workspace-user.component';
 
 export const routes: Routes = [
   // Routes des Workspaces
+
+  //For Manager
+
   { path: 'workspaces', component: ListWorkspacesComponent },
   { path: 'workspaces/add', component: WorkspaceFormComponent },
   { path: 'workspaces/edit/:id', component: WorkspaceFormComponent },
 
-  // Routes des Workflows
+  //For Users
+  {path: 'workspaceUser' , component: WorkspaceUserComponent},
 
+  // Routes des Workflows
   { path: 'workflows', component: WorkflowComponent },
   { path: 'workflows/add', component: WorkflowFormComponent },
   { path: 'workflows/edit/:id', component: WorkflowFormComponent },
