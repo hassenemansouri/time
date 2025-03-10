@@ -9,7 +9,7 @@ import { NgForOf } from '@angular/common';
   templateUrl: './list-goals.component.html',
   styleUrls: ['./list-goals.component.css'],
   standalone: true,
-    imports: [NgForOf, RouterLink]
+  imports: [NgForOf, RouterLink, RouterLinkActive]
 })
 export class ListGoalsComponent implements OnInit {
   goals: Goal[] = [];
