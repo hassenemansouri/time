@@ -19,7 +19,6 @@ import {ListGoalsComponent} from './goal/list-goals.component';
 import {GoalFormComponent} from './goal/goal-form.component';
 import {ListRewardsComponent} from './reward/list-rewards.component';
 import {RewardFormComponent} from './reward/reward-form.component';
-import {WorkspaceUserComponent} from './workspace-user/workspace-user.component';
 
 export const routes: Routes = [
   // Routes des Workspaces
