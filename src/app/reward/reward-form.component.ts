@@ -15,6 +15,7 @@ import { NgIf } from '@angular/common';
 export class RewardFormComponent implements OnInit {
   reward: Reward = { type: '', description: '' };
   isEdit: boolean = false;
+  dateInFuture: boolean = false;
 
   constructor(
     private rewardService: RewardService,
@@ -32,6 +33,30 @@ export class RewardFormComponent implements OnInit {
     }
   }
 
+  checkDateFuture(date: Date | undefined): void {
+    if (!date) {
+      this.dateInFuture = false;
+      return;
+    }
+
+    const selectedDate = new Date(date);
+    selectedDate.setHours(0, 0, 0, 0); // Normalisation de l'heure à 00:00:00 pour la comparaison
+
+    const today = new Date();
+    today.setHours(0, 0, 0, 0); // Normalisation de l'heure à 00:00:00
+
+    // ✅ Autoriser aujourd'hui et dates futures
+    this.dateInFuture = selectedDate < today; // Si la date choisie est avant aujourd'hui -> invalide
+  }
+
+
+  onSubmit(form: any): void {
+    if (form.valid && !this.dateInFuture) {
+      this.saveReward(); // Appelle la méthode existante pour enregistrer
+    } else {
+      console.warn('Formulaire invalide ou date future détectée.');
+    }
+  }
   saveReward(): void {
     if (this.isEdit) {
       if (!this.reward.id) {
