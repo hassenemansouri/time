@@ -9,12 +9,12 @@ import {Message} from 'primeng/message';
   providedIn: 'root',
 })
 export class CollaborationService {
-  private apiUrl = 'http://localhost:8300/collaborations'; // Base URL for collaborations
+  private apiUrl = 'http://localhost:8300/timeforge/collaborations'; // Base URL for collaborations
 
   constructor(private http: HttpClient) {}
 
   // Add a new collaboration
-  addCollaboration(collaboration: Collaboration): Observable<void> {
+  addCollaboration(collaboration: Collaboration[]): Observable<void> {
     return this.http.post<void>(`${this.apiUrl}/add`, collaboration, {
       headers: new HttpHeaders({ 'Content-Type': 'application/json' }),
     });
@@ -68,7 +68,7 @@ export class CollaborationService {
   }
 
   // Delete a collaboration
-  deleteCollaboration(collaborationId: string): Observable<void> {
+  deleteCollaboration(collaborationId: string | undefined): Observable<void> {
     return this.http.delete<void>(`${this.apiUrl}/delete/${collaborationId}`);
   }
 }

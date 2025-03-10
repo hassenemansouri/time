@@ -1,5 +1,5 @@
 export interface Collaboration {
-  collaborationId: string;
+  collaborationId?: string;
   chatTitle: string;
   description: string;
   createdAt: Date;

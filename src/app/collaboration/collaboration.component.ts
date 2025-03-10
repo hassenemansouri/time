@@ -46,7 +46,7 @@ export class CollaborationComponent implements OnInit {
 
   // Add a new collaboration
   addCollaboration(): void {
-    this.collaborationService.addCollaboration(this.newCollaboration).subscribe(
+    this.collaborationService.addCollaboration(this.collaborations).subscribe(
       () => {
         console.log('Collaboration added successfully');
         this.loadCollaborations(); // Refresh the list
@@ -59,7 +59,7 @@ export class CollaborationComponent implements OnInit {
   }
 
   // Delete a collaboration
-  deleteCollaboration(collaborationId: string): void {
+  deleteCollaboration(collaborationId: string | undefined): void {
     this.collaborationService.deleteCollaboration(collaborationId).subscribe(
       () => {
         console.log('Collaboration deleted successfully');

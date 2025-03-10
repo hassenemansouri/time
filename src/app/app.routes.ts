@@ -11,6 +11,14 @@ import {SignUpComponent} from './sign-up/sign-up.component';
 import {DashboardComponent} from './dashboard/dashboard.component';
 import {AuthGuard} from './AuthGuard';
 import {CollaborationComponent} from './collaboration/collaboration.component';
+import {StrategicparternshipComponent} from './strategicparternship/strategicparternship.component';
+import {ListGoalsComponent} from './goal/list-goals.component';
+import {ListRewardsComponent} from './reward/list-rewards.component';
+import {RewardFormComponent} from './reward/reward-form.component';
+import {GoalFormComponent} from './goal/goal-form.component';
+import {SendEmailComponent} from './send-email/send-email.component';
+import {ForgotPasswordComponent} from './forgot-password/forgot-password.component';
+
 
 
 export const routes: Routes = [
@@ -29,7 +37,18 @@ export const routes: Routes = [
   { path: 'signup', component: SignUpComponent },
   { path: 'home', component: LandingComponent },
   { path: 'error', component: NotFoundComponent },
+  //strategicpartnership Routes
+  { path: 'strategicpartnership', component: StrategicparternshipComponent },
+
   { path: 'collaborations', component: CollaborationComponent },
+  { path: 'error', component: NotFoundComponent },
+  {path : 'goals' , component : ListGoalsComponent},
+  { path : 'goals/add' , component : GoalFormComponent},
+  { path : 'rewards/add' , component : RewardFormComponent},
+  {path : 'forgetpassword' , component : ForgotPasswordComponent},
+
+
+  {path : 'rewards' , component : ListRewardsComponent},
   // Redirection par défaut
   { path: '', redirectTo: '/home', pathMatch: 'full' },
   { path: '**', redirectTo: '/error' } // Gestion des erreurs de routes
