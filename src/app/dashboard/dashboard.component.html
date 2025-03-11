@@ -1,153 +1,58 @@
-<!DOCTYPE html>
-<html lang="en">
-<head>
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>TimeForge Dashboard</title>
-  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha1/dist/css/bootstrap.min.css">
-  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.4/css/all.min.css">
-  <style>
-    .sidebar {
-      position: fixed;
-      top: 0;
-      left: 0;
-      height: 100%;
-      width: 250px;
-      background-color: #2c3e50;
-      color: white;
-      padding-top: 20px;
-    }
-    .sidebar a {
-      color: white;
-      padding: 10px 15px;
-      text-decoration: none;
-      display: block;
-    }
-    .sidebar a:hover {
-      background-color: #34495e;
-    }
-    .content {
-      margin-left: 270px;
-      padding: 20px;
-    }
-    .card {
-      margin-bottom: 20px;
-    }
-    .icon {
-      font-size: 24px;
-      color: #3498db;
-    }
-  </style>
-</head>
-<body>
-<!-- 🌟 Navbar Bootstrap 5 Modern -->
-<nav class="navbar navbar-expand-lg navbar-dark custom-navbar">
-  <div class="container">
-    <!-- Logo -->
-    <a class="navbar-brand" href="#">
-      <img src="/timeforge_labor_logo.jpeg" alt="Logo" class="logo"> TimeForge
-    </a>
 
-    <!-- Bouton Responsive -->
-    <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav">
-      <span class="navbar-toggler-icon"></span>
-    </button>
-
-    <!-- Liens de Navigation -->
-    <div class="collapse navbar-collapse" id="navbarNav">
-      <!-- Boutons -->
-      <div class="nav-buttons">
-
-        <a routerLink="/home" class="btn btn-primary">Get Started</a>
-      </div>
-    </div>
-  </div>
-</nav>
-
-<!-- Sidebar -->
-<div class="sidebar">
-  <h3 class="text-center text-white">TimeForge</h3>
-  <a href="#" class="active"><i class="fas fa-tachometer-alt icon"></i> Dashboard</a>
-  <a routerLink="/tasks"><i class="fas fa-tasks icon"></i> Tasks</a>
-  <a routerLink="/projects"><i class="fas fa-project-diagram icon"></i> Projects</a>
-
-
-  <!-- New Sidebar Links -->
-
-    <a routerLink="/workspaces" routerLinkActive="active"><i class="fas fa-warehouse icon"></i> Workspaces</a>
-    <a routerLink="/workflows" routerLinkActive="active"><i class="fas fa-tasks icon"></i> Workflows</a>
-    <a routerLink="/goals" routerLinkActive="active"><i class="fas fa-bullseye icon"></i> Goals</a>
-    <a routerLink="/rewards" routerLinkActive="active"><i class="fas fa-gift icon"></i> Rewards</a>
-  <a routerLink="/collaborations" routerLinkActive="active"><i class="fas fa-gift icon"></i> Collaborations</a>
-  <a href="#"><i class="fas fa-clock icon"></i> Time Logs</a>
-  <a href="#"><i class="fas fa-cogs icon"></i> Settings</a>
-
-  <a href="#" class="active"><i class="fas fa-sign-out-alt icon"></i> Logout</a>
-</div>
 
 <!-- Main Content -->
 <div class="content">
-  <h2>Welcome back</h2>
-  <div class="row">
-    <!-- Overview Section -->
+  <h2 class="fw-bold mb-4">Welcome Back</h2>
+  <div class="row g-4">
+    <!-- Card 1 -->
     <div class="col-md-6 col-lg-4">
       <div class="card">
         <div class="card-body">
           <h5 class="card-title">Overview</h5>
-          <p class="card-text">Quick glance at your daily tasks, project status, and time logs.</p>
-          <a href="#" class="btn btn-primary">View Overview</a>
+          <p class="card-text">Quick glance at your daily tasks and projects.</p>
+          <a routerLink="/dashboard" class="btn btn-primary w-100">View Overview</a>
         </div>
       </div>
     </div>
-
-    <!-- Tasks Section -->
+    <!-- Card 2 -->
     <div class="col-md-6 col-lg-4">
       <div class="card">
         <div class="card-body">
           <h5 class="card-title">Your Tasks</h5>
           <p class="card-text">Manage and track your tasks in one place.</p>
-          <a href="#" class="btn btn-primary">View Tasks</a>
+          <a routerLink="/tasks" class="btn btn-primary w-100">View Tasks</a>
         </div>
       </div>
     </div>
-
-    <!-- Projects Section -->
+    <!-- Card 3 -->
     <div class="col-md-6 col-lg-4">
       <div class="card">
         <div class="card-body">
           <h5 class="card-title">Projects</h5>
-          <p class="card-text">Keep track of your ongoing and completed projects.</p>
-          <a href="#" class="btn btn-primary">View Projects</a>
+          <p class="card-text">Monitor ongoing and completed projects.</p>
+          <a routerLink="/projects" class="btn btn-primary w-100">View Projects</a>
         </div>
       </div>
     </div>
-
-    <!-- Time Logs Section -->
+    <!-- Card 4 -->
     <div class="col-md-6 col-lg-4">
       <div class="card">
         <div class="card-body">
           <h5 class="card-title">Time Logs</h5>
-          <p class="card-text">Log your working hours and monitor time spent on tasks.</p>
-          <a href="#" class="btn btn-primary">View Time Logs</a>
+          <p class="card-text">Track your time and logs effectively.</p>
+          <a routerLink="/timelogs" class="btn btn-primary w-100">View Time Logs</a>
         </div>
       </div>
     </div>
-
-    <!-- Settings Section -->
+    <!-- Card 5 -->
     <div class="col-md-6 col-lg-4">
       <div class="card">
         <div class="card-body">
           <h5 class="card-title">Account Settings</h5>
-          <p class="card-text">Update your profile, password, and preferences.</p>
-          <a href="#" class="btn btn-primary">Go to Settings</a>
+          <p class="card-text">Manage profile and preferences.</p>
+          <a routerLink="/settings" class="btn btn-primary w-100">Go to Settings</a>
         </div>
       </div>
     </div>
   </div>
 </div>
-
-<!-- Bootstrap JS -->
-<script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.11.6/dist/umd/popper.min.js"></script>
-<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha1/dist/js/bootstrap.min.js"></script>
-</body>
-</html>

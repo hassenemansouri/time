@@ -1,53 +1,74 @@
-<nav class="navbar">
-  <div class="nav-logo">
-    <a routerLink="/" class="logo">Time Forge App</a>
-  </div>
-  <ul class="nav-links">
-    <li><a routerLink="/dashboard" routerLinkActive="active">Home</a></li>
-    <li><a routerLink="/collaborations" routerLinkActive="active">Collaborations</a></li>
-    <li><a routerLink="/login" routerLinkActive="active">LogOut</a></li>
-  </ul>
-</nav>
-<div class="collaboration-container">
-  <h2>Collaborations</h2>
 
-  <!-- Form to create a new collaboration -->
-  <div class="form-container">
-    <h3>Create New Collaboration</h3>
-    <form (ngSubmit)="addCollaboration()">
-      <label for="chatTitle">Chat Title:</label>
-      <input
-        type="text"
-        id="chatTitle"
-        [(ngModel)]="newCollaboration.chatTitle"
-        name="chatTitle"
-        required
-      />
 
-      <label for="description">Description:</label>
-      <textarea
-        id="description"
-        [(ngModel)]="newCollaboration.description"
-        name="description"
-        required
-      ></textarea>
+<!-- MAIN CONTENT -->
+<div class="container py-5">
+  <h2 class="text-center mb-4">Collaborations</h2>
 
-      <button type="submit">Create</button>
-    </form>
-  </div>
-
-  <!-- List of collaborations -->
-  <div class="collaboration-list">
-    <h3>Collaboration List</h3>
-    <ul>
-      <li *ngFor="let collab of collaborations">
-        <div class="collaboration-item">
-          <h4>{{ collab.chatTitle }}</h4>
-          <p>{{ collab.description }}</p>
-          <p><strong>Created At:</strong> {{ collab.createdAt | date: 'medium' }}</p>
-          <button (click)="deleteCollaboration(collab.collaborationId)">Delete</button>
+  <!-- FORM -->
+  <div class="card shadow-sm rounded-4 mb-5">
+    <div class="card-header bg-secondary text-white">
+      <h5 class="m-0">Create New Collaboration</h5>
+    </div>
+    <div class="card-body">
+      <form (ngSubmit)="addCollaboration()">
+        <div class="mb-3">
+          <label for="chatTitle" class="form-label">Chat Title</label>
+          <input
+            type="text"
+            id="chatTitle"
+            class="form-control"
+            [(ngModel)]="newCollaboration.chatTitle"
+            name="chatTitle"
+            required
+          />
         </div>
-      </li>
-    </ul>
+
+        <div class="mb-3">
+          <label for="description" class="form-label">Description</label>
+          <textarea
+            id="description"
+            class="form-control"
+            rows="3"
+            [(ngModel)]="newCollaboration.description"
+            name="description"
+            required
+          ></textarea>
+        </div>
+
+        <button type="submit" class="btn btn-primary w-100 rounded-pill">
+          <i class="bi bi-plus-circle me-1"></i> Create Collaboration
+        </button>
+      </form>
+    </div>
+  </div>
+
+  <!-- LIST OF COLLABORATIONS -->
+  <div class="card shadow-sm rounded-4">
+    <div class="card-header bg-info text-white">
+      <h5 class="m-0">Collaboration List</h5>
+    </div>
+    <div class="card-body">
+      <ul class="list-group list-group-flush" *ngIf="collaborations.length > 0; else noCollab">
+        <li class="list-group-item d-flex justify-content-between align-items-start" *ngFor="let collab of collaborations">
+          <div class="ms-2 me-auto">
+            <div class="fw-bold">{{ collab.chatTitle }}</div>
+            <p class="mb-1">{{ collab.description }}</p>
+            <small class="text-muted">Created At: {{ collab.createdAt | date: 'medium' }}</small>
+          </div>
+          <button
+            (click)="deleteCollaboration(collab.collaborationId)"
+            class="btn btn-outline-danger btn-sm rounded-pill"
+          >
+            <i class="bi bi-trash3-fill"></i>
+          </button>
+        </li>
+      </ul>
+
+      <ng-template #noCollab>
+        <div class="alert alert-warning text-center m-0" role="alert">
+          <i class="bi bi-exclamation-circle-fill me-2"></i> No collaborations available.
+        </div>
+      </ng-template>
+    </div>
   </div>
 </div>

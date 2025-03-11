@@ -1,66 +1,80 @@
 import { NgModule } from '@angular/core';
 import { RouterModule, Routes } from '@angular/router';
-import {ListWorkspacesComponent} from './workspace/list-workspaces/list-workspaces.component';
-import {WorkspaceFormComponent} from './workspace/workspace-form/workspace-form.component';
-import {WorkflowFormComponent} from './workflow/workflow-form/workflow-form.component';
-import {WorkflowComponent} from './workflow/workflow/workflow.component';
-import {LandingComponent} from './landing/landing.component';
-import {NotFoundComponent} from './not-found/not-found.component';
+
+import { ListWorkspacesComponent } from './workspace/list-workspaces/list-workspaces.component';
+import { WorkspaceFormComponent } from './workspace/workspace-form/workspace-form.component';
+import { WorkflowFormComponent } from './workflow/workflow-form/workflow-form.component';
+import { WorkflowComponent } from './workflow/workflow/workflow.component';
+import { LandingComponent } from './landing/landing.component';
+import { NotFoundComponent } from './not-found/not-found.component';
 import { ProjectComponent } from './project/project/project.component';
 import { TaskComponent } from './task/task/task.component';
-import {LoginComponent} from './login/login.component';
-import {DashboardComponent} from './dashboard/dashboard.component';
-import {SignUpComponent} from './sign-up/sign-up.component';
-import {AuthGuard} from './AuthGuard';
-import {CollaborationComponent} from './collaboration/collaboration.component';
-import {ProjectFormComponent} from './project/project-form/project-form.component';
-import {TaskFormComponent} from './task/task-form/task-form.component';
-import {ListGoalsComponent} from './goal/list-goals.component';
-import {GoalFormComponent} from './goal/goal-form.component';
-import {ListRewardsComponent} from './reward/list-rewards.component';
-import {RewardFormComponent} from './reward/reward-form.component';
+import { LoginComponent } from './login/login.component';
+import { DashboardComponent } from './dashboard/dashboard.component';
+import { SignUpComponent } from './sign-up/sign-up.component';
+import { AuthGuard } from './AuthGuard';
+import { CollaborationComponent } from './collaboration/collaboration.component';
+import { ProjectFormComponent } from './project/project-form/project-form.component';
+import { TaskFormComponent } from './task/task-form/task-form.component';
+import { ListGoalsComponent } from './goal/list-goals.component';
+import { GoalFormComponent } from './goal/goal-form.component';
+import { ListRewardsComponent } from './reward/list-rewards.component';
+import { RewardFormComponent } from './reward/reward-form.component';
+import { ForgotPasswordComponent } from './forgot-password/forgot-password.component';
+import { PartnershipListComponent } from './strategicparternship/partnership-list/partnership-list.component';
+import { AddPartnershipComponent } from './strategicparternship/add-partnership/add-partnership.component';
+
+// Layouts
+import { AuthenticatedLayoutComponent } from './layouts/authenticated-layout/authenticated-layout.component';
+import { PublicLayoutComponent } from './layouts/public-layout/public-layout.component';
+import {PrivateLayoutComponent} from './layouts/private-layout/private-layout.component';
 
 export const routes: Routes = [
-  // Routes des Workspaces
 
-  //For Manager
+  // PUBLIC ROUTES (No sidebar)
+  {
+    path: '',
+    component: PublicLayoutComponent,
+    children: [
+      { path: 'login', component: LoginComponent },
+      { path: 'signup', component: SignUpComponent },
+      { path: 'home', component: LandingComponent },
+      { path: 'forgetpassword', component: ForgotPasswordComponent },
+      { path: '', redirectTo: 'home', pathMatch: 'full' }
+    ]
+  },
 
-  { path: 'workspaces', component: ListWorkspacesComponent },
-  { path: 'workspaces/add', component: WorkspaceFormComponent },
-  { path: 'workspaces/edit/:id', component: WorkspaceFormComponent },
+  // AUTHENTICATED ROUTES (With sidebar)
+  {
+    path: '',
+    component: PrivateLayoutComponent,
+    canActivate: [AuthGuard], // Protect all below routes
+      children: [
+        { path: 'dashboard', component: DashboardComponent },
+        { path: 'workspaces', component: ListWorkspacesComponent },
+        { path: 'workspaces/add', component: WorkspaceFormComponent },
+        { path: 'workspaces/edit/:id', component: WorkspaceFormComponent },
+        { path: 'workflows', component: WorkflowComponent },
+        { path: 'workflows/add', component: WorkflowFormComponent },
+        { path: 'workflows/edit/:id', component: WorkflowFormComponent },
+        { path: 'collaborations', component: CollaborationComponent },
+        { path: 'goals', component: ListGoalsComponent },
+        { path: 'goals/add', component: GoalFormComponent },
+        { path: 'goals/edit/:id', component: GoalFormComponent },
+        { path: 'rewards', component: ListRewardsComponent },
+        { path: 'rewards/add', component: RewardFormComponent },
+        { path: 'rewards/edit/:id', component: RewardFormComponent },
+        { path: 'tasks', component: TaskComponent },
+        { path: 'projects', component: ProjectComponent },
+        { path: 'projects/add', component: ProjectFormComponent },
+        { path: 'tasks/add', component: TaskFormComponent },
+        { path: 'partnerships', component: PartnershipListComponent },
+        { path: 'add-partnership', component: AddPartnershipComponent }
+      ]
+  },
 
-
-  // Routes des Workflows
-  { path: 'workflows', component: WorkflowComponent },
-  { path: 'workflows/add', component: WorkflowFormComponent },
-  { path: 'workflows/edit/:id', component: WorkflowFormComponent },
-  //user Routes
-  { path: 'login', component: LoginComponent },
-  { path: 'dashboard', component: DashboardComponent, canActivate: [AuthGuard]  },
-  { path: 'signup', component: SignUpComponent },
-  { path: 'home', component: LandingComponent },
-  { path: 'error', component: NotFoundComponent },
-  { path: 'collaborations', component: CollaborationComponent },
-
-  // Routes des Goals
-  { path: 'goals', component: ListGoalsComponent },
-  { path: 'goals/add', component: GoalFormComponent },
-  { path: 'goals/edit/:id', component: GoalFormComponent },
-
-  // Routes des Rewards
-  { path: 'rewards', component: ListRewardsComponent },
-  { path: 'rewards/add', component: RewardFormComponent },
-  { path: 'rewards/edit/:id', component: RewardFormComponent },
-
-  //Routes des projets et tasks
-  { path: 'tasks', component: TaskComponent },
-  { path: 'projects', component: ProjectComponent },
-  { path: 'projects/add' , component: ProjectFormComponent},
-  { path : 'tasks/add' , component : TaskFormComponent},
-
-  // Redirection par défaut
-  { path: '', redirectTo: '/home', pathMatch: 'full' },
-  { path: '**', redirectTo: '/error' } // Gestion des erreurs de routes
+  // 404 Route
+  { path: '**', component: NotFoundComponent }
 
 ];
 

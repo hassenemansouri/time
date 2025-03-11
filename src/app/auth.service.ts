@@ -56,4 +56,10 @@ export class AuthService {
     const token = this.getToken();
     return new HttpHeaders().set('Authorization', `Bearer ${token}`);
   }
+  forgotPassword(email: string) {
+    const token = localStorage.getItem('jwtToken'); // Get the token from storage or wherever it's stored
+    const headers = new HttpHeaders().set('Authorization', `Bearer ${token}`);
+
+    return this.http.post('http://localhost:8080/api/auth/forgot-password', { email }, { headers });
+  }
 }

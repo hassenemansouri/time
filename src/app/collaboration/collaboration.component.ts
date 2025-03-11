@@ -2,7 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import { CollaborationService } from './collaboration.service';
 import { Collaboration } from './collaboration.model';
 import {FormsModule} from '@angular/forms';
-import {DatePipe, NgForOf} from '@angular/common';
+import {DatePipe, NgForOf, NgIf} from '@angular/common';
 import {RouterLink, RouterLinkActive} from '@angular/router';
 
 @Component({
@@ -15,7 +15,8 @@ import {RouterLink, RouterLinkActive} from '@angular/router';
     DatePipe,
     NgForOf,
     RouterLink,
-    RouterLinkActive
+    RouterLinkActive,
+    NgIf
   ]
 })
 export class CollaborationComponent implements OnInit {

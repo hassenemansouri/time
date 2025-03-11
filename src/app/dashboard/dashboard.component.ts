@@ -1,12 +1,14 @@
 import {Component, OnInit} from '@angular/core';
 import {AuthService} from '../auth.service';
 import {Router, RouterLink, RouterLinkActive} from '@angular/router';
+import {NgOptimizedImage} from '@angular/common';
 
 @Component({
   selector: 'app-dashboard',
   imports: [
     RouterLink,
-    RouterLinkActive
+
+
   ],
   templateUrl: './dashboard.component.html',
   standalone: true,

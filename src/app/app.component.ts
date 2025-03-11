@@ -7,13 +7,12 @@ import {AuthInterceptor} from './auth.interceptor';
 import {JwtHelperService} from '@auth0/angular-jwt';
 import {AuthService} from './auth.service';
 import {FormsModule, ReactiveFormsModule} from '@angular/forms';
-import {ToastrModule} from 'ngx-toastr';
 import {BrowserAnimationsModule} from '@angular/platform-browser/animations';
 
 
 @Component({
   selector: 'app-root',
-  imports: [RouterOutlet, HttpClientModule, RouterLink, FormsModule, ReactiveFormsModule],
+  imports: [RouterOutlet, HttpClientModule, FormsModule, ReactiveFormsModule],
   templateUrl: './app.component.html',
   standalone: true,
   styleUrl: './app.component.css',

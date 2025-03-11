@@ -2,8 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import {FormBuilder, FormGroup, FormsModule, Validators} from '@angular/forms';
 import { AuthService } from '../auth.service';  // Import the AuthService
 import {Router, RouterLink} from '@angular/router';
-import {InputText} from 'primeng/inputtext';
-import {ButtonDirective} from 'primeng/button';
+
 import {NgIf} from '@angular/common';
 
 @Component({
@@ -13,9 +12,9 @@ import {NgIf} from '@angular/common';
   standalone: true,
   imports: [
     FormsModule,
-    InputText,
+
     RouterLink,
-    ButtonDirective,
+
     NgIf
   ]
 })
@@ -24,7 +23,7 @@ export class LoginComponent implements OnInit {
   errorMessage: string | null = null;
   username: string = '';
   password: string = '';
-
+  loading: boolean = false;
   constructor(
     private fb: FormBuilder,
     private authService: AuthService,
