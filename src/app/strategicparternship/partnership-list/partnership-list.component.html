@@ -1,0 +1,45 @@
+<div class="container mt-5">
+  <div class="row">
+    <div class="col-md-12">
+
+      <h3 class="text-center mb-4">List of Strategic Partnerships</h3>
+
+      <div *ngIf="partnerships.length > 0; else noPartnerships">
+        <div class="table-responsive rounded-4 shadow-sm">
+          <table class="table table-striped table-hover align-middle">
+            <thead class="table-primary">
+            <tr>
+              <th>ID</th>
+              <th>Name</th>
+              <th>Description</th>
+              <th class="text-center">Actions</th>
+            </tr>
+            </thead>
+            <tbody>
+            <tr *ngFor="let partnership of partnerships">
+              <td>{{ partnership.id }}</td>
+              <td>{{ partnership.name }}</td>
+              <td>{{ partnership.description }}</td>
+              <td class="text-center">
+                <button
+                  (click)="deletePartnership(partnership.id)"
+                  class="btn btn-danger btn-sm rounded-pill"
+                >
+                  <i class="bi bi-trash3-fill me-1"></i> Delete
+                </button>
+              </td>
+            </tr>
+            </tbody>
+          </table>
+        </div>
+      </div>
+
+      <ng-template #noPartnerships>
+        <div class="alert alert-warning text-center mt-4" role="alert">
+          <i class="bi bi-info-circle-fill me-2"></i> No partnerships available.
+        </div>
+      </ng-template>
+
+    </div>
+  </div>
+</div>
