@@ -1,6 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { ActivatedRoute, Router } from '@angular/router';
-import { FormsModule, ReactiveFormsModule } from '@angular/forms';
+import { FormsModule, NgForm, ReactiveFormsModule } from '@angular/forms';
 import {CommonModule, NgForOf, NgIf} from '@angular/common';
 import { Project } from '../../models/project.model';
 import { ProjectService } from '../project.service';
@@ -12,18 +12,18 @@ import { ProjectService } from '../project.service';
   templateUrl: './project-form.component.html',
   styleUrl: './project-form.component.css'
 })
+
 export class ProjectFormComponent implements OnInit {
   project: Project = {
-    id: '',
+    projet_id: '',
     title: '',
     description: '',
-    status: 'to-do',
-    startDate: undefined,
+    category: 'DESIGN', // Valeur par défaut mise à jour
+    startDate: new Date(),
     endDate: undefined
   };
   
   isEdit: boolean = false;
-projectForm: any;
 
   constructor(
     private projectService: ProjectService,
@@ -41,16 +41,13 @@ projectForm: any;
     }
   }
 
-
-  saveProject(): void {
-    console.log('✅ Saving project:', JSON.stringify(this.project, null, 2));
-
+  saveProject(projectForm: NgForm) {
     if (this.isEdit) {
-      if (!this.project.id || this.project.id === 'number') {
+      if (!this.project.projet_id) {
         console.error('❌ Error: Invalid ID');
         return;
       }
-      this.projectService.updateProject(this.project.id, this.project).subscribe({
+      this.projectService.updateProject(this.project.projet_id, this.project).subscribe({
         next: () => {
           console.log('✅ Project updated successfully');
           this.router.navigate(['/projects']);

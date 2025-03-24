@@ -14,10 +14,8 @@ import {RouterLink, RouterLinkActive} from '@angular/router';
     FormsModule,
     DatePipe,
     NgForOf,
-    RouterLink,
-    RouterLinkActive,
     NgIf
-  ]
+]
 })
 export class CollaborationComponent implements OnInit {
   collaborations: Collaboration[] = [];

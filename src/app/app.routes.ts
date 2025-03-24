@@ -64,10 +64,12 @@ export const routes: Routes = [
         { path: 'rewards', component: ListRewardsComponent },
         { path: 'rewards/add', component: RewardFormComponent },
         { path: 'rewards/edit/:id', component: RewardFormComponent },
-        { path: 'tasks', component: TaskComponent },
         { path: 'projects', component: ProjectComponent },
         { path: 'projects/add', component: ProjectFormComponent },
+        { path: 'projects/edit/:id', component: ProjectFormComponent },
+        { path: 'tasks', component: TaskComponent },
         { path: 'tasks/add', component: TaskFormComponent },
+        { path: 'tasks/edit/:id', component: TaskFormComponent },
         { path: 'partnerships', component: PartnershipListComponent },
         { path: 'add-partnership', component: AddPartnershipComponent }
       ]

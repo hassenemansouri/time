@@ -13,12 +13,13 @@ export class ProjectService {
  
  
    getAllProjects(): Observable<Project[]> {
-     return this.http.get<Project[]>(`${this.apiUrl}/getAllProjects`);
-   }
- 
-   getProjectById(id: string): Observable<Project> {
-     return this.http.get<Project>(`${this.apiUrl}/getProjectById/${id}`);
-   }
+    return this.http.get<Project[]>(`${this.apiUrl}`); // Change /getAllProjects en /projects
+  }
+  
+  getProjectById(id: string): Observable<Project> {
+    return this.http.get<Project>(`${this.apiUrl}/${id}`); // Change /getProjectById/${id} en /${id}
+  }
+  
  
    private httpOptions = {
      headers: new HttpHeaders({ 'Content-Type': 'application/json' })
@@ -29,8 +30,9 @@ export class ProjectService {
    }
  
    updateProject(id: string | undefined, project: Project): Observable<Project> {
-     return this.http.put<Project>(`${this.apiUrl}/update/${id}`, project);
-   }
+    return this.http.put<Project>(`${this.apiUrl}/modify-project`, project); // Changer la route
+  }
+  
  
    deleteProject(id: string | undefined): Observable<void> {
      return this.http.delete<void>(`${this.apiUrl}/delete/${id}`);
