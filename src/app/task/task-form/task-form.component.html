@@ -1,14 +1,16 @@
 <div class="container">
-    <div class="card">
-      <h2 class="text-center mb-4">{{ isEdit ? 'Update' : 'Create' }} a Task</h2>
-  
+  <div class="card">
+    <h2 class="text-center mb-4">{{ isEdit ? 'Update' : 'Create' }} a Project</h2>
+
+    <form #projectForm="ngForm" (ngSubmit)="saveTask(taskForm)" novalidate>
+      <!-- Champ titre -->
       <div class="mb-3">
         <label for="title" class="form-label fw-bold">Task Title</label>
         <input
           type="text"
           id="title"
           class="form-control"
-          [(ngModel)]="task.title"
+          [(ngModel)]="task.name"
           name="title"
           required
           minlength="3"
@@ -29,37 +31,23 @@
           class="form-control"
           [(ngModel)]="task.description"
           name="description"
-          placeholder="Enter project description"
-          [required]="isEdit ? false : true"
+          placeholder="Enter task description"
+          required
         ></textarea>
       </div>
   
       <div class="mb-3">
-        <label for="status" class="form-label fw-bold">Status</label>
-        <select
-          id="status"
-          class="form-control"
-          [(ngModel)]="task.status"
-          name="status"
-          required
-        >
-          <option value="to-do">To-Do</option>
-          <option value="in-progress">In Progress</option>
-          <option value="done">Done</option>
-        </select>
-      </div>
-      <div class="mb-3">
         <label for="priority" class="form-label fw-bold">Priority</label>
         <select
-          id="status"
+          id="priority"
           class="form-control"
           [(ngModel)]="task.priority"
-          name="status"
+          name="priority"
           required
         >
-          <option value="low">low</option>
-          <option value="medium">medium</option>
-          <option value="high">high</option>
+          <option value="LOW">LOW</option>
+          <option value="MEDIUM">MEDIUM</option>
+          <option value="HIGH">HIGH</option>
         </select>
       </div>  
 
@@ -92,11 +80,13 @@
   
       <!-- Boutons -->
       <div class="btn-container">
-        <button type="button" class="btn btn-success" (click)="saveTask()">💾 Save</button>
+        <button type="button" class="btn btn-success" (click)="saveTask(taskForm)">💾 Save</button>
       </div>
       <button type="button" class="btn btn-secondary" (click)="router.navigate(['/tasks'])">
         ❌ Cancel
       </button>
+    </form>
+
     </div>
   </div>
   

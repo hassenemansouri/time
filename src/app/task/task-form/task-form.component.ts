@@ -2,7 +2,7 @@ import { Component, OnDestroy, OnInit } from '@angular/core';
 import { Task } from '../../models/task.model';
 import { TaskService } from '../task.service';
 import { ActivatedRoute, Router } from '@angular/router';
-import { FormsModule, ReactiveFormsModule } from '@angular/forms';
+import { FormsModule, NgForm, ReactiveFormsModule } from '@angular/forms';
 import {CommonModule, NgForOf, NgIf} from '@angular/common';
 @Component({
   selector: 'app-task-form',
@@ -12,13 +12,12 @@ import {CommonModule, NgForOf, NgIf} from '@angular/common';
 })
 export class TaskFormComponent implements OnInit{
 task: Task = {
-    id: '',
-    title: '',
+    id_task: '',
+    name: '',
     description: '',
     createdDate: undefined,
     dueDate: undefined,
-    status: 'pending',
-    priority:'low'
+    priority:'LOW'
   };
   
   isEdit: boolean = false;
@@ -41,15 +40,15 @@ taskForm: any;
   }
 
 
-  saveTask(): void {
+  saveTask(taskForm: NgForm): void {
     console.log('✅ Saving task:', JSON.stringify(this.task, null, 2));
 
     if (this.isEdit) {
-      if (!this.task.id || this.task.id === 'string') {
+      if (!this.task.id_task || this.task.id_task === 'string') {
         console.error('❌ Error: Invalid ID');
         return;
       }
-      this.taskService.updateTask(this.task.id, this.task).subscribe({
+      this.taskService.updateTask(this.task.id_task, this.task).subscribe({
         next: () => {
           console.log('✅ Project updated successfully');
           this.router.navigate(['/projects']);

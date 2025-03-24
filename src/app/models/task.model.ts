@@ -1,9 +1,8 @@
 export interface Task {
-  id: string;
-  title: string;
+  id_task: string;
+  name: string;
   description: string;
-  createdDate?: string;
-  dueDate?:string;
-  priority: 'low' | 'medium' | 'high';
-  status: 'pending' | 'in-progress' | 'completed';
+  createdDate?: Date | null;
+  dueDate?: Date | null;
+  priority: 'LOW' | 'MEDIUM ' | 'HIGH';
 }

@@ -6,6 +6,7 @@ import { Project } from '../../models/project.model';
 import jsPDF from 'jspdf';
 import * as XLSX from 'xlsx';  // Importation pour l'exportation Excel
 import {FormsModule} from '@angular/forms';  // Importation pour l'exportation PDF
+import { of } from 'rxjs';
 
 @Component({
   selector: 'app-project',
@@ -38,7 +39,7 @@ projects: Project[] = [];
       });
     }
   }
-  exportToPDF(): void {
+  exportToPDF(): void { 
     if (!this.projects || this.projects.length === 0) {
       console.error("No projects available to export.");
       return;
@@ -62,15 +63,18 @@ projects: Project[] = [];
     doc.line(10, 22, 200, 22);
   
     // Define table columns and data
-    const columns = ['Project Name', 'Project Category'];
+    const columns = ['Title', 'Description', 'Start Date', 'End Date', 'Category'];
     const data = this.projects.map(project => [
       project.title,
+      project.description,
+      project.startDate,
+      project.endDate,
       project.category
     ]);
   
     // Table formatting options
     const startY = 30;
-    const columnWidth = [100, 80];
+    const columnWidth = [20, 60, 30, 30, 45];
     const rowHeight = 8;
     const pageHeight = 280;
   
@@ -83,8 +87,15 @@ projects: Project[] = [];
     // Draw column headers
     doc.rect(10, startY - 5, columnWidth[0], rowHeight, 'F');
     doc.rect(columnWidth[0] + 10, startY - 5, columnWidth[1], rowHeight, 'F');
+    doc.rect(columnWidth[0] + columnWidth[1] + 10, startY - 5, columnWidth[2], rowHeight, 'F');
+    doc.rect(columnWidth[0] + columnWidth[1] + columnWidth[2] + 10, startY - 5, columnWidth[3], rowHeight, 'F');
+    doc.rect(columnWidth[0] + columnWidth[1] + columnWidth[2] + columnWidth[3] + 10, startY - 5, columnWidth[4], rowHeight, 'F');
+    
     doc.text(columns[0], 14, startY);
     doc.text(columns[1], columnWidth[0] + 14, startY);
+    doc.text(columns[2], columnWidth[0] + columnWidth[1] + 14, startY);
+    doc.text(columns[3], columnWidth[0] + columnWidth[1] + columnWidth[2] + 14, startY);
+    doc.text(columns[4], columnWidth[0] + columnWidth[1] + columnWidth[2] + columnWidth[3] + 14, startY);
   
     // Draw table rows
     let y = startY + rowHeight;
@@ -94,11 +105,17 @@ projects: Project[] = [];
       doc.setFillColor(rowIndex % 2 === 0 ? 245 : 235, 235, 235);
       doc.rect(10, y, columnWidth[0], rowHeight, 'F');
       doc.rect(columnWidth[0] + 10, y, columnWidth[1], rowHeight, 'F');
-      
+      doc.rect(columnWidth[0] + columnWidth[1] + 10, y, columnWidth[2], rowHeight, 'F');
+      doc.rect(columnWidth[0] + columnWidth[1] + columnWidth[2] + 10, y, columnWidth[3], rowHeight, 'F');
+      doc.rect(columnWidth[0] + columnWidth[1] + columnWidth[2] + columnWidth[3] + 10, y, columnWidth[4], rowHeight, 'F');
+  
       doc.setTextColor(0);
       doc.setFont('helvetica', 'normal');
-      doc.text(row[0], 14, y + 5);
-      doc.text(row[1], columnWidth[0] + 14, y + 5);
+      doc.text(String(row[0]), 14, y + 5);
+      doc.text(String(row[1]), columnWidth[0] + 14, y + 5);
+      doc.text(String(row[2]), columnWidth[0] + columnWidth[1] + 14, y + 5);
+      doc.text(String(row[3]), columnWidth[0] + columnWidth[1] + columnWidth[2] + 14, y + 5);
+      doc.text(String(row[4]), columnWidth[0] + columnWidth[1] + columnWidth[2] + columnWidth[3] + 14, y + 5);
   
       y += rowHeight;
       rowIndex++;
@@ -109,7 +126,10 @@ projects: Project[] = [];
         doc.setFont('helvetica', 'bold');
         doc.setFontSize(12);
         doc.text('Project Name', 14, y);
-        doc.text('Project Category', columnWidth[0] + 14, y);
+        doc.text('Description', columnWidth[0] + 14, y);
+        doc.text('Start Date', columnWidth[0] + columnWidth[1] + 14, y);
+        doc.text('End Date', columnWidth[0] + columnWidth[1] + columnWidth[2] + 14, y);
+        doc.text('Category', columnWidth[0] + columnWidth[1] + columnWidth[2] + columnWidth[3] + 14, y);
         y += rowHeight;
       }
     });
@@ -129,20 +149,21 @@ projects: Project[] = [];
   }
   
   
-  // Export to Excel
-  exportToExcel(): void {
-    const ws: XLSX.WorkSheet = XLSX.utils.json_to_sheet(this.projects.map(project => ({
-      'Project Title': project.title,
-      'Description': project.description,
-      'Start Date': project.startDate,
-      'End Date': project.endDate,
-      'ProjectCategory': project.category,
-    })));
   
-    const wb: XLSX.WorkBook = XLSX.utils.book_new();
-    XLSX.utils.book_append_sheet(wb, ws, 'Projects');
-    XLSX.writeFile(wb, 'projects.xlsx');
-  }
-  
+ // Export to Excel
+ exportToExcel(): void {
+  const ws: XLSX.WorkSheet = XLSX.utils.json_to_sheet(this.projects.map(project => ({
+    'Project Title': project.title,
+    'Description': project.description,
+    'Start Date': project.startDate,
+    'End Date': project.endDate,
+    'Project Category': project.category,
+  })));
+
+  const wb: XLSX.WorkBook = XLSX.utils.book_new();
+  XLSX.utils.book_append_sheet(wb, ws, 'Projects');
+  XLSX.writeFile(wb, 'projects.xlsx');
+}
+
 
 }
