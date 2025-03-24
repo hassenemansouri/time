@@ -21,6 +21,9 @@
         <p *ngIf="titleCtrl.errors?.['minlength']">Au moins 3 caractères sont requis.</p>
       </div>
     </div>
+    <div class="alert alert-danger" *ngIf="serverError">
+      {{ serverError }}
+    </div>
 
     <div class="mb-3">
       <label for="description" class="form-label fw-bold">Description</label>

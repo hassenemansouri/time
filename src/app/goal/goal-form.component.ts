@@ -32,7 +32,16 @@ export class GoalFormComponent implements OnInit {
     }
   }
 
+  serverError: string = '';
+
   saveGoal(): void {
+    if (this.goal.title.trim().length < 3 || this.goal.description.trim().length < 5) {
+      this.serverError = "Veuillez vérifier les champs : titre (3+) et description (5+ caractères)";
+      return;
+    }
+
+    this.serverError = ''; // reset error if validation passes
+
     if (this.isEdit) {
       if (!this.goal.goal_id) {
         console.error('ID invalide');
@@ -43,7 +52,7 @@ export class GoalFormComponent implements OnInit {
           console.log('Goal modifié avec succès');
           this.router.navigate(['/goals']);
         },
-        error: (err) => console.error('Erreur lors de la modification du goal:', err)
+        error: (err) => this.serverError = err.error // Récupère l'erreur du Backend
       });
     } else {
       this.goalService.createGoal(this.goal).subscribe({
@@ -51,7 +60,7 @@ export class GoalFormComponent implements OnInit {
           console.log('Goal créé avec succès');
           this.router.navigate(['/goals']);
         },
-        error: (err) => console.error('Erreur lors de la création du goal:', err)
+        error: (err) => this.serverError = err.error // Récupère l'erreur du Backend
       });
     }
   }

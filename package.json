@@ -10,6 +10,7 @@
   },
   "private": true,
   "dependencies": {
+    "@angular/animations": "^19.2.0",
     "@angular/cdk": "^19.2.1",
     "@angular/common": "^19.2.0",
     "@angular/compiler": "^19.2.0",
@@ -19,12 +20,18 @@
     "@angular/platform-browser": "^19.2.0",
     "@angular/platform-browser-dynamic": "^19.2.0",
     "@angular/router": "^19.2.0",
+    "@auth0/angular-jwt": "^5.0.0",
     "@types/three": "^0.174.0",
+    "jspdf": "^3.0.0",
+    "jspdf-autotable": "^5.0.2",
+    "ngx-toastr": "^17.0.0",
     "primeicons": "^7.0.0",
     "primeng": "^19.0.9",
     "rxjs": "~7.8.0",
     "three": "^0.174.0",
     "tslib": "^2.3.0",
+    "xlsx": "^0.18.5",
+    "xlsx-style": "^0.8.13",
     "zone.js": "~0.15.0"
   },
   "devDependencies": {
