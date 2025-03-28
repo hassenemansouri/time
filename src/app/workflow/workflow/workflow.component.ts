@@ -82,7 +82,7 @@ export class WorkflowComponent implements OnInit {
     doc.setTextColor(255, 255, 255); // White text for headers
     doc.setFillColor(41, 128, 185); // Blue background for headers
 
-    // Draw column headers with background fill
+    // Draw column headers with background filll
     doc.rect(10, startY - 5, columnWidth[0], rowHeight, 'F'); // First header cell background
     doc.rect(columnWidth[0] + 10, startY - 5, columnWidth[1], rowHeight, 'F'); // Second header cell background
     doc.text(columns[0], 14, startY); // First column header text
