@@ -7,19 +7,18 @@ import { Task } from '../models/task.model';
   providedIn: 'root'
 })
 export class TaskService {
- private apiUrl = 'http://localhost:8400/timeforge/projects';
+ private apiUrl = 'http://localhost:8400/timeforge/tasks';
  
    constructor(private http: HttpClient) {}
  
  
-   getAllTasks(): Observable<Task[]> {
-     return this.http.get<Task[]>(`${this.apiUrl}/getAllTasks`);
-   }
- 
-   getTaskById(id: string): Observable<Task> {
-     return this.http.get<Task>(`${this.apiUrl}/getTaskById/${id}`);
-   }
- 
+getAllTasks(): Observable<Task[]> {
+    return this.http.get<Task[]>(`${this.apiUrl}`); // Change /getAllTasks en /tasks
+  }
+  
+  getTaskById(id: string): Observable<Task> {
+    return this.http.get<Task>(`${this.apiUrl}/${id}`); // Change /getTaskById/${id} en /${id}
+  }
    private httpOptions = {
      headers: new HttpHeaders({ 'Content-Type': 'application/json' })
    };
@@ -29,7 +28,7 @@ export class TaskService {
    }
  
    updateTask(id: string | undefined, task: Task): Observable<Task> {
-     return this.http.put<Task>(`${this.apiUrl}/update/${id}`, task);
+     return this.http.put<Task>(`${this.apiUrl}/modify-task`, task);
    }
  
    deleteTask(id: string | undefined): Observable<void> {

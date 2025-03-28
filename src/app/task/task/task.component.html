@@ -1,38 +1,59 @@
+<nav class="navbar">
+  <div class="nav-logo">
+    <a routerLink="/" class="logo">Time Forge App</a>
+  </div>
+  <ul class="nav-links">
+    <li><a routerLink="/dashboard" routerLinkActive="active">Home</a></li>
+    <li><a routerLink="/projects" routerLinkActive="active">Tasks</a></li>
+    <li><a routerLink="/calender" routerLinkActive="active">Calender</a></li>
+    <li><a routerLink="/reports" routerLinkActive="active">Reports</a></li>
+    <li><a routerLink="/login" routerLinkActive="active">LogOut</a></li>
+  </ul>
+</nav>
+  <h2 class="text-center text-light mb-4">List of Tasks</h2>
 
-<div class="container">
-    <h2>List of Tasks</h2>
+  <div class="export-buttons">
+    <button class="btn btn-success" (click)="exportToExcel()">📂 Export to Excel</button>
+    <input
+      type="text"
+      class="search-input"
+      [(ngModel)]="searchText"
+      placeholder="Search Project..."
+    />
+    <button class="btn btn-danger" (click)="exportToPDF()">📝 Export to PDF</button>
+  </div>
+
+  <div class="d-flex justify-content-center mb-4">
 
     <button class="btn btn-primary" [routerLink]="['/tasks/add']">
       ➕ Add Task
     </button>
-
+  </div>
+  
+  <div class="table-responsive">
     <table class="table">
       <thead>
         <tr>
-          <th>Title</th>
+          <th>Name</th>
           <th>Description</th>
           <th>Created Date</th>
           <th>Due Date</th>
-          <th>Status</th>
           <th>Priority</th>
-
-
         </tr>
       </thead>
       <tbody>
         <tr *ngFor="let task of tasks">
-          <td>{{ task.title }}</td>
+          <td>{{ task.name }}</td>
           <td>{{ task.description }}</td>
           <td>{{ task.createdDate | date:'yyyy-MM-dd' }}</td>
           <td>{{ task.dueDate | date:'yyyy-MM-dd' }}</td>
-          <td>{{ task.status }}</td>
-          <td>{{ task.status }}</td>
+          <td>{{ task.priority }}</td>
           <td data-label="Actions">
             <div class="btn-container">
-              <button class="btn btn-warning btn-sm" [routerLink]="['/tasks/edit', task.id]">
+              <button class="btn btn-warning btn-sm" [routerLink]="['/tasks/edit', task.id_task]">
                 🖊️ Edit
               </button>
-              <button class="btn btn-danger" (click)="deleteTask(task.id)">
+              <button class="btn btn-danger" (click)="deleteTask(task.id_task)">
                 🗑️ Remove
               </button>
             </div>

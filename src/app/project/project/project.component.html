@@ -1,11 +1,36 @@
+<nav class="navbar">
+  <div class="nav-logo">
+    <a routerLink="/" class="logo">Time Forge App</a>
+  </div>
+  <ul class="nav-links">
+    <li><a routerLink="/dashboard" routerLinkActive="active">Home</a></li>
+    <li><a routerLink="/projects" routerLinkActive="active">Projects</a></li>
+    <li><a routerLink="/calender" routerLinkActive="active">Calender</a></li>
+    <li><a routerLink="/reports" routerLinkActive="active">Reports</a></li>
+    <li><a routerLink="/login" routerLinkActive="active">LogOut</a></li>
+  </ul>
+</nav>
+  <h2 class="text-center text-light mb-4">List of Projects</h2>
 
-<div class="container">
-    <h2>List of Projects</h2>
+  <div class="export-buttons">
+    <button class="btn btn-success" (click)="exportToExcel()">📂 Export to Excel</button>
+    <input
+      type="text"
+      class="search-input"
+      [(ngModel)]="searchText"
+      placeholder="Search Project..."
+    />
+    <button class="btn btn-danger" (click)="exportToPDF()">📝 Export to PDF</button>
+  </div>
+
+  <div class="d-flex justify-content-center mb-4">
 
     <button class="btn btn-primary" [routerLink]="['/projects/add']">
       ➕ Add Project
     </button>
-
+  </div>
+  
+  <div class="table-responsive">
     <table class="table">
       <thead>
         <tr>
@@ -13,7 +38,7 @@
           <th>Description</th>
           <th>Start Date</th>
           <th>End Date</th>
-          <th>Status</th>
+          <th>Category</th>
 
         </tr>
       </thead>
@@ -23,13 +48,13 @@
           <td>{{ project.description }}</td>
           <td>{{ project.startDate | date:'yyyy-MM-dd' }}</td>
           <td>{{ project.endDate | date:'yyyy-MM-dd' }}</td>
-          <td>{{ project.status }}</td>
+          <td>{{ project.category }}</td>
           <td data-label="Actions">
             <div class="btn-container">
-              <button class="btn btn-warning btn-sm" [routerLink]="['/projects/edit', project.id]">
+              <button class="btn btn-warning btn-sm" [routerLink]="['/projects/edit', project.projet_id]">
                 🖊️ Edit
               </button>
-              <button class="btn btn-danger" (click)="deleteProject(project.id)">
+              <button class="btn btn-danger" (click)="deleteProject(project.projet_id)">
                 🗑️ Remove
               </button>
             </div>
