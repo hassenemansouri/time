@@ -78,7 +78,8 @@ export const routes: Routes = [
         { path: 'tasks/calender', component: CalendarComponent},
         { path: 'partnerships', component: PartnershipListComponent },
         { path: 'add-partnership', component: AddPartnershipComponent },
-        { path: 'partnerships/calender', component: CalendarComponent}
+        { path: 'partnerships/calender', component: CalendarComponent},
+        { path: 'calender', component: CalendarComponent}
       ]
   },
 
