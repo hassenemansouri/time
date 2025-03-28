@@ -1,0 +1,23 @@
+import { NgModule } from '@angular/core';
+import { BrowserModule } from '@angular/platform-browser';
+import { CalendarModule, CalendarUtils } from 'angular-calendar';
+import {AppComponent} from '../app.component';
+import {CalendarComponent} from './calendar/calendar.component';
+
+
+// Ajouter CalendarUtils dans les providers
+@NgModule({
+  declarations: [],
+  imports: [
+    BrowserModule,
+    CalendarModule.forRoot({
+      provide: CalendarUtils,  // Ajout de CalendarUtils
+      useClass: CalendarUtils, // Définir la classe pour le provider
+    }),
+    AppComponent,
+    CalendarComponent,
+  ],
+  providers: [CalendarUtils],
+  bootstrap: [],
+})
+export class AppModule {}

@@ -9,6 +9,7 @@ import {RouterLink, RouterLinkActive, RouterOutlet} from '@angular/router';
     RouterLinkActive
   ],
   templateUrl: './public-layout.component.html',
+  standalone: true,
   styleUrl: './public-layout.component.css'
 })
 export class PublicLayoutComponent {

@@ -9,6 +9,7 @@ import {RouterLink, RouterLinkActive, RouterOutlet} from '@angular/router';
     RouterLink,
     RouterLinkActive
   ],
+  standalone: true,
   styleUrls: ['./private-layout.component.css']
 })
 export class PrivateLayoutComponent implements OnInit {

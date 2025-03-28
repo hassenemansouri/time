@@ -10,6 +10,7 @@ import {NgIf} from '@angular/common';
     ReactiveFormsModule,
     NgIf
   ],
+  standalone: true,
   styleUrls: ['./forgot-password.component.css']
 })
 export class ForgotPasswordComponent {

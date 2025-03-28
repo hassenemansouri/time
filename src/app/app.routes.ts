@@ -25,9 +25,9 @@ import { PartnershipListComponent } from './strategicparternship/partnership-lis
 import { AddPartnershipComponent } from './strategicparternship/add-partnership/add-partnership.component';
 
 // Layouts
-import { AuthenticatedLayoutComponent } from './layouts/authenticated-layout/authenticated-layout.component';
 import { PublicLayoutComponent } from './layouts/public-layout/public-layout.component';
 import {PrivateLayoutComponent} from './layouts/private-layout/private-layout.component';
+import {CalendarComponent} from './app/calendar/calendar.component';
 
 export const routes: Routes = [
 
@@ -57,6 +57,7 @@ export const routes: Routes = [
         { path: 'workflows', component: WorkflowComponent },
         { path: 'workflows/add', component: WorkflowFormComponent },
         { path: 'workflows/edit/:id', component: WorkflowFormComponent },
+        { path: 'workflows/calender', component: CalendarComponent},
         { path: 'collaborations', component: CollaborationComponent },
         { path: 'goals', component: ListGoalsComponent },
         { path: 'goals/add', component: GoalFormComponent },

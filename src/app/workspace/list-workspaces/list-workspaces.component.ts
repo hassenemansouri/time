@@ -5,7 +5,6 @@ import {Router, RouterLink, RouterLinkActive} from '@angular/router';
 import { Workspace } from '../workspace.model';
 import {FormsModule} from "@angular/forms";
 import {jsPDF} from 'jspdf';
-import {Workflow} from '../../workflow/workflow.model';
 import * as XLSX from 'xlsx';
 
 @Component({
