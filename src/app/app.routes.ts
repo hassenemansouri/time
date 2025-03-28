@@ -54,6 +54,7 @@ export const routes: Routes = [
         { path: 'workspaces', component: ListWorkspacesComponent },
         { path: 'workspaces/add', component: WorkspaceFormComponent },
         { path: 'workspaces/edit/:id', component: WorkspaceFormComponent },
+        { path: 'workspaces/calender', component: CalendarComponent},
         { path: 'workflows', component: WorkflowComponent },
         { path: 'workflows/add', component: WorkflowFormComponent },
         { path: 'workflows/edit/:id', component: WorkflowFormComponent },
@@ -62,17 +63,22 @@ export const routes: Routes = [
         { path: 'goals', component: ListGoalsComponent },
         { path: 'goals/add', component: GoalFormComponent },
         { path: 'goals/edit/:id', component: GoalFormComponent },
+        { path: 'goals/calender', component: CalendarComponent},
         { path: 'rewards', component: ListRewardsComponent },
         { path: 'rewards/add', component: RewardFormComponent },
         { path: 'rewards/edit/:id', component: RewardFormComponent },
+        { path: 'rewards/calender', component: CalendarComponent},
         { path: 'projects', component: ProjectComponent },
         { path: 'projects/add', component: ProjectFormComponent },
         { path: 'projects/edit/:id', component: ProjectFormComponent },
+        { path: 'projects/calender', component: CalendarComponent},
         { path: 'tasks', component: TaskComponent },
         { path: 'tasks/add', component: TaskFormComponent },
         { path: 'tasks/edit/:id', component: TaskFormComponent },
+        { path: 'tasks/calender', component: CalendarComponent},
         { path: 'partnerships', component: PartnershipListComponent },
-        { path: 'add-partnership', component: AddPartnershipComponent }
+        { path: 'add-partnership', component: AddPartnershipComponent },
+        { path: 'partnerships/calender', component: CalendarComponent}
       ]
   },
 
