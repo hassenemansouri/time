@@ -2,7 +2,7 @@ import {Component, CUSTOM_ELEMENTS_SCHEMA, OnInit} from '@angular/core';
 import {Router, RouterLink, RouterLinkActive} from '@angular/router';
 import { WorkflowService } from '../workflow.service';
 import { Workflow } from '../workflow.model';
-import { NgForOf } from '@angular/common';
+import {NgForOf, NgIf} from '@angular/common';
 import * as XLSX from 'xlsx';  // Importation pour l'exportation Excel
 import { jsPDF } from 'jspdf';
 import {FormsModule} from '@angular/forms';  // Importation pour l'exportation PDF
@@ -16,7 +16,8 @@ import {FormsModule} from '@angular/forms';  // Importation pour l'exportation P
     NgForOf,
     RouterLink,
     FormsModule,
-    RouterLinkActive
+    RouterLinkActive,
+    NgIf
   ],
   styleUrls: ['./workflow.component.css'],
   schemas: [CUSTOM_ELEMENTS_SCHEMA]  // ✅ Permet d'utiliser dotlottie-player
@@ -29,8 +30,15 @@ export class WorkflowComponent implements OnInit {
 
   constructor(private workflowService: WorkflowService, private router: Router) {}
 
+
+  showAnimation = true;  // To control if the animation is visible
+
   ngOnInit(): void {
     this.loadWorkflows();
+    // Hide the animation after 5 seconds and show the workflow content
+    setTimeout(() => {
+      this.showAnimation = false;
+    }, 7500);
   }
 
   loadWorkflows(): void {
