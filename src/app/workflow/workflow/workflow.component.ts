@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import {Component, CUSTOM_ELEMENTS_SCHEMA, OnInit} from '@angular/core';
 import {Router, RouterLink, RouterLinkActive} from '@angular/router';
 import { WorkflowService } from '../workflow.service';
 import { Workflow } from '../workflow.model';
@@ -18,7 +18,9 @@ import {FormsModule} from '@angular/forms';  // Importation pour l'exportation P
     FormsModule,
     RouterLinkActive
   ],
-  styleUrls: ['./workflow.component.css']
+  styleUrls: ['./workflow.component.css'],
+  schemas: [CUSTOM_ELEMENTS_SCHEMA]  // ✅ Permet d'utiliser dotlottie-player
+
 })
 export class WorkflowComponent implements OnInit {
   workflows: Workflow[] = [];

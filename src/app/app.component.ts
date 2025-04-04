@@ -41,7 +41,7 @@ export class AppComponent implements OnInit {
       } else {
         console.log('User is not authenticated');
         // Optionally redirect to the login page if not authenticated
-        this.router.navigate(['/login']);
+        //this.router.navigate(['/login']);
       }
     });
   }
