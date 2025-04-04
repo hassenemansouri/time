@@ -2,13 +2,24 @@
 <div class="container">
   <h2>List Of Workspaces</h2>
 
+  <div class="Workspace-animation" *ngIf="showAnimation">
+    <dotlottie-player
+      src="https://lottie.host/ba6c24ab-b02d-4832-9a6e-09795ed363ac/NP56wVv0us.lottie"
+      background="transparent"
+      speed="2"
+      loop
+      autoplay
+      style="width: 80%; max-width: 600px; height: auto;">
+    </dotlottie-player>
+  </div>
+
   <div class="export-buttons">
     <button class="btn btn-success" (click)="exportToExcel()">📂 Export to Excel</button>
     <input
       type="text"
       class="search-input"
       [(ngModel)]="searchText"
-      placeholder="Search Workflows..."
+      placeholder="Search Workspaces..."
     />
     <button class="btn btn-danger" (click)="exportToPDF()">📝 Export to PDF</button>
   </div>

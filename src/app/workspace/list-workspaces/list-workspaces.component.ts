@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit , CUSTOM_ELEMENTS_SCHEMA} from '@angular/core';
 import { WorkspaceService } from '../workspace.service';
 import { NgForOf, CommonModule } from '@angular/common';
 import {Router, RouterLink, RouterLinkActive} from '@angular/router';
@@ -18,18 +18,26 @@ import * as XLSX from 'xlsx';
         RouterLinkActive,
         FormsModule
     ],
-  styleUrls: ['./list-workspaces.component.css']
+  styleUrls: ['./list-workspaces.component.css'],
+  schemas: [CUSTOM_ELEMENTS_SCHEMA]
+
 })
 export class ListWorkspacesComponent implements OnInit {
   workspaces: Workspace[] = [];
 
+  showAnimation = true;  // To control if the animation is visible
+
+  ngOnInit(): void {
+    this.loadWorkspaces();
+    // Hide the animation after 5 seconds and show the workflow content
+    setTimeout(() => {
+      this.showAnimation = false;
+    }, 6000);
+  }
 
   searchText: string = ''; // Variable pour stocker la recherche
   constructor(private workspaceService: WorkspaceService , protected router : Router) {}
 
-  ngOnInit(): void {
-    this.loadWorkspaces();
-  }
 
   loadWorkspaces() {
     this.workspaceService.getAll().subscribe({

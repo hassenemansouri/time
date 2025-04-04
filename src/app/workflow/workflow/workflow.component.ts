@@ -38,7 +38,7 @@ export class WorkflowComponent implements OnInit {
     // Hide the animation after 5 seconds and show the workflow content
     setTimeout(() => {
       this.showAnimation = false;
-    }, 7500);
+    }, 6000);
   }
 
   loadWorkflows(): void {
