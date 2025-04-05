@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import {Component, CUSTOM_ELEMENTS_SCHEMA, OnInit} from '@angular/core';
 import {StrategicPartnership, StrategicPartnershipService} from '../strategicparternship.service';
 import {NgForOf, NgIf} from '@angular/common';
 
@@ -11,7 +11,8 @@ import {NgForOf, NgIf} from '@angular/common';
     NgForOf
   ],
   standalone: true,
-  styleUrls: ['./partnership-list.component.css']
+  styleUrls: ['./partnership-list.component.css'],
+  schemas: [CUSTOM_ELEMENTS_SCHEMA]
 })
 export class PartnershipListComponent implements OnInit {
 

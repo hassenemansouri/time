@@ -31,18 +31,15 @@ export class LoginComponent implements OnInit {
     private router: Router
   ) {}
 
+
+
   ngOnInit(): void {
     this.loginForm = this.fb.group({
       email: ['', [Validators.required, Validators.email]],
       password: ['', [Validators.required]],
     });
-    // Hide the animation after 26 seconds and show the workflow content
-    setTimeout(() => {
-      this.showAnimation = false;
-    }, 26000);
-  }
-  showAnimation = true;  // To control if the animation is visible
 
+  }
 
   onSubmit(): void {
     if (this.loginForm.valid) {
