@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import {Component, CUSTOM_ELEMENTS_SCHEMA, NO_ERRORS_SCHEMA, OnInit} from '@angular/core';
 import {FormBuilder, FormGroup, ReactiveFormsModule, Validators} from '@angular/forms';
 import { Router } from '@angular/router';
 import { AuthService } from '../auth.service';
@@ -15,9 +15,12 @@ import {ButtonDirective} from 'primeng/button';
     NgIf,
     ButtonDirective
   ],
-  styleUrls: ['./sign-up.component.css']
+  standalone: true,
+  styleUrls: ['./sign-up.component.css'],
+  schemas: [CUSTOM_ELEMENTS_SCHEMA],
 })
 export class SignUpComponent implements OnInit {
+  showAnimation = true;
   signUpForm!: FormGroup;
   errorMessage: string | null = null;
 
@@ -35,6 +38,9 @@ export class SignUpComponent implements OnInit {
       password: ['', [Validators.required, Validators.minLength(6)]],
       role: ['', [Validators.required]]
     });
+    setTimeout(() => {
+      this.showAnimation = false;
+    }, 45000);
   }
 
   // Getter methods to access form controls more easily

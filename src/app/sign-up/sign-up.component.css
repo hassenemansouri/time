@@ -144,4 +144,14 @@ select.p-inputtext:focus {
     transform: translateY(0);
   }
 }
+.signup-animation {
+  display: block;
+  justify-content: center; /* Centre horizontalement */
+  align-items: center;     /* Centre verticalement */
+  /* Utilise toute la hauteur de la fenêtre */
+  position: relative;
+  top: 0;
+  right: 0;
+  bottom: 0;
+}
 
