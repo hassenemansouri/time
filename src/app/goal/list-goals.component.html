@@ -1,9 +1,21 @@
-
 <div class="container">
   <h2>Liste des Goals</h2>
-  <button class="btn btn-primary" [routerLink]="['/goals/add']">
+
+  <div class="export-buttons mb-3">
+    <button class="btn btn-success me-2" (click)="exportToExcel()">📂 Export to Excel</button>
+    <input
+      type="text"
+      class="form-control d-inline w-auto me-2"
+      [(ngModel)]="searchText"
+      placeholder="🔎 Rechercher un goal..."
+    />
+    <button class="btn btn-danger" (click)="exportToPDF()">📝 Export to PDF</button>
+  </div>
+
+  <button class="btn btn-primary mb-3" [routerLink]="['/goals/add']">
     ➕ Ajouter un Goal
   </button>
+
   <table class="table">
     <thead>
     <tr>
@@ -13,7 +25,7 @@
     </tr>
     </thead>
     <tbody>
-    <tr *ngFor="let goal of goals">
+    <tr *ngFor="let goal of filteredGoals()">
       <td>{{ goal.title }}</td>
       <td>{{ goal.description }}</td>
       <td>
@@ -21,7 +33,7 @@
           <button class="btn btn-warning btn-sm" [routerLink]="['/goals/edit', goal.goal_id]">
             ✏️ Modifier
           </button>
-          <button class="btn btn-danger" (click)="deleteGoal(goal.goal_id)">
+          <button class="btn btn-danger btn-sm" (click)="deleteGoal(goal.goal_id)">
             🗑️ Supprimer
           </button>
         </div>

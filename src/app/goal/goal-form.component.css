@@ -1,54 +1,62 @@
-/* Conteneur principal */
+/* 🌟 Conteneur principal */
 .container {
-  max-width: 600px;
+  max-width: 700px;
   margin: 50px auto;
-  background: #ffffff;
+  background: linear-gradient(135deg, #ffffff, #f8f9fa);
   padding: 30px;
-  border-radius: 12px;
-  box-shadow: 0px 4px 15px rgba(0, 0, 0, 0.1);
+  border-radius: 15px;
+  box-shadow: 0 8px 20px rgba(0, 0, 0, 0.15);
   text-align: center;
 }
 
-/* Carte */
+/* 📦 Carte du formulaire */
 .card {
-  padding: 25px;
-  border-radius: 10px;
-  background: #f9f9f9;
-  box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
+  background: white;
+  padding: 30px;
+  border-radius: 15px;
+  box-shadow: 0px 6px 18px rgba(0, 0, 0, 0.1);
+  transition: transform 0.3s ease;
+}
+.card:hover {
+  transform: scale(1.01);
 }
 
-/* Titre */
+/* 🎯 Titre */
 h2 {
   font-family: 'Poppins', sans-serif;
-  color: #333;
+  font-size: 26px;
   font-weight: bold;
+  color: #007bff;
+  margin-bottom: 25px;
+  text-shadow: 1px 1px 2px rgba(0, 0, 0, 0.05);
 }
 
-/* Labels */
+/* 🏷️ Labels */
 .form-label {
   font-weight: bold;
   color: #333;
-  font-size: 14px;
-  margin-bottom: 5px;
+  font-size: 15px;
+  margin-bottom: 6px;
+  display: block;
+  text-align: left;
 }
 
-/* Champs du formulaire */
+/* ✍️ Champs de formulaire */
 .form-control {
   width: 100%;
-  padding: 10px;
+  padding: 12px;
   font-size: 16px;
-  border-radius: 8px;
-  border: 1px solid #ccc;
-  transition: all 0.3s ease-in-out;
+  border-radius: 10px;
+  border: 2px solid #ccc;
+  transition: border-color 0.3s, box-shadow 0.3s;
 }
 
-/* Effet focus sur les champs */
 .form-control:focus {
   border-color: #007bff;
-  box-shadow: 0 0 8px rgba(0, 123, 255, 0.2);
+  box-shadow: 0 0 10px rgba(0, 123, 255, 0.2);
 }
 
-/* Champ invalide */
+/* ⚠️ Champs invalides */
 .is-invalid {
   border-color: #dc3545 !important;
 }
@@ -56,51 +64,62 @@ h2 {
 .invalid-feedback p {
   color: #dc3545;
   font-size: 14px;
+  margin: 5px 0 0;
+  text-align: left;
 }
 
-/* Boutons */
+/* 🎛️ Conteneur de boutons */
 .btn-container {
   display: flex;
   justify-content: space-between;
-  margin-top: 20px;
+  margin-top: 25px;
+  gap: 15px;
 }
 
+/* 🔘 Boutons */
 .btn {
   border: none;
-  padding: 10px 16px;
+  padding: 12px 20px;
   font-size: 16px;
   font-weight: bold;
-  border-radius: 8px;
+  border-radius: 30px;
   cursor: pointer;
   transition: all 0.3s ease;
+  min-width: 130px;
 }
 
-/* Bouton Enregistrer */
+/* ✅ Enregistrer */
 .btn-success {
-  background: #28a745;
+  background: linear-gradient(135deg, #28a745, #218838);
   color: white;
 }
-
 .btn-success:hover {
-  background: #218838;
-  transform: scale(1.05);
+  transform: translateY(-2px);
+  box-shadow: 0 6px 15px rgba(40, 167, 69, 0.3);
 }
 
-/* Bouton Annuler */
+/* ❌ Annuler */
 .btn-secondary {
-  background: #6c757d;
+  background: linear-gradient(135deg, #6c757d, #5a6268);
   color: white;
 }
-
 .btn-secondary:hover {
-  background: #5a6268;
-  transform: scale(1.05);
+  transform: translateY(-2px);
+  box-shadow: 0 6px 15px rgba(108, 117, 125, 0.3);
 }
 
-/* Responsive */
+/* 📱 Responsive */
 @media (max-width: 768px) {
+  .card {
+    padding: 20px;
+  }
+
   .btn-container {
     flex-direction: column;
     gap: 10px;
+  }
+
+  .btn {
+    width: 100%;
   }
 }
