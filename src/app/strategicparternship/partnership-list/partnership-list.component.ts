@@ -10,6 +10,7 @@ import {NgForOf, NgIf} from '@angular/common';
     NgIf,
     NgForOf
   ],
+  standalone: true,
   styleUrls: ['./partnership-list.component.css']
 })
 export class PartnershipListComponent implements OnInit {
@@ -18,8 +19,14 @@ export class PartnershipListComponent implements OnInit {
 
   constructor(private partnershipService: StrategicPartnershipService) { }
 
+  showAnimation = true;  // To control if the animation is visible
+
   ngOnInit(): void {
     this.loadPartnerships();
+    // Hide the animation after 5 seconds and show the workflow content
+    setTimeout(() => {
+      this.showAnimation = false;
+    }, 6000);
   }
 
   loadPartnerships(): void {
