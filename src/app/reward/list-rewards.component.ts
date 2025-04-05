@@ -1,7 +1,7 @@
-import { Component, OnInit } from '@angular/core';
+import {Component, CUSTOM_ELEMENTS_SCHEMA, OnInit} from '@angular/core';
   import { RewardService } from './reward.service';
   import { Reward } from './reward.model';
-  import { NgForOf, DatePipe } from '@angular/common';
+  import {NgForOf, DatePipe, NgIf} from '@angular/common';
   import {FormsModule } from '@angular/forms';
   import { jsPDF } from 'jspdf';
   import * as XLSX from 'xlsx';
@@ -12,7 +12,8 @@ import {Router, RouterLink, RouterLinkActive} from '@angular/router';
     templateUrl: './list-rewards.component.html',
     styleUrls: ['./list-rewards.component.css'],
     standalone: true,
-    imports: [NgForOf, RouterLink, DatePipe, FormsModule]
+    imports: [NgForOf, RouterLink, DatePipe, FormsModule, NgIf],
+    schemas: [CUSTOM_ELEMENTS_SCHEMA]
   })
   export class ListRewardsComponent implements OnInit {
     rewards: Reward[] = [];
@@ -20,8 +21,15 @@ import {Router, RouterLink, RouterLinkActive} from '@angular/router';
 
     constructor(private rewardService: RewardService, private router: Router) {}
 
+
+    showAnimation = true;  // To control if the animation is visible
+
     ngOnInit(): void {
       this.loadRewards();
+      // Hide the animation after 5 seconds and show the workflow content
+      setTimeout(() => {
+        this.showAnimation = false;
+      }, 6000);
     }
 
     loadRewards(): void {
