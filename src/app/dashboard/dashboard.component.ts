@@ -1,4 +1,4 @@
-import {Component, OnInit} from '@angular/core';
+import {Component, CUSTOM_ELEMENTS_SCHEMA, OnInit} from '@angular/core';
 import {AuthService} from '../auth.service';
 import {Router, RouterLink, RouterLinkActive} from '@angular/router';
 import {NgOptimizedImage} from '@angular/common';
@@ -7,12 +7,11 @@ import {NgOptimizedImage} from '@angular/common';
   selector: 'app-dashboard',
   imports: [
     RouterLink,
-
-
   ],
   templateUrl: './dashboard.component.html',
   standalone: true,
-  styleUrl: './dashboard.component.css'
+  styleUrl: './dashboard.component.css',
+  schemas: [CUSTOM_ELEMENTS_SCHEMA],
 })
 export class DashboardComponent implements OnInit {
 
