@@ -1,19 +1,22 @@
-import { Component } from '@angular/core';
+import {Component, CUSTOM_ELEMENTS_SCHEMA, OnInit} from '@angular/core';
 import {FormBuilder, FormGroup, ReactiveFormsModule, Validators} from '@angular/forms';
 import { HttpClient } from '@angular/common/http';
 import { ToastrService } from 'ngx-toastr';
-import {NgIf} from '@angular/common';
+import {NgClass, NgIf} from '@angular/common';
+
 @Component({
   selector: 'app-forgot-password',
   templateUrl: './forgot-password.component.html',
   imports: [
     ReactiveFormsModule,
-    NgIf
+    NgIf,
+    NgClass
   ],
   standalone: true,
-  styleUrls: ['./forgot-password.component.css']
+  styleUrls: ['./forgot-password.component.css'],
+  schemas: [CUSTOM_ELEMENTS_SCHEMA]
 })
-export class ForgotPasswordComponent {
+export class ForgotPasswordComponent implements OnInit {
   forgotPasswordForm: FormGroup;
   loading = false;
 
@@ -48,6 +51,14 @@ export class ForgotPasswordComponent {
         this.loading = false;
       }
     });
+  }
+
+  showAnimation = true;  // To control if the animation is visible
+
+  ngOnInit(): void {
+    setTimeout(() => {
+      this.showAnimation = false;
+    }, 30000);
   }
 
 
