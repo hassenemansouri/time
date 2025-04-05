@@ -74,7 +74,7 @@
 /* Titre */
 h2 {
   font-family: 'Poppins', sans-serif;
-  color: #333;
+  color: #007bff;
   margin-bottom: 20px;
 }
 
@@ -170,4 +170,17 @@ h2 {
     flex-direction: column;
     gap: 5px;
   }
+}
+
+
+.goal-animation {
+  display: block;
+  justify-content: center; /* Centre horizontalement */
+  align-items: center;     /* Centre verticalement */
+  height: 100vh;           /* Utilise toute la hauteur de la fenêtre */
+  position: relative;
+  top: 0;
+  right: 0;
+  bottom: 0;
+  left: 135px;
 }
