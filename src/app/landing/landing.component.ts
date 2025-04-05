@@ -18,10 +18,7 @@ export class LandingComponent implements OnInit {
   showAnimation = true;  // To control if the animation is visible
 
   ngOnInit(): void {
-    // Hide the animation after 26 seconds and show the workflow content
-    setTimeout(() => {
-      this.showAnimation = false;
-    }, 26000);
+
   }
 
 

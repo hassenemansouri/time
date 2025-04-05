@@ -12,12 +12,52 @@
 
   <link rel="stylesheet" href="/timeforge_labor_logo.jpeg">
 
-  <!-- 🚀 Hero Section -->
-  <section class="hero parallax">
-    <canvas id="three-bg"></canvas>
-    <h1><i class="pi pi-clock animated-icon"></i> Optimize Your Time & Boost Productivity</h1>
-    <p><i class="pi pi-chart-line"></i> Manage tasks, collaborate with teams, and streamline workflows.</p>
-    <button pButton label="Try for Free" icon="pi pi-play" class="btn-primary glow"></button>
+  <!-- 🌟 Supercharged Hero Section -->
+  <section class="hero-section">
+    <!-- Animated 3D Background -->
+    <canvas id="three-js-bg" class="particle-bg"></canvas>
+
+    <!-- Floating Glow Elements -->
+    <div class="glow-circle glow-1"></div>
+    <div class="glow-circle glow-2"></div>
+    <div class="glow-circle glow-3"></div>
+
+    <!-- Hero Content Container -->
+    <div class="hero-content">
+      <!-- Animated Lottie Illustration -->
+      <div class="hero-illustration">
+        <dotlottie-player
+          src="https://lottie.host/37e52f35-e963-491a-bc37-b6a9bb7c5d07/VIbHNGscG5.lottie"
+          background="transparent"
+          speed="1"
+          loop
+          autoplay
+        ></dotlottie-player>
+      </div>
+
+      <!-- Hero Text -->
+      <div class="hero-text">
+        <h1 class="hero-title">
+        <span class="icon-wrapper">
+          <i class="pi pi-clock animated-icon"></i>
+        </span>
+          <span class="text-gradient"> Optimize Your Time</span>
+          <span class="typing-text"></span>
+        </h1>
+
+        <p class="hero-subtitle">
+          <i class="pi pi-chart-line pulse-icon"></i>
+          <span class="rotating-text">
+          <span> Manage tasks efficiently </span>
+          <span> Collaborate with teams </span>
+          <span> Streamline workflows </span>
+        </span>
+        </p>
+
+      </div>
+    </div>
+
+
   </section>
 
 
@@ -26,13 +66,13 @@
     <div class="feature card">
       <i class="pi pi-list animated-icon"></i>
       <h3>Task Management</h3>
-      <div class="task-management-animation" *ngIf="showAnimation">
+      <div class="task-management-animation">
       <dotlottie-player
         src="https://lottie.host/93910813-c7dc-47df-afb2-71d193a2f5a3/Vfyyix3H1H.lottie"
         background="transparent"
         speed="1"
-        style="width: 300px; height: 300px"
-        loop
+        style="width: 250px; height: 250px"
+        loop="true"
         autoplay
       ></dotlottie-player>
       </div>
@@ -41,36 +81,95 @@
     <div class="feature card">
       <i class="pi pi-users animated-icon"></i>
       <h3>Team Collaboration</h3>
+      <div class="COLLAB-animation">
+      <dotlottie-player
+        src="https://lottie.host/05405f9b-7d6a-48c0-99a8-76239c5e3c76/FJGONbGws4.lottie"
+        background="transparent"
+        speed="1"
+        style="width: 250px; height: 250px"
+        loop="true"
+        autoplay
+      ></dotlottie-player>
+      </div>
       <p>Work together efficiently with real-time updates and shared boards.</p>
     </div>
     <div class="feature card">
       <i class="pi pi-cog animated-icon"></i>
       <h3>Automated Workflows</h3>
+      <dotlottie-player
+        src="https://lottie.host/09f0279b-a7c5-475f-b0f9-63367567436c/Nb1FUniv9r.lottie"
+        background="transparent"
+        speed="1"
+        style="width: 250px; height: 250px"
+        loop="true"
+        autoplay
+      ></dotlottie-player>
       <p>Streamline repetitive tasks and increase efficiency.</p>
     </div>
     <div class="feature card">
       <i class="pi pi-chart-bar animated-icon"></i>
       <h3>Analytics & Insights</h3>
+      <dotlottie-player
+        src="https://lottie.host/e3f23363-ec66-435b-bc29-ed76a79d8f98/dGZqhcPVZA.lottie"
+        background="transparent"
+        speed="1"
+        style="width: 250px; height: 250px"
+        loop="true"
+        autoplay
+      ></dotlottie-player>
       <p>Gain insights from performance metrics and AI-driven suggestions.</p>
     </div>
     <div class="feature card">
       <i class="pi pi-list animated-icon"></i>
       <h3>Cloud Synchronization</h3>
+      <dotlottie-player
+        src="https://lottie.host/101035d8-9436-4fbb-b574-dfd71a761d34/s5FNMktOPy.lottie"
+        background="transparent"
+        speed="1"
+        style="width: 250px; height: 250px"
+        loop="true"
+        autoplay
+      ></dotlottie-player>
       <p>Access your tasks and projects from any device, anytime, anywhere.</p>
     </div>
     <div class="feature card">
       <i class="pi pi-users animated-icon"></i>
       <h3>Project Management</h3>
+      <dotlottie-player
+        src="https://lottie.host/e427bf07-4f47-4748-b14a-c4b8118b7fd5/4bMA4R8r7x.lottie"
+        background="transparent"
+        speed="1"
+        style="width: 250px; height: 250px"
+        loop="true"
+        autoplay
+      ></dotlottie-player>
       <p>Access your tasks and projects from any device, anytime, anywhere.</p>
     </div>
     <div class="feature card">
       <i class="pi pi-cog animated-icon"></i>
       <h3>Glories Management</h3>
+
+      <dotlottie-player
+        src="https://lottie.host/517cf50f-dc6d-4b58-b4d0-fbf2845d79af/Nzm55IMorJ.lottie"
+        background="transparent"
+        speed="1"
+        style="width: 250px; height: 250px"
+        loop="true"
+        autoplay
+      ></dotlottie-player>
       <p>Tack your goals and claim rewards</p>
     </div>
     <div class="feature card">
       <i class="pi pi-chart-bar animated-icon"></i>
       <h3>Strategic Partnership Management</h3>
+      <dotlottie-player
+        src="https://lottie.host/ecc32047-9cb4-45c8-add5-706b24f783ae/ZQ6FU5ygEN.lottie"
+        background="transparent"
+        speed="1"
+        style="width: 250px; height: 250px"
+        loop="true"
+        autoplay
+      ></dotlottie-player>
       <p>make some offers to another startup's to be more scalable</p>
     </div>
   </section>
