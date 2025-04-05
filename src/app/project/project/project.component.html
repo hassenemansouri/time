@@ -1,17 +1,16 @@
-<nav class="navbar">
-  <div class="nav-logo">
-    <a routerLink="/" class="logo">Time Forge App</a>
-  </div>
-  <ul class="nav-links">
-    <li><a routerLink="/dashboard" routerLinkActive="active">Home</a></li>
-    <li><a routerLink="/projects" routerLinkActive="active">Projects</a></li>
-    <li><a routerLink="/calender" routerLinkActive="active">Calender</a></li>
-    <li><a routerLink="/reports" routerLinkActive="active">Reports</a></li>
-    <li><a routerLink="/login" routerLinkActive="active">LogOut</a></li>
-  </ul>
-</nav>
-  <h2 class="text-center text-light mb-4">List of Projects</h2>
+<h2>List of Projects</h2>
 
+<div class="project-animation" *ngIf="showAnimation">
+<dotlottie-player
+  src="https://lottie.host/72a0e417-72e7-42d9-a8d4-27b6bc9a4d36/C1JRRxxzGU.lottie"
+  background="transparent"
+  speed="2"
+  style="width: 550px; height: 550px"
+  loop
+  autoplay
+></dotlottie-player>
+
+</div>
   <div class="export-buttons">
     <button class="btn btn-success" (click)="exportToExcel()">📂 Export to Excel</button>
     <input
@@ -29,7 +28,7 @@
       ➕ Add Project
     </button>
   </div>
-  
+
   <div class="table-responsive">
     <table class="table">
       <thead>
