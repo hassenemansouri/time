@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import {Component, CUSTOM_ELEMENTS_SCHEMA, OnInit} from '@angular/core';
 import { CollaborationService } from './collaboration.service';
 import { Collaboration } from './collaboration.model';
 import {FormsModule} from '@angular/forms';
@@ -15,7 +15,8 @@ import {RouterLink, RouterLinkActive} from '@angular/router';
     DatePipe,
     NgForOf,
     NgIf
-]
+  ],
+  schemas: [CUSTOM_ELEMENTS_SCHEMA]
 })
 export class CollaborationComponent implements OnInit {
   collaborations: Collaboration[] = [];
@@ -30,9 +31,14 @@ export class CollaborationComponent implements OnInit {
   };
 
   constructor(private collaborationService: CollaborationService) {}
+  showAnimation = true;  // To control if the animation is visible
 
   ngOnInit(): void {
     this.loadCollaborations();
+    // Hide the animation after 5 seconds and show the workflow content
+    setTimeout(() => {
+      this.showAnimation = false;
+    }, 6000);
   }
 
   // Load all collaborations
