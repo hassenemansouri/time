@@ -112,7 +112,7 @@
       <dotlottie-player
         src="https://lottie.host/e3f23363-ec66-435b-bc29-ed76a79d8f98/dGZqhcPVZA.lottie"
         background="transparent"
-        speed="1"
+        speed="4"
         style="width: 250px; height: 250px"
         loop="true"
         autoplay
@@ -178,25 +178,252 @@
   <section class="pricing">
     <div class="plan card-scale">
       <i class="pi pi-tag animated-icon"></i>
-      <h3>Free</h3>
-      <p>$0/month</p>
-      <p>Perfect for individuals and small teams.</p>
-      <button pButton label="Get Started" icon="pi pi-check" class="btn-primary"  ></button>
+
+      <div class="pricing-container">
+        <div class="pricing-header">
+          <h1 id="p">Pricing</h1>
+          <div class="animation-container">
+            <dotlottie-player
+              src="https://lottie.host/68cf2c1d-007b-4b93-8b36-2170a2544e22/6P1GwdgPEO.lottie"
+              background="transparent"
+              speed="1.5"
+              style="width: 300px; height: 300px"
+              loop="true"
+              autoplay
+            ></dotlottie-player>
+          </div>
+        </div>
+
+        <div class="pricing-plans">
+          <div class="plan-card free-plan">
+            <div class="plan-icon"><i class="pi pi-star"></i></div>
+            <h3 class="plan-name">Free</h3>
+            <p class="plan-price">$0<span>/month</span></p>
+            <ul class="plan-features">
+              <li>Perfect for individuals</li>
+              <li>Basic features</li>
+              <li>Community support</li>
+            </ul>
+            <button pButton label="Get Started" icon="pi pi-check" class="p-button-raised p-button-rounded"></button>
+          </div>
+
+          <div class="plan-card pro-plan featured">
+            <div class="plan-icon"><i class="pi pi-briefcase"></i></div>
+            <h3 class="plan-name">Pro</h3>
+            <p class="plan-price">$9.99<span>/month</span></p>
+            <ul class="plan-features">
+              <li>Advanced features</li>
+              <li>Priority support</li>
+              <li>Team collaboration</li>
+              <li>Analytics dashboard</li>
+            </ul>
+            <button pButton label="Upgrade" icon="pi pi-arrow-up" class="p-button-raised p-button-rounded"></button>
+          </div>
+
+          <div class="plan-card enterprise-plan">
+            <div class="plan-icon"><i class="pi pi-building"></i></div>
+            <h3 class="plan-name">Enterprise</h3>
+            <p class="plan-price">Custom</p>
+            <ul class="plan-features">
+              <li>Tailored solutions</li>
+              <li>Dedicated account manager</li>
+              <li>Unlimited users</li>
+              <li>API access</li>
+            </ul>
+            <button pButton label="Contact Us" icon="pi pi-envelope" class="p-button-raised p-button-rounded"></button>
+          </div>
+        </div>
+      </div>
+
     </div>
-    <div class="plan card-scale">
-      <i class="pi pi-briefcase animated-icon"></i>
-      <h3>Pro</h3>
-      <p>$9.99/month</p>
-      <p>Advanced features for growing businesses.</p>
-      <button pButton label="Upgrade" icon="pi pi-arrow-up" class="btn-secondary"></button>
-    </div>
-    <div class="plan card-scale">
-      <i class="pi pi-building animated-icon"></i>
-      <h3>Enterprise</h3>
-      <p>Custom Pricing</p>
-      <p>Tailored solutions for large organizations.</p>
-      <button pButton label="Contact Us" icon="pi pi-envelope" class="btn-primary"></button>
-    </div>
+      <style>
+        :root {
+          --primary-color: #4361ee;
+          --secondary-color: #3f37c9;
+          --accent-color: #4895ef;
+          --dark-color: #2b2d42;
+          --light-color: #f8f9fa;
+          --success-color: #4cc9f0;
+          --featured-color: #f72585;
+        }
+
+        .pricing-container {
+          font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+          max-width: 1200px;
+          margin: 0 auto;
+          padding: 2rem;
+          color: var(--dark-color);
+        }
+
+        .pricing-header {
+          text-align: center;
+          margin-bottom: 3rem;
+          position: relative;
+        }
+
+        .pricing-title {
+          font-size: 3.5rem;
+          font-weight: 800;
+          margin-bottom: 1rem;
+          background: linear-gradient(45deg, var(--primary-color), var(--accent-color));
+          -webkit-background-clip: text;
+          background-clip: text;
+          color: transparent;
+          position: relative;
+          display: inline-block;
+        }
+
+        .pricing-title::after {
+          content: '';
+          position: absolute;
+          bottom: -10px;
+          left: 50%;
+          transform: translateX(-50%);
+          width: 100px;
+          height: 4px;
+          background: linear-gradient(90deg, var(--primary-color), var(--accent-color));
+          border-radius: 2px;
+        }
+
+        .animation-container {
+          display: flex;
+          justify-content: center;
+          margin-top: -50px;
+        }
+
+        .pricing-plans {
+          display: grid;
+          grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+          gap: 2rem;
+          margin-top: -50px;
+        }
+
+        .plan-card {
+          background: white;
+          border-radius: 20px;
+          padding: 2.5rem;
+          box-shadow: 0 10px 30px rgba(0, 0, 0, 0.05);
+          transition: all 0.3s ease;
+          position: relative;
+          overflow: hidden;
+          border: 1px solid rgba(0, 0, 0, 0.05);
+          text-align: center;
+        }
+
+        .plan-card:hover {
+          transform: translateY(-10px);
+          box-shadow: 0 15px 35px rgba(0, 0, 0, 0.1);
+        }
+
+        .plan-card.featured {
+          border: 2px solid var(--featured-color);
+          position: relative;
+        }
+
+        .plan-card.featured::before {
+          content: 'Popular';
+          position: absolute;
+          top: 20px;
+          right: -35px;
+          background: var(--featured-color);
+          color: white;
+          padding: 0.5rem 2rem;
+          font-size: 0.8rem;
+          font-weight: bold;
+          transform: rotate(45deg);
+        }
+
+        .plan-icon {
+          font-size: 2.5rem;
+          color: var(--primary-color);
+          margin-bottom: 1.5rem;
+        }
+
+        .plan-name {
+          font-size: 1.8rem;
+          margin-bottom: 1rem;
+          color: var(--dark-color);
+        }
+
+        .plan-price {
+          font-size: 3rem;
+          font-weight: 700;
+          margin: 1.5rem 0;
+          color: var(--primary-color);
+        }
+
+        .plan-price span {
+          font-size: 1rem;
+          color: #6c757d;
+          font-weight: normal;
+        }
+
+        .plan-features {
+          list-style: none;
+          padding: 0;
+          margin: 2rem 0;
+          text-align: left;
+        }
+
+        .plan-features li {
+          padding: 0.5rem 0;
+          position: relative;
+          padding-left: 1.5rem;
+        }
+
+        .plan-features li::before {
+          content: '✓';
+          position: absolute;
+          left: 0;
+          color: var(--success-color);
+          font-weight: bold;
+        }
+
+        .free-plan .plan-icon {
+          color: #6c757d;
+        }
+
+        .pro-plan .plan-icon {
+          color: var(--featured-color);
+        }
+
+        .enterprise-plan .plan-icon {
+          color: var(--secondary-color);
+        }
+
+        .p-button-raised {
+          width: 100%;
+          padding: 1rem;
+          font-weight: 600;
+          border-radius: 50px !important;
+          transition: all 0.3s ease;
+        }
+
+        .free-plan .p-button-raised {
+          background: linear-gradient(45deg, #6c757d, #adb5bd) !important;
+          border: none !important;
+        }
+
+        .pro-plan .p-button-raised {
+          background: linear-gradient(45deg, var(--featured-color), #b5179e) !important;
+          border: none !important;
+        }
+
+        .enterprise-plan .p-button-raised {
+          background: linear-gradient(45deg, var(--secondary-color), var(--primary-color)) !important;
+          border: none !important;
+        }
+
+        @media (max-width: 768px) {
+          .pricing-plans {
+            grid-template-columns: 1fr;
+          }
+
+          .pricing-title {
+            font-size: 2.5rem;
+          }
+        }
+      </style>
   </section>
 
   <!-- 🏆 Testimonials -->

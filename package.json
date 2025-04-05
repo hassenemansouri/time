@@ -30,6 +30,7 @@
     "date-fns": "^4.1.0",
     "jspdf": "^3.0.0",
     "jspdf-autotable": "^5.0.2",
+    "ngx-pagination": "^6.0.3",
     "ngx-toastr": "^17.0.0",
     "primeicons": "^7.0.0",
     "primeng": "^19.0.9",

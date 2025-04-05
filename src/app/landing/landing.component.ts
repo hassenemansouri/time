@@ -9,7 +9,7 @@ import {NgIf} from "@angular/common";
 @Component({
   selector: 'app-landing',
   standalone: true,
-    imports: [RouterModule, RippleModule, StyleClassModule, ButtonModule, DividerModule, NgIf],
+  imports: [RouterModule, RippleModule, StyleClassModule, ButtonModule, DividerModule, NgIf],
   templateUrl: './landing.component.html',
   styleUrls: ['./landing.component.css'],
   schemas: [CUSTOM_ELEMENTS_SCHEMA]
