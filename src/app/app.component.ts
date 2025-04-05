@@ -1,5 +1,7 @@
 import {Component, OnInit} from '@angular/core';
 import {Router, RouterLink, RouterLinkActive, RouterOutlet} from '@angular/router';
+import {DotLottiePlayer } from '@dotlottie/player-component';
+
 
 import {HTTP_INTERCEPTORS, HttpClientModule} from '@angular/common/http';
 
@@ -13,9 +15,8 @@ import { DragDropModule } from '@angular/cdk/drag-drop';
 
 @Component({
   selector: 'app-root',
-  imports: [RouterOutlet, HttpClientModule, FormsModule, ReactiveFormsModule , DragDropModule],
+  imports: [RouterOutlet, HttpClientModule, FormsModule, ReactiveFormsModule, DragDropModule],
   templateUrl: './app.component.html',
-  standalone: true,
   styleUrl: './app.component.css',
   providers: [
     {
@@ -26,6 +27,7 @@ import { DragDropModule } from '@angular/cdk/drag-drop';
     JwtHelperService,  // Register the JwtHelperService
     AuthService        // Register the AuthService
   ],
+  standalone: true
 })
 export class AppComponent implements OnInit {
   title = 'WorkspaceWorkflow';

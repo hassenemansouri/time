@@ -4,6 +4,7 @@ import { CalendarModule, CalendarUtils } from 'angular-calendar';
 import {AppComponent} from '../app.component';
 import {CalendarComponent} from './calendar/calendar.component';
 import { DragDropModule } from '@angular/cdk/drag-drop';
+import {DotLottiePlayer } from '@dotlottie/player-component';
 
 
 // Ajouter CalendarUtils dans les providers

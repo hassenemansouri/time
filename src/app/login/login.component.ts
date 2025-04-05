@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import {Component, CUSTOM_ELEMENTS_SCHEMA, OnInit} from '@angular/core';
 import {FormBuilder, FormGroup, FormsModule, Validators} from '@angular/forms';
 import { AuthService } from '../auth.service';  // Import the AuthService
 import {Router, RouterLink} from '@angular/router';
@@ -16,7 +16,8 @@ import {NgIf} from '@angular/common';
     RouterLink,
 
     NgIf
-  ]
+  ],
+  schemas: [CUSTOM_ELEMENTS_SCHEMA]
 })
 export class LoginComponent implements OnInit {
   loginForm!: FormGroup;
@@ -35,7 +36,13 @@ export class LoginComponent implements OnInit {
       email: ['', [Validators.required, Validators.email]],
       password: ['', [Validators.required]],
     });
+    // Hide the animation after 26 seconds and show the workflow content
+    setTimeout(() => {
+      this.showAnimation = false;
+    }, 26000);
   }
+  showAnimation = true;  // To control if the animation is visible
+
 
   onSubmit(): void {
     if (this.loginForm.valid) {

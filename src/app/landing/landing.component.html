@@ -7,6 +7,7 @@
 <link rel="stylesheet" href="https://unpkg.com/primeicons/primeicons.css">
 <div class="landing-container">
   <!-- 🌟 Top Bar -->
+  <script src="https://unpkg.com/@dotlottie/player-component@latest/dist/dotlottie-player.js"></script>
 
 
   <link rel="stylesheet" href="/timeforge_labor_logo.jpeg">
@@ -25,6 +26,16 @@
     <div class="feature card">
       <i class="pi pi-list animated-icon"></i>
       <h3>Task Management</h3>
+      <div class="task-management-animation" *ngIf="showAnimation">
+      <dotlottie-player
+        src="https://lottie.host/93910813-c7dc-47df-afb2-71d193a2f5a3/Vfyyix3H1H.lottie"
+        background="transparent"
+        speed="1"
+        style="width: 300px; height: 300px"
+        loop
+        autoplay
+      ></dotlottie-player>
+      </div>
       <p>Organize, prioritize, and track progress in one place.</p>
     </div>
     <div class="feature card">
