@@ -32,6 +32,8 @@
     <tr>
       <th>Titre</th>
       <th>Description</th>
+      <th>Date début</th>
+      <th>Date fin</th>
       <th>Actions</th>
     </tr>
     </thead>
@@ -39,6 +41,8 @@
     <tr *ngFor="let goal of filteredGoals()">
       <td>{{ goal.title }}</td>
       <td>{{ goal.description }}</td>
+      <td>{{ goal.startDate | date:'yyyy-MM-dd' }}</td>
+      <td>{{ goal.endDate | date:'yyyy-MM-dd' }}</td>
       <td>
         <div class="btn-container">
           <button class="btn btn-warning btn-sm" [routerLink]="['/goals/edit', goal.goal_id]">✏️ Modifier</button>
@@ -48,6 +52,7 @@
     </tr>
     </tbody>
   </table>
+
 
   <ng-template #noData>
     <div class="alert alert-warning text-center">

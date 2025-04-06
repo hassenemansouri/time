@@ -21,9 +21,6 @@
         <p *ngIf="titleCtrl.errors?.['minlength']">Au moins 3 caractères sont requis.</p>
       </div>
     </div>
-    <div class="alert alert-danger" *ngIf="serverError">
-      {{ serverError }}
-    </div>
 
     <div class="mb-3">
       <label for="description" class="form-label fw-bold">Description</label>
@@ -44,12 +41,35 @@
       </div>
     </div>
 
-    <!-- Boutons -->
+    <div class="mb-3">
+      <label for="startDate" class="form-label fw-bold">Date de début</label>
+      <input
+        type="date"
+        id="startDate"
+        class="form-control"
+        [(ngModel)]="goal.startDate"
+        name="startDate"
+      />
+    </div>
+
+    <div class="mb-3">
+      <label for="endDate" class="form-label fw-bold">Date de fin</label>
+      <input
+        type="date"
+        id="endDate"
+        class="form-control"
+        [(ngModel)]="goal.endDate"
+        name="endDate"
+      />
+    </div>
+
+    <div class="alert alert-danger" *ngIf="serverError">
+      {{ serverError }}
+    </div>
+
     <div class="btn-container">
       <button type="button" class="btn btn-success" (click)="saveGoal()">💾 Enregistrer</button>
-      <button type="button" class="btn btn-secondary" (click)="router.navigate(['/goals'])">
-        ❌ Annuler
-      </button>
+      <button type="button" class="btn btn-secondary" (click)="router.navigate(['/goals'])">❌ Annuler</button>
     </div>
   </div>
 </div>
