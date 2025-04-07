@@ -2,6 +2,7 @@ import { Injectable } from '@angular/core';
 import { HttpClient, HttpHeaders } from '@angular/common/http';
 import { Observable } from 'rxjs';
 import { Goal } from './goal.model';
+import {Categorie} from './categorie.model';
 
 @Injectable({
   providedIn: 'root'
@@ -14,6 +15,10 @@ export class GoalService {
   };
 
   constructor(private http: HttpClient) {}
+
+  getAllCategories(): Observable<Categorie[]> {
+    return this.http.get<Categorie[]>(`${this.apiUrl}/categories`);
+  }
 
   getAllGoals(): Observable<Goal[]> {
     return this.http.get<Goal[]>(`${this.apiUrl}/getall`);
