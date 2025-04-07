@@ -13,7 +13,7 @@ import { NgIf } from '@angular/common';
   imports: [FormsModule, NgIf]
 })
 export class GoalFormComponent implements OnInit {
-  goal: Goal = { title: '', description: '' };
+  goal: Goal = { title: '', description: ''};
   isEdit: boolean = false;
 
   constructor(
