@@ -309,4 +309,39 @@ h2 {
   bottom: 0;
   left: 135px;
 }
+/* Add this to your existing CSS */
+.pagination-container {
+  display: flex;
+  justify-content: center;
+  margin-top: 20px;
+}
 
+.my-pagination {
+  display: flex;
+  padding-left: 0;
+  list-style: none;
+}
+
+.my-pagination li {
+  margin: 0 5px;
+}
+
+.my-pagination a {
+  color: #333;
+  text-decoration: none;
+  padding: 5px 10px;
+  border: 1px solid #ddd;
+  border-radius: 3px;
+}
+
+.my-pagination a:hover {
+  background: #eee;
+}
+
+.my-pagination .current {
+  background: #007bff;
+  color: white;
+  border-color: #007bff;
+}
+
+/* Keep your existing styles */

@@ -6,19 +6,22 @@ import { NgForOf, NgIf,DatePipe  } from '@angular/common';
 import { jsPDF } from 'jspdf';
 import * as XLSX from 'xlsx';
 import { FormsModule } from '@angular/forms';
+import { NgxPaginationModule } from 'ngx-pagination';
 
 @Component({
   selector: 'app-list-goals',
   templateUrl: './list-goals.component.html',
   styleUrls: ['./list-goals.component.css'],
   standalone: true,
-  imports: [NgForOf, RouterLink, NgIf, FormsModule, DatePipe],
+  imports: [NgForOf, RouterLink, NgIf, FormsModule, DatePipe,NgxPaginationModule ],
   schemas: [CUSTOM_ELEMENTS_SCHEMA]
 })
 export class ListGoalsComponent implements OnInit {
   goals: Goal[] = [];
   searchText = '';
   showAnimation = true;
+  page: number = 1;          // page courante
+  itemsPerPage: number = 6;  // nombre d’éléments par page
 
   constructor(private goalService: GoalService, private router: Router) {}
 
@@ -45,8 +48,8 @@ export class ListGoalsComponent implements OnInit {
   filteredGoals(): Goal[] {
     if (!this.searchText) return this.goals;
     return this.goals.filter(goal =>
-        goal.title.toLowerCase().includes(this.searchText.toLowerCase()) ||
-        goal.description.toLowerCase().includes(this.searchText.toLowerCase())
+      goal.title.toLowerCase().includes(this.searchText.toLowerCase()) ||
+      goal.description.toLowerCase().includes(this.searchText.toLowerCase())
     );
   }
 
