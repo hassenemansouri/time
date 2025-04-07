@@ -5,6 +5,7 @@ import {AppComponent} from '../app.component';
 import {CalendarComponent} from './calendar/calendar.component';
 import { DragDropModule } from '@angular/cdk/drag-drop';
 import {DotLottiePlayer } from '@dotlottie/player-component';
+import {NgxPaginationModule} from 'ngx-pagination';
 
 
 // Ajouter CalendarUtils dans les providers
@@ -18,6 +19,7 @@ import {DotLottiePlayer } from '@dotlottie/player-component';
     }),
     AppComponent,
     CalendarComponent,
+    NgxPaginationModule
   ],
   providers: [CalendarUtils],
   bootstrap: [],

@@ -6,26 +6,31 @@ import { Workspace } from '../workspace.model';
 import {FormsModule} from "@angular/forms";
 import {jsPDF} from 'jspdf';
 import * as XLSX from 'xlsx';
+import {NgxPaginationModule} from 'ngx-pagination';
 
 @Component({
   selector: 'app-list-workspaces',
   templateUrl: './list-workspaces.component.html',
   standalone: true,
-    imports: [
-        NgForOf,
-        CommonModule,
-        RouterLink,
-        RouterLinkActive,
-        FormsModule
-    ],
+  imports: [
+    NgForOf,
+    CommonModule,
+    RouterLink,
+    RouterLinkActive,
+    FormsModule,
+    NgxPaginationModule
+  ],
   styleUrls: ['./list-workspaces.component.css'],
   schemas: [CUSTOM_ELEMENTS_SCHEMA]
 
 })
 export class ListWorkspacesComponent implements OnInit {
+  page: number = 1;
+  searchText: string = '';
   workspaces: Workspace[] = [];
-
   showAnimation = true;  // To control if the animation is visible
+  itemsPerPage: number = 5; // Adjust as needed
+
 
   ngOnInit(): void {
     this.loadWorkspaces();
@@ -35,7 +40,6 @@ export class ListWorkspacesComponent implements OnInit {
     }, 6000);
   }
 
-  searchText: string = ''; // Variable pour stocker la recherche
   constructor(private workspaceService: WorkspaceService , protected router : Router) {}
 
 

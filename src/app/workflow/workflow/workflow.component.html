@@ -11,26 +11,26 @@
   </dotlottie-player>
 </div>
 
-  <div class="export-buttons">
-    <button class="btn btn-success" (click)="exportToExcel()">📂 Export to Excel</button>
-    <input
-      type="text"
-      class="search-input"
-      [(ngModel)]="searchText"
-      placeholder="Search Workflows..."
-    />
-    <button class="btn btn-danger" (click)="exportToPDF()">📝 Export to PDF</button>
-  </div>
+<div class="export-buttons">
+  <button class="btn btn-success" (click)="exportToExcel()">📂 Export to Excel</button>
+  <input
+    type="text"
+    class="search-input"
+    [(ngModel)]="searchText"
+    placeholder="Search Workflows..."
+  />
+  <button class="btn btn-danger" (click)="exportToPDF()">📝 Export to PDF</button>
+</div>
 
-  <!-- Bouton "Add a Workflow" -->
-  <div class="d-flex justify-content-center mb-4">
-    <button class="btn btn-primary btn-extraordinary w-100 w-md-auto" [routerLink]="['/workflows/add']">
-      ➕ Add a Workflow
-    </button>
-  </div>
+<!-- Bouton "Add a Workflow" -->
+<div class="d-flex justify-content-center mb-4">
+  <button class="btn btn-primary btn-extraordinary w-100 w-md-auto" [routerLink]="['/workflows/add']">
+    ➕ Add a Workflow
+  </button>
+</div>
 
-
-  <!-- Table des workflows -->
+<!-- Table des workflows -->
+<div *ngIf="filteredWorkflows().length > 0; else noData">
   <div class="table-responsive">
     <table class="table table-striped table-hover table-bordered shadow-lg rounded">
       <thead class="thead-dark">
@@ -41,7 +41,11 @@
       </tr>
       </thead>
       <tbody>
-      <tr *ngFor="let workflow of filteredWorkflows()">
+      <tr *ngFor="let workflow of filteredWorkflows() | paginate: {
+              itemsPerPage: itemsPerPage,
+              currentPage: page,
+              totalItems: filteredWorkflows().length
+            }">
         <td>{{ workflow.workflowName }}</td>
         <td>{{ workflow.steps.join(', ') }}</td>
         <td>
@@ -59,3 +63,21 @@
     </table>
   </div>
 
+  <!-- Pagination Controls -->
+  <div class="pagination-container mt-4">
+    <pagination-controls
+      (pageChange)="page = $event"
+      previousLabel="Previous"
+      nextLabel="Next"
+      [responsive]="true"
+      [maxSize]="5"
+      class="my-pagination">
+    </pagination-controls>
+  </div>
+</div>
+
+<ng-template #noData>
+  <div class="alert alert-warning text-center">
+    No workflows found.
+  </div>
+</ng-template>
