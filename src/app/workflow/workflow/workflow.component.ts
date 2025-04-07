@@ -5,7 +5,8 @@ import { Workflow } from '../workflow.model';
 import {NgForOf, NgIf} from '@angular/common';
 import * as XLSX from 'xlsx';  // Importation pour l'exportation Excel
 import { jsPDF } from 'jspdf';
-import {FormsModule} from '@angular/forms';  // Importation pour l'exportation PDF
+import {FormsModule} from '@angular/forms';
+import {NgxPaginationModule} from 'ngx-pagination';  // Importation pour l'exportation PDF
 
 
 @Component({
@@ -17,7 +18,8 @@ import {FormsModule} from '@angular/forms';  // Importation pour l'exportation P
     RouterLink,
     FormsModule,
     RouterLinkActive,
-    NgIf
+    NgIf,
+    NgxPaginationModule
   ],
   styleUrls: ['./workflow.component.css'],
   schemas: [CUSTOM_ELEMENTS_SCHEMA]  // ✅ Permet d'utiliser dotlottie-player
@@ -25,13 +27,13 @@ import {FormsModule} from '@angular/forms';  // Importation pour l'exportation P
 })
 export class WorkflowComponent implements OnInit {
   workflows: Workflow[] = [];
-
   searchText: string = ''; // Variable pour stocker la recherche
+  page: number = 1;
+  itemsPerPage: number = 5; // Items per page
+  showAnimation = true;
 
   constructor(private workflowService: WorkflowService, private router: Router) {}
 
-
-  showAnimation = true;  // To control if the animation is visible
 
   ngOnInit(): void {
     this.loadWorkflows();

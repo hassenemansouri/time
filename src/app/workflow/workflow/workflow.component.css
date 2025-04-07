@@ -299,3 +299,42 @@ h2 {
 .list{
  color: #007bff;
 }
+/* Pagination Styles */
+.pagination-container {
+  display: flex;
+  justify-content: center;
+  margin-top: 20px;
+}
+
+.my-pagination {
+  display: flex;
+  padding-left: 0;
+  list-style: none;
+  flex-wrap: wrap;
+  justify-content: center;
+}
+
+.my-pagination li {
+  margin: 0 5px;
+}
+
+.my-pagination a {
+  color: #333;
+  text-decoration: none;
+  padding: 6px 12px;
+  border: 1px solid #ddd;
+  border-radius: 4px;
+  transition: all 0.3s;
+}
+
+.my-pagination a:hover {
+  background-color: #e9ecef;
+}
+
+.my-pagination .current {
+  background: #007bff;
+  color: white;
+  border-color: #007bff;
+}
+
+/* Keep your existing styles */
