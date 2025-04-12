@@ -6,5 +6,5 @@ export interface Task {
   createdAt: Date;
   dueDate: Date;
   columnId: string;
-
+  history: string[]; // Ajout du champ history
 }
