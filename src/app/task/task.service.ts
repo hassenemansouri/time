@@ -10,7 +10,10 @@ export class TaskService {
  private apiUrl = 'http://localhost:8400/timeforge/tasks';
  
    constructor(private http: HttpClient) {}
- 
+   private httpOptions = {
+    headers: new HttpHeaders({ 'Content-Type': 'application/json' })
+  };
+
  
 getAllTasks(): Observable<Task[]> {
     return this.http.get<Task[]>(`${this.apiUrl}`); // Change /getAllTasks en /tasks
@@ -19,19 +22,20 @@ getAllTasks(): Observable<Task[]> {
   getTaskById(id: string): Observable<Task> {
     return this.http.get<Task>(`${this.apiUrl}/${id}`); // Change /getTaskById/${id} en /${id}
   }
-   private httpOptions = {
-     headers: new HttpHeaders({ 'Content-Type': 'application/json' })
-   };
+
  
    createTask(task: Task): Observable<Task> {
-     return this.http.post<Task>(`${this.apiUrl}/create`, task, this.httpOptions);
+     return this.http.post<Task>(`${this.apiUrl}/create`, task);
    }
  
-   updateTask(id: string | undefined, task: Task): Observable<Task> {
-     return this.http.put<Task>(`${this.apiUrl}/modify-task`, task);
+   updateTask(task: Task): Observable<Task> {
+     return this.http.put<Task>(`${this.apiUrl}/modify-task`, task, this.httpOptions);
    }
  
    deleteTask(id: string | undefined): Observable<void> {
-     return this.http.delete<void>(`${this.apiUrl}/delete/${id}`);
+     return this.http.delete<void>(`${this.apiUrl}/${id}`);
    }
+   getTasksByColumnId(columnId: string): Observable<Task[]> {
+    return this.http.get<Task[]>(`${this.apiUrl}/column/${columnId}`);
+  }
 }

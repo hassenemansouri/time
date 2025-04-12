@@ -12,16 +12,16 @@ import {CommonModule, NgForOf, NgIf} from '@angular/common';
 })
 export class TaskFormComponent implements OnInit{
 task: Task = {
-    id_task: '',
     name: '',
     description: '',
-    createdDate: undefined,
-    dueDate: undefined,
-    priority:'LOW'
+    createdAt: new Date(),
+    dueDate: new Date(),
+    priority:'LOW',
+    columnId:''
   };
   
   isEdit: boolean = false;
-taskForm: any;
+  taskForm: any;
 
   constructor(
     private taskService: TaskService,
@@ -40,20 +40,20 @@ taskForm: any;
   }
 
 
-  saveTask(taskForm: NgForm): void {
-    console.log('✅ Saving task:', JSON.stringify(this.task, null, 2));
+  saveTask(): void {
+    console.log("Données envoyées :", this.task);
 
     if (this.isEdit) {
-      if (!this.task.id_task || this.task.id_task === 'string') {
+      if (!this.task._id) {
         console.error('❌ Error: Invalid ID');
         return;
       }
-      this.taskService.updateTask(this.task.id_task, this.task).subscribe({
+      this.taskService.updateTask(this.task).subscribe({
         next: () => {
-          console.log('✅ Project updated successfully');
-          this.router.navigate(['/projects']);
+          console.log('✅ Task updated successfully');
+          this.router.navigate(['/tasks']);
         },
-        error: (err) => console.error('❌ Error updating project:', err)
+        error: (err) => console.error('❌ Error updating task:', err)
       });
     } else {
       this.taskService.createTask(this.task).subscribe({

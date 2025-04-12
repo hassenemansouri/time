@@ -1,8 +1,8 @@
 <div class="container">
   <div class="card">
-    <h2 class="text-center mb-4">{{ isEdit ? 'Update' : 'Create' }} a Project</h2>
+    <h2 class="text-center mb-4">{{ isEdit ? 'Update' : 'Create' }} a Task</h2>
 
-    <form #projectForm="ngForm" (ngSubmit)="saveTask(taskForm)" novalidate>
+    <form #projectForm="ngForm" (ngSubmit)="saveTask()" novalidate>
       <!-- Champ titre -->
       <div class="mb-3">
         <label for="title" class="form-label fw-bold">Task Title</label>
@@ -52,13 +52,13 @@
       </div>  
 
       <div class="mb-3">
-        <label for="createdDate" class="form-label fw-bold">Created Date</label>
+        <label for="createdAt" class="form-label fw-bold">Created Date</label>
         <input
           type="date"
-          id="createdDate"
+          id="createdAt"
           class="form-control"
-          [(ngModel)]="task.createdDate"
-          name="createdDate"
+          [(ngModel)]="task.createdAt"
+          name="createdAt"
           required
         />
   
@@ -72,7 +72,7 @@
           class="form-control"
           [(ngModel)]="task.dueDate"
           name="dueDate"
-          [min]="task.createdDate"
+          [min]="task.createdAt"
           required
         />
      
@@ -80,7 +80,7 @@
   
       <!-- Boutons -->
       <div class="btn-container">
-        <button type="button" class="btn btn-success" (click)="saveTask(taskForm)">💾 Save</button>
+        <button type="button" class="btn btn-success" (click)="saveTask()">💾 Save</button>
       </div>
       <button type="button" class="btn btn-secondary" (click)="router.navigate(['/tasks'])">
         ❌ Cancel
