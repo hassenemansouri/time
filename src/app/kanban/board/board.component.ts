@@ -139,8 +139,11 @@ export class BoardComponent implements OnInit {
     }
   }
 
-  isTaskSelected(taskId: string | undefined): boolean {
+  isTaskSelected(taskId: string): boolean {
     return taskId ? this.selectedTaskIds.has(taskId) : false;
+  }
+  removeTask(columnIndex: number, taskIndex: number): void {
+    this.board.columns[columnIndex].tasks.splice(taskIndex, 1);
   }
 
   removeColumnFromBoard(column: Column): void {
@@ -149,10 +152,7 @@ export class BoardComponent implements OnInit {
     });
   }
 
-  removeTask(columnIndex: number, taskIndex: number): void {
-    this.board.columns[columnIndex].tasks.splice(taskIndex, 1);
-  }
-
+  
   drop(event: CdkDragDrop<Task[]>): void {
     if (event.previousContainer === event.container) {
       moveItemInArray(event.container.data, event.previousIndex, event.currentIndex);

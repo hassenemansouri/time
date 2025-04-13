@@ -40,6 +40,7 @@
         </div>
       </div>
     </div>
+    
     <div class="modal-overlayTask" *ngIf="isTaskOpen">
       <div class="modal-contentTask">
         <h4>Select Tasks</h4>
@@ -60,7 +61,7 @@
                 <td>
                   <input 
                     type="checkbox" 
-                    [checked]="isTaskSelected(task._id)"
+                    [checked]="isTaskSelected(task._id!)"
                     (change)="toggleTaskSelection(task._id, $event)" 
                   />
                 </td>

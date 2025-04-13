@@ -29,8 +29,8 @@ getAllTasks(): Observable<Task[]> {
    }
  
    updateTask(task: Task): Observable<Task> {
-     return this.http.put<Task>(`${this.apiUrl}/modify-task`, task, this.httpOptions);
-   }
+    return this.http.put<Task>(`${this.apiUrl}/update/${task._id}`, task);
+  }
  
    deleteTask(id: string | undefined): Observable<void> {
      return this.http.delete<void>(`${this.apiUrl}/${id}`);
