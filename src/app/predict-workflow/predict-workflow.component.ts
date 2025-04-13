@@ -23,14 +23,13 @@ export class PredictWorkflowComponent {
   constructor(private http: HttpClient, private fb: FormBuilder) {
     // Création du formulaire avec validation
     this.form = this.fb.group({
-      steps: ['', Validators.required], // Le champ 'steps' est requis
-      actions: ['', Validators.required], // Le champ 'actions' est requis
+      steps: ['', Validators.required] // Le champ 'actions' est requis
     });
   }
 
   predict() {
     if (this.form.invalid) {
-      this.errorMessage = "Les champs 'steps' et 'actions' sont requis.";
+      this.errorMessage = "Les champs 'steps' sont requis.";
       this.prediction = null;
       return;
     }
