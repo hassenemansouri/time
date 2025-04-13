@@ -5,6 +5,17 @@
       🔮 Workflow Prediction
     </h2>
 
+    <div class="ML-animation" *ngIf="showAnimation">
+    <dotlottie-player
+      src="https://lottie.host/45f3c123-745b-425c-8491-7aaabf67c70c/jOtTL2NQky.lottie"
+      background="transparent"
+      speed="2"
+      style="width: 50%; height: 50%"
+      loop
+      autoplay
+    ></dotlottie-player>
+    </div>
+
     <form (ngSubmit)="predict()" class="space-y-4">
       <div>
         <label class="block text-slate-600 font-semibold mb-1">Steps</label>

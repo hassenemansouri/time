@@ -1,4 +1,4 @@
-import { Component } from '@angular/core';
+import {Component, CUSTOM_ELEMENTS_SCHEMA} from '@angular/core';
 import { HttpClient } from '@angular/common/http';
 import {FormsModule} from '@angular/forms';
 import {CommonModule} from '@angular/common';
@@ -11,13 +11,15 @@ import {CommonModule} from '@angular/common';
     CommonModule
   ],
   templateUrl: './predict-workflow.component.html',
-  styleUrl: './predict-workflow.component.css'
+  styleUrl: './predict-workflow.component.css',
+  schemas: [CUSTOM_ELEMENTS_SCHEMA]
 })
 export class PredictWorkflowComponent {
   steps = '';
   actions = '';
   prediction: string | null = null;
   errorMessage: string | null = null;
+  showAnimation = true;
 
   constructor(private http: HttpClient) {}
 
