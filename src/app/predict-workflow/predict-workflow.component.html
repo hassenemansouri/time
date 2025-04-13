@@ -1,0 +1,38 @@
+<div class="min-h-screen bg-gradient-to-br from-slate-900 to-slate-800 flex items-center justify-center px-4">
+  <div class="bg-white rounded-2xl shadow-2xl w-full max-w-lg p-8 space-y-6">
+
+    <h2 class="text-2xl font-extrabold text-center text-slate-800">
+      🔮 Workflow Prediction
+    </h2>
+
+    <form (ngSubmit)="predict()" class="space-y-4">
+      <div>
+        <label class="block text-slate-600 font-semibold mb-1">Steps</label>
+        <input type="text" [(ngModel)]="steps" name="steps"
+               class="input-field"
+               placeholder="Ex: Step 1, Step 2" required />
+      </div>
+
+      <div>
+        <label class="block text-slate-600 font-semibold mb-1">Actions</label>
+        <input type="text" [(ngModel)]="actions" name="actions"
+               class="input-field"
+               placeholder="Ex: Action 1" required />
+      </div>
+
+      <button type="submit" class="submit-button">
+        🔍 Predict
+      </button>
+    </form>
+
+    <div *ngIf="prediction" class="result success">
+      <h3 class="font-bold">Result :</h3>
+      <p>{{ prediction }}</p>
+    </div>
+
+    <div *ngIf="errorMessage" class="result error">
+      <h3 class="font-bold">Error :</h3>
+      <p>{{ errorMessage }}</p>
+    </div>
+  </div>
+</div>

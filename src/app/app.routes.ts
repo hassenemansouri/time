@@ -28,6 +28,7 @@ import { AddPartnershipComponent } from './strategicparternship/add-partnership/
 import { PublicLayoutComponent } from './layouts/public-layout/public-layout.component';
 import {PrivateLayoutComponent} from './layouts/private-layout/private-layout.component';
 import {CalendarComponent} from './app/calendar/calendar.component';
+import {PredictWorkflowComponent} from './predict-workflow/predict-workflow.component';
 
 export const routes: Routes = [
 
@@ -79,7 +80,8 @@ export const routes: Routes = [
         { path: 'partnerships', component: PartnershipListComponent },
         { path: 'add-partnership', component: AddPartnershipComponent },
         { path: 'partnerships/calender', component: CalendarComponent},
-        { path: 'calender', component: CalendarComponent}
+        { path: 'calender', component: CalendarComponent},
+        { path: 'predict', component: PredictWorkflowComponent}
 
       ]
   },
