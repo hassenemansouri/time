@@ -37,6 +37,25 @@ searchText: string = '';
       this.tasks = data;
     });
   }
+  // Initialisation avec des valeurs undefined au lieu de ''
+// filters: {
+//   name?: string;
+//   priority?: string;
+//   assignedToId?: string;
+//   projectId?: string;
+// } = {};
+
+// // Applique les filtres automatiquement
+// applyFilters(): void {
+//   this.taskService.searchTasks(this.filters).subscribe(data => {
+//     this.tasks = data;
+//   });
+// }
+
+// clearFilter(filterName: keyof typeof this.filters): void {
+//   this.filters[filterName] = undefined;
+//   this.applyFilters();
+// }
 
   deleteTask(id: string | undefined): void {
     if (confirm('Are you sure you want to delete this task?')) {
