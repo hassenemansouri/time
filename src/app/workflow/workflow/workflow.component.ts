@@ -1,12 +1,13 @@
 import {Component, CUSTOM_ELEMENTS_SCHEMA, OnInit} from '@angular/core';
-import {Router, RouterLink, RouterLinkActive} from '@angular/router';
+import { RouterLink, RouterLinkActive} from '@angular/router';
 import { WorkflowService } from '../workflow.service';
 import { Workflow } from '../workflow.model';
 import {NgForOf, NgIf} from '@angular/common';
 import * as XLSX from 'xlsx';  // Importation pour l'exportation Excel
 import { jsPDF } from 'jspdf';
 import {FormsModule} from '@angular/forms';
-import {NgxPaginationModule} from 'ngx-pagination';  // Importation pour l'exportation PDF
+import {NgxPaginationModule} from 'ngx-pagination';
+import { saveAs } from 'file-saver';
 
 
 @Component({
@@ -32,7 +33,7 @@ export class WorkflowComponent implements OnInit {
   itemsPerPage: number = 5; // Items per page
   showAnimation = true;
 
-  constructor(private workflowService: WorkflowService, private router: Router) {}
+  constructor(private workflowService: WorkflowService) {}
 
 
   ngOnInit(): void {
@@ -44,8 +45,13 @@ export class WorkflowComponent implements OnInit {
   }
 
   loadWorkflows(): void {
+    // Example of adding a default value for files
     this.workflowService.getAllWorkflows().subscribe(data => {
-      this.workflows = data;
+      this.workflows = data.map(workflow => ({
+        ...workflow,
+        files: workflow.files || [],  // Ensure 'files' is initialized as an empty array if missing
+        steps: workflow.steps || [],  // Similarly, initialize 'steps' if missing
+      }));
     });
   }
 
@@ -195,8 +201,17 @@ export class WorkflowComponent implements OnInit {
   }
 
 
+  downloadFile(workflowId: string | undefined, fileName: string): void {
 
-
+    this.workflowService.downloadFile(workflowId, fileName).subscribe(
+      (blob) => {
+        saveAs(blob, fileName);
+      },
+      (error) => {
+        console.error(`❌ Download failed for workflow: ${workflowId}`, error);
+      }
+    );
+  }
 
 
 }

@@ -1,9 +1,9 @@
 import { Component, OnDestroy, OnInit } from '@angular/core';
 import { Task } from '../../models/task.model';
 import { TaskService } from '../task.service';
-import { ActivatedRoute, Router } from '@angular/router';
-import { FormsModule, NgForm, ReactiveFormsModule } from '@angular/forms';
-import {CommonModule, NgForOf, NgIf} from '@angular/common';
+import {  ActivatedRoute, Router } from '@angular/router';
+import { FormsModule,  ReactiveFormsModule } from '@angular/forms';
+import {CommonModule,} from '@angular/common';
 @Component({
   selector: 'app-task-form',
   imports: [CommonModule, ReactiveFormsModule, FormsModule],
@@ -11,58 +11,83 @@ import {CommonModule, NgForOf, NgIf} from '@angular/common';
   styleUrl: './task-form.component.css'
 })
 export class TaskFormComponent implements OnInit{
-task: Task = {
-    id_task: '',
+  task: Task = {
     name: '',
     description: '',
-    createdDate: undefined,
-    dueDate: undefined,
-    priority:'LOW'
+    createdAt: new Date(),
+    dueDate: new Date(),
+    priority: 'LOW',
+    columnId: '',
+    history: []
   };
-  
-  isEdit: boolean = false;
-taskForm: any;
+
+  oldTask: Task | null = null;
+  isEdit = false;
 
   constructor(
     private taskService: TaskService,
     private route: ActivatedRoute,
-    protected router: Router
+    private router: Router
   ) {}
 
   ngOnInit(): void {
     const id = this.route.snapshot.paramMap.get('id');
-    if (id && id !== 'string') {
+    if (id) {
       this.isEdit = true;
-      this.taskService.getTaskById(id).subscribe(data => {
-        this.task = data;
+      this.taskService.getTaskById(id).subscribe(task => {
+        this.task = { ...task, history: task.history || [] };
+        this.oldTask = { ...task }; // 👈 garde l’état original pour comparaison
       });
     }
   }
 
+  saveTask(): void {
+    const now = new Date().toLocaleString();
 
-  saveTask(taskForm: NgForm): void {
-    console.log('✅ Saving task:', JSON.stringify(this.task, null, 2));
+    const historyEntry = this.isEdit && this.oldTask
+      ? `Updated on ${now}: ${this.generateUpdateLog(this.oldTask, this.task)}`
+      : `Created on ${now}`;
 
-    if (this.isEdit) {
-      if (!this.task.id_task || this.task.id_task === 'string') {
-        console.error('❌ Error: Invalid ID');
-        return;
-      }
-      this.taskService.updateTask(this.task.id_task, this.task).subscribe({
-        next: () => {
-          console.log('✅ Project updated successfully');
-          this.router.navigate(['/projects']);
-        },
-        error: (err) => console.error('❌ Error updating project:', err)
+    const taskToSave: Task = {
+      ...this.task,
+      history: [...(this.task.history || []), historyEntry]
+    };
+
+    if (this.isEdit && this.task._id) {
+      this.taskService.updateTask(taskToSave).subscribe(() => {
+        this.router.navigate(['/tasks']);
       });
     } else {
-      this.taskService.createTask(this.task).subscribe({
-        next: () => {
-          console.log('✅ Task created successfully');
-          this.router.navigate(['/tasks']);
-        },
-        error: (err) => console.error('❌ Error creating task:', err)
+      this.taskService.createTask(taskToSave).subscribe(newTask => {
+        this.task = newTask;
+        this.router.navigate(['/tasks']);
       });
     }
+  }
+
+  private generateUpdateLog(oldTask: Task, updatedTask: Task): string {
+    let log = '';
+
+    if (oldTask.name !== updatedTask.name) {
+      log += `Name changed from "${oldTask.name}" to "${updatedTask.name}". `;
+    }
+    if (oldTask.description !== updatedTask.description) {
+      log += `Description changed. `;
+    }
+    if (oldTask.dueDate !== updatedTask.dueDate) {
+      log += `Due date changed from ${new Date(oldTask.dueDate).toLocaleDateString()} to ${new Date(updatedTask.dueDate).toLocaleDateString()}. `;
+    }
+    if (oldTask.priority !== updatedTask.priority) {
+      log += `Priority changed from "${oldTask.priority}" to "${updatedTask.priority}". `;
+    }
+    if (oldTask.columnId !== updatedTask.columnId) {
+      log += `Column changed. `;
+    }
+
+    return log.trim() || 'No specific changes recorded.';
+  }
+
+  cancel(): void {
+    this.router.navigate(['/tasks']);
   }
 }
