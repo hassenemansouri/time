@@ -1,8 +1,10 @@
 export interface Task {
-  id_task: string;
+  _id?: string;
   name: string;
   description: string;
-  createdDate?: Date | null;
-  dueDate?: Date | null;
-  priority: 'LOW' | 'MEDIUM ' | 'HIGH';
+  priority: 'LOW' | 'MEDIUM' | 'HIGH';
+  createdAt: Date;
+  dueDate: Date;
+  columnId: string;
+  history: string[]; // Ajout du champ history
 }

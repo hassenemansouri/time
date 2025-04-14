@@ -6,6 +6,8 @@ import { CommonModule } from '@angular/common';
 import jsPDF from 'jspdf';
 import * as XLSX from 'xlsx';
 import {FormsModule} from '@angular/forms';
+import { TaskDetailsComponent } from '../task-details/task-details.component';
+import { MatDialog, MatDialogModule } from '@angular/material/dialog';
 @Component({
   selector: 'app-task',
   imports: [RouterModule, CommonModule,FormsModule],
@@ -17,7 +19,7 @@ import {FormsModule} from '@angular/forms';
 export class TaskComponent implements OnInit {
 tasks: Task[] = [];
 searchText: string = '';
-  constructor(private taskService: TaskService, private router: Router) {}
+  constructor(private taskService: TaskService, private dialog: MatDialog) {}
 
 
   showAnimation = true;  // To control if the animation is visible
@@ -35,13 +37,37 @@ searchText: string = '';
       this.tasks = data;
     });
   }
+  // Initialisation avec des valeurs undefined au lieu de ''
+// filters: {
+//   name?: string;
+//   priority?: string;
+//   assignedToId?: string;
+//   projectId?: string;
+// } = {};
+
+// // Applique les filtres automatiquement
+// applyFilters(): void {
+//   this.taskService.searchTasks(this.filters).subscribe(data => {
+//     this.tasks = data;
+//   });
+// }
+
+// clearFilter(filterName: keyof typeof this.filters): void {
+//   this.filters[filterName] = undefined;
+//   this.applyFilters();
+// }
 
   deleteTask(id: string | undefined): void {
     if (confirm('Are you sure you want to delete this task?')) {
       this.taskService.deleteTask(id).subscribe(() => {
-        this.tasks = this.tasks.filter(t => t.id_task !== id);
+        this.tasks = this.tasks.filter(t => t._id !== id);
       });
     }
+  }
+  onViewTask(task: Task): void {
+    this.dialog.open(TaskDetailsComponent, {
+      data: task,
+    });
   }
   exportToPDF(): void {
       if (!this.tasks || this.tasks.length === 0) {
@@ -71,7 +97,7 @@ searchText: string = '';
       const data = this.tasks.map(task => [
         task.name,
         task.description,
-        task.createdDate,
+        task.createdAt,
         task.dueDate,
         task.priority
       ]);
@@ -157,7 +183,7 @@ searchText: string = '';
     const ws: XLSX.WorkSheet = XLSX.utils.json_to_sheet(this.tasks.map(task => ({
       'Task Name': task.name,
       'Description': task.description,
-      'Created Date': task.createdDate ? task.createdDate.toISOString().split('T')[0] : 'N/A',
+      'Created At': task.createdAt ? task.createdAt.toISOString().split('T')[0] : 'N/A',
       'Due Date': task.dueDate ? task.dueDate.toISOString().split('T')[0] : 'N/A',
       'Priority': task.priority.charAt(0).toUpperCase() + task.priority.slice(1)
     })));
