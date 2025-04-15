@@ -28,15 +28,13 @@ import { AddPartnershipComponent } from './strategicparternship/add-partnership/
 import { PublicLayoutComponent } from './layouts/public-layout/public-layout.component';
 import {PrivateLayoutComponent} from './layouts/private-layout/private-layout.component';
 import {CalendarComponent} from './app/calendar/calendar.component';
-<<<<<<< HEAD
 import { ColumnComponent } from './column/column/column.component';
 import { ColumnFormComponent } from './column/column-form/column-form.component';
 import { ListBoardComponent } from './kanban/list-board/list-board.component';
 import { FormBoardComponent } from './kanban/form-board/form-board.component';
 import { BoardComponent } from './kanban/board/board.component';
-=======
-import {PredictWorkflowComponent} from './predict-workflow/predict-workflow.component';
->>>>>>> master
+import { PredictWorkflowComponent } from './predict-workflow/predict-workflow.component';
+
 
 export const routes: Routes = [
 

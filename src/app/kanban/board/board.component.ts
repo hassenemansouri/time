@@ -35,7 +35,7 @@ export class BoardComponent implements OnInit {
 
   selectedColumns: Column[] = [];
   availableColumns: Column[] = [];
-  selectedCulumn!: Column;
+  selectedCulumn: Column;
 
   tasks: Task[] = [];
   selectedTaskIds: Set<string> = new Set();
@@ -46,15 +46,14 @@ export class BoardComponent implements OnInit {
     columns: []
   };
 
-  id: string | null = null;
-
+  id: string
   constructor(
     private route: ActivatedRoute,
     private boardService: BoardService,
     private taskService: TaskService,
     private columnService: ColumnService,
     private dialog: MatDialog
-  ) {}
+  ) { }
 
   ngOnInit(): void {
     this.id = this.route.snapshot.paramMap.get('id');
@@ -93,7 +92,7 @@ export class BoardComponent implements OnInit {
       col.board = this.id!;
     });
     this.columnService.saveListColumn(this.selectedColumns).subscribe(() => {
-      this.getColumnBoard(this.id!);
+      this.getColumnBoard(this.id);
     });
     this.closeModal();
   }
@@ -114,8 +113,8 @@ export class BoardComponent implements OnInit {
       const selectedTasks = this.tasks.filter(task => task._id && this.selectedTaskIds.has(task._id));
       this.selectedCulumn.tasks = selectedTasks;
 
-      this.columnService.updateColumn(this.selectedCulumn).subscribe(() => {
-        this.getColumnBoard(this.id!);
+      this.columnService.addTaskToColumn(this.selectedCulumn).subscribe(() => {
+        this.getColumnBoard(this.id);
         this.closeTaskModal();
       });
     } else {
@@ -123,7 +122,7 @@ export class BoardComponent implements OnInit {
     }
   }
 
-  toggleTaskSelection(taskId: string | undefined, event: Event): void {
+  toggleTaskSelection(taskId: string, event: Event): void {
     if (!taskId) return;
     const checked = (event.target as HTMLInputElement).checked;
     if (checked) this.selectedTaskIds.add(taskId);
@@ -144,15 +143,18 @@ export class BoardComponent implements OnInit {
   }
   removeTask(columnIndex: number, taskIndex: number): void {
     this.board.columns[columnIndex].tasks.splice(taskIndex, 1);
+    this.columnService.updateColumn(this.board.columns[columnIndex]).subscribe(() => {
+      this.getColumnBoard(this.id);
+    });
   }
 
   removeColumnFromBoard(column: Column): void {
     this.columnService.removeBoardFromColumn(column).subscribe(() => {
-      this.getColumnBoard(this.id!);
+      this.getColumnBoard(this.id);
     });
   }
 
-  
+
   drop(event: CdkDragDrop<Task[]>): void {
     if (event.previousContainer === event.container) {
       moveItemInArray(event.container.data, event.previousIndex, event.currentIndex);
@@ -163,6 +165,12 @@ export class BoardComponent implements OnInit {
         event.previousIndex,
         event.currentIndex
       );
+      const fromColumn = this.board.columns.find(col => col.tasks === event.previousContainer.data);
+      const movedTask = event.container.data[event.currentIndex];
+      const destinationColumn = this.board.columns.find(col => col.tasks === event.container.data);
+      this.columnService.moveTask(movedTask._id, fromColumn._id, destinationColumn._id).subscribe(() => {
+        this.getColumnBoard(this.id);
+      });
     }
   }
 

@@ -262,6 +262,13 @@ button:hover {
   width: 100%;
   justify-content: center;
 }
+.delete-colone-btn {
+  margin-top: 10px;
+  background-color: #f50707;
+  color: white;
+  width: 100%;
+  justify-content: center;
+}
 
 .foooter{
   height: 70px;
