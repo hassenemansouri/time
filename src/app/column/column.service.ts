@@ -43,4 +43,19 @@ export class ColumnService {
   getColumnByIdBoard(id: string): Observable<Column[]> {
     return this.http.get<Column[]>(`${this.apiUrl}/getAll/${id}`);
   }
+
+  addTaskToColumn( column: Column): Observable<Column> {
+    return this.http.put<Column>(`${this.apiUrl}/addTaskToColumn`, column, this.httpOptions);
+  }
+
+  moveTask(taskId: string, fromColumnId: string, toColumnId: string): Observable<Column> {
+    return this.http.put<Column>(`${this.apiUrl}/move-task`, null, {
+      params: {
+        taskId : taskId,
+        fromColumnId : fromColumnId,
+        toColumnId : toColumnId
+      }
+    });
+  }
+  
 }

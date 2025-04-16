@@ -61,7 +61,7 @@
                 <td>
                   <input 
                     type="checkbox" 
-                    [checked]="isTaskSelected(task._id!)"
+                    [checked]="isTaskSelected(task._id)"
                     (change)="toggleTaskSelection(task._id, $event)" 
                   />
                 </td>
@@ -108,16 +108,14 @@
           <!-- Tasks -->
           <div *ngFor="let task of column.tasks; let taskIndex = index" class="task-container" cdkDrag>
             <div class="task">
-              <input type="text" [(ngModel)]="task.name" placeholder="Task name" />
+              <input type="text" [(ngModel)]="task.name" placeholder="Task name" disabled="true" />
               <button class="remove-task-btn" (click)="removeTask(i, taskIndex)" aria-label="Remove task">
                 <i class="fas fa-trash-alt"></i> Remove Task
               </button>
               <button (click)="onViewTask(task)">
                 <i class="fa fa-eye view-icon"></i>View Task
               </button>
-              <button class="btn btn-dangerr" (click)="removeColumnFromBoard(column)">
-                <i class="fas fa-trash"></i> Delete Column
-              </button>
+             
               
             </div>
           </div>
@@ -126,7 +124,9 @@
           <button class="add-task-btn" (click)="addTask(column)" aria-label="Add new task">
             <i class="fas fa-plus-circle"></i> Add Task
           </button>
-     
+          <button class="delete-colone-btn" (click)="removeColumnFromBoard(column)">
+            <i class="fas fa-trash"></i> Delete Column
+          </button>
         </div>
       </div>
     </div>
