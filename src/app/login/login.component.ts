@@ -41,40 +41,15 @@ export class LoginComponent implements OnInit {
 
   }
 
-  onSubmit(): void {
-    if (this.loginForm.valid) {
-      const credentials = this.loginForm.value;
 
-      // Call the login method from AuthService
-      this.authService.login(credentials).subscribe(
-        (response) => {
-          // Save the JWT token to localStorage
-          this.authService.saveToken(response.token);
-          console.log('Login successful', response);
-          this.router.navigate(['/dashboard']);  // Navigate to a protected route after login
-        },
-        (error) => {
-          this.errorMessage = 'Invalid username or password';
-          this.router.navigate(['/dashboard']);  // Navigate to a protected route after login
-
-          // Set error message if login fails
-          console.error('Error during login', error);
-
-        }
-      );
-    }
-  }
-
-  // Optional: A method for handling login manually (as you seem to be using username and password directly in your HTML)
   login(): void {
     if (this.username && this.password) {
       this.authService.login({ email: this.username, password: this.password }).subscribe(
         (response) => {
-          this.authService.saveToken(response.token);
-          this.router.navigate(['/dashboard']);
+          this.authService.storeToken(response.token); // Store JWT in cookie
+          this.router.navigate(['/dashboard'], { replaceUrl: true });
         },
         (error) => {
-          this.router.navigate(['/dashboard']);
           this.errorMessage = 'Invalid username or password';
         }
       );
@@ -82,4 +57,6 @@ export class LoginComponent implements OnInit {
       this.errorMessage = 'Please enter both username and password';
     }
   }
+
+
 }

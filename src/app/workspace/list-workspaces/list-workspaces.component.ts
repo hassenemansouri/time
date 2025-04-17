@@ -15,8 +15,6 @@ import {NgxPaginationModule} from 'ngx-pagination';
   imports: [
     NgForOf,
     CommonModule,
-    RouterLink,
-    RouterLinkActive,
     FormsModule,
     NgxPaginationModule
   ],

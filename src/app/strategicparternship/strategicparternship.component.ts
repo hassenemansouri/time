@@ -2,7 +2,7 @@ import {Component, OnInit} from '@angular/core';
 import {NgForOf, NgIf} from '@angular/common';
 import {FormBuilder, FormGroup, ReactiveFormsModule, Validators} from '@angular/forms';
 import {HttpClient} from '@angular/common/http';
-import {StrategicparternshipService} from './strategicparternship.service';
+
 
 @Component({
   selector: 'app-strategicparternship',
