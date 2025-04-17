@@ -23,7 +23,7 @@ export class PredictWorkflowComponent {
   constructor(private http: HttpClient, private fb: FormBuilder) {
     // Création du formulaire avec validation
     this.form = this.fb.group({
-      steps: ['', Validators.required] // Le champ 'actions' est requis
+      steps: ['', Validators.required]
     });
   }
 
@@ -35,13 +35,13 @@ export class PredictWorkflowComponent {
     }
 
     // Récupération des valeurs du formulaire
-    const { steps, actions } = this.form.value;
+    const { steps } = this.form.value;
 
     this.prediction = null;
     this.errorMessage = null;
     this.showAnimation = true; // Affichage de l'animation de chargement
 
-    const body = { steps, actions };
+    const body = { steps };
 
     this.http.post<any>('http://localhost:5000/predict', body).subscribe({
       next: (response) => {

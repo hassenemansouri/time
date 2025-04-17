@@ -13,7 +13,8 @@ import {NgForOf, NgIf} from '@angular/common';
   styleUrls: ['./workflow-form.component.css']
 })
 export class WorkflowFormComponent implements OnInit {
-  workflow: Workflow = { id: '', workflowName: '', steps: [] };
+  workflow: Workflow = {files: [], id: '', workflowName: '', steps: [] };
+  file: File | null = null;
   isEdit: boolean = false;
 
   constructor(
@@ -21,6 +22,14 @@ export class WorkflowFormComponent implements OnInit {
     private route: ActivatedRoute,
     protected router: Router
   ) {}
+
+  // This method handles file selection
+  onFileSelected(event: Event): void {
+    const input = event.target as HTMLInputElement;
+    if (input?.files?.[0]) {
+      this.file = input.files[0];
+    }
+  }
 
   ngOnInit(): void {
     const id = this.route.snapshot.paramMap.get('id');
@@ -40,29 +49,27 @@ export class WorkflowFormComponent implements OnInit {
     this.workflow.steps.splice(index, 1);
   }
 
+  // This method is triggered when the form is submitted
   saveWorkflow(): void {
-    console.log('✅ Saving workflow:', JSON.stringify(this.workflow, null, 2));
-
-    if (this.isEdit) {
-      if (!this.workflow.id || this.workflow.id === 'string') {
-        console.error('❌ Error: Invalid ID');
-        return;
-      }
-      this.workflowService.updateWorkflow(this.workflow.id, this.workflow).subscribe({
-        next: () => {
-          console.log('✅ Workflow updated successfully');
+    if (this.workflow.workflowName && this.workflow.workflowName.length >= 3) {
+      this.workflowService.createWorkflow(this.workflow).subscribe((createdWorkflow) => {
+        // Now upload the file if selected
+        if (this.file) {
+          this.workflowService.uploadFile(createdWorkflow.id!, this.file).subscribe(
+            (response) => {
+              console.log('File uploaded successfully', response.message); // response is now an object with a message
+              this.router.navigate(['/workflows']);
+            },
+            (error) => {
+              console.error('File upload failed', error);
+            }
+          );
+        } else {
           this.router.navigate(['/workflows']);
-        },
-        error: (err) => console.error('❌ Error updating workflow:', err)
-      });
-    } else {
-      this.workflowService.createWorkflow(this.workflow).subscribe({
-        next: () => {
-          console.log('✅ Workflow created successfully');
-          this.router.navigate(['/workflows']);
-        },
-        error: (err) => console.error('❌ Error creating workflow:', err)
+        }
       });
     }
   }
+
+
 }

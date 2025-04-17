@@ -21,22 +21,22 @@ import { GoalFormComponent } from './goal/goal-form.component';
 import { ListRewardsComponent } from './reward/list-rewards.component';
 import { RewardFormComponent } from './reward/reward-form.component';
 import { ForgotPasswordComponent } from './forgot-password/forgot-password.component';
-import { ListPartnershipComponent } from './strategicparternship/partnership-list/partnership-list.component';
+import { PartnershipListComponent } from './strategicparternship/partnership-list/partnership-list.component';
 import { AddPartnershipComponent } from './strategicparternship/add-partnership/add-partnership.component';
 
 // Layouts
 import { PublicLayoutComponent } from './layouts/public-layout/public-layout.component';
 import {PrivateLayoutComponent} from './layouts/private-layout/private-layout.component';
 import {CalendarComponent} from './app/calendar/calendar.component';
-
+<<<<<<< HEAD
 import { ColumnComponent } from './column/column/column.component';
 import { ColumnFormComponent } from './column/column-form/column-form.component';
 import { ListBoardComponent } from './kanban/list-board/list-board.component';
 import { FormBoardComponent } from './kanban/form-board/form-board.component';
 import { BoardComponent } from './kanban/board/board.component';
-
+=======
 import {PredictWorkflowComponent} from './predict-workflow/predict-workflow.component';
-
+>>>>>>> master
 
 export const routes: Routes = [
 
@@ -92,7 +92,7 @@ export const routes: Routes = [
         { path: 'boards/add', component: FormBoardComponent },
         { path: 'boards/edit/:id', component: FormBoardComponent },
         { path: 'kanban/:id', component: BoardComponent },
-        { path: 'partnerships', component: ListPartnershipComponent },
+        { path: 'partnerships', component: PartnershipListComponent },
         { path: 'add-partnership', component: AddPartnershipComponent },
         { path: 'partnerships/calender', component: CalendarComponent},
         { path: 'calender', component: CalendarComponent},

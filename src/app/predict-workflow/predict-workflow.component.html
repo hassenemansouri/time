@@ -28,7 +28,7 @@
           placeholder="Ex: Step 1, Step 2"
         />
         <div *ngIf="form.get('steps')?.touched && form.get('steps')?.invalid" class="text-red-500 text-sm mt-1">
-          <small *ngIf="form.get('steps')?.hasError('required')">Le champ 'steps' est requis.</small>
+          <small *ngIf="form.get('steps')?.hasError('required')">The 'steps' field is required</small>
         </div>
       </div>
 

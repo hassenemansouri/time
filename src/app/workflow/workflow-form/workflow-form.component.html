@@ -30,6 +30,17 @@
     </div>
     <button type="button" class="btn btn-secondary" (click)="addStep()">➕ Add Step</button>
 
+    <!-- File Upload Section -->
+    <div class="mb-3">
+      <label for="file" class="form-label fw-bold">Upload File</label>
+      <input
+        type="file"
+        id="file"
+        class="form-control"
+        (change)="onFileSelected($event)"
+      />
+    </div>
+
     <!-- Boutons -->
     <div class="btn-container">
       <button type="button" class="btn btn-success" (click)="saveWorkflow()">💾 Save</button>
