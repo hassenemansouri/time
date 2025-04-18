@@ -2,26 +2,27 @@ import { Component, CUSTOM_ELEMENTS_SCHEMA, OnInit } from '@angular/core';
 import { GoalService } from './goal.service';
 import { Goal } from './goal.model';
 import { Router, RouterLink } from '@angular/router';
-import { NgForOf, NgIf,DatePipe  } from '@angular/common';
+import { NgForOf, NgIf, DatePipe } from '@angular/common';
 import { jsPDF } from 'jspdf';
 import * as XLSX from 'xlsx';
 import { FormsModule } from '@angular/forms';
 import { NgxPaginationModule } from 'ngx-pagination';
+import emailjs from 'emailjs-com';
 
 @Component({
   selector: 'app-list-goals',
   templateUrl: './list-goals.component.html',
   styleUrls: ['./list-goals.component.css'],
   standalone: true,
-  imports: [NgForOf, RouterLink, NgIf, FormsModule, DatePipe,NgxPaginationModule ],
+  imports: [NgForOf, RouterLink, NgIf, FormsModule, DatePipe, NgxPaginationModule],
   schemas: [CUSTOM_ELEMENTS_SCHEMA]
 })
 export class ListGoalsComponent implements OnInit {
   goals: Goal[] = [];
   searchText = '';
   showAnimation = true;
-  page: number = 1;          // page courante
-  itemsPerPage: number = 6;  // nombre d’éléments par page
+  page: number = 1;
+  itemsPerPage: number = 6;
 
   constructor(private goalService: GoalService, private router: Router) {}
 
@@ -38,11 +39,41 @@ export class ListGoalsComponent implements OnInit {
 
   deleteGoal(id: string | undefined): void {
     if (!id) return;
+    const goalToDelete = this.goals.find(g => g.goal_id === id);
+    if (!goalToDelete) return;
+
     if (confirm('Êtes-vous sûr de vouloir supprimer ce goal ?')) {
       this.goalService.deleteGoal(id).subscribe(() => {
         this.goals = this.goals.filter(g => g.goal_id !== id);
+        this.sendDeletionEmail(goalToDelete);
       });
     }
+  }
+
+  private sendDeletionEmail(goal: Goal): void {
+    const category = goal.categories?.[0] || { libelle: '', description: '' };
+
+    const emailParams = {
+      title: goal.title,
+      description: goal.description,
+      startDate: goal.startDate,
+      endDate: goal.endDate,
+      libelle: category.libelle,
+      duration: category.description,
+      action: 'suppression',
+      to_email: 'mzoughi.mahdi@esprit.tn'
+    };
+
+    emailjs.send(
+      'service_pbrsy9b',       // Remplace par ton ID de service
+      'template_ul44vhk',      // Remplace par ton ID de template
+      emailParams,
+      'ID0U3W2KxG6kY1JV0'      // Remplace par ton user/public key
+    ).then((result) => {
+      console.log('✅ Email de suppression envoyé !', result.text);
+    }).catch((error) => {
+      console.error('❌ Erreur e-mail suppression :', error);
+    });
   }
 
   filteredGoals(): Goal[] {
@@ -56,55 +87,53 @@ export class ListGoalsComponent implements OnInit {
   exportToPDF(): void {
     const doc = new jsPDF();
     doc.setFont('helvetica', 'bold');
-    doc.setFontSize(22);
+    doc.setFontSize(18);
     doc.text('Liste des Goals - TimeForge', 14, 15);
 
+    doc.setFontSize(12);
     doc.setFont('helvetica', 'italic');
-    doc.setFontSize(14);
     doc.text('Aperçu des objectifs créés', 14, 25);
 
-    const columns = ['Titre', 'Description', 'Début', 'Fin'];
-    const data = this.filteredGoals().map(g => [
-      g.title,
-      g.description,
-      g.startDate ? new Date(g.startDate).toLocaleDateString() : '',
-      g.endDate ? new Date(g.endDate).toLocaleDateString() : ''
-    ]);
+    const columns = ['Titre', 'Description', 'Début', 'Fin', 'Type Libellé', 'Durée'];
+    const data = this.filteredGoals().map(g => {
+      const category = g.categories?.[0] || { libelle: '', description: '' };
+      return [
+        g.title,
+        g.description,
+        g.startDate ? new Date(g.startDate).toLocaleDateString() : '',
+        g.endDate ? new Date(g.endDate).toLocaleDateString() : '',
+        category.libelle,
+        category.description
+      ];
+    });
 
     const startY = 35;
-    const columnWidth = [50, 60, 40, 40];
     const rowHeight = 8;
     const pageHeight = 280;
     let y = startY;
     let rowIndex = 0;
+    const columnWidths = [35, 50, 25, 25, 30, 25];
 
-    doc.setFontSize(10);
-    doc.setTextColor(255);
     doc.setFillColor(0, 123, 255);
-    doc.rect(10, y, columnWidth[0], rowHeight, 'F');
-    doc.rect(10 + columnWidth[0], y, columnWidth[1], rowHeight, 'F');
-    doc.rect(10 + columnWidth[0] + columnWidth[1], y, columnWidth[2], rowHeight, 'F');
-    doc.rect(10 + columnWidth[0] + columnWidth[1] + columnWidth[2], y, columnWidth[3], rowHeight, 'F');
+    doc.setTextColor(255);
+    doc.setFontSize(10);
+    columns.forEach((col, i) => {
+      doc.rect(10 + columnWidths.slice(0, i).reduce((a, b) => a + b, 0), y, columnWidths[i], rowHeight, 'F');
+      doc.text(col, 12 + columnWidths.slice(0, i).reduce((a, b) => a + b, 0), y + 6);
+    });
 
-    doc.text(columns[0], 12, y + 6);
-    doc.text(columns[1], 12 + columnWidth[0], y + 6);
-    doc.text(columns[2], 12 + columnWidth[0] + columnWidth[1], y + 6);
-    doc.text(columns[3], 12 + columnWidth[0] + columnWidth[1] + columnWidth[2], y + 6);
     y += rowHeight;
 
     data.forEach(row => {
-      doc.setFillColor(rowIndex % 2 === 0 ? 245 : 240, 245, 245);
-      doc.rect(10, y, columnWidth[0], rowHeight, 'F');
-      doc.rect(10 + columnWidth[0], y, columnWidth[1], rowHeight, 'F');
-      doc.rect(10 + columnWidth[0] + columnWidth[1], y, columnWidth[2], rowHeight, 'F');
-      doc.rect(10 + columnWidth[0] + columnWidth[1] + columnWidth[2], y, columnWidth[3], rowHeight, 'F');
+      const fillColor = rowIndex % 2 === 0 ? 245 : 240;
+      doc.setFillColor(fillColor, fillColor, fillColor);
 
-      doc.setTextColor(0);
-      doc.setFont('helvetica', 'normal');
-      doc.text(row[0], 12, y + 6);
-      doc.text(row[1], 12 + columnWidth[0], y + 6);
-      doc.text(row[2], 12 + columnWidth[0] + columnWidth[1], y + 6);
-      doc.text(row[3], 12 + columnWidth[0] + columnWidth[1] + columnWidth[2], y + 6);
+      row.forEach((cell, i) => {
+        const x = 10 + columnWidths.slice(0, i).reduce((a, b) => a + b, 0);
+        doc.rect(x, y, columnWidths[i], rowHeight, 'F');
+        doc.setTextColor(0);
+        doc.text(String(cell), x + 2, y + 6);
+      });
 
       y += rowHeight;
       rowIndex++;
@@ -121,22 +150,29 @@ export class ListGoalsComponent implements OnInit {
       doc.setFontSize(8);
       doc.setTextColor(100);
       doc.text("TimeForge App", 90, 290);
-      doc.text(`Page ${i} of ${totalPages}`, 180, 290);
+      doc.text(`Page ${i} / ${totalPages}`, 180, 290);
     }
 
     doc.save('goals.pdf');
   }
 
   exportToExcel(): void {
-    const ws: XLSX.WorkSheet = XLSX.utils.json_to_sheet(this.filteredGoals().map(g => ({
-      'Titre': g.title,
-      'Description': g.description,
-      'Date Debut': g.startDate ? new Date(g.startDate).toLocaleDateString() : '',
-      'Date Fin': g.endDate ? new Date(g.endDate).toLocaleDateString() : ''
-    })));
+    const data = this.filteredGoals().map(g => {
+      const category = g.categories?.[0] || { libelle: '', description: '' };
+      return {
+        'Titre': g.title,
+        'Description': g.description,
+        'Date Début': g.startDate ? new Date(g.startDate).toLocaleDateString() : '',
+        'Date Fin': g.endDate ? new Date(g.endDate).toLocaleDateString() : '',
+        'Type Libellé': category.libelle,
+        'Durée': category.description
+      };
+    });
 
+    const ws: XLSX.WorkSheet = XLSX.utils.json_to_sheet(data);
     const wb: XLSX.WorkBook = XLSX.utils.book_new();
     XLSX.utils.book_append_sheet(wb, ws, 'Goals');
     XLSX.writeFile(wb, 'goals.xlsx');
   }
+
 }

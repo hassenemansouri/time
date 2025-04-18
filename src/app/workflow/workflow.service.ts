@@ -37,4 +37,16 @@ export class WorkflowService {
   deleteWorkflow(id: string | undefined): Observable<void> {
     return this.http.delete<void>(`${this.apiUrl}/delete/${id}`);
   }
+  uploadFile(id: string, file: File): Observable<any> {
+    const formData = new FormData();
+    formData.append('file', file);
+    return this.http.post(`${this.apiUrl}/${id}/files/upload`, formData);
+  }
+
+  downloadFile(workflowId: string | undefined, fileName: string | undefined): Observable<Blob> {
+    const url = `${this.apiUrl}/${workflowId}/files/${fileName}`;
+    return this.http.get(url, { responseType: 'blob' });
+  }
+
+
 }

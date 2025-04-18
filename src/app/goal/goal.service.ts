@@ -13,6 +13,9 @@ export class GoalService {
   private httpOptions = {
     headers: new HttpHeaders({ 'Content-Type': 'application/json' })
   };
+  getEstimatedDurationDays(libelle: string): Observable<number> {
+    return this.http.get<number>(`${this.apiUrl}/estimerDureeJours/${encodeURIComponent(libelle)}`);
+  }
 
   constructor(private http: HttpClient) {}
 

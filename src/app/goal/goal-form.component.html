@@ -1,4 +1,3 @@
-Vous avez dit :
 <div class="container">
   <div class="card mx-auto" style="max-width: 600px; padding: 20px;">
     <h2 class="text-center mb-4">{{ isEdit ? 'Modifier' : 'Créer' }} un Goal</h2>
@@ -15,6 +14,25 @@ Vous avez dit :
       <textarea class="form-control" [(ngModel)]="goal.description" required minlength="5"></textarea>
     </div>
 
+
+
+    <hr />
+    <h5 class="text-primary">Nouvelle Catégorie associée</h5>
+
+    <!-- Libellé -->
+    <div class="mb-3">
+      <label class="form-label">Libellé</label>
+      <input type="text" class="form-control"
+             [(ngModel)]="newCategory.libelle"
+             (blur)="checkLibelleAndEstimate()"
+             required />
+    </div>
+
+    <!-- Affichage estimation -->
+    <div class="alert alert-info" *ngIf="showEstimate">
+      ✅ Moyenne estimée pour '{{ newCategory.libelle }}' : <strong>{{ estimatedDuration }} jours</strong>
+    </div>
+
     <!-- Date de début -->
     <div class="mb-3">
       <label class="form-label fw-bold">Date de début</label>
@@ -24,23 +42,14 @@ Vous avez dit :
     <!-- Date de fin -->
     <div class="mb-3">
       <label class="form-label fw-bold">Date de fin</label>
-      <input type="date" class="form-control" [(ngModel)]="goal.endDate" readonly />
+      <input type="date" class="form-control" [(ngModel)]="goal.endDate"  />
     </div>
-
-    <hr />
-    <h5 class="text-primary">Nouvelle Catégorie associée</h5>
-
-    <!-- Libellé -->
+    <!-- Durée -->
     <div class="mb-3">
-      <label class="form-label">Libellé</label>
-      <input type="text" class="form-control" [(ngModel)]="newCategory.libelle" required />
-    </div>
-
-    <!-- Description -->
-    <div class="mb-3">
-      <label class="form-label">Duree</label>
+      <label class="form-label">Durée</label>
       <input type="text" class="form-control" [(ngModel)]="newCategory.description" />
     </div>
+
 
     <!-- Message d'erreur -->
     <div class="alert alert-danger" *ngIf="serverError">
