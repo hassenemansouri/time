@@ -14,7 +14,7 @@ import { AppointmentDialogComponent } from '../appointment-dialog/appointment-di
 const routes: Routes = [{ path: '', component: CalendarComponent }];
 
 @NgModule({
-  declarations: [CalendarComponent],
+  declarations: [],
   imports: [
     CommonModule,
     MatButtonModule,
@@ -24,6 +24,7 @@ const routes: Routes = [{ path: '', component: CalendarComponent }];
     DragDropModule,
     AppointmentDialogComponent,
     RouterModule.forChild(routes),
+    CalendarComponent,
   ],
 })
 export class CalendarModule {}

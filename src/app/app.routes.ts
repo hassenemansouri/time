@@ -29,6 +29,14 @@ import { PublicLayoutComponent } from './layouts/public-layout/public-layout.com
 import {PrivateLayoutComponent} from './layouts/private-layout/private-layout.component';
 import {CalendarComponent} from './app/calendar/calendar.component';
 
+import { ColumnComponent } from './column/column/column.component';
+import { ColumnFormComponent } from './column/column-form/column-form.component';
+import { ListBoardComponent } from './kanban/list-board/list-board.component';
+import { FormBoardComponent } from './kanban/form-board/form-board.component';
+import { BoardComponent } from './kanban/board/board.component';
+import {PredictWorkflowComponent} from './predict-workflow/predict-workflow.component';
+
+
 export const routes: Routes = [
 
   // PUBLIC ROUTES (No sidebar)
@@ -76,10 +84,18 @@ export const routes: Routes = [
         { path: 'tasks/add', component: TaskFormComponent },
         { path: 'tasks/edit/:id', component: TaskFormComponent },
         { path: 'tasks/calender', component: CalendarComponent},
+        { path: 'columns', component: ColumnComponent },
+        { path: 'columns/add', component: ColumnFormComponent },
+        { path: 'columns/edit/:id', component: ColumnFormComponent },
+        { path: 'boards', component: ListBoardComponent },
+        { path: 'boards/add', component: FormBoardComponent },
+        { path: 'boards/edit/:id', component: FormBoardComponent },
+        { path: 'kanban/:id', component: BoardComponent },
         { path: 'partnerships', component: PartnershipListComponent },
         { path: 'add-partnership', component: AddPartnershipComponent },
         { path: 'partnerships/calender', component: CalendarComponent},
-        { path: 'calender', component: CalendarComponent}
+        { path: 'calender', component: CalendarComponent},
+        { path: 'workflows/predict', component: PredictWorkflowComponent}
 
       ]
   },
