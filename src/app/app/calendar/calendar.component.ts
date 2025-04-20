@@ -8,6 +8,10 @@ import { CdkDropListGroup, CdkDropList, CdkDrag, CdkDragHandle, CdkDragDrop, mov
 import { MatButtonToggle, MatButtonToggleGroup } from '@angular/material/button-toggle';
 import { MatIcon } from '@angular/material/icon';
 import { MatButton, MatIconButton } from '@angular/material/button';
+import { addDays, differenceInCalendarDays } from 'date-fns';
+import {Workflow} from '../../workflow/workflow.model';
+import {WorkflowService} from '../../workflow/workflow.service';
+
 
 enum CalendarView {
   Month = 'month',
@@ -40,6 +44,7 @@ export class CalendarComponent {
   constructor(
     public dialog: MatDialog,
     private calendarService: CalendarService,
+    private workflowService: WorkflowService,
   ) {
     this.refreshAppointments();
     this.generateTimeSlots();
@@ -52,7 +57,7 @@ export class CalendarComponent {
 
   // Générer les créneaux horaires
   generateTimeSlots() {
-    this.timeSlots = Array.from({ length: 24 }, (_, i) =>
+    this.timeSlots = Array.from({length: 24}, (_, i) =>
       `${i.toString().padStart(2, '0')}:00`);
   }
 
@@ -107,7 +112,7 @@ export class CalendarComponent {
 
   generateWeekView(date: Date) {
     const startOfWeek = this.startOfWeek(date);
-    this.monthDays = Array.from({ length: 7 }, (_, i) => {
+    this.monthDays = Array.from({length: 7}, (_, i) => {
       const d = new Date(startOfWeek);
       d.setDate(startOfWeek.getDate() + i);
       return d;
@@ -225,6 +230,7 @@ export class CalendarComponent {
       moveItemInArray(targetAppointments, event.previousIndex, event.currentIndex);
     }
   }
+
   removeAppointmentFromDate(appointment: any, containerId: string) {
     const dateStr = containerId.replace('drop-list-', '');
     const date = new Date(dateStr);
@@ -236,7 +242,6 @@ export class CalendarComponent {
       appointmentsForDate.splice(index, 1);
     }
   }
-
 
 
   // Gestion de la boîte de dialogue
@@ -264,7 +269,7 @@ export class CalendarComponent {
 
     const dialogRef = this.dialog.open(AppointmentDialogComponent, {
       width: '500px',
-      data: { ...appointment }
+      data: {...appointment}
     });
 
     dialogRef.afterClosed().subscribe((result) => {
@@ -283,22 +288,29 @@ export class CalendarComponent {
     const hue = Math.floor(Math.random() * 360);
     return `hsla(${hue}, 70%, 50%, 0.7)`;
   }
+
   switchToView(view: CalendarView) {
     this.generateView(view, this.viewDate);
   }
+
   connectedDropListsIds: string[] = [];
 
   ngOnInit() {
     this.updateConnectedDropLists();
+    this.workflowService.getAllWorkflows().subscribe((workflows) => {
+      this.loadWorkflowsIntoCalendar(workflows);
+    });
   }
 
   updateConnectedDropLists() {
     const dates = this.weeks.flat(); // toutes les dates visibles dans le mois
     this.connectedDropListsIds = dates.map(date => this.getDropListId(date));
   }
+
   getDropListId(date: Date): string {
     return `drop-list-${date.toDateString()}`;
   }
+
   saveAppointmentsToStorage() {
     localStorage.setItem('appointments', JSON.stringify(this.appointments));
   }
@@ -310,4 +322,37 @@ export class CalendarComponent {
     }
   }
 
+  loadWorkflowsIntoCalendar(workflows: Workflow[]) {
+    const addedDates = new Set<string>(); // To track unique dates
+
+    workflows.forEach(workflow => {
+      // Check if startDate and endDate are valid
+      const start = new Date(workflow.startDate);
+      const end = new Date(workflow.endDate);
+
+      if (isNaN(start.getTime()) || isNaN(end.getTime())) {
+        console.error('Invalid date for workflow', workflow);
+        return;
+      }
+
+      const days = differenceInCalendarDays(end, start) + 1;
+
+      for (let i = 0; i < days; i++) {
+        const date = addDays(start, i);
+        const dateString = date.toISOString().split('T')[0]; // Get the date part (YYYY-MM-DD)
+
+        // Only add the date if it has not been added already
+        if (!addedDates.has(dateString)) {
+          this.appointments.push({
+            endTime: '',
+            startTime: '',
+            id: `${workflow.id}-${i}`,
+            title: workflow.workflowName,
+            date: date
+          });
+          addedDates.add(dateString); // Mark the date as added
+        }
+      }
+    });
+  }
 }
