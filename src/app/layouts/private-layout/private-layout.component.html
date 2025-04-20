@@ -13,9 +13,9 @@
       </a>
 
       <!-- Projects -->
-       
+
       <div class="dropdown">
-        
+
         <a routerLink="/calender" routerLinkActive="active" class="list-group-item list-group-item-action bg-dark text-white">
           <i class="fas fa-cogs me-2"></i> Principal Calender
         </a>
@@ -54,7 +54,7 @@
       <li><a routerLink="/columns/add" routerLinkActive="active" class="dropdown-item text-white">Add Column</a></li>
     </ul>
   </div>
-  
+
    <!-- kanban -->
    <div class="dropdown">
     <a class="list-group-item list-group-item-action bg-dark text-white dropdown-toggle" href="#" id="kanbanDropdown" role="button" data-bs-toggle="dropdown" aria-expanded="false">
@@ -65,7 +65,7 @@
       <li><a routerLink="/boards/add" routerLinkActive="active" class="dropdown-item text-white">Add Board</a></li>
     </ul>
   </div>
-  
+
       <!-- Workspaces -->
       <div class="dropdown">
         <a class="list-group-item list-group-item-action bg-dark text-white dropdown-toggle" href="#" id="workspacesDropdown" role="button" data-bs-toggle="dropdown" aria-expanded="false">
@@ -144,7 +144,7 @@
       </a>
 
       <!-- Logout -->
-      <a routerLink="/login" class="list-group-item list-group-item-action bg-dark text-danger">
+      <a href="#" (click)="logout()" class="list-group-item list-group-item-action bg-dark text-danger">
         <i class="fas fa-sign-out-alt me-2"></i> Logout
       </a>
 

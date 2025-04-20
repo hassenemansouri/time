@@ -1,5 +1,5 @@
 import { Component, OnInit } from '@angular/core';
-import {RouterLink, RouterLinkActive, RouterOutlet} from '@angular/router';
+import {Router, RouterLink, RouterLinkActive, RouterOutlet} from '@angular/router';
 
 @Component({
   selector: 'app-private-layout',
@@ -16,7 +16,8 @@ export class PrivateLayoutComponent implements OnInit {
 
   user: { name: string } | null = null;
 
-  constructor() {}
+
+  constructor(private router: Router) {}
 
   ngOnInit(): void {
     // Example: Fetch user data (replace with real AuthService logic)
@@ -28,4 +29,12 @@ export class PrivateLayoutComponent implements OnInit {
   }
 
 
+  logout(): void {
+    // Clear the token and user data from localStorage
+    localStorage.removeItem('jwtToken');
+    localStorage.removeItem('user');
+
+    // Redirect the user to the login page
+    this.router.navigate(['/login']);
+  }
 }

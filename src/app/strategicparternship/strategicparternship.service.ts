@@ -65,7 +65,7 @@ export class PartnershipService {
 
     if (!token) {
       return throwError(() => new Error('Please login to access verification'));
-    }
+    }2
 
     const headers = new HttpHeaders({
       'Authorization': `Bearer ${token}`

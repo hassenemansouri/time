@@ -1,16 +1,38 @@
-// src/app/components/add-partnership/add-partnership.component.ts
-import { Component } from '@angular/core';
-import { CommonModule } from '@angular/common'; // For date and slice pipes
-import { PartnershipService, StrategicPartnership, BlockchainRecord } from '../strategicparternship.service'
-import {RouterLink} from '@angular/router';
-import {FormsModule} from '@angular/forms';
+import {Component, CUSTOM_ELEMENTS_SCHEMA} from '@angular/core';
+import { CommonModule } from '@angular/common';
+import { PartnershipService, StrategicPartnership, BlockchainRecord } from '../strategicparternship.service';
+import { RouterLink } from '@angular/router';
+import { FormsModule } from '@angular/forms';
+import { UserSearchService } from '../usersearch.service';
+import { MatAutocompleteModule } from '@angular/material/autocomplete';
+import { MatInputModule } from '@angular/material/input';
+import { MatFormFieldModule } from '@angular/material/form-field';
+import { MatChipsModule } from '@angular/material/chips';
+import { MatIconModule } from '@angular/material/icon';
+import { ReactiveFormsModule, FormControl } from '@angular/forms';
+import { Observable } from 'rxjs';
+import { startWith, map } from 'rxjs/operators';
+import {UserAutocompleteComponent} from '../userautocomplete/userautocomplete.component';
+
 
 @Component({
   selector: 'app-add-partnership',
   templateUrl: './add-partnership.component.html',
   styleUrls: ['./add-partnership.component.css'],
-  standalone: true, // If using standalone components
-  imports: [CommonModule, RouterLink, FormsModule] // Required for date and slice pipes
+  standalone: true,
+  imports: [
+    CommonModule,
+    RouterLink,
+    FormsModule,
+    MatAutocompleteModule,
+    MatInputModule,
+    MatFormFieldModule,
+    MatChipsModule,
+    MatIconModule,
+    ReactiveFormsModule,
+    UserAutocompleteComponent
+  ],
+  schemas: [CUSTOM_ELEMENTS_SCHEMA]
 })
 export class AddPartnershipComponent {
   partnership: StrategicPartnership = {
@@ -18,47 +40,63 @@ export class AddPartnershipComponent {
     description: '',
     participants: []
   };
-  newParticipant = '';
+  participantControl = new FormControl();
+  filteredUsers: Observable<any[]>;
+  selectedUsers: any[] = [];
   registrationResult: StrategicPartnership | null = null;
   verificationResult: boolean | null = null;
   blockchainRecords: BlockchainRecord[] = [];
   isLoading = false;
   errorMessage: string | null = null;
+  formSubmitted = false;
+  constructor(
+    private partnershipService: PartnershipService,
+    protected userSearchService: UserSearchService
+  ) {
+    this.filteredUsers = this.participantControl.valueChanges.pipe(
+      startWith(''),
+      map(value => this._filter(value))
+    );
+  }
 
-  constructor(private partnershipService: PartnershipService) {}
+  private _filter(value: string): any[] {
+    if (typeof value !== 'string') return [];
+    const filterValue = value.toLowerCase();
 
-  // Add this method to handle verification status display
+    // In a real app, you would call your user search service here
+    // For now, we'll return an empty array and handle search in the template
+    return [];
+  }
+
+  displayFn(user: any): string {
+    return user && user.name ? user.name : '';
+  }
+
   getVerificationStatus(): string {
     if (this.verificationResult === true) return 'Verified';
     if (this.verificationResult === false) return 'Verification Failed';
     return 'Pending Verification';
   }
 
-  // Add this method to reset the form
   resetForm(): void {
     this.partnership = {
       name: '',
       description: '',
       participants: []
     };
-    this.newParticipant = '';
+    this.selectedUsers = [];
+    this.participantControl.setValue('');
     this.registrationResult = null;
     this.verificationResult = null;
     this.errorMessage = null;
   }
 
-  addParticipant(): void {
-    if (this.newParticipant.trim()) {
-      this.partnership.participants.push(this.newParticipant.trim());
-      this.newParticipant = '';
-    }
-  }
-
-  removeParticipant(index: number): void {
-    this.partnership.participants.splice(index, 1);
-  }
-
   onSubmit(): void {
+    this.formSubmitted = true;
+
+    if (!this.partnership.name || this.partnership.participants.length === 0) {
+      return;
+    }
     this.isLoading = true;
     this.errorMessage = null;
 
@@ -72,12 +110,9 @@ export class AddPartnershipComponent {
       error: (err) => {
         console.error('Registration failed', err);
         this.isLoading = false;
-
-        if (err.status === 0) {
-          this.errorMessage = 'Failed to connect to the server. Please check your connection and ensure the backend is running.';
-        } else {
-          this.errorMessage = err.error?.message || 'Registration failed. Please try again.';
-        }
+        this.errorMessage = err.status === 0
+          ? 'Failed to connect to the server. Please check your connection.'
+          : err.error?.message || 'Registration failed. Please try again.';
       }
     });
   }
@@ -99,5 +134,20 @@ export class AddPartnershipComponent {
       next: (records) => this.blockchainRecords = records,
       error: (err) => console.error('Failed to load blockchain', err)
     });
+  }
+
+
+
+  getParticipantNames(): string {
+    return this.selectedUsers.map(user => user.name).join(', ');
+  }
+  removeUser(user: any): void {
+    this.selectedUsers = this.selectedUsers.filter(u => u.id !== user.id);
+    this.partnership.participants = this.selectedUsers.map(u => u.id);
+  }
+// In add-partnership.component.ts
+  onUsersSelected(users: any[]): void {
+    this.selectedUsers = users;
+    this.partnership.participants = users.map(u => u.id);
   }
 }
