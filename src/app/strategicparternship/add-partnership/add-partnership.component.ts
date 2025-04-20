@@ -3,7 +3,6 @@ import { CommonModule } from '@angular/common';
 import { PartnershipService, StrategicPartnership, BlockchainRecord } from '../strategicparternship.service';
 import { RouterLink } from '@angular/router';
 import { FormsModule } from '@angular/forms';
-import { UserSearchService } from '../usersearch.service';
 import { MatAutocompleteModule } from '@angular/material/autocomplete';
 import { MatInputModule } from '@angular/material/input';
 import { MatFormFieldModule } from '@angular/material/form-field';
@@ -13,6 +12,7 @@ import { ReactiveFormsModule, FormControl } from '@angular/forms';
 import { Observable } from 'rxjs';
 import { startWith, map } from 'rxjs/operators';
 import {UserAutocompleteComponent} from '../userautocomplete/userautocomplete.component';
+import {UserSearchService} from '../usersearch.service';
 
 
 @Component({
