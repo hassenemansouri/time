@@ -18,7 +18,6 @@ import { saveAs } from 'file-saver';
     NgForOf,
     RouterLink,
     FormsModule,
-    RouterLinkActive,
     NgIf,
     NgxPaginationModule,
     DatePipe
