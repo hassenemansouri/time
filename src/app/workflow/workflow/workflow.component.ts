@@ -2,7 +2,7 @@ import {Component, CUSTOM_ELEMENTS_SCHEMA, OnInit} from '@angular/core';
 import { RouterLink, RouterLinkActive} from '@angular/router';
 import { WorkflowService } from '../workflow.service';
 import { Workflow } from '../workflow.model';
-import {NgForOf, NgIf} from '@angular/common';
+import {DatePipe, NgForOf, NgIf} from '@angular/common';
 import * as XLSX from 'xlsx';  // Importation pour l'exportation Excel
 import { jsPDF } from 'jspdf';
 import {FormsModule} from '@angular/forms';
@@ -19,7 +19,8 @@ import { saveAs } from 'file-saver';
     RouterLink,
     FormsModule,
     NgIf,
-    NgxPaginationModule
+    NgxPaginationModule,
+    DatePipe
   ],
   styleUrls: ['./workflow.component.css'],
   schemas: [CUSTOM_ELEMENTS_SCHEMA]  // ✅ Permet d'utiliser dotlottie-player
@@ -85,6 +86,8 @@ export class WorkflowComponent implements OnInit {
     const data = this.workflows.map(workflow => [
       workflow.workflowName,
       workflow.steps.join(', '), // Join steps into a single string
+      workflow.startDate,
+      workflow.endDate
     ]);
 
     // Table formatting options
@@ -118,7 +121,9 @@ export class WorkflowComponent implements OnInit {
       // Draw text for each cell
       doc.setTextColor(0); // Black text for row data
       doc.setFont('helvetica', 'normal');
+      // @ts-ignore
       doc.text(row[0], 14, y + 5); // First column data
+      // @ts-ignore
       doc.text(row[1], columnWidth[0] + 14, y + 5); // Second column data
 
       y += rowHeight; // Move to the next row
@@ -151,6 +156,7 @@ export class WorkflowComponent implements OnInit {
     // Save the PDF
     doc.save('workflows.pdf');
   }
+
 
   // Méthode pour filtrer les workflows en fonction de la recherche
   filteredWorkflows(): Workflow[] {

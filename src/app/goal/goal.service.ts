@@ -16,8 +16,8 @@ export class GoalService {
 
   constructor(private http: HttpClient) {}
 
-  getAllCategories(): Observable<Categorie[]> {
-    return this.http.get<Categorie[]>(`${this.apiUrl}/categories`);
+  createGoalWithCategories(payload: any) {
+    return this.http.post<any>(`${this.apiUrl}/ajouterGoalAvecNouvellesCategories`, payload, this.httpOptions);
   }
 
   getAllGoals(): Observable<Goal[]> {

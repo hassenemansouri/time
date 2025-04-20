@@ -1,8 +1,8 @@
-export interface Workflow {
-  id?: string;
+export class Workflow {
+  id: string;
   workflowName: string;
   steps: string[];
-  files: string[];  // tableau de noms de fichiers
-
-
+  startDate: Date | string;  // Ajoute la possibilité d'être string si nécessaire
+  endDate: Date | string;    // Même chose ici
+  files: any[];
 }

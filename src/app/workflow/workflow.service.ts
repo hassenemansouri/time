@@ -26,13 +26,18 @@ export class WorkflowService {
     headers: new HttpHeaders({ 'Content-Type': 'application/json' })
   };
 
-  createWorkflow(workflow: Workflow): Observable<Workflow> {
-    return this.http.post<Workflow>(`${this.apiUrl}/create`, workflow, this.httpOptions);
+  createWorkflow(formData: FormData): Observable<any> {
+    const url = 'http://localhost:8500/timeforge/workflows/create';
+    return this.http.post(url, formData);  // Utilisez .post sans spécifier Content-Type
   }
 
-  updateWorkflow(id: string | undefined, workflow: Workflow): Observable<Workflow> {
-    return this.http.put<Workflow>(`${this.apiUrl}/update/${id}`, workflow);
+
+  updateWorkflow(id: string | undefined, formData: FormData): Observable<Workflow> {
+    const url = `http://localhost:8500/timeforge/workflows/update/${id}`;
+    return this.http.put<Workflow>(url, formData);
   }
+
+
 
   deleteWorkflow(id: string | undefined): Observable<void> {
     return this.http.delete<void>(`${this.apiUrl}/delete/${id}`);

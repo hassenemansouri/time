@@ -12,6 +12,12 @@
   z-index: 1000;
 }
 
+.pagination-container {
+  display: flex;
+  justify-content: center;
+  margin-top: 20px;
+}
+
 /* 🎯 Logo */
 .nav-logo .logo {
   font-size: 24px;
@@ -75,7 +81,7 @@
 
 /* 🌟 Conteneur principal */
 .container {
-  max-width: 900px;
+  width: 100%;
   margin: 40px auto;
   background: linear-gradient(135deg, #ffffff, #f8f9fa);
   padding: 25px;
@@ -284,19 +290,6 @@ h2 {
   background-color: rgba(255, 255, 255, 0.2);
   border-color: rgba(0, 123, 255, 0.5);
   box-shadow: 0 0 10px rgba(0, 123, 255, 0.3);
-}
-
-/* 🌟 Alert Message */
-.alert {
-  padding: 15px;
-  border-radius: 10px;
-  text-align: center;
-  font-size: 16px;
-  font-weight: bold;
-  background-color: #fff3cd;
-  color: #856404;
-  border: 1px solid #ffeeba;
-  box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
 }
 
 /* 🌟 Animation */

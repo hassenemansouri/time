@@ -34,15 +34,22 @@
       <th>Description</th>
       <th>Date début</th>
       <th>Date fin</th>
+      <th>type de Libelle</th> <!-- Ajout du libellé -->
+      <th> durée </th> <!-- Ajout de la description -->
       <th>Actions</th>
     </tr>
     </thead>
     <tbody>
-    <tr *ngFor="let goal of filteredGoals()">
+    <tr *ngFor="let goal of filteredGoals() | paginate: { itemsPerPage: itemsPerPage, currentPage: page, totalItems: filteredGoals().length }">
       <td>{{ goal.title }}</td>
       <td>{{ goal.description }}</td>
-      <td>{{ goal.startDate | date:'yyyy-MM-dd' }}</td>
-      <td>{{ goal.endDate | date:'yyyy-MM-dd' }}</td>
+      <td>{{ goal.startDate | date: 'yyyy-MM-dd' }}</td>
+      <td>{{ goal.endDate | date: 'yyyy-MM-dd' }}</td>
+
+      <!-- Affichage du libellé et description de la catégorie -->
+      <td *ngFor="let category of goal.categories">{{ category.libelle }}</td>
+      <td *ngFor="let category of goal.categories">{{ category.description }}</td>
+
       <td>
         <div class="btn-container">
           <button class="btn btn-warning btn-sm" [routerLink]="['/goals/edit', goal.goal_id]">✏️ Modifier</button>
@@ -53,6 +60,16 @@
     </tbody>
   </table>
 
+  <div class="pagination-container">
+    <pagination-controls
+      (pageChange)="page = $event"
+      previousLabel="Précédent"
+      nextLabel="Suivant"
+      [responsive]="true"
+      [maxSize]="5"
+      class="my-pagination">
+    </pagination-controls>
+  </div>
 
   <ng-template #noData>
     <div class="alert alert-warning text-center">
