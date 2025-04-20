@@ -1,13 +1,13 @@
 // Variables
 $primary-color: #3f51b5;
 $secondary-color: #ff4081;
-$background-color: #f5f5f5;
-$text-color: #333;
-$light-text: #777;
+$background-color: #008bfc;
+$text-color: #000000;
+$light-text: #000000;
 $border-color: #e0e0e0;
-$today-color: #e3f2fd;
-$outside-month-color: #f9f9f9;
-$time-slot-color: #f5f5f5;
+$today-color: #ffffff;
+$outside-month-color: #ffffff;
+$time-slot-color: #6e6d6d;
 $appointment-hover: rgba(0, 0, 0, 0.1);
 
 // Mixins
@@ -155,7 +155,7 @@ $appointment-hover: rgba(0, 0, 0, 0.1);
   td {
     height: 120px;
     border: 1px solid $border-color;
-    background-color: white;
+    background-color: #ffffff;
 
     &.today {
       background-color: $today-color;
@@ -283,7 +283,7 @@ $appointment-hover: rgba(0, 0, 0, 0.1);
   border-radius: 4px;
   padding: 4px 8px;
   margin-bottom: 4px;
-  color: white;
+  color: #000000;
   font-size: 12px;
   cursor: pointer;
   @include shadow-elevation(1);
@@ -347,4 +347,8 @@ $appointment-hover: rgba(0, 0, 0, 0.1);
       height: 80px;
     }
   }
+}
+div.cdk-drag.appointment{
+  background-color: #0d6efd;
+  color: white;
 }
