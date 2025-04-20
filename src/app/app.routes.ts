@@ -36,6 +36,7 @@ import { FormBoardComponent } from './kanban/form-board/form-board.component';
 import { BoardComponent } from './kanban/board/board.component';
 
 import {PredictWorkflowComponent} from './predict-workflow/predict-workflow.component';
+import {StatsComponent} from './stats/stats.component';
 
 
 export const routes: Routes = [
@@ -96,7 +97,10 @@ export const routes: Routes = [
         { path: 'add-partnership', component: AddPartnershipComponent },
         { path: 'partnerships/calender', component: CalendarComponent},
         { path: 'calender', component: CalendarComponent},
-        { path: 'workflows/predict', component: PredictWorkflowComponent}
+        { path: 'workflows/predict', component: PredictWorkflowComponent},
+        { path: 'workflows/stats', component: StatsComponent}
+
+        //StatsComponent
 
       ]
   },

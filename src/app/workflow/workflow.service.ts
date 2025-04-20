@@ -52,6 +52,9 @@ export class WorkflowService {
     const url = `${this.apiUrl}/${workflowId}/files/${fileName}`;
     return this.http.get(url, { responseType: 'blob' });
   }
+  getDashboardStats(): Observable<any> {
+    return this.http.get<any>(`${this.apiUrl}/stats`);
+  }
 
 
 }
