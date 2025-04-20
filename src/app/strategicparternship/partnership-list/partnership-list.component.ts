@@ -96,7 +96,7 @@ export class ListPartnershipComponent implements OnInit {
     this.currentPage = 1;
   }
   viewDetails(id: string): void {
-    this.router.navigate(['/partnerships', id]);
+    this.router.navigate(['/partnerships/edit', id]);
   }
   editPartnership(id: string): void {
     this.router.navigate(['/partnerships/edit', id]);

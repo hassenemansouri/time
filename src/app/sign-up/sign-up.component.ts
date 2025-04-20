@@ -66,7 +66,6 @@ export class SignUpComponent implements OnInit {
       this.authService.register(user).pipe(
         catchError((error) => {
           // Check the entire error object for more details
-          console.error('Registration Error:', error);
           this.router.navigate(['/login']).then(r => console.log('Navigated to login page'));
           // If it's an error response, log more details about it
           if (error instanceof HttpErrorResponse) {

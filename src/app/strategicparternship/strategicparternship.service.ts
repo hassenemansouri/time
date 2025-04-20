@@ -107,4 +107,18 @@ export class PartnershipService {
       })
     );
   }
+  updatePartnership(id: string, partnership: StrategicPartnership): Observable<StrategicPartnership> {
+    const token = localStorage.getItem('jwtToken');
+    const headers = new HttpHeaders({
+      'Authorization': `Bearer ${token}`,
+      'Content-Type': 'application/json'
+    });
+
+    return this.http.put<StrategicPartnership>(`${this.baseUrl}/${id}`, partnership, { headers }).pipe(
+      catchError(err => {
+        console.error('Failed to update partnership:', err);
+        return throwError(() => new Error('Failed to update partnership'));
+      })
+    );
+  }
 }

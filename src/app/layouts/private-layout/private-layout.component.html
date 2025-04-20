@@ -137,7 +137,7 @@
       </a>
 
       <!-- Logout -->
-      <a routerLink="/login" class="list-group-item list-group-item-action bg-dark text-danger">
+      <a routerLink="/login" class="list-group-item list-group-item-action bg-dark text-danger" (click)="logout()">
         <i class="fas fa-sign-out-alt me-2"></i> Logout
       </a>
 
@@ -155,16 +155,34 @@
         <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarSupportedContent" (click)="toggleSidebar()">
           <span class="navbar-toggler-icon"></span>
         </button>
+        <!-- ... existing navbar code ... -->
         <div class="collapse navbar-collapse" id="navbarSupportedContent">
           <ul class="navbar-nav ms-auto">
-            <li class="nav-item">
-              <a class="nav-link text-white" href="#"><i class="fas fa-user-circle me-1"></i> Profile</a>
-            </li>
-            <li class="nav-item">
-              <a class="nav-link text-white" href="#"><i class="fas fa-bell me-1"></i> Notifications</a>
+            <li class="nav-item dropdown">
+              <a *ngIf="user" class="nav-link dropdown-toggle text-white" href="#" id="navbarDropdown" role="button" data-bs-toggle="dropdown" aria-expanded="false">
+                <!-- User photo or placeholder -->
+                <span class="d-flex align-items-center">
+          <img *ngIf="getPhotoUrl(); else placeholder"
+               [src]="getPhotoUrl()"
+               alt="Profile Photo"
+               class="rounded-circle me-2"
+               style="width: 30px; height: 30px; object-fit: cover;">
+          <ng-template #placeholder>
+            <i class="fas fa-user-circle me-2"></i>
+          </ng-template>
+                  {{ user.name }}
+        </span>
+              </a>
+              <ul class="dropdown-menu dropdown-menu-end" aria-labelledby="navbarDropdown">
+                <li><a class="dropdown-item" [routerLink]="['/users', user.id]"><i class="fas fa-user me-2"></i> Profile</a></li>
+                <li><a class="dropdown-item" href="#"><i class="fas fa-bell me-2"></i> Notifications</a></li>
+                <li><hr class="dropdown-divider"></li>
+                <li><a class="dropdown-item" (click)="logout()"><i class="fas fa-sign-out-alt me-2"></i> Logout</a></li>
+              </ul>
             </li>
           </ul>
         </div>
+        <!-- ... rest of your layout ... -->
       </div>
     </nav>
 
