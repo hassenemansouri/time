@@ -4,6 +4,7 @@ import { PartnershipService, StrategicPartnership } from '../strategicparternshi
 import {Router, RouterModule} from '@angular/router';
 import { CommonModule } from '@angular/common';
 import { FormsModule } from '@angular/forms';
+import {PdfService} from './pdf.service';
 
 @Component({
   selector: 'app-list-partnership',
@@ -25,7 +26,8 @@ export class ListPartnershipComponent implements OnInit {
 
   constructor(
     private partnershipService: PartnershipService,
-    private router: Router
+    private router: Router,
+    private pdfService: PdfService // Assuming you have a PdfService for PDF downloads
   ) {}
 
   ngOnInit(): void {
@@ -111,4 +113,22 @@ export class ListPartnershipComponent implements OnInit {
   trackById(index: number, partnership: StrategicPartnership): string {
     return partnership.id || index.toString();
   }
+  // partnership-details.component.ts
+  downloadPdf(partnershipId: string) {
+    this.pdfService.downloadPartnershipPdf(partnershipId).subscribe(
+      (data: ArrayBuffer) => {
+        const blob = new Blob([data], { type: 'application/pdf' });
+        const url = window.URL.createObjectURL(blob);
+
+        const link = document.createElement('a');
+        link.href = url;
+        link.download = `partnership_${partnershipId}.pdf`;
+        link.click();
+
+        window.URL.revokeObjectURL(url);
+      },
+      error => console.error('PDF download failed', error)
+    );
+  }
+
 }
