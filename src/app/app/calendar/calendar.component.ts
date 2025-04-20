@@ -11,6 +11,7 @@ import { MatButton, MatIconButton } from '@angular/material/button';
 import { addDays, differenceInCalendarDays } from 'date-fns';
 import {Workflow} from '../../workflow/workflow.model';
 import {WorkflowService} from '../../workflow/workflow.service';
+import {PartnershipService, StrategicPartnership} from '../../strategicparternship/strategicparternship.service';
 
 
 enum CalendarView {
@@ -45,6 +46,7 @@ export class CalendarComponent {
     public dialog: MatDialog,
     private calendarService: CalendarService,
     private workflowService: WorkflowService,
+    private partnershipService:PartnershipService
   ) {
     this.refreshAppointments();
     this.generateTimeSlots();
@@ -300,6 +302,9 @@ export class CalendarComponent {
     this.workflowService.getAllWorkflows().subscribe((workflows) => {
       this.loadWorkflowsIntoCalendar(workflows);
     });
+    this.partnershipService.getAllPartnerships().subscribe((partnerships) => {
+      this.loadPartnershipIntoCalendar(partnerships);
+    });
   }
 
   updateConnectedDropLists() {
@@ -322,6 +327,31 @@ export class CalendarComponent {
     }
   }
 
+  loadPartnershipIntoCalendar(partnerships: StrategicPartnership[]) {
+    const addedDates = new Set<string>(); // To track unique dates
+
+    partnerships.forEach(partner => {
+      const creationDate = new Date(partner.creationDate);
+
+      if (isNaN(creationDate.getTime())) {
+        console.error('Invalid creationDate for partner', partner);
+        return;
+      }
+
+      const dateString = creationDate.toISOString().split('T')[0];
+
+      if (!addedDates.has(dateString)) {
+        this.appointments.push({
+          endTime: '',
+          startTime: '',
+          id: `${partner.id}`,
+          title: partner.name,
+          date: creationDate
+        });
+        addedDates.add(dateString);
+      }
+    });
+  }
   loadWorkflowsIntoCalendar(workflows: Workflow[]) {
     const addedDates = new Set<string>(); // To track unique dates
 
@@ -355,4 +385,5 @@ export class CalendarComponent {
       }
     });
   }
+
 }
