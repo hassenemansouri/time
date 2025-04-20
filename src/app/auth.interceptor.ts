@@ -9,7 +9,9 @@ export class AuthInterceptor implements HttpInterceptor {
 
   intercept(request: HttpRequest<any>, next: HttpHandler): Observable<HttpEvent<any>> {
     // Skip adding token for public endpoints (adjust this part as needed)
-    if (request.url.includes('/auth/') || request.url.includes('/api/partnerships') && request.method === 'POST') {
+    if (request.url.includes('/auth/') ||
+      request.url.includes('/api/partnerships') &&
+      (request.method === 'POST' || request.url.includes('/verify'))) {
       return next.handle(request);
     }
 
