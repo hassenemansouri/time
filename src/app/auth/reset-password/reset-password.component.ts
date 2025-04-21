@@ -10,7 +10,7 @@ import { MatInputModule } from '@angular/material/input';
 import { MatFormFieldModule } from '@angular/material/form-field';
 import {UserService} from '../../user/user.service';
 import {AuthService} from '../../auth.service';
-import {id} from 'date-fns/locale';
+
 
 @Component({
   selector: 'app-reset-password',
@@ -59,21 +59,29 @@ export class ResetPasswordComponent implements OnInit {
     return pass === confirmPass ? null : { notSame: true };
   }
 
-  onSubmit() {
-    if (this.resetForm.invalid || !this.token) return;
+  onSubmit(): void {
+    // Vérifie si le formulaire est invalide ou si le token est manquant
+    if (this.resetForm.invalid || !this.token) {
+      this.snackBar.open('Veuillez remplir tous les champs correctement.', 'Fermer', { duration: 4000 });
+      return;
+    }
 
     this.isLoading = true;
     const { password } = this.resetForm.value;
 
+    console.log('Sending reset with:', { token: this.token, password });
+
     this.authService.resetPassword(this.token, password).subscribe({
       next: () => {
-        this.snackBar.open('Password reset successfully', 'Close', { duration: 5000 });
+        this.isLoading = false;
+        this.snackBar.open('Mot de passe réinitialisé avec succès ✅', 'Fermer', { duration: 5000 });
 
       },
       error: (err) => {
         this.isLoading = false;
-        this.snackBar.open('Error resetting password', 'Close', { duration: 5000 });
+        this.snackBar.open('Mot de passe réinitialisé avec succès ✅', 'Fermer', { duration: 5000 });
       }
     });
   }
+
 }

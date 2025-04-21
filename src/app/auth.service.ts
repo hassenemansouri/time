@@ -90,15 +90,15 @@ export class AuthService {
     return this.http.post(`${this.apiUrl}/forgot-password`, { email });
   }
 
-  resetPassword(token: string, password: string): Observable<any> {
+
+  resetPassword(token: string, newPassword: string): Observable<any> {
+    const headers = new HttpHeaders({ 'Content-Type': 'application/json' });
+
     return this.http.post(
-      `http://localhost:8100/api/auth/reset-password`,
-      { token, password: password },
-      {
-        headers: new HttpHeaders({
-          'Content-Type': 'application/json'
-        })
-      }
+      `http://localhost:8100/timeforge/auth/reset-password`,
+      { token, password: newPassword }, // <-- ici c’est bon
+      { headers, withCredentials: true }
     );
   }
+
 }
