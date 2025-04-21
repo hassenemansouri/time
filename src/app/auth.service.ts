@@ -65,12 +65,7 @@ export class AuthService {
     const token = this.getToken();
     return new HttpHeaders().set('Authorization', `Bearer ${token}`);
   }
-  forgotPassword(email: string) {
-    const token = localStorage.getItem('jwtToken'); // Get the token from storage or wherever it's stored
-    const headers = new HttpHeaders().set('Authorization', `Bearer ${token}`);
 
-    return this.http.post('http://localhost:8080/api/auth/forgot-password', { email }, { headers });
-  }
 
 
   loadUserFromStorage(): void {
@@ -82,5 +77,29 @@ export class AuthService {
 
   private storeUser(user: any): void {
     localStorage.setItem('user', JSON.stringify(user));
+  }
+  resetPasswordbyId(userId: string): Observable<string> {
+    return this.http.post(
+      `${this.apiUrl}/${userId}/reset-password`,
+      {},
+      { responseType: 'text' }  // Tell HttpClient to expect text
+    );
+  }
+
+  requestPasswordReset(email: string): Observable<any> {
+    return this.http.post(`${this.apiUrl}/forgot-password`, { email });
+  }
+
+  resetPassword(token: string, newPassword: string): Observable<any> {
+    return this.http.post(
+      `http://localhost:8100/api/auth/reset-password`,
+      { token, password: newPassword },
+      {
+        headers: new HttpHeaders({
+          'Content-Type': 'application/json'
+        }),
+        withCredentials: true // Only if using cookies/sessions
+      }
+    );
   }
 }

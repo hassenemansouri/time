@@ -115,6 +115,14 @@
 
         <div class="text-end">
           <button type="button" class="btn btn-secondary me-2" routerLink="/users">Cancel</button>
+          <button type="button"
+                  class="btn btn-warning me-2"
+                  (click)="resetPassword()"
+                  [disabled]="isLoading">
+            <span *ngIf="isLoading" class="spinner-border spinner-border-sm" role="status" aria-hidden="true"></span>
+            Reset Password
+          </button>
+
           <button type="submit" class="btn btn-primary" [disabled]="userForm.invalid || isLoading">
             <span *ngIf="isLoading" class="spinner-border spinner-border-sm" role="status" aria-hidden="true"></span>
             Update User
