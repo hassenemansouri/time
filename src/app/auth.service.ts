@@ -90,15 +90,14 @@ export class AuthService {
     return this.http.post(`${this.apiUrl}/forgot-password`, { email });
   }
 
-  resetPassword(token: string, newPassword: string): Observable<any> {
+  resetPassword(token: string, password: string): Observable<any> {
     return this.http.post(
       `http://localhost:8100/api/auth/reset-password`,
-      { token, password: newPassword },
+      { token, password: password },
       {
         headers: new HttpHeaders({
           'Content-Type': 'application/json'
-        }),
-        withCredentials: true // Only if using cookies/sessions
+        })
       }
     );
   }

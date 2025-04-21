@@ -42,6 +42,7 @@ import {
 } from './strategicparternship/update-partnership/update-partnership.component';
 import {UserUpdateComponent} from './user/user-update/user-update.component';
 import {StatsComponent} from './stats/stats.component';
+import {ResetPasswordComponent} from './auth/reset-password/reset-password.component';
 
 
 export const routes: Routes = [
@@ -65,6 +66,7 @@ export const routes: Routes = [
     component: PrivateLayoutComponent,
     canActivate: [AuthGuard], // Protect all below routes
       children: [
+        { path: 'reset-password', component: ResetPasswordComponent },
         { path: 'users', component: UserDetailComponent },
         {path: 'users/:id', component: UserDetailComponent, title: 'User Details'},
         { path: 'users/edit/:id', component: UserUpdateComponent },
