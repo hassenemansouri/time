@@ -36,7 +36,11 @@ import { FormBoardComponent } from './kanban/form-board/form-board.component';
 import { BoardComponent } from './kanban/board/board.component';
 
 import {PredictWorkflowComponent} from './predict-workflow/predict-workflow.component';
-import {StatsComponent} from './stats/stats.component';
+import {UserDetailComponent} from './user/user-detail/user-detail.component';
+import {
+  UpdatePartnershipComponent
+} from './strategicparternship/update-partnership/update-partnership.component';
+import {UserUpdateComponent} from './user/user-update/user-update.component';
 
 
 export const routes: Routes = [
@@ -60,6 +64,9 @@ export const routes: Routes = [
     component: PrivateLayoutComponent,
     canActivate: [AuthGuard], // Protect all below routes
       children: [
+        { path: 'users', component: UserDetailComponent },
+        {path: 'users/:id', component: UserDetailComponent, title: 'User Details'},
+        { path: 'users/edit/:id', component: UserUpdateComponent },
         { path: 'dashboard', component: DashboardComponent },
         { path: 'workspaces', component: ListWorkspacesComponent },
         { path: 'workspaces/add', component: WorkspaceFormComponent },
@@ -95,12 +102,10 @@ export const routes: Routes = [
         { path: 'kanban/:id', component: BoardComponent },
         { path: 'partnerships', component: ListPartnershipComponent },
         { path: 'add-partnership', component: AddPartnershipComponent },
+        {path: 'partnerships/edit/:id', component: UpdatePartnershipComponent},
         { path: 'partnerships/calender', component: CalendarComponent},
         { path: 'calender', component: CalendarComponent},
-        { path: 'workflows/predict', component: PredictWorkflowComponent},
-        { path: 'workflows/stats', component: StatsComponent}
-
-        //StatsComponent
+        { path: 'workflows/predict', component: PredictWorkflowComponent}
 
       ]
   },
