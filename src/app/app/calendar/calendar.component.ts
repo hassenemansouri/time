@@ -1,10 +1,10 @@
-import {Component, TrackByFunction} from '@angular/core';
+import {Component} from '@angular/core';
 import { MatDialog } from '@angular/material/dialog';
 import { CalendarService } from './calendar.service';
 import { AppointmentDialogComponent } from '../appointment-dialog/appointment-dialog.component';
 import { Appointment } from '../appointment-dialog/appointment-dialog.model';
-import { DatePipe, NgForOf, NgIf, NgStyle } from '@angular/common';
-import { CdkDropListGroup, CdkDropList, CdkDrag, CdkDragHandle, CdkDragDrop, moveItemInArray } from '@angular/cdk/drag-drop';
+import { DatePipe, NgForOf, NgIf} from '@angular/common';
+import { CdkDropListGroup, CdkDropList, CdkDrag, CdkDragDrop, moveItemInArray } from '@angular/cdk/drag-drop';
 import { MatButtonToggle, MatButtonToggleGroup } from '@angular/material/button-toggle';
 import { MatIcon } from '@angular/material/icon';
 import { MatButton, MatIconButton } from '@angular/material/button';
@@ -27,8 +27,8 @@ enum CalendarView {
   standalone: true,
   imports: [
     CdkDropListGroup, CdkDropList, DatePipe, MatButtonToggleGroup,
-    NgIf, MatButtonToggle, MatIcon, NgForOf, NgStyle,
-    CdkDrag, MatButton, MatIconButton, CdkDragHandle
+    NgIf, MatButtonToggle, MatIcon, NgForOf,
+    CdkDrag, MatButton, MatIconButton
   ],
 })
 export class CalendarComponent {
