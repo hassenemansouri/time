@@ -37,6 +37,7 @@ export class AppComponent implements OnInit {
 
   ngOnInit() {
     // Check if the user is authenticated on app load
+    this.authService.loadUserFromStorage();
     this.authService.isAuthenticated().subscribe((authenticated) => {
       if (authenticated) {
         console.log('User is authenticated');

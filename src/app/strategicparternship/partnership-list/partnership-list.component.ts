@@ -23,7 +23,7 @@ export class ListPartnershipComponent implements OnInit {
   currentPage: number = 1; // Fixes "Unresolved variable or type currentPage"
   itemsPerPage: number = 10; // Fixes "Unresolved variable or type itemsPerPage"
   totalItems: number = 0;
-
+  participantNamesMap: { [id: string]: string } = {};
   constructor(
     private partnershipService: PartnershipService,
     private router: Router,
@@ -32,6 +32,25 @@ export class ListPartnershipComponent implements OnInit {
 
   ngOnInit(): void {
     this.loadPartnerships();
+  }
+  // Add loading state for names
+  isLoadingNames: boolean = false;
+
+  loadParticipantNames(participantIds: string[]) {
+    if (participantIds.length === 0) return;
+
+    this.isLoadingNames = true;
+    this.partnershipService.getNamesByIds(participantIds).subscribe({
+      next: (names) => {
+        this.participantNamesMap = {...this.participantNamesMap, ...names};
+        console.log('Participant names loaded:', this.participantNamesMap);
+        this.isLoadingNames = false;
+      },
+      error: (err) => {
+        console.error('Failed to load participant names:', err);
+        this.isLoadingNames = false;
+      }
+    });
   }
 
   loadPartnerships(): void {
@@ -43,20 +62,25 @@ export class ListPartnershipComponent implements OnInit {
         console.log("Partnerships loaded:", partnerships);
         this.partnerships = partnerships;
         this.filteredPartnerships = [...partnerships];
+
+        // NEW: Load participant names for all partnerships
+        const allParticipantIds = this.getAllUniqueParticipantIds(partnerships);
+        this.loadParticipantNames(allParticipantIds);
+
         this.isLoading = false;
       },
       error: (err) => {
         this.isLoading = false;
         this.errorMessage = err.message;
-
-        // Redirect to login if unauthorized
-       // if (err.message.includes('login')) {
-        //  this.router.navigate(['/login']);
-       // }
       }
     });
   }
 
+// NEW: Helper method to get all unique participant IDs
+  private getAllUniqueParticipantIds(partnerships: StrategicPartnership[]): string[] {
+    const allIds = partnerships.flatMap(p => p.participants);
+    return [...new Set(allIds)]; // Remove duplicates
+  }
   applyFilter(): void {
     if (!this.searchText.trim()) {
       this.filteredPartnerships = [...this.partnerships];
@@ -71,15 +95,12 @@ export class ListPartnershipComponent implements OnInit {
     this.totalItems = this.filteredPartnerships.length;
     this.currentPage = 1;
   }
-
   viewDetails(id: string): void {
-    this.router.navigate(['/partnerships', id]);
+    this.router.navigate(['/partnerships/edit', id]);
   }
-
   editPartnership(id: string): void {
     this.router.navigate(['/partnerships/edit', id]);
   }
-
   deletePartnership(id: string): void {
     if (confirm('Are you sure you want to delete this partnership?')) {
       this.isLoading = true;
@@ -94,26 +115,21 @@ export class ListPartnershipComponent implements OnInit {
     }
   }
 
-  // Pagination methods
   get paginatedPartnerships(): StrategicPartnership[] {
     const startIndex = (this.currentPage - 1) * this.itemsPerPage;
     return this.filteredPartnerships.slice(startIndex, startIndex + this.itemsPerPage);
   }
-
   get totalPages(): number {
     return Math.ceil(this.totalItems / this.itemsPerPage);
   }
-
   onPageChange(newPage: number): void {
     if (newPage >= 1 && newPage <= this.totalPages) {
       this.currentPage = newPage;
     }
   }
-
   trackById(index: number, partnership: StrategicPartnership): string {
     return partnership.id || index.toString();
   }
-  // partnership-details.component.ts
   downloadPdf(partnershipId: string) {
     this.pdfService.downloadPartnershipPdf(partnershipId).subscribe(
       (data: ArrayBuffer) => {
@@ -130,5 +146,4 @@ export class ListPartnershipComponent implements OnInit {
       error => console.error('PDF download failed', error)
     );
   }
-
 }

@@ -1,15 +1,25 @@
 import { Injectable } from '@angular/core';
 import { HttpClient, HttpHeaders } from '@angular/common/http';
-import {Observable, of} from 'rxjs';
+import {BehaviorSubject, Observable, of, tap} from 'rxjs';
 import {environment} from "./environments/environment";
 import {Router} from "@angular/router";
 
+interface LoginResponse {
+  token: string;
+  user: {
+    id: string;
+    name: string;
+    email: string;
+    role: string;
 
+  };
+}
 @Injectable({
   providedIn: 'root',
 })
 export class AuthService {
   private apiUrl = `${environment.apiUrl}/timeforge/auth`;  // Base URL for your API (adjust accordingly)
+  private currentUserSubject = new BehaviorSubject<any>(null);
 
 
   constructor(private http: HttpClient,private router: Router) {}
@@ -29,13 +39,13 @@ export class AuthService {
     localStorage.setItem('jwtToken', token);
   }
   // Login and get JWT token
-  login(credentials: { email: string; password: string }): Observable<any> {
-    return this.http.post(`${this.apiUrl}/login`, credentials);
-  }
-
-  // Save the JWT token to localStorage (or any other method you prefer)
-  saveToken(token: string): void {
-    localStorage.setItem('jwtToken', token);
+  login(credentials: { email: string, password: string }): Observable<LoginResponse> {
+    return this.http.post<LoginResponse>(`${this.apiUrl}/login`, credentials).pipe(
+      tap(response => {
+        this.storeUser(response.user);
+        this.currentUserSubject.next(response.user);
+      })
+    );
   }
 
   // Get the JWT token
@@ -50,7 +60,6 @@ export class AuthService {
     localStorage.removeItem('jwtToken');
     this.router.navigate(['/login']);
   }
-
   // Send HTTP requests with JWT token (for protected routes)
   getHeaders(): HttpHeaders {
     const token = this.getToken();
@@ -61,5 +70,17 @@ export class AuthService {
     const headers = new HttpHeaders().set('Authorization', `Bearer ${token}`);
 
     return this.http.post('http://localhost:8080/api/auth/forgot-password', { email }, { headers });
+  }
+
+
+  loadUserFromStorage(): void {
+    const userData = localStorage.getItem('user');
+    if (userData) {
+      this.currentUserSubject.next(JSON.parse(userData));
+    }
+  }
+
+  private storeUser(user: any): void {
+    localStorage.setItem('user', JSON.stringify(user));
   }
 }

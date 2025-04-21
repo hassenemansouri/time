@@ -1,7 +1,7 @@
 <div class="container mt-4">
   <div class="d-flex justify-content-between align-items-center mb-4">
     <h2>Strategic Partnerships</h2>
-    <button class="btn btn-primary" routerLink="/partnerships/add">
+    <button class="btn btn-primary" routerLink="/add-partnership">
       <i class="bi bi-plus-circle me-1"></i> Add New Partnership
     </button>
   </div>
@@ -78,13 +78,18 @@
           </td>
           <td class="align-middle">
             <div class="d-flex flex-wrap gap-1">
-                <span *ngFor="let participant of partnership.participants | slice:0:3"
-                      class="badge bg-secondary">
-                  {{ participant }}
-                </span>
-              <span *ngIf="partnership.participants.length > 3" class="badge bg-light text-dark">
-                  +{{ partnership.participants.length - 3 }} more
-                </span>
+              <ng-container *ngIf="!isLoadingNames; else loadingNames">
+      <span *ngFor="let participantId of partnership.participants | slice:0:3"
+            class="badge bg-secondary">
+        {{ participantNamesMap[participantId] || participantId }}
+      </span>
+                <span *ngIf="partnership.participants.length > 3" class="badge bg-light text-dark">
+        +{{ partnership.participants.length - 3 }} more
+      </span>
+              </ng-container>
+              <ng-template #loadingNames>
+                <span class="badge bg-info">Loading names...</span>
+              </ng-template>
             </div>
           </td>
           <td class="align-middle">
