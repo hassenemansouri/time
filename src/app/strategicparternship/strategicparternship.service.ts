@@ -88,5 +88,37 @@ export class PartnershipService {
   getBlockchain(): Observable<BlockchainRecord[]> {
     return this.http.get<BlockchainRecord[]>(this.blockchainUrl);
   }
+  getNamesByIds(ids: string[]): Observable<{ [id: string]: string }> {
+    const token = localStorage.getItem('jwtToken');
+    const headers = new HttpHeaders({
+      'Authorization': `Bearer ${token}`,
+      'Content-Type': 'application/json'
+    });
 
+    // Send as plain array in body
+    return this.http.post<{ [id: string]: string }>(
+      `${this.baseUrl}/names`,
+      ids,  // Send array directly
+      { headers }
+    ).pipe(
+      catchError(err => {
+        console.error('Failed to load participant names:', err);
+        return throwError(() => new Error('Failed to load participant names'));
+      })
+    );
+  }
+  updatePartnership(id: string, partnership: StrategicPartnership): Observable<StrategicPartnership> {
+    const token = localStorage.getItem('jwtToken');
+    const headers = new HttpHeaders({
+      'Authorization': `Bearer ${token}`,
+      'Content-Type': 'application/json'
+    });
+
+    return this.http.put<StrategicPartnership>(`${this.baseUrl}/${id}`, partnership, { headers }).pipe(
+      catchError(err => {
+        console.error('Failed to update partnership:', err);
+        return throwError(() => new Error('Failed to update partnership'));
+      })
+    );
+  }
 }
