@@ -4,6 +4,10 @@ import { ActivatedRoute, Router, RouterLink } from '@angular/router';
 import { CommonModule } from '@angular/common';
 import { UserService, User, Role } from '../user.service';
 import { catchError, of } from 'rxjs';
+import {ConfirmDialogComponent} from '../../confirm-dialog/confirm-dialog.component';
+import {MatDialog} from '@angular/material/dialog';
+import {AuthService} from '../../auth.service';
+import {MatSnackBar} from '@angular/material/snack-bar';
 
 @Component({
   selector: 'app-user-update',
@@ -24,7 +28,10 @@ export class UserUpdateComponent implements OnInit {
     private fb: FormBuilder,
     private route: ActivatedRoute,
     private router: Router,
-    private userService: UserService
+    private userService: UserService,
+    private authService: AuthService,
+    private dialog: MatDialog,
+    private snackBar: MatSnackBar
   ) {
     this.userForm = this.fb.group({
       name: ['', Validators.required],
@@ -120,5 +127,40 @@ export class UserUpdateComponent implements OnInit {
   getPhotoUrl(): string | null {
     if (!this.user?.photoBase64 || !this.user.photoContentType) return null;
     return `data:${this.user.photoContentType};base64,${this.user.photoBase64}`;
+  }
+
+  resetPassword(): void {
+    if (!this.user) return;
+
+    const dialogRef = this.dialog.open(ConfirmDialogComponent, {
+      data: {
+        title: 'Reset Password',
+        message: 'Are you sure you want to reset this user\'s password?'
+      }
+    });
+
+    dialogRef.afterClosed().subscribe(result => {
+      if (result && this.user) {
+        this.isLoading = true;
+         this.authService.resetPasswordbyId(this.user.id).subscribe({
+          next: (response: any) => {
+            this.isLoading = false;
+            // Handle both JSON and text responses
+            const message = typeof response === 'string'
+              ? response
+              : response.message;
+            this.snackBar.open(message, 'Close', { duration: 5000 });
+          },
+          error: (err) => {
+            this.isLoading = false;
+            this.snackBar.open(
+              'Failed to reset password: ' + err.error?.message || err.message,
+              'Close',
+              { duration: 5000 }
+            );
+          }
+        });
+      }
+    });
   }
 }
