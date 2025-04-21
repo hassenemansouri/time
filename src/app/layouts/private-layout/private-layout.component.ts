@@ -18,6 +18,7 @@ import {NgIf} from '@angular/common';
 export class PrivateLayoutComponent implements OnInit {
 
   user: {
+
     photoContentType: boolean;
     photoBase64: boolean;
     id: any[] | string | UrlTree;
@@ -41,7 +42,7 @@ export class PrivateLayoutComponent implements OnInit {
     } else {
       this.user = null;
     }
-    
+
     this.loadUsers();
   }
 

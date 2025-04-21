@@ -9,7 +9,7 @@ import { LandingComponent } from './landing/landing.component';
 import { NotFoundComponent } from './not-found/not-found.component';
 import { ProjectComponent } from './project/project/project.component';
 import { TaskComponent } from './task/task/task.component';
-import { LoginComponent } from './login/login.component';
+import { LoginComponent } from './auth/login/login.component';
 import { DashboardComponent } from './dashboard/dashboard.component';
 import { SignUpComponent } from './sign-up/sign-up.component';
 import { AuthGuard } from './AuthGuard';
@@ -43,6 +43,7 @@ import {
 import {UserUpdateComponent} from './user/user-update/user-update.component';
 import {StatsComponent} from './stats/stats.component';
 import {ResetPasswordComponent} from './auth/reset-password/reset-password.component';
+import {NoAuthGuardService} from './no-auth-guard.service';
 
 
 export const routes: Routes = [
@@ -66,6 +67,16 @@ export const routes: Routes = [
     component: PrivateLayoutComponent,
     canActivate: [AuthGuard], // Protect all below routes
       children: [
+        {
+          path: 'login',
+          component: LoginComponent,
+          canActivate: [NoAuthGuardService] // <-- Blocks if already logged in
+        },
+        {
+          path: 'signup',
+          component: SignUpComponent,
+          canActivate: [NoAuthGuardService] // <-- Blocks if already logged in
+        },
         { path: 'reset-password', component: ResetPasswordComponent },
         { path: 'users', component: UserDetailComponent },
         {path: 'users/:id', component: UserDetailComponent, title: 'User Details'},

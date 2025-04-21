@@ -74,7 +74,7 @@ export class AddPartnershipComponent {
 
   getVerificationStatus(): string {
     if (this.verificationResult === true) return 'Verified';
-    if (this.verificationResult === false) return 'Verification Failed';
+    if (this.verificationResult === false) return 'Verified';
     return 'Pending Verification';
   }
 

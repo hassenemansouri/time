@@ -43,26 +43,26 @@
         </ul>
       </div>
       <!-- Column -->
-   <div class="dropdown">
-    <a class="list-group-item list-group-item-action bg-dark text-white dropdown-toggle" href="#" id="columnDropdown" role="button" data-bs-toggle="dropdown" aria-expanded="false">
-      <i class="fas fa-columns me-2"></i> Column
-    </a>
-    <ul class="dropdown-menu bg-dark" aria-labelledby="columnDropdown">
-      <li><a routerLink="/columns" routerLinkActive="active" class="dropdown-item text-white">All Columns</a></li>
-      <li><a routerLink="/columns/add" routerLinkActive="active" class="dropdown-item text-white">Add Column</a></li>
-    </ul>
-  </div>
+      <div class="dropdown">
+        <a class="list-group-item list-group-item-action bg-dark text-white dropdown-toggle" href="#" id="columnDropdown" role="button" data-bs-toggle="dropdown" aria-expanded="false">
+          <i class="fas fa-columns me-2"></i> Column
+        </a>
+        <ul class="dropdown-menu bg-dark" aria-labelledby="columnDropdown">
+          <li><a routerLink="/columns" routerLinkActive="active" class="dropdown-item text-white">All Columns</a></li>
+          <li><a routerLink="/columns/add" routerLinkActive="active" class="dropdown-item text-white">Add Column</a></li>
+        </ul>
+      </div>
 
-   <!-- kanban -->
-   <div class="dropdown">
-    <a class="list-group-item list-group-item-action bg-dark text-white dropdown-toggle" href="#" id="kanbanDropdown" role="button" data-bs-toggle="dropdown" aria-expanded="false">
-      <i class="fas fa-columns me-2"></i> Kanban
-    </a>
-    <ul class="dropdown-menu bg-dark" aria-labelledby="kanbanDropdown">
-      <li><a routerLink="/boards" routerLinkActive="active" class="dropdown-item text-white">All Boards</a></li>
-      <li><a routerLink="/boards/add" routerLinkActive="active" class="dropdown-item text-white">Add Board</a></li>
-    </ul>
-  </div>
+      <!-- kanban -->
+      <div class="dropdown">
+        <a class="list-group-item list-group-item-action bg-dark text-white dropdown-toggle" href="#" id="kanbanDropdown" role="button" data-bs-toggle="dropdown" aria-expanded="false">
+          <i class="fas fa-columns me-2"></i> Kanban
+        </a>
+        <ul class="dropdown-menu bg-dark" aria-labelledby="kanbanDropdown">
+          <li><a routerLink="/boards" routerLinkActive="active" class="dropdown-item text-white">All Boards</a></li>
+          <li><a routerLink="/boards/add" routerLinkActive="active" class="dropdown-item text-white">Add Board</a></li>
+        </ul>
+      </div>
 
       <!-- Workspaces -->
       <div class="dropdown">
@@ -131,15 +131,7 @@
         </ul>
       </div>
 
-      <!-- Settings -->
-      <a routerLink="/settings" routerLinkActive="active" class="list-group-item list-group-item-action bg-dark text-white">
-        <i class="fas fa-cogs me-2"></i> Settings
-      </a>
 
-      <!-- Logout -->
-      <a routerLink="/login" class="list-group-item list-group-item-action bg-dark text-danger" (click)="logout()">
-        <i class="fas fa-sign-out-alt me-2"></i> Logout
-      </a>
 
     </div>
   </div>
@@ -190,7 +182,7 @@
     <div class="container-fluid py-4">
       <!-- Example Cards -->
 
-        <!-- You can add more cards here -->
+      <!-- You can add more cards here -->
 
 
       <router-outlet></router-outlet>

@@ -1,6 +1,6 @@
 import {Component, CUSTOM_ELEMENTS_SCHEMA, OnInit} from '@angular/core';
 import {FormBuilder, FormGroup, FormsModule, Validators} from '@angular/forms';
-import { AuthService } from '../auth.service';  // Import the AuthService
+import { AuthService } from '../../auth.service';  // Import the AuthService
 import {Router, RouterLink} from '@angular/router';
 
 import {NgIf} from '@angular/common';
