@@ -10,6 +10,7 @@ import {MatButtonToggle, MatButtonToggleGroup} from '@angular/material/button-to
 import {MatButton, MatIconButton} from '@angular/material/button';
 import {MatIcon} from '@angular/material/icon';
 import {DatePipe, NgForOf, NgIf} from '@angular/common';
+import {StrategicPartenershipCalendarService} from './strategic-partenership-calendar.service';
 
 
 
@@ -46,7 +47,8 @@ export class StrategicPartenershipCalendarComponent {
   constructor(
     public dialog: MatDialog,
     private calendarService: CalendarService,
-    private partnershipService:PartnershipService
+    private partnershipService:PartnershipService,
+    private PartenershipCalendarService: StrategicPartenershipCalendarService
   ) {
     this.refreshAppointments();
     this.generateTimeSlots();
@@ -54,7 +56,7 @@ export class StrategicPartenershipCalendarComponent {
   }
 
   private refreshAppointments() {
-    this.appointments = this.calendarService.getAppointments();
+    this.appointments = this.PartenershipCalendarService.getAppointments();
   }
 
   // Générer les créneaux horaires
@@ -260,7 +262,7 @@ export class StrategicPartenershipCalendarComponent {
 
     dialogRef.afterClosed().subscribe((result: Appointment) => {
       if (result) {
-        this.calendarService.addAppointment(result);
+        this.PartenershipCalendarService.addAppointment(result);
         this.refreshAppointments();
       }
     });
@@ -277,9 +279,9 @@ export class StrategicPartenershipCalendarComponent {
     dialogRef.afterClosed().subscribe((result) => {
       if (result) {
         if (result.remove) {
-          this.calendarService.deleteAppointment(result.uuid);
+          this.PartenershipCalendarService.deleteAppointment(result.uuid);
         } else {
-          this.calendarService.updateAppointment(result);
+          this.PartenershipCalendarService.updateAppointment(result);
         }
         this.refreshAppointments();
       }
