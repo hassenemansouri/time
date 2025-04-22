@@ -110,7 +110,6 @@ $shadow-color: rgba(0, 0, 0, 0.2);
         @include shadow-elevation(1);
 
         &:hover {
-          background-color: darken($primary-color, 5%);
           @include shadow-elevation(2);
         }
       }
@@ -121,7 +120,6 @@ $shadow-color: rgba(0, 0, 0, 0.2);
 
         &:hover {
           background-color: $hover-color;
-          border-color: darken($border-color, 10%);
         }
       }
 
