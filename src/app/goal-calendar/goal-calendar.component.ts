@@ -1,7 +1,6 @@
 import { Component } from '@angular/core';
 import {Appointment} from '../app/appointment-dialog/appointment-dialog.model';
 import {MatDialog} from '@angular/material/dialog';
-import {CalendarService} from '../app/calendar/calendar.service';
 import {GoalService} from '../goal/goal.service';
 import {CdkDrag, CdkDragDrop, CdkDropList, CdkDropListGroup, moveItemInArray} from '@angular/cdk/drag-drop';
 import {AppointmentDialogComponent} from '../app/appointment-dialog/appointment-dialog.component';

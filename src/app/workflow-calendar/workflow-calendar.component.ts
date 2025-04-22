@@ -16,6 +16,7 @@ import {Workflow} from '../workflow/workflow.model';
 import {addDays, differenceInCalendarDays} from 'date-fns';
 import {Goal} from '../goal/goal.model';
 import {Project} from '../models/project.model';
+import {WorkflowCalendarService} from './workflow-calendar.service';
 
 
 enum CalendarView {
@@ -58,7 +59,8 @@ export class WorkflowCalendarComponent {
   constructor(
     public dialog: MatDialog,
     private calendarService: CalendarService,
-    private workflowService: WorkflowService
+    private workflowService: WorkflowService,
+    private workflowCalendarService : WorkflowCalendarService
   ) {
     this.refreshAppointments();
     this.generateTimeSlots();
@@ -66,7 +68,7 @@ export class WorkflowCalendarComponent {
   }
 
   private refreshAppointments() {
-    this.appointments = this.calendarService.getAppointments();
+    this.appointments = this.workflowCalendarService.getAppointments();
   }
 
   // Générer les créneaux horaires
@@ -272,7 +274,7 @@ export class WorkflowCalendarComponent {
 
     dialogRef.afterClosed().subscribe((result: Appointment) => {
       if (result) {
-        this.calendarService.addAppointment(result);
+        this.workflowCalendarService.addAppointment(result);
         this.refreshAppointments();
       }
     });
@@ -289,9 +291,9 @@ export class WorkflowCalendarComponent {
     dialogRef.afterClosed().subscribe((result) => {
       if (result) {
         if (result.remove) {
-          this.calendarService.deleteAppointment(result.uuid);
+          this.workflowCalendarService.deleteAppointment(result.uuid);
         } else {
-          this.calendarService.updateAppointment(result);
+          this.workflowCalendarService.updateAppointment(result);
         }
         this.refreshAppointments();
       }
