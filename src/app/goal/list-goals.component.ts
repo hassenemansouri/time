@@ -9,6 +9,7 @@ import { FormsModule } from '@angular/forms';
 import { NgxPaginationModule } from 'ngx-pagination';
 import emailjs from 'emailjs-com';
 
+
 @Component({
   selector: 'app-list-goals',
   templateUrl: './list-goals.component.html',

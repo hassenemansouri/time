@@ -1,17 +1,13 @@
-// user-autocomplete.component.ts
-import {Component, CUSTOM_ELEMENTS_SCHEMA, EventEmitter, Input, Output} from '@angular/core';
-import {FormControl, ReactiveFormsModule} from '@angular/forms';
+import { Component, CUSTOM_ELEMENTS_SCHEMA, EventEmitter, Input, Output } from '@angular/core';
+import { FormControl, ReactiveFormsModule } from '@angular/forms';
 import { Observable } from 'rxjs';
 import { startWith, switchMap, debounceTime, distinctUntilChanged } from 'rxjs/operators';
 import { UserSearchService } from '../usersearch.service';
-import {MatFormField} from '@angular/material/form-field';
-import {MatInput} from '@angular/material/input';
+import { DomSanitizer, SafeUrl } from '@angular/platform-browser';
 import {MatAutocomplete, MatAutocompleteTrigger, MatOption} from '@angular/material/autocomplete';
-import {AsyncPipe, NgForOf, NgIf} from '@angular/common';
-import {MatIcon} from '@angular/material/icon';
-import {MatIconButton} from '@angular/material/button';
+import {MatFormField, MatInput} from '@angular/material/input';
+import {AsyncPipe, NgForOf} from '@angular/common';
 import {MatChipGrid, MatChipInput, MatChipRow} from '@angular/material/chips';
-import {add} from 'date-fns';
 import {COMMA, ENTER} from '@angular/cdk/keycodes';
 
 @Component({
@@ -41,8 +37,12 @@ export class UserAutocompleteComponent {
   searchControl = new FormControl();
   filteredUsers: Observable<any[]>;
   selectedUsers: any[] = [];
+  defaultUserImage = 'assets/images/default-user.png';
 
-  constructor(private userSearchService: UserSearchService) {
+  constructor(
+    private userSearchService: UserSearchService,
+    private sanitizer: DomSanitizer
+  ) {
     this.filteredUsers = this.searchControl.valueChanges.pipe(
       debounceTime(300),
       distinctUntilChanged(),
@@ -55,6 +55,19 @@ export class UserAutocompleteComponent {
     );
   }
 
+  getUserPhotoUrl(user: any): string {
+    if (user?.photoBase64 && user?.photoContentType) {
+      return `data:${user.photoContentType};base64,${user.photoBase64}`;
+    }
+    return this.defaultUserImage;
+  }
+
+  handleImageError(event: Event): void {
+    const imgElement = event.target as HTMLImageElement;
+    imgElement.src = this.defaultUserImage;
+    imgElement.onerror = null; // Prevent infinite loop if default image fails
+  }
+
   displayFn(user: any): string {
     return user && user.name ? user.name : '';
   }
@@ -65,7 +78,13 @@ export class UserAutocompleteComponent {
       this.selectedUsers.push(user);
       this.usersSelected.emit(this.selectedUsers); // <== Emit full users
     }
-    this.searchControl.setValue('');
+    this.searchControl.setValue('', { emitEvent: false });
+
+    // Manually trigger the input clearing (for some Angular Material versions)
+    const input = event.source._elementRef.nativeElement.querySelector('input');
+    if (input) {
+      input.value = '';
+    }
   }
 
   removeUser(user: any): void {
@@ -90,4 +109,14 @@ export class UserAutocompleteComponent {
     this.searchControl.setValue(null);
   }
   readonly separatorKeysCodes: number[] = [ENTER, COMMA];
+
+  clearInput(): void {
+    this.searchControl.setValue('', { emitEvent: false });
+
+    // If you need to manually clear the input element
+    const inputElement = document.querySelector('.example-chip-list input');
+    if (inputElement) {
+      (inputElement as HTMLInputElement).value = '';
+    }
+  }
 }

@@ -1,4 +1,4 @@
-import {Component, CUSTOM_ELEMENTS_SCHEMA} from '@angular/core';
+import {Component, CUSTOM_ELEMENTS_SCHEMA, ViewChild} from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { PartnershipService, StrategicPartnership, BlockchainRecord } from '../strategicparternship.service';
 import { RouterLink } from '@angular/router';
@@ -35,6 +35,7 @@ import {UserSearchService} from '../usersearch.service';
   schemas: [CUSTOM_ELEMENTS_SCHEMA]
 })
 export class AddPartnershipComponent {
+  @ViewChild(UserAutocompleteComponent) userAutocomplete!: UserAutocompleteComponent;
   partnership: StrategicPartnership = {
     name: '',
     description: '',
@@ -146,8 +147,13 @@ export class AddPartnershipComponent {
     this.partnership.participants = this.selectedUsers.map(u => u.id);
   }
 // In add-partnership.component.ts
+
   onUsersSelected(users: any[]): void {
     this.selectedUsers = users;
     this.partnership.participants = users.map(u => u.id);
+
+
+    // Then call clear method when needed
+    this.userAutocomplete.clearInput();
   }
 }
