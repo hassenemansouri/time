@@ -21,7 +21,7 @@ import { GoalFormComponent } from './goal/goal-form.component';
 import { ListRewardsComponent } from './reward/list-rewards.component';
 import { RewardFormComponent } from './reward/reward-form.component';
 import { ForgotPasswordComponent } from './forgot-password/forgot-password.component';
-import { PartnershipListComponent } from './strategicparternship/partnership-list/partnership-list.component';
+import { ListPartnershipComponent } from './strategicparternship/partnership-list/partnership-list.component';
 import { AddPartnershipComponent } from './strategicparternship/add-partnership/add-partnership.component';
 
 // Layouts
@@ -34,7 +34,15 @@ import { ColumnFormComponent } from './column/column-form/column-form.component'
 import { ListBoardComponent } from './kanban/list-board/list-board.component';
 import { FormBoardComponent } from './kanban/form-board/form-board.component';
 import { BoardComponent } from './kanban/board/board.component';
+
 import {PredictWorkflowComponent} from './predict-workflow/predict-workflow.component';
+import {UserDetailComponent} from './user/user-detail/user-detail.component';
+import {
+  UpdatePartnershipComponent
+} from './strategicparternship/update-partnership/update-partnership.component';
+import {UserUpdateComponent} from './user/user-update/user-update.component';
+import {StatsComponent} from './stats/stats.component';
+import {ResetPasswordComponent} from './auth/reset-password/reset-password.component';
 
 
 export const routes: Routes = [
@@ -58,6 +66,10 @@ export const routes: Routes = [
     component: PrivateLayoutComponent,
     canActivate: [AuthGuard], // Protect all below routes
       children: [
+        { path: 'reset-password', component: ResetPasswordComponent },
+        { path: 'users', component: UserDetailComponent },
+        {path: 'users/:id', component: UserDetailComponent, title: 'User Details'},
+        { path: 'users/edit/:id', component: UserUpdateComponent },
         { path: 'dashboard', component: DashboardComponent },
         { path: 'workspaces', component: ListWorkspacesComponent },
         { path: 'workspaces/add', component: WorkspaceFormComponent },
@@ -91,11 +103,13 @@ export const routes: Routes = [
         { path: 'boards/add', component: FormBoardComponent },
         { path: 'boards/edit/:id', component: FormBoardComponent },
         { path: 'kanban/:id', component: BoardComponent },
-        { path: 'partnerships', component: PartnershipListComponent },
+        { path: 'partnerships', component: ListPartnershipComponent },
         { path: 'add-partnership', component: AddPartnershipComponent },
+        {path: 'partnerships/edit/:id', component: UpdatePartnershipComponent},
         { path: 'partnerships/calender', component: CalendarComponent},
         { path: 'calender', component: CalendarComponent},
-        { path: 'workflows/predict', component: PredictWorkflowComponent}
+        { path: 'workflows/predict', component: PredictWorkflowComponent},
+        { path: 'workflows/stats', component: StatsComponent}
 
       ]
   },

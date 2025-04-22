@@ -1,17 +1,30 @@
-.strategic-animation {
-  display: block;
-  justify-content: center; /* Centre horizontalement */
-  align-items: center;     /* Centre verticalement */
-  height: 100vh;           /* Utilise toute la hauteur de la fenêtre */
-  position: relative;
-  top: 0;
-  right: 0;
-  bottom: 0;
-  left: 300px;
+/* src/app/components/list-partnership/list-partnership.component.css */
+.table {
+  font-size: 0.9rem;
 }
-h2{
-  color: #007bff;
-  text-align: center;
-  align-content: center;
-  justify-content: center;
+
+.table th {
+  font-weight: 500;
+  background-color: #f8f9fa;
+}
+
+.badge {
+  font-weight: normal;
+}
+
+.btn-group-sm .btn {
+  padding: 0.25rem 0.5rem;
+  font-size: 0.8rem;
+}
+
+.pagination {
+  margin-top: 20px;
+}
+
+.page-link {
+  cursor: pointer;
+}
+
+.alert {
+  margin-top: 20px;
 }

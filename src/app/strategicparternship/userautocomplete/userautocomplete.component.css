@@ -1,0 +1,23 @@
+/* user-autocomplete.component.css */
+.selected-users {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 8px;
+  margin-top: 8px;
+}
+
+.user-chip {
+  display: flex;
+  align-items: center;
+  padding: 4px 8px;
+  background: #e0e0e0;
+  border-radius: 16px;
+}
+
+.example-chip-list {
+  width: 100%;
+}
+
+mat-chip {
+  margin: 2px;
+}

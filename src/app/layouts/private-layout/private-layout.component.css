@@ -30,3 +30,12 @@
     margin-left: 0;
   }
 }
+/* Style for the profile dropdown */
+.dropdown-toggle::after {
+  display: none; /* Hide default dropdown arrow */
+}
+
+/* Profile photo styling */
+.navbar .dropdown-menu {
+  min-width: 200px;
+}

@@ -37,6 +37,7 @@ export class GoalFormComponent implements OnInit {
       this.isEdit = true;
       this.goalService.getGoalById(id).subscribe(data => {
         this.goal = data;
+
       });
     }
   }
@@ -149,4 +150,5 @@ export class GoalFormComponent implements OnInit {
       }
     });
   }
+
 }
