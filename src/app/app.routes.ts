@@ -48,6 +48,8 @@ import {WorkflowCalendarComponent} from './workflow-calendar/workflow-calendar.c
 import {
   StrategicPartenershipCalendarComponent
 } from './strategic-partenership-calendar/strategic-partenership-calendar.component';
+import {GoalCalendarComponent} from './goal-calendar/goal-calendar.component';
+import {ProjectCalendarComponent} from './project-calendar/project-calendar.component';
 
 
 export const routes: Routes = [
@@ -121,7 +123,9 @@ export const routes: Routes = [
         { path: 'workflows/predict', component: PredictWorkflowComponent},
         { path: 'workflows/stats', component: StatsComponent},
         { path: 'workflows/calendar', component: WorkflowCalendarComponent},
-        { path: 'partnerships/calendar', component: StrategicPartenershipCalendarComponent}
+        { path: 'partnerships/calendar', component: StrategicPartenershipCalendarComponent},
+        { path: 'goals/calendar', component: GoalCalendarComponent},
+        { path: 'projects/calendar', component: ProjectCalendarComponent}
 
 
       ]
