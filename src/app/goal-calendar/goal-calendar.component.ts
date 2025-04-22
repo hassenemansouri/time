@@ -1,21 +1,16 @@
-import {Component} from '@angular/core';
-import { MatDialog } from '@angular/material/dialog';
-import { CalendarService } from './calendar.service';
-import { AppointmentDialogComponent } from '../appointment-dialog/appointment-dialog.component';
-import { Appointment } from '../appointment-dialog/appointment-dialog.model';
-import { DatePipe, NgForOf, NgIf} from '@angular/common';
-import { CdkDropListGroup, CdkDropList, CdkDrag, CdkDragDrop, moveItemInArray } from '@angular/cdk/drag-drop';
-import { MatButtonToggle, MatButtonToggleGroup } from '@angular/material/button-toggle';
-import { MatIcon } from '@angular/material/icon';
-import { MatButton, MatIconButton } from '@angular/material/button';
-import { addDays, differenceInCalendarDays } from 'date-fns';
-import {Workflow} from '../../workflow/workflow.model';
-import {WorkflowService} from '../../workflow/workflow.service';
-import {PartnershipService, StrategicPartnership} from '../../strategicparternship/strategicparternship.service';
-import {Goal} from '../../goal/goal.model';
-import {GoalService} from '../../goal/goal.service';
-import {ProjectService} from '../../project/project.service';
-import {Project} from '../../models/project.model';
+import { Component } from '@angular/core';
+import {Appointment} from '../app/appointment-dialog/appointment-dialog.model';
+import {MatDialog} from '@angular/material/dialog';
+import {GoalService} from '../goal/goal.service';
+import {CdkDrag, CdkDragDrop, CdkDropList, CdkDropListGroup, moveItemInArray} from '@angular/cdk/drag-drop';
+import {AppointmentDialogComponent} from '../app/appointment-dialog/appointment-dialog.component';
+import {addDays, differenceInCalendarDays} from 'date-fns';
+import {Goal} from '../goal/goal.model';
+import {DatePipe, NgForOf, NgIf} from '@angular/common';
+import {MatButtonToggle, MatButtonToggleGroup} from '@angular/material/button-toggle';
+import {MatIcon} from '@angular/material/icon';
+import {MatButton, MatIconButton} from '@angular/material/button';
+import {GoalCalendarService} from './goal-calendar.service';
 
 
 enum CalendarView {
@@ -23,19 +18,20 @@ enum CalendarView {
   Week = 'week',
   Day = 'day',
 }
-
 @Component({
-  selector: 'app-calendar',
-  templateUrl: './calendar.component.html',
-  styleUrls: ['./calendar.component.scss'],
-  standalone: true,
+  selector: 'app-goal-calendar',
   imports: [
     CdkDropListGroup, CdkDropList, DatePipe, MatButtonToggleGroup,
     NgIf, MatButtonToggle, MatIcon, NgForOf,
     CdkDrag, MatButton, MatIconButton
   ],
+  templateUrl: './goal-calendar.component.html',
+  standalone: true,
+  styleUrl: './goal-calendar.component.scss'
 })
-export class CalendarComponent {
+export class GoalCalendarComponent {
+
+
   viewDate: Date = new Date();
   selectedDate: Date | null = null;
   currentView: CalendarView = CalendarView.Month;
@@ -48,11 +44,8 @@ export class CalendarComponent {
 
   constructor(
     public dialog: MatDialog,
-    private calendarService: CalendarService,
-    private workflowService: WorkflowService,
-    private partnershipService:PartnershipService,
+    private goalCalendarService: GoalCalendarService,
     private goalService: GoalService,
-    private projectService: ProjectService,
   ) {
     this.refreshAppointments();
     this.generateTimeSlots();
@@ -60,7 +53,7 @@ export class CalendarComponent {
   }
 
   private refreshAppointments() {
-    this.appointments = this.calendarService.getAppointments();
+    this.appointments = this.goalCalendarService.getAppointments();
   }
 
   // Générer les créneaux horaires
@@ -266,7 +259,7 @@ export class CalendarComponent {
 
     dialogRef.afterClosed().subscribe((result: Appointment) => {
       if (result) {
-        this.calendarService.addAppointment(result);
+        this.goalCalendarService.addAppointment(result);
         this.refreshAppointments();
       }
     });
@@ -283,9 +276,9 @@ export class CalendarComponent {
     dialogRef.afterClosed().subscribe((result) => {
       if (result) {
         if (result.remove) {
-          this.calendarService.deleteAppointment(result.uuid);
+          this.goalCalendarService.deleteAppointment(result.uuid);
         } else {
-          this.calendarService.updateAppointment(result);
+          this.goalCalendarService.updateAppointment(result);
         }
         this.refreshAppointments();
       }
@@ -305,17 +298,8 @@ export class CalendarComponent {
 
   ngOnInit() {
     this.updateConnectedDropLists();
-    this.workflowService.getAllWorkflows().subscribe((workflows) => {
-      this.loadWorkflowsIntoCalendar(workflows);
-    });
-    this.partnershipService.getAllPartnerships().subscribe((partnerships) => {
-      this.loadPartnershipIntoCalendar(partnerships);
-    });
     this.goalService.getAllGoals().subscribe((goals) => {
       this.loadGoalsIntoCalendar(goals);
-    })
-    this.projectService.getAllProjects().subscribe((projects) => {
-      this.loadProjectsIntoCalendar(projects);
     })
 
   }
@@ -327,76 +311,6 @@ export class CalendarComponent {
 
   getDropListId(date: Date): string {
     return `drop-list-${date.toDateString()}`;
-  }
-
-  saveAppointmentsToStorage() {
-    localStorage.setItem('appointments', JSON.stringify(this.appointments));
-  }
-
-  loadAppointmentsFromStorage() {
-    const stored = localStorage.getItem('appointments');
-    if (stored) {
-      this.appointments = JSON.parse(stored);
-    }
-  }
-
-  loadPartnershipIntoCalendar(partnerships: StrategicPartnership[]) {
-    const addedDates = new Set<string>(); // To track unique dates
-
-    partnerships.forEach(partner => {
-      const creationDate = new Date(partner.creationDate);
-
-      if (isNaN(creationDate.getTime())) {
-        console.error('Invalid creationDate for partner', partner);
-        return;
-      }
-
-      const dateString = creationDate.toISOString().split('T')[0];
-
-      if (!addedDates.has(dateString)) {
-        this.appointments.push({
-          endTime: '',
-          startTime: '',
-          id: `${partner.id}`,
-          title: partner.name,
-          date: creationDate
-        });
-        addedDates.add(dateString);
-      }
-    });
-  }
-  loadWorkflowsIntoCalendar(workflows: Workflow[]) {
-    const addedDates = new Set<string>(); // To track unique dates
-
-    workflows.forEach(workflow => {
-      // Check if startDate and endDate are valid
-      const start = new Date(workflow.startDate);
-      const end = new Date(workflow.endDate);
-
-      if (isNaN(start.getTime()) || isNaN(end.getTime())) {
-        console.error('Invalid date for workflow', workflow);
-        return;
-      }
-
-      const days = differenceInCalendarDays(end, start) + 1;
-
-      for (let i = 0; i < days; i++) {
-        const date = addDays(start, i);
-        const dateString = date.toISOString().split('T')[0]; // Get the date part (YYYY-MM-DD)
-
-        // Only add the date if it has not been added already
-        if (!addedDates.has(dateString)) {
-          this.appointments.push({
-            endTime: '',
-            startTime: '',
-            id: `${workflow.id}-${i}`,
-            title: workflow.workflowName,
-            date: date
-          });
-          addedDates.add(dateString); // Mark the date as added
-        }
-      }
-    });
   }
   loadGoalsIntoCalendar(goals: Goal[]) {
     const addedDates = new Set<string>(); // Pour suivre les dates uniques
@@ -430,39 +344,5 @@ export class CalendarComponent {
       }
     });
   }
-  loadProjectsIntoCalendar(projects: Project[]) {
-    const addedDates = new Set<string>(); // Pour suivre les dates uniques
-
-    projects.forEach(project => {
-      // Vérifie que les dates sont définies et valides
-      const start = new Date(project.startDate!);
-      const end = new Date(project.endDate!);
-
-      if (!project.startDate || !project.endDate || isNaN(start.getTime()) || isNaN(end.getTime())) {
-        console.error('Invalid date for project', project);
-        return;
-      }
-
-      const days = differenceInCalendarDays(end, start) + 1;
-
-      for (let i = 0; i < days; i++) {
-        const date = addDays(start, i);
-        const dateString = date.toISOString().split('T')[0];
-
-        if (!addedDates.has(dateString)) {
-          this.appointments.push({
-            endTime: '',
-            startTime: '',
-            id: `${project.projet_id}-${i}`,
-            title: `${project.title} (${project.category})`, // Ajoute la catégorie si utile
-            date: date
-          });
-          addedDates.add(dateString);
-        }
-      }
-    });
-  }
-
-
 
 }

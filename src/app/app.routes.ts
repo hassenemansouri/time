@@ -44,6 +44,12 @@ import {UserUpdateComponent} from './user/user-update/user-update.component';
 import {StatsComponent} from './stats/stats.component';
 import {ResetPasswordComponent} from './auth/reset-password/reset-password.component';
 import {NoAuthGuardService} from './no-auth-guard.service';
+import {WorkflowCalendarComponent} from './workflow-calendar/workflow-calendar.component';
+import {
+  StrategicPartenershipCalendarComponent
+} from './strategic-partenership-calendar/strategic-partenership-calendar.component';
+import {GoalCalendarComponent} from './goal-calendar/goal-calendar.component';
+import {ProjectCalendarComponent} from './project-calendar/project-calendar.component';
 
 
 export const routes: Routes = [
@@ -85,11 +91,10 @@ export const routes: Routes = [
         { path: 'workspaces', component: ListWorkspacesComponent },
         { path: 'workspaces/add', component: WorkspaceFormComponent },
         { path: 'workspaces/edit/:id', component: WorkspaceFormComponent },
-        { path: 'workspaces/calender', component: CalendarComponent},
+        { path: 'calender', component: CalendarComponent},
         { path: 'workflows', component: WorkflowComponent },
         { path: 'workflows/add', component: WorkflowFormComponent },
         { path: 'workflows/edit/:id', component: WorkflowFormComponent },
-        { path: 'workflows/calender', component: CalendarComponent},
         { path: 'collaborations', component: CollaborationComponent },
         { path: 'goals', component: ListGoalsComponent },
         { path: 'goals/add', component: GoalFormComponent },
@@ -98,15 +103,12 @@ export const routes: Routes = [
         { path: 'rewards', component: ListRewardsComponent },
         { path: 'rewards/add', component: RewardFormComponent },
         { path: 'rewards/edit/:id', component: RewardFormComponent },
-        { path: 'rewards/calender', component: CalendarComponent},
         { path: 'projects', component: ProjectComponent },
         { path: 'projects/add', component: ProjectFormComponent },
         { path: 'projects/edit/:id', component: ProjectFormComponent },
-        { path: 'projects/calender', component: CalendarComponent},
         { path: 'tasks', component: TaskComponent },
         { path: 'tasks/add', component: TaskFormComponent },
         { path: 'tasks/edit/:id', component: TaskFormComponent },
-        { path: 'tasks/calender', component: CalendarComponent},
         { path: 'columns', component: ColumnComponent },
         { path: 'columns/add', component: ColumnFormComponent },
         { path: 'columns/edit/:id', component: ColumnFormComponent },
@@ -117,10 +119,14 @@ export const routes: Routes = [
         { path: 'partnerships', component: ListPartnershipComponent },
         { path: 'add-partnership', component: AddPartnershipComponent },
         {path: 'partnerships/edit/:id', component: UpdatePartnershipComponent},
-        { path: 'partnerships/calender', component: CalendarComponent},
         { path: 'calender', component: CalendarComponent},
         { path: 'workflows/predict', component: PredictWorkflowComponent},
-        { path: 'workflows/stats', component: StatsComponent}
+        { path: 'workflows/stats', component: StatsComponent},
+        { path: 'workflows/calendar', component: WorkflowCalendarComponent},
+        { path: 'partnerships/calendar', component: StrategicPartenershipCalendarComponent},
+        { path: 'goals/calendar', component: GoalCalendarComponent},
+        { path: 'projects/calendar', component: ProjectCalendarComponent}
+
 
       ]
   },
