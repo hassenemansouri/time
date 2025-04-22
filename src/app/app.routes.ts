@@ -56,6 +56,7 @@ import {
   StrategicPartenershipStatsComponent
 } from './strategic-partenership-stats/strategic-partenership-stats.component';
 import {ProjectStatsComponent} from './project-stats/project-stats.component';
+import {TimeTrackerComponent} from './components/time-tracker/time-tracker/time-tracker.component';
 
 
 export const routes: Routes = [
@@ -90,6 +91,7 @@ export const routes: Routes = [
           canActivate: [NoAuthGuardService] // <-- Blocks if already logged in
         },
         { path: 'reset-password', component: ResetPasswordComponent },
+        {path: 'time-tracker',component: TimeTrackerComponent},
         { path: 'users', component: UserDetailComponent },
         {path: 'users/:id', component: UserDetailComponent, title: 'User Details'},
         { path: 'users/edit/:id', component: UserUpdateComponent },
