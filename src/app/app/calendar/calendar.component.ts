@@ -12,6 +12,8 @@ import { addDays, differenceInCalendarDays } from 'date-fns';
 import {Workflow} from '../../workflow/workflow.model';
 import {WorkflowService} from '../../workflow/workflow.service';
 import {PartnershipService, StrategicPartnership} from '../../strategicparternship/strategicparternship.service';
+import {Goal} from '../../goal/goal.model';
+import {GoalService} from '../../goal/goal.service';
 
 
 enum CalendarView {
@@ -46,7 +48,8 @@ export class CalendarComponent {
     public dialog: MatDialog,
     private calendarService: CalendarService,
     private workflowService: WorkflowService,
-    private partnershipService:PartnershipService
+    private partnershipService:PartnershipService,
+    private goalService: GoalService,
   ) {
     this.refreshAppointments();
     this.generateTimeSlots();
@@ -305,6 +308,10 @@ export class CalendarComponent {
     this.partnershipService.getAllPartnerships().subscribe((partnerships) => {
       this.loadPartnershipIntoCalendar(partnerships);
     });
+    this.goalService.getAllGoals().subscribe((goals) => {
+      this.loadGoalsIntoCalendar(goals);
+    })
+
   }
 
   updateConnectedDropLists() {
@@ -385,5 +392,38 @@ export class CalendarComponent {
       }
     });
   }
+  loadGoalsIntoCalendar(goals: Goal[]) {
+    const addedDates = new Set<string>(); // Pour suivre les dates uniques
+
+    goals.forEach(goal => {
+      // Vérification des dates valides
+      const start = new Date(goal.startDate!);
+      const end = new Date(goal.endDate!);
+
+      if (isNaN(start.getTime()) || isNaN(end.getTime())) {
+        console.error('Invalid date for goal', goal);
+        return;
+      }
+
+      const days = differenceInCalendarDays(end, start) + 1;
+
+      for (let i = 0; i < days; i++) {
+        const date = addDays(start, i);
+        const dateString = date.toISOString().split('T')[0];
+
+        if (!addedDates.has(dateString)) {
+          this.appointments.push({
+            endTime: '',
+            startTime: '',
+            id: `${goal.goal_id}-${i}`,
+            title: goal.title,
+            date: date
+          });
+          addedDates.add(dateString);
+        }
+      }
+    });
+  }
+
 
 }
