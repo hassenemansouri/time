@@ -1,23 +1,44 @@
-import {Component, OnInit} from '@angular/core';
-import {GoalService} from '../goal/goal.service';
-import {ProjectService} from '../project/project.service';
-import {WorkflowService} from '../workflow/workflow.service';
-import {PartnershipService} from '../strategicparternship/strategicparternship.service';
-
+import { Component, OnInit, OnDestroy } from '@angular/core';
+import { GoalService } from '../goal/goal.service';
+import { ProjectService } from '../project/project.service';
+import { WorkflowService } from '../workflow/workflow.service';
+import { PartnershipService } from '../strategicparternship/strategicparternship.service';
 import { Chart, registerables } from 'chart.js';
+import { forkJoin, Subject } from 'rxjs';
+import { takeUntil } from 'rxjs/operators';
+import {NgForOf, NgIf} from '@angular/common';
+
 Chart.register(...registerables);
+
+interface DashboardTab {
+  id: string;
+  label: string;
+}
+
 @Component({
   selector: 'app-all-stats',
-  imports: [],
   templateUrl: './all-stats.component.html',
+  styleUrls: ['./all-stats.component.scss'],
   standalone: true,
-  styleUrl: './all-stats.component.scss'
+  imports: [
+    NgForOf,
+    NgIf
+  ]
 })
-export class AllStatsComponent implements OnInit {
+export class AllStatsComponent implements OnInit, OnDestroy {
+  stats: any = {};
+  loading = true;
+  error = false;
+  activeTab = 'goals';
+  private destroy$ = new Subject<void>();
 
-  stats: any;
+  tabs: DashboardTab[] = [
+    { id: 'goals', label: 'Goals' },
+    { id: 'projects', label: 'Projects' },
+    { id: 'workflows', label: 'Workflows' },
+    { id: 'partnerships', label: 'Partnerships' }
+  ];
 
-  // Inject services
   constructor(
     private goalService: GoalService,
     private projectService: ProjectService,
@@ -26,161 +47,203 @@ export class AllStatsComponent implements OnInit {
   ) {}
 
   ngOnInit(): void {
-    // Fetch data from GoalService and initialize charts
-    this.goalService.getDashboardStats().subscribe((data) => {
-      this.stats = data;
-      this.initGoalCharts();
-    });
-
-    // Fetch data from ProjectService and initialize charts
-    this.projectService.getProjectDashboardStats().subscribe((data) => {
-      this.stats = data;
-      this.initProjectCharts();
-    });
-
-    // Fetch data from WorkflowService and initialize charts
-    this.workflowService.getDashboardStats().subscribe((data) => {
-      this.stats = data;
-      this.initWorkflowCharts();
-    });
-
-    // Fetch data from PartnershipService and initialize charts
-    this.partnershipService.getDashboardStats().subscribe((data) => {
-      this.stats = data;
-      this.initPartnershipCharts();
-    });
+    this.loadDashboardData();
   }
 
-  // Initialize charts for GoalStats
-  initGoalCharts(): void {
+  ngOnDestroy(): void {
+    this.destroy$.next();
+    this.destroy$.complete();
+    this.destroyCharts();
+  }
+
+  setActiveTab(tabId: string): void {
+    this.activeTab = tabId;
+  }
+
+  private loadDashboardData(): void {
+    this.loading = true;
+    this.error = false;
+
+    forkJoin([
+      this.goalService.getDashboardStats(),
+      this.projectService.getProjectDashboardStats(),
+      this.workflowService.getDashboardStats(),
+      this.partnershipService.getDashboardStats()
+    ])
+      .pipe(takeUntil(this.destroy$))
+      .subscribe({
+        next: ([goalStats, projectStats, workflowStats, partnershipStats]) => {
+          this.stats = {
+            ...goalStats,
+            ...projectStats,
+            ...workflowStats,
+            ...partnershipStats
+          };
+          this.initAllCharts();
+          this.loading = false;
+        },
+        error: (err) => {
+          console.error('Failed to load dashboard data:', err);
+          this.error = true;
+          this.loading = false;
+        }
+      });
+  }
+
+  private initAllCharts(): void {
+    this.initGoalCharts();
+    this.initProjectCharts();
+    this.initWorkflowCharts();
+    this.initPartnershipCharts();
+  }
+
+  private destroyCharts(): void {
+    Object.values(Chart.instances).forEach(instance => instance.destroy());
+  }
+
+  private initGoalCharts(): void {
     if (!this.stats) return;
 
     if (this.stats.goalsPerMonth) {
       this.createBarChart(
         'goalsPerMonthChart',
-        'Goals par Mois',
+        'Goals per Month',
         Object.keys(this.stats.goalsPerMonth),
-        Object.values(this.stats.goalsPerMonth)
+        Object.values(this.stats.goalsPerMonth),
+        ['#4361ee', '#3f37c9', '#4895ef']
       );
     }
 
     if (this.stats.avgCategoriesPerMonth) {
       this.createLineChart(
         'avgCategoriesPerMonthChart',
-        'Moyenne de Catégories par Mois',
+        'Average Categories per Month',
         Object.keys(this.stats.avgCategoriesPerMonth),
-        Object.values(this.stats.avgCategoriesPerMonth)
+        Object.values(this.stats.avgCategoriesPerMonth),
+        '#4cc9f0'
       );
     }
 
     if (this.stats.goalsBySize) {
       this.createPieChart(
         'goalsBySizeChart',
-        'Répartition des Goals par Taille',
+        'Goals by Size',
         Object.keys(this.stats.goalsBySize),
-        Object.values(this.stats.goalsBySize)
+        Object.values(this.stats.goalsBySize),
+        ['#4361ee', '#3f37c9', '#4895ef', '#4cc9f0', '#560bad']
       );
     }
   }
 
-  // Initialize charts for ProjectStats
-  initProjectCharts(): void {
+  private initProjectCharts(): void {
     if (!this.stats) return;
 
     if (this.stats.projectsPerMonth) {
       this.createBarChart(
         'projectsPerMonthChart',
-        'Projects par Mois',
+        'Projects per Month',
         Object.keys(this.stats.projectsPerMonth),
-        Object.values(this.stats.projectsPerMonth)
+        Object.values(this.stats.projectsPerMonth),
+        ['#7209b7', '#560bad', '#480ca8']
       );
     }
 
     if (this.stats.projectCategories) {
       this.createLineChart(
         'projectCategoriesChart',
-        'Catégories de Projet par Mois',
+        'Project Categories',
         Object.keys(this.stats.projectCategories),
-        Object.values(this.stats.projectCategories)
+        Object.values(this.stats.projectCategories),
+        '#b5179e'
       );
     }
 
     if (this.stats.projectsBySize) {
       this.createPieChart(
         'projectsBySizeChart',
-        'Répartition des Projects par Taille',
+        'Projects by Size',
         Object.keys(this.stats.projectsBySize),
-        Object.values(this.stats.projectsBySize)
+        Object.values(this.stats.projectsBySize),
+        ['#7209b7', '#560bad', '#480ca8', '#3a0ca3', '#f72585']
       );
     }
   }
 
-  // Initialize charts for WorkflowStats
-  initWorkflowCharts(): void {
+  private initWorkflowCharts(): void {
     if (!this.stats) return;
 
     if (this.stats.workflowsPerMonth) {
       this.createBarChart(
         'workflowsPerMonthChart',
-        'Workflows par Mois',
+        'Workflows per Month',
         Object.keys(this.stats.workflowsPerMonth),
-        Object.values(this.stats.workflowsPerMonth)
+        Object.values(this.stats.workflowsPerMonth),
+        ['#f72585', '#b5179e', '#7209b7']
       );
     }
 
     if (this.stats.workflowCategories) {
       this.createLineChart(
         'workflowCategoriesChart',
-        'Catégories de Workflow par Mois',
+        'Workflow Categories',
         Object.keys(this.stats.workflowCategories),
-        Object.values(this.stats.workflowCategories)
+        Object.values(this.stats.workflowCategories),
+        '#7209b7'
       );
     }
 
     if (this.stats.workflowsBySize) {
       this.createPieChart(
         'workflowsBySizeChart',
-        'Répartition des Workflows par Taille',
+        'Workflows by Size',
         Object.keys(this.stats.workflowsBySize),
-        Object.values(this.stats.workflowsBySize)
+        Object.values(this.stats.workflowsBySize),
+        ['#f72585', '#b5179e', '#7209b7', '#560bad', '#480ca8']
       );
     }
   }
 
-  // Initialize charts for PartnershipStats
-  initPartnershipCharts(): void {
+  private initPartnershipCharts(): void {
     if (!this.stats) return;
 
     if (this.stats.partnershipsPerMonth) {
       this.createBarChart(
         'partnershipsPerMonthChart',
-        'Partenariats par Mois',
+        'Partnerships per Month',
         Object.keys(this.stats.partnershipsPerMonth),
-        Object.values(this.stats.partnershipsPerMonth)
+        Object.values(this.stats.partnershipsPerMonth),
+        ['#4cc9f0', '#4895ef', '#4361ee']
       );
     }
 
     if (this.stats.partnershipCategories) {
       this.createLineChart(
         'partnershipCategoriesChart',
-        'Catégories de Partenariat par Mois',
+        'Partnership Categories',
         Object.keys(this.stats.partnershipCategories),
-        Object.values(this.stats.partnershipCategories)
+        Object.values(this.stats.partnershipCategories),
+        '#4895ef'
       );
     }
 
     if (this.stats.partnershipsBySize) {
       this.createPieChart(
         'partnershipsBySizeChart',
-        'Répartition des Partenariats par Taille',
+        'Partnerships by Size',
         Object.keys(this.stats.partnershipsBySize),
-        Object.values(this.stats.partnershipsBySize)
+        Object.values(this.stats.partnershipsBySize),
+        ['#4cc9f0', '#4895ef', '#4361ee', '#3f37c9', '#3a0ca3']
       );
     }
   }
 
-  // Bar chart creation method
-  createBarChart(id: string, label: string, labels: string[], data: any[]): void {
+  private createBarChart(
+    id: string,
+    label: string,
+    labels: string[],
+    data: any[],
+    colors: string[]
+  ): void {
     new Chart(id, {
       type: 'bar',
       data: {
@@ -188,14 +251,50 @@ export class AllStatsComponent implements OnInit {
         datasets: [{
           label,
           data,
-          backgroundColor: '#42A5F5'
+          backgroundColor: colors,
+          borderColor: colors.map(color => `${color}cc`),
+          borderWidth: 1,
+          borderRadius: 4
         }]
+      },
+      options: {
+        responsive: true,
+        plugins: {
+          legend: {
+            display: false
+          },
+          tooltip: {
+            backgroundColor: '#2b2d42',
+            titleColor: '#fff',
+            bodyColor: '#fff',
+            padding: 12,
+            cornerRadius: 4
+          }
+        },
+        scales: {
+          y: {
+            beginAtZero: true,
+            grid: {
+              color: 'rgba(0, 0, 0, 0.05)'
+            }
+          },
+          x: {
+            grid: {
+              display: false
+            }
+          }
+        }
       }
     });
   }
 
-  // Line chart creation method
-  createLineChart(id: string, label: string, labels: string[], data: any[]): void {
+  private createLineChart(
+    id: string,
+    label: string,
+    labels: string[],
+    data: any[],
+    color: string
+  ): void {
     new Chart(id, {
       type: 'line',
       data: {
@@ -203,15 +302,54 @@ export class AllStatsComponent implements OnInit {
         datasets: [{
           label,
           data,
-          borderColor: '#66BB6A',
-          fill: false,
+          borderColor: color,
+          backgroundColor: `${color}20`,
+          borderWidth: 3,
+          tension: 0.3,
+          fill: true,
+          pointBackgroundColor: color,
+          pointRadius: 5,
+          pointHoverRadius: 7
         }]
+      },
+      options: {
+        responsive: true,
+        plugins: {
+          legend: {
+            display: false
+          },
+          tooltip: {
+            backgroundColor: '#2b2d42',
+            titleColor: '#fff',
+            bodyColor: '#fff',
+            padding: 12,
+            cornerRadius: 4
+          }
+        },
+        scales: {
+          y: {
+            beginAtZero: true,
+            grid: {
+              color: 'rgba(0, 0, 0, 0.05)'
+            }
+          },
+          x: {
+            grid: {
+              display: false
+            }
+          }
+        }
       }
     });
   }
 
-  // Pie chart creation method
-  createPieChart(id: string, label: string, labels: string[], data: any[]): void {
+  private createPieChart(
+    id: string,
+    label: string,
+    labels: string[],
+    data: any[],
+    colors: string[]
+  ): void {
     new Chart(id, {
       type: 'pie',
       data: {
@@ -219,10 +357,31 @@ export class AllStatsComponent implements OnInit {
         datasets: [{
           label,
           data,
-          backgroundColor: ['#FFA726', '#AB47BC', '#29B6F6']
+          backgroundColor: colors,
+          borderColor: '#fff',
+          borderWidth: 2
         }]
+      },
+      options: {
+        responsive: true,
+        plugins: {
+          legend: {
+            position: 'right',
+            labels: {
+              padding: 20,
+              usePointStyle: true,
+              pointStyle: 'circle'
+            }
+          },
+          tooltip: {
+            backgroundColor: '#2b2d42',
+            titleColor: '#fff',
+            bodyColor: '#fff',
+            padding: 12,
+            cornerRadius: 4
+          }
+        }
       }
     });
   }
-
 }

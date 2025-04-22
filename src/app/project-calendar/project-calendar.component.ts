@@ -7,14 +7,9 @@ import {MatIcon} from '@angular/material/icon';
 import {Appointment} from '../app/appointment-dialog/appointment-dialog.model';
 import {MatDialog} from '@angular/material/dialog';
 import {CalendarService} from '../app/calendar/calendar.service';
-import {WorkflowService} from '../workflow/workflow.service';
-import {PartnershipService, StrategicPartnership} from '../strategicparternship/strategicparternship.service';
-import {GoalService} from '../goal/goal.service';
 import {ProjectService} from '../project/project.service';
 import {AppointmentDialogComponent} from '../app/appointment-dialog/appointment-dialog.component';
-import {Workflow} from '../workflow/workflow.model';
 import {addDays, differenceInCalendarDays} from 'date-fns';
-import {Goal} from '../goal/goal.model';
 import {Project} from '../models/project.model';
 import {ProjectCalendarService} from './project-calendar.service';
 
@@ -58,7 +53,6 @@ export class ProjectCalendarComponent {
 
   constructor(
     public dialog: MatDialog,
-    private calendarService: CalendarService,
     private projectService: ProjectService,
     private ProjectCalendarService : ProjectCalendarService
   ) {
