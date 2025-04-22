@@ -29,14 +29,50 @@ export class ListGoalsComponent implements OnInit {
   ngOnInit(): void {
     this.loadGoals();
     setTimeout(() => this.showAnimation = false, 6000);
+    this.goals.forEach(goal => this.verifierEtEnvoyerAlerte(goal));
   }
 
   loadGoals(): void {
     this.goalService.getAllGoals().subscribe(data => {
       this.goals = data;
+      this.goals.forEach(goal => this.verifierEtEnvoyerAlerte(goal));
     });
   }
+  verifierEtEnvoyerAlerte(goal: Goal): void {
+    const today = new Date();
+    const endDate = new Date(goal.endDate);
 
+    if (isNaN(endDate.getTime())) {
+      console.error('❌ Date de fin invalide');
+      return;
+    }
+
+    const diffTime = endDate.getTime() - today.getTime();
+    const diffDays = Math.ceil(diffTime / (1000 * 3600 * 24));
+    console.log(`📅 J-${diffDays} pour le goal : ${goal.title}`);
+
+    if ([3, 2, 1].includes(diffDays)) {
+      const emailParams = {
+        title: goal.title,
+        description: goal.description,
+        startDate: goal.startDate,
+        endDate: goal.endDate,
+        libelle: goal['categories']?.[0]?.libelle || 'Non précisé',
+        duration: goal['categories']?.[0]?.description || 'Non précisé',
+        to_email: 'mahdibenammor@gmail.com'
+      };
+      emailjs.send(
+        'service_pbrsy9b',       // SERVICE_ID
+        'template_ul44vhk',      // TEMPLATE_ID de rappel
+        emailParams,
+        'ID0U3W2KxG6kY1JV0'      // PUBLIC_KEY
+      ).then((result) => {
+        console.log(`📩 Email de rappel envoyé pour "${goal.title}" à J-${diffDays}`, result.text);
+      }).catch((error) => {
+        console.error('❌ Erreur e-mail de rappel :', error);
+      });
+    }
+  }
   deleteGoal(id: string | undefined): void {
     if (!id) return;
     const goalToDelete = this.goals.find(g => g.goal_id === id);
@@ -45,37 +81,10 @@ export class ListGoalsComponent implements OnInit {
     if (confirm('Êtes-vous sûr de vouloir supprimer ce goal ?')) {
       this.goalService.deleteGoal(id).subscribe(() => {
         this.goals = this.goals.filter(g => g.goal_id !== id);
-        this.sendDeletionEmail(goalToDelete);
+
       });
     }
   }
-
-  private sendDeletionEmail(goal: Goal): void {
-    const category = goal.categories?.[0] || { libelle: '', description: '' };
-
-    const emailParams = {
-      title: goal.title,
-      description: goal.description,
-      startDate: goal.startDate,
-      endDate: goal.endDate,
-      libelle: category.libelle,
-      duration: category.description,
-      action: 'suppression',
-      to_email: 'mzoughi.mahdi@esprit.tn'
-    };
-
-    emailjs.send(
-      'service_pbrsy9b',       // Remplace par ton ID de service
-      'template_ul44vhk',      // Remplace par ton ID de template
-      emailParams,
-      'ID0U3W2KxG6kY1JV0'      // Remplace par ton user/public key
-    ).then((result) => {
-      console.log('✅ Email de suppression envoyé !', result.text);
-    }).catch((error) => {
-      console.error('❌ Erreur e-mail suppression :', error);
-    });
-  }
-
   filteredGoals(): Goal[] {
     if (!this.searchText) return this.goals;
     return this.goals.filter(goal =>

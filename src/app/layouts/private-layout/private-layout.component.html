@@ -13,9 +13,9 @@
       </a>
 
       <!-- Projects -->
-       
+
       <div class="dropdown">
-        
+
         <a routerLink="/calender" routerLinkActive="active" class="list-group-item list-group-item-action bg-dark text-white">
           <i class="fas fa-cogs me-2"></i> Principal Calender
         </a>
@@ -26,7 +26,6 @@
         <ul class="dropdown-menu bg-dark" aria-labelledby="projectsDropdown">
           <li><a routerLink="/projects" routerLinkActive="active" class="dropdown-item text-white">All Projects</a></li>
           <li><a routerLink="/projects/add" routerLinkActive="active" class="dropdown-item text-white">Add Project</a></li>
-          <li><a routerLink="/projects/calender" routerLinkActive="active" class="dropdown-item text-white">Calender</a></li>
           <li><a routerLink="/projects/dashboard" routerLinkActive="active" class="dropdown-item text-white">Dashboard</a></li>
         </ul>
       </div>
@@ -40,7 +39,6 @@
         <ul class="dropdown-menu bg-dark" aria-labelledby="tasksDropdown">
           <li><a routerLink="/tasks" routerLinkActive="active" class="dropdown-item text-white">All Tasks</a></li>
           <li><a routerLink="/tasks/add" routerLinkActive="active" class="dropdown-item text-white">Add Task</a></li>
-          <li><a routerLink="/tasks/calender" routerLinkActive="active" class="dropdown-item text-white">Calender</a></li>
           <li><a routerLink="/tasks/dashboard" routerLinkActive="active" class="dropdown-item text-white">Dashboard</a></li>
         </ul>
       </div>
@@ -54,7 +52,7 @@
       <li><a routerLink="/columns/add" routerLinkActive="active" class="dropdown-item text-white">Add Column</a></li>
     </ul>
   </div>
-  
+
    <!-- kanban -->
    <div class="dropdown">
     <a class="list-group-item list-group-item-action bg-dark text-white dropdown-toggle" href="#" id="kanbanDropdown" role="button" data-bs-toggle="dropdown" aria-expanded="false">
@@ -65,7 +63,7 @@
       <li><a routerLink="/boards/add" routerLinkActive="active" class="dropdown-item text-white">Add Board</a></li>
     </ul>
   </div>
-  
+
       <!-- Workspaces -->
       <div class="dropdown">
         <a class="list-group-item list-group-item-action bg-dark text-white dropdown-toggle" href="#" id="workspacesDropdown" role="button" data-bs-toggle="dropdown" aria-expanded="false">
@@ -74,7 +72,6 @@
         <ul class="dropdown-menu bg-dark" aria-labelledby="workspacesDropdown">
           <li><a routerLink="/workspaces" routerLinkActive="active" class="dropdown-item text-white">All Workspaces</a></li>
           <li><a routerLink="/workspaces/add" routerLinkActive="active" class="dropdown-item text-white">Add Workspace</a></li>
-          <li><a routerLink="/workspaces/calender" routerLinkActive="active" class="dropdown-item text-white">Calender</a></li>
           <li><a routerLink="/workspaces/dashboard" routerLinkActive="active" class="dropdown-item text-white">Dashboard</a></li>
 
         </ul>
@@ -89,8 +86,7 @@
           <li><a routerLink="/workflows" routerLinkActive="active" class="dropdown-item text-white">All Workflows</a></li>
           <li><a routerLink="/workflows/add" routerLinkActive="active" class="dropdown-item text-white">Add Workflow</a></li>
           <li><a routerLink="/workflows/predict" routerLinkActive="active" class="dropdown-item text-white">Prediction</a></li>
-          <li><a routerLink="/workflows/calender" routerLinkActive="active" class="dropdown-item text-white">Calender</a></li>
-          <li><a routerLink="/workspaces/add" routerLinkActive="active" class="dropdown-item text-white">Dashboard</a></li>
+          <li><a routerLink="/workflows/stats" routerLinkActive="active" class="dropdown-item text-white">Dashboard</a></li>
         </ul>
       </div>
 
@@ -102,7 +98,6 @@
         <ul class="dropdown-menu bg-dark" aria-labelledby="goalsDropdown">
           <li><a routerLink="/goals" routerLinkActive="active" class="dropdown-item text-white">All Goals</a></li>
           <li><a routerLink="/goals/add" routerLinkActive="active" class="dropdown-item text-white">Add Goal</a></li>
-          <li><a routerLink="/goals/calender" routerLinkActive="active" class="dropdown-item text-white">Calender</a></li>
           <li><a routerLink="/goals/dashboard" routerLinkActive="active" class="dropdown-item text-white">Dashboard</a></li>
         </ul>
       </div>
@@ -115,7 +110,6 @@
         <ul class="dropdown-menu bg-dark" aria-labelledby="rewardsDropdown">
           <li><a routerLink="/rewards" routerLinkActive="active" class="dropdown-item text-white">All Rewards</a></li>
           <li><a routerLink="/rewards/add" routerLinkActive="active" class="dropdown-item text-white">Add Reward</a></li>
-          <li><a routerLink="/rewards/calender" routerLinkActive="active" class="dropdown-item text-white">Calender</a></li>
           <li><a routerLink="/rewards/dashboard" routerLinkActive="active" class="dropdown-item text-white">Dashboard</a></li>
         </ul>
       </div>
@@ -133,7 +127,6 @@
         <ul class="dropdown-menu bg-dark" aria-labelledby="partnershipsDropdown">
           <li><a routerLink="/partnerships" routerLinkActive="active" class="dropdown-item text-white">All Partnerships</a></li>
           <li><a routerLink="/add-partnership" routerLinkActive="active" class="dropdown-item text-white">Add Partnership</a></li>
-          <li><a routerLink="/partnerships/calender" routerLinkActive="active" class="dropdown-item text-white">Calender</a></li>
           <li><a routerLink="/partnerships/dashboard" routerLinkActive="active" class="dropdown-item text-white">Dashboard</a></li>
         </ul>
       </div>
@@ -144,7 +137,7 @@
       </a>
 
       <!-- Logout -->
-      <a routerLink="/login" class="list-group-item list-group-item-action bg-dark text-danger">
+      <a routerLink="/login" class="list-group-item list-group-item-action bg-dark text-danger" (click)="logout()">
         <i class="fas fa-sign-out-alt me-2"></i> Logout
       </a>
 
@@ -162,16 +155,34 @@
         <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarSupportedContent" (click)="toggleSidebar()">
           <span class="navbar-toggler-icon"></span>
         </button>
+        <!-- ... existing navbar code ... -->
         <div class="collapse navbar-collapse" id="navbarSupportedContent">
           <ul class="navbar-nav ms-auto">
-            <li class="nav-item">
-              <a class="nav-link text-white" href="#"><i class="fas fa-user-circle me-1"></i> Profile</a>
-            </li>
-            <li class="nav-item">
-              <a class="nav-link text-white" href="#"><i class="fas fa-bell me-1"></i> Notifications</a>
+            <li class="nav-item dropdown">
+              <a *ngIf="user" class="nav-link dropdown-toggle text-white" href="#" id="navbarDropdown" role="button" data-bs-toggle="dropdown" aria-expanded="false">
+                <!-- User photo or placeholder -->
+                <span class="d-flex align-items-center">
+          <img *ngIf="getPhotoUrl(); else placeholder"
+               [src]="getPhotoUrl()"
+               alt="Profile Photo"
+               class="rounded-circle me-2"
+               style="width: 30px; height: 30px; object-fit: cover;">
+          <ng-template #placeholder>
+            <i class="fas fa-user-circle me-2"></i>
+          </ng-template>
+                  {{ user.name }}
+        </span>
+              </a>
+              <ul class="dropdown-menu dropdown-menu-end" aria-labelledby="navbarDropdown">
+                <!--<li><a class="dropdown-item" [routerLink]="['/users', user.id]"><i class="fas fa-user me-2"></i> Profile</a></li>-->
+                <li><a class="dropdown-item" href="#"><i class="fas fa-bell me-2"></i> Notifications</a></li>
+                <li><hr class="dropdown-divider"></li>
+                <li><a class="dropdown-item" (click)="logout()"><i class="fas fa-sign-out-alt me-2"></i> Logout</a></li>
+              </ul>
             </li>
           </ul>
         </div>
+        <!-- ... rest of your layout ... -->
       </div>
     </nav>
 
