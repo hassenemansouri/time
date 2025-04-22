@@ -2,15 +2,16 @@ import { Component } from '@angular/core';
 import {Appointment} from '../app/appointment-dialog/appointment-dialog.model';
 import {MatDialog} from '@angular/material/dialog';
 import {CalendarService} from '../app/calendar/calendar.service';
-import {PartnershipService, StrategicPartnership} from '../strategicparternship/strategicparternship.service';
+import {GoalService} from '../goal/goal.service';
 import {CdkDrag, CdkDragDrop, CdkDropList, CdkDropListGroup, moveItemInArray} from '@angular/cdk/drag-drop';
 import {AppointmentDialogComponent} from '../app/appointment-dialog/appointment-dialog.component';
 import {addDays, differenceInCalendarDays} from 'date-fns';
-import {MatButtonToggle, MatButtonToggleGroup} from '@angular/material/button-toggle';
-import {MatButton, MatIconButton} from '@angular/material/button';
-import {MatIcon} from '@angular/material/icon';
+import {Goal} from '../goal/goal.model';
 import {DatePipe, NgForOf, NgIf} from '@angular/common';
-
+import {MatButtonToggle, MatButtonToggleGroup} from '@angular/material/button-toggle';
+import {MatIcon} from '@angular/material/icon';
+import {MatButton, MatIconButton} from '@angular/material/button';
+import {GoalCalendarService} from './goal-calendar.service';
 
 
 enum CalendarView {
@@ -18,19 +19,18 @@ enum CalendarView {
   Week = 'week',
   Day = 'day',
 }
-
 @Component({
-  selector: 'app-strategic-partenership-calendar',
+  selector: 'app-goal-calendar',
   imports: [
     CdkDropListGroup, CdkDropList, DatePipe, MatButtonToggleGroup,
     NgIf, MatButtonToggle, MatIcon, NgForOf,
     CdkDrag, MatButton, MatIconButton
   ],
-  templateUrl: './strategic-partenership-calendar.component.html',
+  templateUrl: './goal-calendar.component.html',
   standalone: true,
-  styleUrl: './strategic-partenership-calendar.component.scss'
+  styleUrl: './goal-calendar.component.scss'
 })
-export class StrategicPartenershipCalendarComponent {
+export class GoalCalendarComponent {
 
 
   viewDate: Date = new Date();
@@ -45,8 +45,8 @@ export class StrategicPartenershipCalendarComponent {
 
   constructor(
     public dialog: MatDialog,
-    private calendarService: CalendarService,
-    private partnershipService:PartnershipService
+    private goalCalendarService: GoalCalendarService,
+    private goalService: GoalService,
   ) {
     this.refreshAppointments();
     this.generateTimeSlots();
@@ -54,7 +54,7 @@ export class StrategicPartenershipCalendarComponent {
   }
 
   private refreshAppointments() {
-    this.appointments = this.calendarService.getAppointments();
+    this.appointments = this.goalCalendarService.getAppointments();
   }
 
   // Générer les créneaux horaires
@@ -260,7 +260,7 @@ export class StrategicPartenershipCalendarComponent {
 
     dialogRef.afterClosed().subscribe((result: Appointment) => {
       if (result) {
-        this.calendarService.addAppointment(result);
+        this.goalCalendarService.addAppointment(result);
         this.refreshAppointments();
       }
     });
@@ -277,9 +277,9 @@ export class StrategicPartenershipCalendarComponent {
     dialogRef.afterClosed().subscribe((result) => {
       if (result) {
         if (result.remove) {
-          this.calendarService.deleteAppointment(result.uuid);
+          this.goalCalendarService.deleteAppointment(result.uuid);
         } else {
-          this.calendarService.updateAppointment(result);
+          this.goalCalendarService.updateAppointment(result);
         }
         this.refreshAppointments();
       }
@@ -299,9 +299,9 @@ export class StrategicPartenershipCalendarComponent {
 
   ngOnInit() {
     this.updateConnectedDropLists();
-    this.partnershipService.getAllPartnerships().subscribe((partnerships) => {
-      this.loadPartnershipIntoCalendar(partnerships);
-    });
+    this.goalService.getAllGoals().subscribe((goals) => {
+      this.loadGoalsIntoCalendar(goals);
+    })
 
   }
 
@@ -313,31 +313,37 @@ export class StrategicPartenershipCalendarComponent {
   getDropListId(date: Date): string {
     return `drop-list-${date.toDateString()}`;
   }
+  loadGoalsIntoCalendar(goals: Goal[]) {
+    const addedDates = new Set<string>(); // Pour suivre les dates uniques
 
+    goals.forEach(goal => {
+      // Vérification des dates valides
+      const start = new Date(goal.startDate!);
+      const end = new Date(goal.endDate!);
 
-  loadPartnershipIntoCalendar(partnerships: StrategicPartnership[]) {
-    const addedDates = new Set<string>(); // To track unique dates
-
-    partnerships.forEach(partner => {
-      const creationDate = new Date(partner.creationDate);
-
-      if (isNaN(creationDate.getTime())) {
-        console.error('Invalid creationDate for partner', partner);
+      if (isNaN(start.getTime()) || isNaN(end.getTime())) {
+        console.error('Invalid date for goal', goal);
         return;
       }
 
-      const dateString = creationDate.toISOString().split('T')[0];
+      const days = differenceInCalendarDays(end, start) + 1;
 
-      if (!addedDates.has(dateString)) {
-        this.appointments.push({
-          endTime: '',
-          startTime: '',
-          id: `${partner.id}`,
-          title: partner.name,
-          date: creationDate
-        });
-        addedDates.add(dateString);
+      for (let i = 0; i < days; i++) {
+        const date = addDays(start, i);
+        const dateString = date.toISOString().split('T')[0];
+
+        if (!addedDates.has(dateString)) {
+          this.appointments.push({
+            endTime: '',
+            startTime: '',
+            id: `${goal.goal_id}-${i}`,
+            title: goal.title,
+            date: date
+          });
+          addedDates.add(dateString);
+        }
       }
     });
   }
+
 }
