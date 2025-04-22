@@ -1,0 +1,314 @@
+// Variables avancées
+$colors: (
+  primary: #4361ee,
+  secondary: #3a0ca3,
+  accent: #4cc9f0,
+  dark: #1a1a2e,
+  light: #f8f9fa,
+  success: #38b000,
+  warning: #ffaa00,
+  danger: #ef476f
+);
+
+$glass-effect: (
+  background: rgba(255, 255, 255, 0.15),
+  backdrop-filter: blur(12px),
+  border: 1px solid rgba(255, 255, 255, 0.2)
+);
+
+$neumorphic-shadow: (
+  inset: (-5px -5px 10px rgba(255, 255, 255, 0.8), 5px 5px 10px rgba(0, 0, 0, 0.1)),
+  regular: (0 20px 50px rgba(0, 0, 0, 0.1), 0 10px 10px rgba(0, 0, 0, 0.04)),
+  hover: (0 30px 60px rgba(0, 0, 0, 0.15), 0 15px 15px rgba(0, 0, 0, 0.08))
+);
+
+$border-radius: (
+  small: 8px,
+  medium: 16px,
+  large: 24px,
+  pill: 50px
+);
+
+// Mixins avancés
+@mixin glass-morphism {
+  background: map-get($glass-effect, background);
+  backdrop-filter: map-get($glass-effect, backdrop-filter);
+  border: map-get($glass-effect, border);
+}
+
+@mixin neumorphic-card {
+  border-radius: map-get($border-radius, medium);
+  box-shadow: map-get($neumorphic-shadow, regular);
+  transition: all 0.4s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+
+  &:hover {
+    box-shadow: map-get($neumorphic-shadow, hover);
+    transform: translateY(-5px);
+  }
+}
+
+@mixin gradient-border($direction: to right) {
+  position: relative;
+
+  &::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    height: 4px;
+    background: linear-gradient($direction,
+      map-get($colors, primary),
+      map-get($colors, accent));
+    border-radius: map-get($border-radius, medium) map-get($border-radius, medium) 0 0;
+  }
+}
+
+@mixin floating-animation {
+  animation: float 6s ease-in-out infinite;
+
+  @keyframes float {
+    0%, 100% { transform: translateY(0); }
+    50% { transform: translateY(-15px); }
+  }
+}
+
+// Styles principaux
+.dashboard-container {
+  padding: 3rem;
+  font-family: 'Poppins', sans-serif;
+  background: radial-gradient(circle at top right,
+    lighten(map-get($colors, primary), 30%),
+    darken(map-get($colors, dark), 70%));
+  min-height: 100vh;
+  color: white;
+
+  .dashboard-title {
+    font-size: 3rem;
+    font-weight: 700;
+    text-align: center;
+    margin-bottom: 2.5rem;
+    position: relative;
+    @include floating-animation;
+
+    &::after {
+      content: '';
+      display: block;
+      width: 150px;
+      height: 5px;
+      background: linear-gradient(to right,
+        map-get($colors, accent),
+        map-get($colors, primary));
+      margin: 1rem auto 0;
+      border-radius: map-get($border-radius, pill);
+    }
+  }
+
+  .totals-container {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 1.5rem;
+    justify-content: center;
+    margin-bottom: 3rem;
+
+    .dashboard-total {
+      padding: 1.2rem 2rem;
+      background: rgba(map-get($colors, dark), 0.7);
+      border-radius: map-get($border-radius, pill);
+      font-size: 1.1rem;
+      @include neumorphic-card;
+      @include gradient-border(to bottom right);
+
+      strong {
+        color: map-get($colors, accent);
+        font-weight: 600;
+      }
+
+      &:hover {
+        background: rgba(map-get($colors, secondary), 0.8);
+        transform: scale(1.05);
+      }
+    }
+  }
+
+  .chart-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(450px, 1fr));
+    gap: 2.5rem;
+
+    .chart-section {
+      .section-title {
+        font-size: 1.5rem;
+        margin-bottom: 1.5rem;
+        padding-bottom: 0.5rem;
+        border-bottom: 2px solid rgba(map-get($colors, accent), 0.3);
+        position: relative;
+
+        &::after {
+          content: '';
+          position: absolute;
+          bottom: -2px;
+          left: 0;
+          width: 100px;
+          height: 3px;
+          background: linear-gradient(to right,
+            map-get($colors, primary),
+            transparent);
+        }
+      }
+    }
+
+    .chart-card {
+      @include glass-morphism;
+      @include neumorphic-card;
+      @include gradient-border;
+      padding: 1.8rem;
+      margin-bottom: 2rem;
+      border-radius: map-get($border-radius, medium);
+      position: relative;
+      overflow: hidden;
+
+      &::after {
+        content: '';
+        position: absolute;
+        top: -50%;
+        right: -50%;
+        width: 100%;
+        height: 100%;
+        background: radial-gradient(circle,
+          rgba(map-get($colors, accent), 0.1) 0%,
+          transparent 70%);
+        opacity: 0;
+        transition: opacity 0.6s ease;
+      }
+
+      &:hover {
+        &::after {
+          opacity: 1;
+        }
+
+        .chart-title {
+          color: map-get($colors, accent);
+        }
+      }
+
+      .chart-title {
+        font-size: 1.3rem;
+        margin: 0 0 1.8rem 0;
+        display: flex;
+        align-items: center;
+        transition: color 0.3s ease;
+
+        &::before {
+          content: '';
+          display: inline-block;
+          width: 12px;
+          height: 12px;
+          background: map-get($colors, accent);
+          border-radius: 50%;
+          margin-right: 12px;
+          box-shadow: 0 0 10px map-get($colors, accent);
+        }
+      }
+
+      canvas {
+        width: 100% !important;
+        height: 320px !important;
+        transition: transform 0.4s ease;
+
+        &:hover {
+          transform: scale(1.02);
+        }
+      }
+    }
+  }
+}
+
+// Effets spéciaux
+.glowing-effect {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  pointer-events: none;
+  z-index: -1;
+
+  &::before, &::after {
+    content: '';
+    position: absolute;
+    border-radius: 50%;
+    filter: blur(80px);
+    opacity: 0.3;
+  }
+
+  &::before {
+    width: 300px;
+    height: 300px;
+    background: map-get($colors, primary);
+    top: 20%;
+    left: 10%;
+    animation: pulse 8s infinite alternate;
+  }
+
+  &::after {
+    width: 400px;
+    height: 400px;
+    background: map-get($colors, accent);
+    bottom: 10%;
+    right: 10%;
+    animation: pulse 10s 2s infinite alternate;
+  }
+}
+
+// Animations avancées
+@keyframes pulse {
+  0% { transform: scale(1); opacity: 0.3; }
+  50% { transform: scale(1.2); opacity: 0.5; }
+  100% { transform: scale(1); opacity: 0.3; }
+}
+
+@keyframes fadeIn {
+  from { opacity: 0; transform: translateY(20px); }
+  to { opacity: 1; transform: translateY(0); }
+}
+
+// Responsive
+@media (max-width: 1200px) {
+  .chart-grid {
+    grid-template-columns: repeat(auto-fill, minmax(400px, 1fr)) !important;
+  }
+}
+
+@media (max-width: 768px) {
+  .dashboard-container {
+    padding: 2rem 1.5rem;
+
+    .dashboard-title {
+      font-size: 2.2rem;
+    }
+
+    .chart-grid {
+      grid-template-columns: 1fr !important;
+    }
+  }
+}
+
+@media (max-width: 576px) {
+  .dashboard-container {
+    padding: 1.5rem 1rem;
+
+    .dashboard-title {
+      font-size: 1.8rem;
+    }
+
+    .totals-container {
+      flex-direction: column;
+
+      .dashboard-total {
+        width: 100%;
+        text-align: center;
+      }
+    }
+  }
+}

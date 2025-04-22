@@ -56,6 +56,7 @@ import {
   StrategicPartenershipStatsComponent
 } from './strategic-partenership-stats/strategic-partenership-stats.component';
 import {ProjectStatsComponent} from './project-stats/project-stats.component';
+import {AllStatsComponent} from './all-stats/all-stats.component';
 
 
 export const routes: Routes = [
@@ -134,9 +135,10 @@ export const routes: Routes = [
         { path: 'projects/calendar', component: ProjectCalendarComponent},
         { path: 'partnerships/stats', component: StrategicPartenershipStatsComponent},
         { path: 'goals/stats', component: GoalStatsComponent},
-        { path: 'projects/stats', component: ProjectStatsComponent}
+        { path: 'projects/stats', component: ProjectStatsComponent},
+        { path: 'allStats', component: AllStatsComponent}
 
-        //GoalStatsComponent
+        //AllStatsComponent
 
       ]
   },
