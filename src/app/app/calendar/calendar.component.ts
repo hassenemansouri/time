@@ -14,6 +14,8 @@ import {WorkflowService} from '../../workflow/workflow.service';
 import {PartnershipService, StrategicPartnership} from '../../strategicparternship/strategicparternship.service';
 import {Goal} from '../../goal/goal.model';
 import {GoalService} from '../../goal/goal.service';
+import {ProjectService} from '../../project/project.service';
+import {Project} from '../../models/project.model';
 
 
 enum CalendarView {
@@ -50,6 +52,7 @@ export class CalendarComponent {
     private workflowService: WorkflowService,
     private partnershipService:PartnershipService,
     private goalService: GoalService,
+    private projectService: ProjectService,
   ) {
     this.refreshAppointments();
     this.generateTimeSlots();
@@ -311,6 +314,9 @@ export class CalendarComponent {
     this.goalService.getAllGoals().subscribe((goals) => {
       this.loadGoalsIntoCalendar(goals);
     })
+    this.projectService.getAllProjects().subscribe((projects) => {
+      this.loadProjectsIntoCalendar(projects);
+    })
 
   }
 
@@ -424,6 +430,39 @@ export class CalendarComponent {
       }
     });
   }
+  loadProjectsIntoCalendar(projects: Project[]) {
+    const addedDates = new Set<string>(); // Pour suivre les dates uniques
+
+    projects.forEach(project => {
+      // Vérifie que les dates sont définies et valides
+      const start = new Date(project.startDate!);
+      const end = new Date(project.endDate!);
+
+      if (!project.startDate || !project.endDate || isNaN(start.getTime()) || isNaN(end.getTime())) {
+        console.error('Invalid date for project', project);
+        return;
+      }
+
+      const days = differenceInCalendarDays(end, start) + 1;
+
+      for (let i = 0; i < days; i++) {
+        const date = addDays(start, i);
+        const dateString = date.toISOString().split('T')[0];
+
+        if (!addedDates.has(dateString)) {
+          this.appointments.push({
+            endTime: '',
+            startTime: '',
+            id: `${project.projet_id}-${i}`,
+            title: `${project.title} (${project.category})`, // Ajoute la catégorie si utile
+            date: date
+          });
+          addedDates.add(dateString);
+        }
+      }
+    });
+  }
+
 
 
 }
