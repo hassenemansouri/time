@@ -8,6 +8,7 @@ import {ConfirmDialogComponent} from '../../confirm-dialog/confirm-dialog.compon
 import {MatDialog} from '@angular/material/dialog';
 import {AuthService} from '../../auth.service';
 import {MatSnackBar} from '@angular/material/snack-bar';
+import {UserStateService} from '../user-state-service.service';
 
 @Component({
   selector: 'app-user-update',
@@ -31,7 +32,8 @@ export class UserUpdateComponent implements OnInit {
     private userService: UserService,
     private authService: AuthService,
     private dialog: MatDialog,
-    private snackBar: MatSnackBar
+    private snackBar: MatSnackBar,
+    private userStateService: UserStateService
   ) {
     this.userForm = this.fb.group({
       name: ['', Validators.required],
@@ -80,6 +82,7 @@ export class UserUpdateComponent implements OnInit {
     )
     .subscribe(updatedUser => {
       if (updatedUser) {
+        this.userStateService.updateUser(updatedUser);
         this.router.navigate(['/users', updatedUser.id]);
       }
     });
@@ -93,6 +96,7 @@ export class UserUpdateComponent implements OnInit {
     this.isLoading = true;
     this.userService.uploadUserPhoto(this.user.id, this.selectedFile).subscribe({
       next: (updatedUser) => {
+        this.userStateService.updateUser(updatedUser);
         this.user = updatedUser;
         this.isLoading = false;
       },
@@ -113,6 +117,7 @@ export class UserUpdateComponent implements OnInit {
         if (this.user) {
           this.user.photoBase64 = undefined;
           this.user.photoContentType = undefined;
+          this.userStateService.updateUser(this.user);
         }
         this.isLoading = false;
       },

@@ -1,7 +1,9 @@
-import { Component, OnInit } from '@angular/core';
+import {Component, OnDestroy, OnInit} from '@angular/core';
 import {Router, RouterLink, RouterLinkActive, RouterOutlet, UrlTree} from '@angular/router';
 import {User, UserService} from '../../user/user.service';
 import {NgIf} from '@angular/common';
+import {Subscription} from 'rxjs';
+import {UserStateService} from '../../user/user-state-service.service';
 
 @Component({
   selector: 'app-private-layout',
@@ -15,18 +17,16 @@ import {NgIf} from '@angular/common';
   standalone: true,
   styleUrls: ['./private-layout.component.css']
 })
-export class PrivateLayoutComponent implements OnInit {
-
-  user: {
-
-    photoContentType: boolean;
-    photoBase64: boolean;
-    id: any[] | string | UrlTree;
-    name: string } | null = null;
+export class PrivateLayoutComponent implements OnInit,OnDestroy {
+  private userSubscription!: Subscription;
+  user: any = null;
 
   users: User[] = [];
 
-  constructor(private router: Router,private userService: UserService) {}
+  constructor(private router: Router,
+              private userService: UserService,
+              private userStateService: UserStateService
+  ) {}
 
   ngOnInit(): void {
 
@@ -35,6 +35,7 @@ export class PrivateLayoutComponent implements OnInit {
     if (userData && userData !== 'undefined') {
       try {
         this.user = JSON.parse(userData);
+        this.userStateService.updateUser(this.user);
       } catch (error) {
         console.error('Error parsing user data:', error);
         this.clearInvalidUserData();
@@ -45,7 +46,9 @@ export class PrivateLayoutComponent implements OnInit {
 
     this.loadUsers();
   }
-
+  ngOnDestroy(): void {
+    this.userSubscription?.unsubscribe();
+  }
   private clearInvalidUserData(): void {
     localStorage.removeItem('user');
     this.user = null;
