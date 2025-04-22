@@ -121,4 +121,8 @@ export class PartnershipService {
       })
     );
   }
+  getDashboardStats(): Observable<any> {
+    return this.http.get<any>('http://localhost:8100/timeforge/api/partnerships/stats');
+  }
+
 }

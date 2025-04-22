@@ -50,6 +50,9 @@ import {
 } from './strategic-partenership-calendar/strategic-partenership-calendar.component';
 import {GoalCalendarComponent} from './goal-calendar/goal-calendar.component';
 import {ProjectCalendarComponent} from './project-calendar/project-calendar.component';
+import {
+  StrategicPartenershipStatsComponent
+} from './strategic-partenership-stats/strategic-partenership-stats.component';
 
 
 export const routes: Routes = [
@@ -125,8 +128,10 @@ export const routes: Routes = [
         { path: 'workflows/calendar', component: WorkflowCalendarComponent},
         { path: 'partnerships/calendar', component: StrategicPartenershipCalendarComponent},
         { path: 'goals/calendar', component: GoalCalendarComponent},
-        { path: 'projects/calendar', component: ProjectCalendarComponent}
+        { path: 'projects/calendar', component: ProjectCalendarComponent},
+        { path: 'partnerships/stats', component: StrategicPartenershipStatsComponent}
 
+        //StrategicPartenershipStatsComponent
 
       ]
   },
