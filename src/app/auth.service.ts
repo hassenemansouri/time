@@ -27,7 +27,8 @@ export class AuthService {
     const token = localStorage.getItem('jwtToken');
     return of(!!token); // Returns true if a token exists, false otherwise
   }
-  // Register a new user
+
+
   register(user: any): Observable<any> {
     return this.http.post(`${this.apiUrl}/register`, user, {
       headers: {
@@ -38,29 +39,30 @@ export class AuthService {
   storeToken(token: string): void {
     localStorage.setItem('jwtToken', token);
   }
-  // Login and get JWT token
+
   login(credentials: { email: string, password: string }): Observable<LoginResponse> {
     return this.http.post<LoginResponse>(`${this.apiUrl}/login`, credentials).pipe(
       tap(response => {
         this.storeUser(response.user);
         this.currentUserSubject.next(response.user);
+        this.router.navigate(['/dashboard']);
       })
     );
   }
 
-  // Get the JWT token
+
   getToken(): string | null {
     return localStorage.getItem('jwtToken');
   }
 
 
 
-  // Logout (remove JWT token)
+
   logout(): void {
     localStorage.removeItem('jwtToken');
     this.router.navigate(['/login']);
   }
-  // Send HTTP requests with JWT token (for protected routes)
+
   getHeaders(): HttpHeaders {
     const token = this.getToken();
     return new HttpHeaders().set('Authorization', `Bearer ${token}`);
@@ -82,7 +84,7 @@ export class AuthService {
     return this.http.post(
       `${this.apiUrl}/${userId}/reset-password`,
       {},
-      { responseType: 'text' }  // Tell HttpClient to expect text
+      { responseType: 'text' }
     );
   }
 
@@ -96,7 +98,7 @@ export class AuthService {
 
     return this.http.post(
       `http://localhost:8100/timeforge/auth/reset-password`,
-      { token, password: newPassword }, // <-- ici c’est bon
+      { token, password: newPassword },
       { headers, withCredentials: true }
     );
   }
