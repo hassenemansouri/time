@@ -12,6 +12,7 @@ import {HttpClient} from '@angular/common/http';
     NgIf
   ],
   templateUrl: './strategicparternship.component.html',
+  standalone: true,
   styleUrl: './strategicparternship.component.css'
 })
 export class StrategicparternshipComponent implements OnInit {

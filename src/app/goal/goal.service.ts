@@ -2,7 +2,6 @@ import { Injectable } from '@angular/core';
 import { HttpClient, HttpHeaders } from '@angular/common/http';
 import { Observable } from 'rxjs';
 import { Goal } from './goal.model';
-import {Categorie} from './categorie.model';
 
 @Injectable({
   providedIn: 'root'
@@ -41,5 +40,9 @@ export class GoalService {
 
   deleteGoal(id: string): Observable<void> {
     return this.http.delete<void>(`${this.apiUrl}/supprimerGoal/${id}`);
+  }
+
+  getDashboardStats(): Observable<any> {
+    return this.http.get<any>('http://localhost:8200/timeforge/goals/dashboard/stats');
   }
 }

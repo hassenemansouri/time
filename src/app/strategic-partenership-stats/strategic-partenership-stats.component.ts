@@ -1,6 +1,6 @@
-import {Component, OnInit} from '@angular/core';
+import { Component, OnInit } from '@angular/core';
 import { Chart } from 'chart.js';
-import {PartnershipService} from '../strategicparternship/strategicparternship.service';
+import { PartnershipService } from '../strategicparternship/strategicparternship.service';
 
 @Component({
   selector: 'app-strategic-partenership-stats',
@@ -13,12 +13,16 @@ export class StrategicPartenershipStatsComponent implements OnInit {
 
   stats: any;
 
-  constructor(private partnershipService : PartnershipService) {}
+  constructor(private partnershipService: PartnershipService) {}
 
   ngOnInit(): void {
     this.partnershipService.getDashboardStats().subscribe((data) => {
       this.stats = data;
-      this.initCharts();
+
+      // On attend le rendu du DOM (canvas inclus) avant de créer les charts
+      setTimeout(() => {
+        this.initCharts();
+      }, 0);
     });
   }
 
@@ -26,28 +30,29 @@ export class StrategicPartenershipStatsComponent implements OnInit {
     this.createBarChart(
       'partnershipsPerMonthChart',
       'Partenariats par Mois',
-      Object.keys(this.stats.PartnertshipsPerMonth || {}),
-      Object.values(this.stats.PartnertshipsPerMonth || {})
+      Object.keys(this.stats.partnershipsPerMonth || {}),
+      Object.values(this.stats.partnershipsPerMonth || {})
     );
 
     this.createLineChart(
       'participantsPerMonthChart',
       'Participants par Mois',
-      Object.keys(this.stats.NBParticipantsPerMonth || {}),
-      Object.values(this.stats.NBParticipantsPerMonth || {})
+      Object.keys(this.stats.avgParticipantsPerMonth || {}),
+      Object.values(this.stats.avgParticipantsPerMonth || {})
     );
 
     this.createPieChart(
       'participantsBySizeChart',
       'Répartition des Participants par Taille',
-      Object.keys(this.stats.ParticipantsBySize || {}),
-      Object.values(this.stats.ParticipantsBySize || {})
+      Object.keys(this.stats.partnershipsBySize || {}),
+      Object.values(this.stats.partnershipsBySize || {})
     );
   }
 
-
   createBarChart(id: string, label: string, labels: string[], data: any[]) {
-    new Chart(id, {
+    const canvas = document.getElementById(id) as HTMLCanvasElement;
+    if (!canvas) return;
+    new Chart(canvas, {
       type: 'bar',
       data: {
         labels,
@@ -65,7 +70,9 @@ export class StrategicPartenershipStatsComponent implements OnInit {
   }
 
   createLineChart(id: string, label: string, labels: string[], data: any[]) {
-    new Chart(id, {
+    const canvas = document.getElementById(id) as HTMLCanvasElement;
+    if (!canvas) return;
+    new Chart(canvas, {
       type: 'line',
       data: {
         labels,
@@ -84,7 +91,9 @@ export class StrategicPartenershipStatsComponent implements OnInit {
   }
 
   createPieChart(id: string, label: string, labels: string[], data: any[]) {
-    new Chart(id, {
+    const canvas = document.getElementById(id) as HTMLCanvasElement;
+    if (!canvas) return;
+    new Chart(canvas, {
       type: 'pie',
       data: {
         labels,
