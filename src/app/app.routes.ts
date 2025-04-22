@@ -45,6 +45,9 @@ import {StatsComponent} from './stats/stats.component';
 import {ResetPasswordComponent} from './auth/reset-password/reset-password.component';
 import {NoAuthGuardService} from './no-auth-guard.service';
 import {WorkflowCalendarComponent} from './workflow-calendar/workflow-calendar.component';
+import {
+  StrategicPartenershipCalendarComponent
+} from './strategic-partenership-calendar/strategic-partenership-calendar.component';
 
 
 export const routes: Routes = [
@@ -117,7 +120,8 @@ export const routes: Routes = [
         { path: 'calender', component: CalendarComponent},
         { path: 'workflows/predict', component: PredictWorkflowComponent},
         { path: 'workflows/stats', component: StatsComponent},
-        { path: 'workflows/calendar', component: WorkflowCalendarComponent}
+        { path: 'workflows/calendar', component: WorkflowCalendarComponent},
+        { path: 'partnerships/calendar', component: StrategicPartenershipCalendarComponent}
 
 
       ]
