@@ -1,4 +1,4 @@
-import { Component } from '@angular/core';
+import {Component, OnInit} from '@angular/core';
 import { Chart } from 'chart.js';
 import {PartnershipService} from '../strategicparternship/strategicparternship.service';
 
@@ -9,7 +9,7 @@ import {PartnershipService} from '../strategicparternship/strategicparternship.s
   standalone: true,
   imports: []
 })
-export class StrategicPartenershipStatsComponent {
+export class StrategicPartenershipStatsComponent implements OnInit {
 
   stats: any;
 
