@@ -9,7 +9,7 @@ import { LandingComponent } from './landing/landing.component';
 import { NotFoundComponent } from './not-found/not-found.component';
 import { ProjectComponent } from './project/project/project.component';
 import { TaskComponent } from './task/task/task.component';
-import { LoginComponent } from './login/login.component';
+import { LoginComponent } from './auth/login/login.component';
 import { DashboardComponent } from './dashboard/dashboard.component';
 import { SignUpComponent } from './sign-up/sign-up.component';
 import { AuthGuard } from './AuthGuard';
@@ -43,6 +43,8 @@ import {
 import {UserUpdateComponent} from './user/user-update/user-update.component';
 import {StatsComponent} from './stats/stats.component';
 import {ResetPasswordComponent} from './auth/reset-password/reset-password.component';
+import {NoAuthGuardService} from './no-auth-guard.service';
+import {WorkflowCalendarComponent} from './workflow-calendar/workflow-calendar.component';
 
 
 export const routes: Routes = [
@@ -66,6 +68,16 @@ export const routes: Routes = [
     component: PrivateLayoutComponent,
     canActivate: [AuthGuard], // Protect all below routes
       children: [
+        {
+          path: 'login',
+          component: LoginComponent,
+          canActivate: [NoAuthGuardService] // <-- Blocks if already logged in
+        },
+        {
+          path: 'signup',
+          component: SignUpComponent,
+          canActivate: [NoAuthGuardService] // <-- Blocks if already logged in
+        },
         { path: 'reset-password', component: ResetPasswordComponent },
         { path: 'users', component: UserDetailComponent },
         {path: 'users/:id', component: UserDetailComponent, title: 'User Details'},
@@ -74,11 +86,10 @@ export const routes: Routes = [
         { path: 'workspaces', component: ListWorkspacesComponent },
         { path: 'workspaces/add', component: WorkspaceFormComponent },
         { path: 'workspaces/edit/:id', component: WorkspaceFormComponent },
-        { path: 'workspaces/calender', component: CalendarComponent},
+        { path: 'calender', component: CalendarComponent},
         { path: 'workflows', component: WorkflowComponent },
         { path: 'workflows/add', component: WorkflowFormComponent },
         { path: 'workflows/edit/:id', component: WorkflowFormComponent },
-        { path: 'workflows/calender', component: CalendarComponent},
         { path: 'collaborations', component: CollaborationComponent },
         { path: 'goals', component: ListGoalsComponent },
         { path: 'goals/add', component: GoalFormComponent },
@@ -87,15 +98,12 @@ export const routes: Routes = [
         { path: 'rewards', component: ListRewardsComponent },
         { path: 'rewards/add', component: RewardFormComponent },
         { path: 'rewards/edit/:id', component: RewardFormComponent },
-        { path: 'rewards/calender', component: CalendarComponent},
         { path: 'projects', component: ProjectComponent },
         { path: 'projects/add', component: ProjectFormComponent },
         { path: 'projects/edit/:id', component: ProjectFormComponent },
-        { path: 'projects/calender', component: CalendarComponent},
         { path: 'tasks', component: TaskComponent },
         { path: 'tasks/add', component: TaskFormComponent },
         { path: 'tasks/edit/:id', component: TaskFormComponent },
-        { path: 'tasks/calender', component: CalendarComponent},
         { path: 'columns', component: ColumnComponent },
         { path: 'columns/add', component: ColumnFormComponent },
         { path: 'columns/edit/:id', component: ColumnFormComponent },
@@ -106,10 +114,11 @@ export const routes: Routes = [
         { path: 'partnerships', component: ListPartnershipComponent },
         { path: 'add-partnership', component: AddPartnershipComponent },
         {path: 'partnerships/edit/:id', component: UpdatePartnershipComponent},
-        { path: 'partnerships/calender', component: CalendarComponent},
         { path: 'calender', component: CalendarComponent},
         { path: 'workflows/predict', component: PredictWorkflowComponent},
-        { path: 'workflows/stats', component: StatsComponent}
+        { path: 'workflows/stats', component: StatsComponent},
+        { path: 'workflows/calendar', component: WorkflowCalendarComponent}
+
 
       ]
   },
