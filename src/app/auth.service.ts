@@ -3,6 +3,7 @@ import { HttpClient, HttpHeaders } from '@angular/common/http';
 import {BehaviorSubject, Observable, of, tap} from 'rxjs';
 import {environment} from "./environments/environment";
 import {Router} from "@angular/router";
+import {UserStateService} from './user/user-state-service.service';
 
 interface LoginResponse {
   token: string;
@@ -22,7 +23,10 @@ export class AuthService {
   private currentUserSubject = new BehaviorSubject<any>(null);
 
 
-  constructor(private http: HttpClient,private router: Router) {}
+  constructor(private http: HttpClient,
+              private router: Router,
+              private userStateService: UserStateService
+    ) {}
   isAuthenticated(): Observable<boolean> {
     const token = localStorage.getItem('jwtToken');
     return of(!!token); // Returns true if a token exists, false otherwise
@@ -61,6 +65,7 @@ export class AuthService {
   logout(): void {
     localStorage.removeItem('jwtToken');
     this.router.navigate(['/login']);
+    this.userStateService.updateUser(null);
   }
 
   getHeaders(): HttpHeaders {
