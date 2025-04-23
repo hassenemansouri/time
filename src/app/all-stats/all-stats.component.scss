@@ -1,0 +1,234 @@
+// Variables
+$primary: #4361ee;
+$secondary: #3f37c9;
+$accent: #4895ef;
+$light: #f8f9fa;
+$dark: #212529;
+$success: #4cc9f0;
+$warning: #f72585;
+$info: #560bad;
+
+$border-radius: 12px;
+$box-shadow: 0 10px 20px rgba(0, 0, 0, 0.1);
+$transition: all 0.3s ease;
+
+// Mixins
+@mixin flex-center {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+@mixin card-style {
+  background: white;
+  border-radius: $border-radius;
+  box-shadow: $box-shadow;
+  padding: 1.5rem;
+  transition: $transition;
+}
+
+// Base styles
+.dashboard-container {
+  font-family: 'Segoe UI', Roboto, sans-serif;
+  padding: 2rem;
+  max-width: 1800px;
+  margin: 0 auto;
+  color: $dark;
+}
+
+.dashboard-header {
+  margin-bottom: 2.5rem;
+  text-align: center;
+
+  .dashboard-title {
+    font-size: 2.5rem;
+    font-weight: 700;
+    color: $primary;
+    margin-bottom: 0.5rem;
+    @include flex-center;
+    gap: 1rem;
+
+    .dashboard-icon {
+      font-size: 2.8rem;
+    }
+
+    .loading-spinner {
+      width: 24px;
+      height: 24px;
+      border: 3px solid rgba($primary, 0.2);
+      border-top-color: $primary;
+      border-radius: 50%;
+      animation: spin 1s linear infinite;
+    }
+  }
+
+  .dashboard-subtitle {
+    color: lighten($dark, 30%);
+    font-size: 1.1rem;
+  }
+}
+
+// Totals grid
+.totals-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+  gap: 1.5rem;
+  margin-bottom: 3rem;
+
+  .total-card {
+    @include card-style;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 1.5rem;
+    position: relative;
+    overflow: hidden;
+    background: linear-gradient(135deg, rgba(255, 255, 255, 0.9) 0%, rgba(245, 247, 250, 0.9) 100%);
+    border-left: 5px solid $primary;
+
+    &:nth-child(2) {
+      border-left-color: $accent;
+    }
+
+    &:nth-child(3) {
+      border-left-color: $warning;
+    }
+
+    &:nth-child(4) {
+      border-left-color: $success;
+    }
+
+    .total-card-content {
+      h3 {
+        font-size: 1.1rem;
+        color: lighten($dark, 20%);
+        margin-bottom: 0.5rem;
+      }
+
+      .total-value {
+        font-size: 2rem;
+        font-weight: 700;
+        color: $dark;
+        margin: 0.5rem 0;
+      }
+
+      .total-trend {
+        @include flex-center;
+        gap: 0.5rem;
+        font-size: 0.9rem;
+        color: lighten($dark, 30%);
+
+        .trend-icon {
+          font-size: 1rem;
+        }
+      }
+    }
+
+    .total-card-icon {
+      font-size: 2.5rem;
+      opacity: 0.2;
+      transition: $transition;
+    }
+
+    &:hover {
+      transform: translateY(-5px);
+
+      .total-card-icon {
+        opacity: 0.4;
+      }
+    }
+  }
+}
+
+// Tabs navigation
+.tab-nav {
+  display: flex;
+  gap: 0.5rem;
+  margin-bottom: 2rem;
+  border-bottom: 1px solid rgba($dark, 0.1);
+  padding-bottom: 0.5rem;
+
+  .tab-button {
+    padding: 0.75rem 1.5rem;
+    background: none;
+    border: none;
+    border-radius: $border-radius;
+    font-weight: 600;
+    color: lighten($dark, 40%);
+    cursor: pointer;
+    transition: $transition;
+
+    &.active {
+      background: rgba($primary, 0.1);
+      color: $primary;
+    }
+
+    &:hover:not(.active) {
+      background: rgba($dark, 0.05);
+      color: lighten($dark, 20%);
+    }
+  }
+}
+
+// Charts section
+.tab-content {
+  .chart-section {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(350px, 1fr));
+    gap: 1.5rem;
+  }
+
+  .chart-card {
+    @include card-style;
+    padding: 1.5rem;
+
+    .chart-title {
+      font-size: 1.2rem;
+      margin-bottom: 1.5rem;
+      color: $dark;
+      text-align: center;
+    }
+
+    canvas {
+      width: 100% !important;
+      height: 300px !important;
+    }
+  }
+}
+
+// Error message
+.error-message {
+  @include card-style;
+  background: rgba($warning, 0.1);
+  border-left: 4px solid $warning;
+  color: $warning;
+  padding: 1.5rem;
+  text-align: center;
+  font-weight: 500;
+}
+
+// Animations
+@keyframes spin {
+  to { transform: rotate(360deg); }
+}
+
+@keyframes fadeIn {
+  from { opacity: 0; transform: translateY(20px); }
+  to { opacity: 1; transform: translateY(0); }
+}
+
+// Responsive
+@media (max-width: 768px) {
+  .dashboard-header .dashboard-title {
+    font-size: 2rem;
+  }
+
+  .totals-grid {
+    grid-template-columns: 1fr;
+  }
+
+  .tab-nav {
+    overflow-x: auto;
+    padding-bottom: 0;
+  }
+}

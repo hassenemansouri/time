@@ -39,9 +39,16 @@
             </div>
           </div>
 
+
           <!-- Validation Message -->
           <div *ngIf="formSubmitted && partnership.participants.length === 0" class="text-danger small mt-1">
             At least one participant is required
+          </div>
+          <div class="date-input-container">
+            <label for="endDate" class="date-label">End Date</label>
+            <input type="date" class="form-control date-input" id="endDate"
+                   [(ngModel)]="partnership.endDate" name="endDate">
+            <small class="date-hint">Optional - leave blank for ongoing partnership</small>
           </div>
         </div>
       </div>
@@ -55,7 +62,9 @@
         <span *ngIf="isLoading" class="spinner-border spinner-border-sm me-2"></span>
         {{ isLoading ? 'Registering...' : 'Register Partnership' }}
       </button>
+
     </div>
+
   </form>
 
   <ng-template #resultSection>

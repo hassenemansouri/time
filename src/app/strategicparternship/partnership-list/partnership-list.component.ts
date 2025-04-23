@@ -146,4 +146,10 @@ export class ListPartnershipComponent implements OnInit {
       error => console.error('PDF download failed', error)
     );
   }
+
+  // Add this method to your component class
+  isExpired(endDate: Date | null): boolean {
+    if (!endDate) return false;
+    return new Date(endDate) < new Date();
+  }
 }
