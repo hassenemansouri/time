@@ -3,7 +3,7 @@
   <header class="dashboard-header">
     <h1 class="dashboard-title">
       <span class="dashboard-icon">📊</span>
-      All Stats Dashboard
+      Statistics Dashboard
       <span *ngIf="loading" class="loading-spinner"></span>
     </h1>
     <p class="dashboard-subtitle">Comprehensive overview of your metrics</p>
@@ -63,12 +63,14 @@
   <!-- Charts grid with tabs -->
   <section class="chart-tabs" *ngIf="stats">
     <nav class="tab-nav">
-      <button class="tab-button"
-              *ngFor="let tab of tabs"
-              [class.active]="activeTab === tab.id"
-              >
-        {{ tab.label }}
+      <button
+        class="tab-button"
+        *ngFor="let tab of tabs"
+        [class.active]="activeTab === tab.id"
+        (click)="setActiveTab(tab.id)" >
+      {{ tab.label }}
       </button>
+
     </nav>
 
     <div class="tab-content" *ngIf="activeTab === 'goals'">
@@ -95,8 +97,8 @@
           <canvas id="projectsPerMonthChart"></canvas>
         </div>
         <div class="chart-card">
-          <h4 class="chart-title">Project Categories</h4>
-          <canvas id="projectCategoriesChart"></canvas>
+          <h5 class="chart-title">Average Members per Month</h5>
+          <canvas id="averageMembersPerMonthChart"></canvas>
         </div>
         <div class="chart-card">
           <h4 class="chart-title">Projects by Size</h4>
@@ -112,8 +114,8 @@
           <canvas id="workflowsPerMonthChart"></canvas>
         </div>
         <div class="chart-card">
-          <h4 class="chart-title">Workflow Categories</h4>
-          <canvas id="workflowCategoriesChart"></canvas>
+          <h5 class="chart-title">Average Steps per Month</h5>
+          <canvas id="averageStepsPerMonthChart"></canvas>
         </div>
         <div class="chart-card">
           <h4 class="chart-title">Workflows by Size</h4>
@@ -129,8 +131,8 @@
           <canvas id="partnershipsPerMonthChart"></canvas>
         </div>
         <div class="chart-card">
-          <h4 class="chart-title">Partnership Categories</h4>
-          <canvas id="partnershipCategoriesChart"></canvas>
+          <h5 class="chart-title">Participants par Mois</h5>
+          <canvas id="participantsPerMonthChart"></canvas>
         </div>
         <div class="chart-card">
           <h4 class="chart-title">Partnerships by Size</h4>
