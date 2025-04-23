@@ -1,4 +1,4 @@
-import { Component, OnInit, OnDestroy } from '@angular/core';
+import { Component, OnInit, OnDestroy, AfterViewInit } from '@angular/core';
 import { GoalService } from '../goal/goal.service';
 import { ProjectService } from '../project/project.service';
 import { WorkflowService } from '../workflow/workflow.service';
@@ -6,7 +6,7 @@ import { PartnershipService } from '../strategicparternship/strategicparternship
 import { Chart, registerables } from 'chart.js';
 import { forkJoin, Subject } from 'rxjs';
 import { takeUntil } from 'rxjs/operators';
-import {NgForOf, NgIf} from '@angular/common';
+import { NgForOf, NgIf } from '@angular/common';
 
 Chart.register(...registerables);
 
@@ -20,12 +20,9 @@ interface DashboardTab {
   templateUrl: './all-stats.component.html',
   styleUrls: ['./all-stats.component.scss'],
   standalone: true,
-  imports: [
-    NgForOf,
-    NgIf
-  ]
+  imports: [NgForOf, NgIf]
 })
-export class AllStatsComponent implements OnInit, OnDestroy {
+export class AllStatsComponent implements OnInit, AfterViewInit, OnDestroy {
   stats: any = {};
   loading = true;
   error = false;
@@ -48,6 +45,12 @@ export class AllStatsComponent implements OnInit, OnDestroy {
 
   ngOnInit(): void {
     this.loadDashboardData();
+
+  }
+
+  ngAfterViewInit(): void {
+    // Retardez l'initialisation des graphiques pour garantir que les éléments DOM existent
+    this.initAllCharts();
   }
 
   ngOnDestroy(): void {
@@ -79,8 +82,9 @@ export class AllStatsComponent implements OnInit, OnDestroy {
             ...workflowStats,
             ...partnershipStats
           };
-          this.initAllCharts();
-          this.loading = false;
+          this.loading = true;
+          this.initAllCharts(); // Déplace ici
+
         },
         error: (err) => {
           console.error('Failed to load dashboard data:', err);
@@ -102,7 +106,7 @@ export class AllStatsComponent implements OnInit, OnDestroy {
   }
 
   private initGoalCharts(): void {
-    if (!this.stats) return;
+    if (!this.stats?.goalsPerMonth) return;
 
     if (this.stats.goalsPerMonth) {
       this.createBarChart(
@@ -237,14 +241,11 @@ export class AllStatsComponent implements OnInit, OnDestroy {
     }
   }
 
-  private createBarChart(
-    id: string,
-    label: string,
-    labels: string[],
-    data: any[],
-    colors: string[]
-  ): void {
-    new Chart(id, {
+  private createBarChart(id: string, label: string, labels: string[], data: any[], colors: string[]): void {
+    const chartElement = document.getElementById(id) as HTMLCanvasElement;
+    if (!chartElement) return;
+
+    new Chart(chartElement.getContext('2d'), {
       type: 'bar',
       data: {
         labels,
@@ -288,14 +289,11 @@ export class AllStatsComponent implements OnInit, OnDestroy {
     });
   }
 
-  private createLineChart(
-    id: string,
-    label: string,
-    labels: string[],
-    data: any[],
-    color: string
-  ): void {
-    new Chart(id, {
+  private createLineChart(id: string, label: string, labels: string[], data: any[], color: string): void {
+    const chartElement = document.getElementById(id) as HTMLCanvasElement;
+    if (!chartElement) return;
+
+    new Chart(chartElement.getContext('2d'), {
       type: 'line',
       data: {
         labels,
@@ -343,14 +341,11 @@ export class AllStatsComponent implements OnInit, OnDestroy {
     });
   }
 
-  private createPieChart(
-    id: string,
-    label: string,
-    labels: string[],
-    data: any[],
-    colors: string[]
-  ): void {
-    new Chart(id, {
+  private createPieChart(id: string, label: string, labels: string[], data: any[], colors: string[]): void {
+    const chartElement = document.getElementById(id) as HTMLCanvasElement;
+    if (!chartElement) return;
+
+    new Chart(chartElement.getContext('2d'), {
       type: 'pie',
       data: {
         labels,

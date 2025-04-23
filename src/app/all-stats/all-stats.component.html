@@ -3,19 +3,22 @@
   <header class="dashboard-header">
     <h1 class="dashboard-title">
       <span class="dashboard-icon">📊</span>
-      Statistics Dashboard
-      <span *ngIf="loading" class="loading-spinner">⏳</span>
+      All Stats Dashboard
+      <span *ngIf="loading" class="loading-spinner"></span>
     </h1>
     <p class="dashboard-subtitle">Comprehensive overview of your metrics</p>
   </header>
 
-  <!-- Totals section -->
+  <!-- Totals section with cards -->
   <section class="totals-grid" *ngIf="stats">
     <div class="total-card" *ngIf="stats.totalGoals !== undefined">
       <div class="total-card-content">
         <h3>Total Goals</h3>
-        <p class="total-value">{{ stats.totalGoals }}</p>
-        <div class="total-trend"><span class="trend-icon">📈</span> All time</div>
+        <p class="total-value">{{ stats.totalGoals}}</p>
+        <div class="total-trend">
+          <span class="trend-icon">📈</span>
+          <span class="trend-text">All time</span>
+        </div>
       </div>
       <div class="total-card-icon">🎯</div>
     </div>
@@ -23,8 +26,11 @@
     <div class="total-card" *ngIf="stats.totalProjects !== undefined">
       <div class="total-card-content">
         <h3>Total Projects</h3>
-        <p class="total-value">{{ stats.totalProjects }}</p>
-        <div class="total-trend"><span class="trend-icon">📊</span> All time</div>
+        <p class="total-value">{{ stats.totalProjects}}</p>
+        <div class="total-trend">
+          <span class="trend-icon">📊</span>
+          <span class="trend-text">All time</span>
+        </div>
       </div>
       <div class="total-card-icon">📂</div>
     </div>
@@ -32,8 +38,11 @@
     <div class="total-card" *ngIf="stats.totalWorkflows !== undefined">
       <div class="total-card-content">
         <h3>Total Workflows</h3>
-        <p class="total-value">{{ stats.totalWorkflows }}</p>
-        <div class="total-trend"><span class="trend-icon">⚙️</span> All time</div>
+        <p class="total-value">{{ stats.totalWorkflows}}</p>
+        <div class="total-trend">
+          <span class="trend-icon">⚙️</span>
+          <span class="trend-text">All time</span>
+        </div>
       </div>
       <div class="total-card-icon">🔄</div>
     </div>
@@ -41,25 +50,27 @@
     <div class="total-card" *ngIf="stats.totalPartnerships !== undefined">
       <div class="total-card-content">
         <h3>Total Partnerships</h3>
-        <p class="total-value">{{ stats.totalPartnerships }}</p>
-        <div class="total-trend"><span class="trend-icon">🤝</span> All time</div>
+        <p class="total-value">{{ stats.totalPartnerships}}</p>
+        <div class="total-trend">
+          <span class="trend-icon">🤝</span>
+          <span class="trend-text">All time</span>
+        </div>
       </div>
       <div class="total-card-icon">🌐</div>
     </div>
   </section>
 
-  <!-- Tabs navigation -->
+  <!-- Charts grid with tabs -->
   <section class="chart-tabs" *ngIf="stats">
     <nav class="tab-nav">
       <button class="tab-button"
               *ngFor="let tab of tabs"
               [class.active]="activeTab === tab.id"
-              (click)="setActiveTab(tab.id)">
+              >
         {{ tab.label }}
       </button>
     </nav>
 
-    <!-- Chart content per tab -->
     <div class="tab-content" *ngIf="activeTab === 'goals'">
       <div class="chart-section">
         <div class="chart-card">
@@ -129,7 +140,7 @@
     </div>
   </section>
 
-  <!-- Error -->
+  <!-- Error message -->
   <div class="error-message" *ngIf="error">
     <p>⚠️ Unable to load dashboard data. Please try again later.</p>
   </div>
