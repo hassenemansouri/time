@@ -14,6 +14,8 @@ import {NgOptimizedImage} from '@angular/common';
   schemas: [CUSTOM_ELEMENTS_SCHEMA],
 })
 export class DashboardComponent implements OnInit {
+  private id: string;
+  private currentUser: any;
 
   constructor(private authService: AuthService, private router: Router) {}
 
@@ -28,5 +30,12 @@ export class DashboardComponent implements OnInit {
     // Call the logout method in the AuthService
     this.authService.logout();
     this.router.navigate(['/dashboard']);
+  }
+
+  protected loadUserId() {
+
+      this.currentUser = this.authService.getCurrentUser();
+      this.id = this.authService.getCurrentUserId();
+
   }
 }
