@@ -46,6 +46,7 @@ export class LoginComponent implements OnInit {
     if (this.username && this.password) {
       this.authService.login({ email: this.username, password: this.password }).subscribe(
         (response) => {
+          this.authService.setCurrentUser(response.user);
           this.authService.storeToken(response.token);
           this.router.navigate(['/dashboard'], { replaceUrl: true });
         },
