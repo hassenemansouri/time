@@ -4,7 +4,9 @@
   padding: 15px 0;
   box-shadow: 0 4px 10px rgba(0, 0, 0, 0.2);
 }
-
+body{
+  background-color: #0d6efd;
+}
 /* 🌟 Logo */
 .logo {
   height: 40px;
@@ -62,20 +64,27 @@
   }
 }
 
+
+app-landing{
+  background-color: #007bff;
+}
+
 /* 🌟 General Styles */
 body {
   font-family: 'Poppins', sans-serif;
-  background: linear-gradient(135deg, #0050fd, #4a7cd6);
+  background: linear-gradient(135deg, #ae1f56, #e8e8e8);
   color: #333;
   margin: 0;
   padding: 0;
   overflow-x: hidden;
 }
 
+
 .landing-container {
   max-width: 1200px;
   margin: 0 auto;
   padding: 20px;
+
 }
 
 /* 🌟 Top Bar with Glassmorphism Effect */
