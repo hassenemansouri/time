@@ -86,7 +86,9 @@ body {
   padding: 20px;
 
 }
-
+span.p-button-rounded{
+  text-underline: none;
+}
 /* 🌟 Top Bar with Glassmorphism Effect */
 .topbar.glass-effect {
   background: rgba(255, 255, 255, 0.1);
