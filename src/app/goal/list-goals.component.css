@@ -294,13 +294,11 @@ h2 {
 
 /* 🌟 Animation */
 .goal-animation {
-  display: block;
-  justify-content: center;
-  align-items: center;
-  height: 100vh;
+  display : flex;
   position: relative;
-  top: 0;
-  right: 0;
-  bottom: 0;
-  left: 135px;
+  height: 80%;
+  width: 80%;
+  left: 170px;
+
 }
+
