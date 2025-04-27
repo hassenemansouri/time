@@ -19,7 +19,7 @@
     <!-- Formulaire de prédiction -->
     <form (ngSubmit)="predict()" [formGroup]="form" class="space-y-4">
       <div>
-        <label class="block text-slate-600 font-semibold mb-1" for="steps">Steps</label>
+        <label class="block text-slate-600 font-semibold mb-1" for="steps">The Description</label>
         <input
           id="steps"
           type="text"
@@ -28,7 +28,7 @@
           placeholder="Ex: Step 1, Step 2"
         />
         <div *ngIf="form.get('steps')&& form.get('steps')?.invalid" class="text-red-500 text-sm mt-1">
-          <small *ngIf="form.get('steps')?.hasError('required')">The 'steps' field is required</small>
+          <small *ngIf="form.get('steps')?.hasError('required')">The Description field is required</small>
         </div>
       </div>
 
