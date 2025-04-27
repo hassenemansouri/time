@@ -136,6 +136,8 @@
         </a>
         <ul class="dropdown-menu bg-dark" aria-labelledby="rewardsDropdown">
           <li><a routerLink="/rewards" routerLinkActive="active" class="dropdown-item text-white">All Rewards</a></li>
+          <li><a routerLink="/prediction_reward" routerLinkActive="active" class="dropdown-item text-white">Prediction</a></li>
+
           <li><a routerLink="/rewards/add" routerLinkActive="active" class="dropdown-item text-white">Add Reward</a></li>
           <li><a routerLink="/rewards/dashboard" routerLinkActive="active" class="dropdown-item text-white">Dashboard</a></li>
         </ul>
@@ -181,7 +183,7 @@
         </span>
               </a>
               <ul class="dropdown-menu dropdown-menu-end" aria-labelledby="navbarDropdown">
-                <li><a class="dropdown-item" [routerLink]="['/users', user.id]"><i class="fas fa-user me-2"></i> Profile</a></li>
+                <!--<li><a class="dropdown-item" [routerLink]="['/users', user.id]"><i class="fas fa-user me-2"></i> Profile</a></li>-->
                 <li><a class="dropdown-item" href="#"><i class="fas fa-bell me-2"></i> Notifications</a></li>
                 <li><hr class="dropdown-divider"></li>
                 <li><a class="dropdown-item" (click)="logout()"><i class="fas fa-sign-out-alt me-2"></i> Logout</a></li>

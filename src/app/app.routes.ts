@@ -58,6 +58,7 @@ import {
 import {ProjectStatsComponent} from './project-stats/project-stats.component';
 import {AllStatsComponent} from './all-stats/all-stats.component';
 import {TimeForgePredectionComponent} from './time-forge-predection/time-forge-predection.component';
+import {RewardPredictComponent} from './reward_predict/reward-predict/reward-predict.component';
 
 
 export const routes: Routes = [
@@ -138,7 +139,10 @@ export const routes: Routes = [
         { path: 'goals/stats', component: GoalStatsComponent},
         { path: 'projects/stats', component: ProjectStatsComponent},
         { path: 'AllStats', component: AllStatsComponent},
-        { path: 'prediction', component: TimeForgePredectionComponent}
+        { path: 'prediction', component: TimeForgePredectionComponent},
+        { path: 'prediction_reward', component: RewardPredictComponent}
+
+
 
 
       ]
