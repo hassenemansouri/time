@@ -13,17 +13,17 @@
       </a>
 
       <a routerLink="/calender" routerLinkActive="active" class="list-group-item list-group-item-action bg-dark text-white">
-        <i class="fas fa-cogs me-2"></i> Principal Calender
+        <i class="fas fa-calendar-check me-2"></i> Calendar Overview
       </a>
 
       <a routerLink="/prediction" routerLinkActive="active" class="list-group-item list-group-item-action bg-dark text-white">
-        <i class="fas fa-cogs me-2"></i> AI TimeForge
+        <i class="fas fa-robot me-2"></i> AI TimeForge
       </a>
 
       <!-- Workspaces -->
       <div class="dropdown">
         <a class="list-group-item list-group-item-action bg-dark text-white dropdown-toggle" href="#" id="workspacesDropdown" role="button" data-bs-toggle="dropdown" aria-expanded="false">
-          <i class="fas fa-warehouse me-2"></i> Workspaces
+          <i class="fas fa-briefcase me-2"></i> Workspaces
         </a>
         <ul class="dropdown-menu bg-dark" aria-labelledby="workspacesDropdown">
           <li><a routerLink="/workspaces" routerLinkActive="active" class="dropdown-item text-white">All Workspaces</a></li>
@@ -37,7 +37,7 @@
       <!-- Workflows -->
       <div class="dropdown">
         <a class="list-group-item list-group-item-action bg-dark text-white dropdown-toggle" href="#" id="workflowsDropdown" role="button" data-bs-toggle="dropdown" aria-expanded="false">
-          <i class="fas fa-tasks me-2"></i> Workflows
+          <i class="fas fa-stream me-2"></i> Workflows
         </a>
         <ul class="dropdown-menu bg-dark" aria-labelledby="workflowsDropdown">
           <li><a routerLink="/workflows" routerLinkActive="active" class="dropdown-item text-white">All Workflows</a></li>
@@ -49,6 +49,20 @@
         </ul>
       </div>
 
+
+      <!-- Partnerships -->
+      <div class="dropdown">
+        <a class="list-group-item list-group-item-action bg-dark text-white dropdown-toggle" href="#" id="partnershipsDropdown" role="button" data-bs-toggle="dropdown" aria-expanded="false">
+          <i class="fas fa-users me-2"></i> Partnerships
+        </a>
+        <ul class="dropdown-menu bg-dark" aria-labelledby="partnershipsDropdown">
+          <li><a routerLink="/partnerships" routerLinkActive="active" class="dropdown-item text-white">All Partnerships</a></li>
+          <li><a routerLink="/add-partnership" routerLinkActive="active" class="dropdown-item text-white">Add Partnership</a></li>
+          <li><a routerLink="/partnerships/calendar" routerLinkActive="active" class="dropdown-item text-white">Calendar</a></li>
+          <li><a routerLink="/partnerships/stats" routerLinkActive="active" class="dropdown-item text-white">Dashboard</a></li>
+
+        </ul>
+      </div>
 
       <!-- Projects -->
 
@@ -131,20 +145,6 @@
       <a routerLink="/collaborations" routerLinkActive="active" class="list-group-item list-group-item-action bg-dark text-white">
         <i class="fas fa-handshake me-2"></i> Collaborations
       </a>
-
-      <!-- Partnerships -->
-      <div class="dropdown">
-        <a class="list-group-item list-group-item-action bg-dark text-white dropdown-toggle" href="#" id="partnershipsDropdown" role="button" data-bs-toggle="dropdown" aria-expanded="false">
-          <i class="fas fa-users me-2"></i> Partnerships
-        </a>
-        <ul class="dropdown-menu bg-dark" aria-labelledby="partnershipsDropdown">
-          <li><a routerLink="/partnerships" routerLinkActive="active" class="dropdown-item text-white">All Partnerships</a></li>
-          <li><a routerLink="/add-partnership" routerLinkActive="active" class="dropdown-item text-white">Add Partnership</a></li>
-          <li><a routerLink="/partnerships/calendar" routerLinkActive="active" class="dropdown-item text-white">Calendar</a></li>
-          <li><a routerLink="/partnerships/stats" routerLinkActive="active" class="dropdown-item text-white">Dashboard</a></li>
-
-        </ul>
-      </div>
 
 
 
