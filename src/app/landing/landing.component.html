@@ -1,5 +1,5 @@
 <!-- 🌟 Navbar Bootstrap 5 Modern -->
-
+<div class="landing">
 
 <!-- 🌟 Ajoute Bootstrap 5 si nécessaire -->
 <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
@@ -204,7 +204,10 @@
               <li>Basic features</li>
               <li>Community support</li>
             </ul>
-            <button pButton label="Get Started" icon="pi pi-check" class="p-button-raised p-button-rounded"></button>
+            <a routerLink="/signup" class="p-button p-button-raised p-button-rounded">
+              <span class="p-button-icon pi pi-check"></span>
+              <span class="p-button-label">Get Started</span>
+            </a>
           </div>
 
           <div class="plan-card pro-plan featured">
@@ -246,6 +249,7 @@
           --success-color: #4cc9f0;
           --featured-color: #f72585;
         }
+
 
         .pricing-container {
           font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
@@ -446,4 +450,5 @@
     <p>Have any questions or need a custom solution? Our team is here to help.</p>
     <button pButton label="Contact Us" icon="pi pi-send" class="btn-secondary"></button>
   </section>
+</div>
 </div>

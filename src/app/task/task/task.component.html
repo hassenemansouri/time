@@ -6,7 +6,6 @@
       src="https://lottie.host/4acee261-a72c-42ab-b8f3-bb6b5eb1a456/w0c0OfWoJd.lottie"
       background="transparent"
       speed="1"
-      style="width: 550px; height: 550px"
       loop
       autoplay
     ></dotlottie-player>
@@ -21,19 +20,19 @@
   />
     <button class="btn btn-danger" (click)="exportToPDF()">📝 Export to PDF</button>
   </div>
-    
+
 <!-- <div class="filter-container mb-4">
   <div class="filter-box mb-3 p-3 border rounded shadow-sm bg-light">
-    <input 
-      [(ngModel)]="filters.name" 
-      (input)="applyFilters()" 
-      placeholder="🔍 Search by name" 
+    <input
+      [(ngModel)]="filters.name"
+      (input)="applyFilters()"
+      placeholder="🔍 Search by name"
       class="form-control mb-2"
     />
 
-    <select 
-      [(ngModel)]="filters.priority" 
-      (change)="applyFilters()" 
+    <select
+      [(ngModel)]="filters.priority"
+      (change)="applyFilters()"
       class="form-control mb-2"
     >
       <option value="">All priorities</option>
@@ -48,12 +47,12 @@
       🔍 "{{ filters.name }}"
       <button (click)="clearFilter('name')" class="btn-clear">&times;</button>
     </span>
-    
+
     <span class="filter-badge" *ngIf="filters.priority">
       ⚡ {{ filters.priority | titlecase }}
       <button (click)="clearFilter('priority')" class="btn-clear">&times;</button>
     </span>
-  </div> 
+  </div>
 
 
 </div> -->

@@ -1,4 +1,9 @@
-import { Component, OnInit, OnDestroy } from '@angular/core';
+import {
+  Component,
+  OnInit,
+  OnDestroy,
+  AfterViewInit
+} from '@angular/core';
 import { GoalService } from '../goal/goal.service';
 import { ProjectService } from '../project/project.service';
 import { WorkflowService } from '../workflow/workflow.service';
@@ -6,7 +11,7 @@ import { PartnershipService } from '../strategicparternship/strategicparternship
 import { Chart, registerables } from 'chart.js';
 import { forkJoin, Subject } from 'rxjs';
 import { takeUntil } from 'rxjs/operators';
-import {NgForOf, NgIf} from '@angular/common';
+import { NgForOf, NgIf } from '@angular/common';
 
 Chart.register(...registerables);
 
@@ -20,12 +25,9 @@ interface DashboardTab {
   templateUrl: './all-stats.component.html',
   styleUrls: ['./all-stats.component.scss'],
   standalone: true,
-  imports: [
-    NgForOf,
-    NgIf
-  ]
+  imports: [NgForOf, NgIf]
 })
-export class AllStatsComponent implements OnInit, OnDestroy {
+export class AllStatsComponent implements OnInit, AfterViewInit, OnDestroy {
   stats: any = {};
   loading = true;
   error = false;
@@ -50,6 +52,11 @@ export class AllStatsComponent implements OnInit, OnDestroy {
     this.loadDashboardData();
   }
 
+  ngAfterViewInit(): void {
+    // Initialiser après la vue
+    this.initAllCharts();
+  }
+
   ngOnDestroy(): void {
     this.destroy$.next();
     this.destroy$.complete();
@@ -58,6 +65,14 @@ export class AllStatsComponent implements OnInit, OnDestroy {
 
   setActiveTab(tabId: string): void {
     this.activeTab = tabId;
+    setTimeout(() => {
+      switch (tabId) {
+        case 'goals': this.initGoalCharts(); break;
+        case 'projects': this.initProjectCharts(); break;
+        case 'workflows': this.initWorkflowCharts(); break;
+        case 'partnerships': this.initPartnershipCharts(); break;
+      }
+    }, 0);
   }
 
   private loadDashboardData(): void {
@@ -79,8 +94,8 @@ export class AllStatsComponent implements OnInit, OnDestroy {
             ...workflowStats,
             ...partnershipStats
           };
-          this.initAllCharts();
           this.loading = false;
+          this.initAllCharts();
         },
         error: (err) => {
           console.error('Failed to load dashboard data:', err);
@@ -98,153 +113,126 @@ export class AllStatsComponent implements OnInit, OnDestroy {
   }
 
   private destroyCharts(): void {
-    Object.values(Chart.instances).forEach(instance => instance.destroy());
+    Object.values(Chart.instances || {}).forEach(instance => instance.destroy());
   }
 
   private initGoalCharts(): void {
-    if (!this.stats) return;
+    if (!this.stats?.goalsPerMonth) return;
 
-    if (this.stats.goalsPerMonth) {
-      this.createBarChart(
-        'goalsPerMonthChart',
-        'Goals per Month',
-        Object.keys(this.stats.goalsPerMonth),
-        Object.values(this.stats.goalsPerMonth),
-        ['#4361ee', '#3f37c9', '#4895ef']
-      );
-    }
+    this.createBarChart(
+      'goalsPerMonthChart',
+      'Goals per Month',
+      Object.keys(this.stats.goalsPerMonth),
+      Object.values(this.stats.goalsPerMonth),
+      ['#4361ee', '#3f37c9', '#4895ef']
+    );
 
-    if (this.stats.avgCategoriesPerMonth) {
-      this.createLineChart(
-        'avgCategoriesPerMonthChart',
-        'Average Categories per Month',
-        Object.keys(this.stats.avgCategoriesPerMonth),
-        Object.values(this.stats.avgCategoriesPerMonth),
-        '#4cc9f0'
-      );
-    }
+    this.createLineChart(
+      'avgCategoriesPerMonthChart',
+      'Average Categories per Month',
+      Object.keys(this.stats.avgCategoriesPerMonth || {}),
+      Object.values(this.stats.avgCategoriesPerMonth || {}),
+      '#4cc9f0'
+    );
 
-    if (this.stats.goalsBySize) {
-      this.createPieChart(
-        'goalsBySizeChart',
-        'Goals by Size',
-        Object.keys(this.stats.goalsBySize),
-        Object.values(this.stats.goalsBySize),
-        ['#4361ee', '#3f37c9', '#4895ef', '#4cc9f0', '#560bad']
-      );
-    }
+    this.createPieChart(
+      'goalsBySizeChart',
+      'Goals by Size',
+      Object.keys(this.stats.goalsBySize || {}),
+      Object.values(this.stats.goalsBySize || {}),
+      ['#4361ee', '#3f37c9', '#4895ef', '#4cc9f0', '#560bad']
+    );
   }
 
   private initProjectCharts(): void {
     if (!this.stats) return;
 
-    if (this.stats.projectsPerMonth) {
-      this.createBarChart(
-        'projectsPerMonthChart',
-        'Projects per Month',
-        Object.keys(this.stats.projectsPerMonth),
-        Object.values(this.stats.projectsPerMonth),
-        ['#7209b7', '#560bad', '#480ca8']
-      );
-    }
+    this.createBarChart(
+      'projectsPerMonthChart',
+      'Projects per Month',
+      Object.keys(this.stats.projectsPerMonth || {}),
+      Object.values(this.stats.projectsPerMonth || {}),
+      ['#7209b7', '#560bad', '#480ca8']
+    );
 
-    if (this.stats.projectCategories) {
-      this.createLineChart(
-        'projectCategoriesChart',
-        'Project Categories',
-        Object.keys(this.stats.projectCategories),
-        Object.values(this.stats.projectCategories),
-        '#b5179e'
-      );
-    }
+    this.createLineChart(
+      'averageMembersPerMonthChart',
+      'Average Members per Month',
+      Object.keys(this.stats.averageMembersPerMonth || {}),
+      Object.values(this.stats.averageMembersPerMonth || {}),
+      '#7209b7'
+    );
 
-    if (this.stats.projectsBySize) {
-      this.createPieChart(
-        'projectsBySizeChart',
-        'Projects by Size',
-        Object.keys(this.stats.projectsBySize),
-        Object.values(this.stats.projectsBySize),
-        ['#7209b7', '#560bad', '#480ca8', '#3a0ca3', '#f72585']
-      );
-    }
+    this.createPieChart(
+      'projectsBySizeChart',
+      'Projects by Size',
+      Object.keys(this.stats.projectsBySize || {}),
+      Object.values(this.stats.projectsBySize || {}),
+      ['#7209b7', '#560bad', '#480ca8', '#3a0ca3', '#f72585']
+    );
   }
 
   private initWorkflowCharts(): void {
     if (!this.stats) return;
 
-    if (this.stats.workflowsPerMonth) {
-      this.createBarChart(
-        'workflowsPerMonthChart',
-        'Workflows per Month',
-        Object.keys(this.stats.workflowsPerMonth),
-        Object.values(this.stats.workflowsPerMonth),
-        ['#f72585', '#b5179e', '#7209b7']
-      );
-    }
+    this.createBarChart(
+      'workflowsPerMonthChart',
+      'Workflows per Month',
+      Object.keys(this.stats.workflowsPerMonth || {}),
+      Object.values(this.stats.workflowsPerMonth || {}),
+      ['#f72585', '#b5179e', '#7209b7']
+    );
 
-    if (this.stats.workflowCategories) {
-      this.createLineChart(
-        'workflowCategoriesChart',
-        'Workflow Categories',
-        Object.keys(this.stats.workflowCategories),
-        Object.values(this.stats.workflowCategories),
-        '#7209b7'
-      );
-    }
+    this.createLineChart(
+      'averageStepsPerMonthChart',
+      'Average Steps per Month',
+      Object.keys(this.stats.averageStepsPerMonth || {}),
+      Object.values(this.stats.averageStepsPerMonth || {}),
+      '#f72585'
+    );
 
-    if (this.stats.workflowsBySize) {
-      this.createPieChart(
-        'workflowsBySizeChart',
-        'Workflows by Size',
-        Object.keys(this.stats.workflowsBySize),
-        Object.values(this.stats.workflowsBySize),
-        ['#f72585', '#b5179e', '#7209b7', '#560bad', '#480ca8']
-      );
-    }
+    this.createPieChart(
+      'workflowsBySizeChart',
+      'Workflows by Size',
+      Object.keys(this.stats.workflowsBySize || {}),
+      Object.values(this.stats.workflowsBySize || {}),
+      ['#f72585', '#b5179e', '#7209b7', '#560bad', '#480ca8']
+    );
   }
 
   private initPartnershipCharts(): void {
     if (!this.stats) return;
 
-    if (this.stats.partnershipsPerMonth) {
-      this.createBarChart(
-        'partnershipsPerMonthChart',
-        'Partnerships per Month',
-        Object.keys(this.stats.partnershipsPerMonth),
-        Object.values(this.stats.partnershipsPerMonth),
-        ['#4cc9f0', '#4895ef', '#4361ee']
-      );
-    }
+    this.createBarChart(
+      'partnershipsPerMonthChart',
+      'Partnerships per Month',
+      Object.keys(this.stats.partnershipsPerMonth || {}),
+      Object.values(this.stats.partnershipsPerMonth || {}),
+      ['#4cc9f0', '#4895ef', '#4361ee']
+    );
 
-    if (this.stats.partnershipCategories) {
-      this.createLineChart(
-        'partnershipCategoriesChart',
-        'Partnership Categories',
-        Object.keys(this.stats.partnershipCategories),
-        Object.values(this.stats.partnershipCategories),
-        '#4895ef'
-      );
-    }
+    this.createLineChart(
+      'participantsPerMonthChart',
+      'Participants per Month',
+      Object.keys(this.stats.avgParticipantsPerMonth || {}),
+      Object.values(this.stats.avgParticipantsPerMonth || {}),
+      '#4895ef'
+    );
 
-    if (this.stats.partnershipsBySize) {
-      this.createPieChart(
-        'partnershipsBySizeChart',
-        'Partnerships by Size',
-        Object.keys(this.stats.partnershipsBySize),
-        Object.values(this.stats.partnershipsBySize),
-        ['#4cc9f0', '#4895ef', '#4361ee', '#3f37c9', '#3a0ca3']
-      );
-    }
+    this.createPieChart(
+      'partnershipsBySizeChart',
+      'Partnerships by Size',
+      Object.keys(this.stats.partnershipsBySize || {}),
+      Object.values(this.stats.partnershipsBySize || {}),
+      ['#4cc9f0', '#4895ef', '#4361ee', '#3f37c9', '#3a0ca3']
+    );
   }
 
-  private createBarChart(
-    id: string,
-    label: string,
-    labels: string[],
-    data: any[],
-    colors: string[]
-  ): void {
-    new Chart(id, {
+  private createBarChart(id: string, label: string, labels: string[], data: any[], colors: string[]): void {
+    const canvas = document.getElementById(id) as HTMLCanvasElement;
+    if (!canvas) return;
+
+    new Chart(canvas.getContext('2d')!, {
       type: 'bar',
       data: {
         labels,
@@ -252,7 +240,7 @@ export class AllStatsComponent implements OnInit, OnDestroy {
           label,
           data,
           backgroundColor: colors,
-          borderColor: colors.map(color => `${color}cc`),
+          borderColor: colors.map(c => `${c}cc`),
           borderWidth: 1,
           borderRadius: 4
         }]
@@ -260,9 +248,7 @@ export class AllStatsComponent implements OnInit, OnDestroy {
       options: {
         responsive: true,
         plugins: {
-          legend: {
-            display: false
-          },
+          legend: { display: false },
           tooltip: {
             backgroundColor: '#2b2d42',
             titleColor: '#fff',
@@ -274,28 +260,21 @@ export class AllStatsComponent implements OnInit, OnDestroy {
         scales: {
           y: {
             beginAtZero: true,
-            grid: {
-              color: 'rgba(0, 0, 0, 0.05)'
-            }
+            grid: { color: 'rgba(0,0,0,0.05)' }
           },
           x: {
-            grid: {
-              display: false
-            }
+            grid: { display: false }
           }
         }
       }
     });
   }
 
-  private createLineChart(
-    id: string,
-    label: string,
-    labels: string[],
-    data: any[],
-    color: string
-  ): void {
-    new Chart(id, {
+  private createLineChart(id: string, label: string, labels: string[], data: any[], color: string): void {
+    const canvas = document.getElementById(id) as HTMLCanvasElement;
+    if (!canvas) return;
+
+    new Chart(canvas.getContext('2d')!, {
       type: 'line',
       data: {
         labels,
@@ -315,9 +294,7 @@ export class AllStatsComponent implements OnInit, OnDestroy {
       options: {
         responsive: true,
         plugins: {
-          legend: {
-            display: false
-          },
+          legend: { display: false },
           tooltip: {
             backgroundColor: '#2b2d42',
             titleColor: '#fff',
@@ -329,28 +306,21 @@ export class AllStatsComponent implements OnInit, OnDestroy {
         scales: {
           y: {
             beginAtZero: true,
-            grid: {
-              color: 'rgba(0, 0, 0, 0.05)'
-            }
+            grid: { color: 'rgba(0,0,0,0.05)' }
           },
           x: {
-            grid: {
-              display: false
-            }
+            grid: { display: false }
           }
         }
       }
     });
   }
 
-  private createPieChart(
-    id: string,
-    label: string,
-    labels: string[],
-    data: any[],
-    colors: string[]
-  ): void {
-    new Chart(id, {
+  private createPieChart(id: string, label: string, labels: string[], data: any[], colors: string[]): void {
+    const canvas = document.getElementById(id) as HTMLCanvasElement;
+    if (!canvas) return;
+
+    new Chart(canvas.getContext('2d')!, {
       type: 'pie',
       data: {
         labels,
@@ -365,14 +335,6 @@ export class AllStatsComponent implements OnInit, OnDestroy {
       options: {
         responsive: true,
         plugins: {
-          legend: {
-            position: 'right',
-            labels: {
-              padding: 20,
-              usePointStyle: true,
-              pointStyle: 'circle'
-            }
-          },
           tooltip: {
             backgroundColor: '#2b2d42',
             titleColor: '#fff',
