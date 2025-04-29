@@ -1,20 +1,22 @@
 import {Component, CUSTOM_ELEMENTS_SCHEMA} from '@angular/core';
-import { HttpClient } from '@angular/common/http';
 import {FormBuilder, FormGroup, ReactiveFormsModule, Validators} from '@angular/forms';
-import {NgIf} from '@angular/common'; // Importation de Reactive Forms
+import {HttpClient} from '@angular/common/http';
+import {NgIf} from '@angular/common';
 
 @Component({
-  selector: 'app-predict-workflow',
-  standalone: true,
+  selector: 'app-time-forge-predection',
   imports: [
     NgIf,
     ReactiveFormsModule
   ],
-  templateUrl: './predict-workflow.component.html',
-  styleUrls: ['./predict-workflow.component.css'],
+  templateUrl: './time-forge-predection.component.html',
+  standalone: true,
+  styleUrl: './time-forge-predection.component.css',
   schemas: [CUSTOM_ELEMENTS_SCHEMA]
 })
-export class PredictWorkflowComponent {
+export class TimeForgePredectionComponent {
+
+
   form: FormGroup;
   prediction: string | null = null;
   errorMessage: string | null = null;
@@ -43,7 +45,7 @@ export class PredictWorkflowComponent {
 
     const body = { steps };
 
-    this.http.post<any>('http://localhost:8501/predict', body).subscribe({
+    this.http.post<any>('http://localhost:8600/predict', body).subscribe({
       next: (response) => {
         this.prediction = response.prediction;
         this.showAnimation = true; // Masquage de l'animation
@@ -55,4 +57,5 @@ export class PredictWorkflowComponent {
       }
     });
   }
+
 }

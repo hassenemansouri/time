@@ -57,6 +57,10 @@ import {
 } from './strategic-partenership-stats/strategic-partenership-stats.component';
 import {ProjectStatsComponent} from './project-stats/project-stats.component';
 import {AllStatsComponent} from './all-stats/all-stats.component';
+import {TimeForgePredectionComponent} from './time-forge-predection/time-forge-predection.component';
+import {PaymentComponent} from './components/payment/payment.component';
+import {PaymentSuccessComponent} from './components/payment-success/payment-success.component';
+import {PaymentErrorComponent} from './components/payment-error/payment-error.component';
 
 
 export const routes: Routes = [
@@ -79,68 +83,70 @@ export const routes: Routes = [
     path: '',
     component: PrivateLayoutComponent,
     canActivate: [AuthGuard], // Protect all below routes
-      children: [
-        {
-          path: 'login',
-          component: LoginComponent,
-          canActivate: [NoAuthGuardService] // <-- Blocks if already logged in
-        },
-        {
-          path: 'signup',
-          component: SignUpComponent,
-          canActivate: [NoAuthGuardService] // <-- Blocks if already logged in
-        },
-        { path: 'reset-password', component: ResetPasswordComponent },
-        { path: 'users', component: UserDetailComponent },
-        {path: 'users/:id', component: UserDetailComponent, title: 'User Details'},
-        { path: 'users/edit/:id', component: UserUpdateComponent },
-        { path: 'dashboard', component: DashboardComponent },
-        { path: 'workspaces', component: ListWorkspacesComponent },
-        { path: 'workspaces/add', component: WorkspaceFormComponent },
-        { path: 'workspaces/edit/:id', component: WorkspaceFormComponent },
-        { path: 'calender', component: CalendarComponent},
-        { path: 'workflows', component: WorkflowComponent },
-        { path: 'workflows/add', component: WorkflowFormComponent },
-        { path: 'workflows/edit/:id', component: WorkflowFormComponent },
-        { path: 'collaborations', component: CollaborationComponent },
-        { path: 'goals', component: ListGoalsComponent },
-        { path: 'goals/add', component: GoalFormComponent },
-        { path: 'goals/edit/:id', component: GoalFormComponent },
-        { path: 'goals/calender', component: CalendarComponent},
-        { path: 'rewards', component: ListRewardsComponent },
-        { path: 'rewards/add', component: RewardFormComponent },
-        { path: 'rewards/edit/:id', component: RewardFormComponent },
-        { path: 'projects', component: ProjectComponent },
-        { path: 'projects/add', component: ProjectFormComponent },
-        { path: 'projects/edit/:id', component: ProjectFormComponent },
-        { path: 'tasks', component: TaskComponent },
-        { path: 'tasks/add', component: TaskFormComponent },
-        { path: 'tasks/edit/:id', component: TaskFormComponent },
-        { path: 'columns', component: ColumnComponent },
-        { path: 'columns/add', component: ColumnFormComponent },
-        { path: 'columns/edit/:id', component: ColumnFormComponent },
-        { path: 'boards', component: ListBoardComponent },
-        { path: 'boards/add', component: FormBoardComponent },
-        { path: 'boards/edit/:id', component: FormBoardComponent },
-        { path: 'kanban/:id', component: BoardComponent },
-        { path: 'partnerships', component: ListPartnershipComponent },
-        { path: 'add-partnership', component: AddPartnershipComponent },
-        {path: 'partnerships/edit/:id', component: UpdatePartnershipComponent},
-        { path: 'calender', component: CalendarComponent},
-        { path: 'workflows/predict', component: PredictWorkflowComponent},
-        { path: 'workflows/stats', component: StatsComponent},
-        { path: 'workflows/calendar', component: WorkflowCalendarComponent},
-        { path: 'partnerships/calendar', component: StrategicPartenershipCalendarComponent},
-        { path: 'goals/calendar', component: GoalCalendarComponent},
-        { path: 'projects/calendar', component: ProjectCalendarComponent},
-        { path: 'partnerships/stats', component: StrategicPartenershipStatsComponent},
-        { path: 'goals/stats', component: GoalStatsComponent},
-        { path: 'projects/stats', component: ProjectStatsComponent},
-        { path: 'allStats', component: AllStatsComponent}
+    children: [
+      {
+        path: 'login',
+        component: LoginComponent,
+        canActivate: [NoAuthGuardService] // <-- Blocks if already logged in
+      },
+      {
+        path: 'signup',
+        component: SignUpComponent,
+        canActivate: [NoAuthGuardService] // <-- Blocks if already logged in
+      },
+      { path: 'reset-password', component: ResetPasswordComponent },
+      { path: 'users', component: UserDetailComponent },
+      {path: 'users/:id', component: UserDetailComponent, title: 'User Details'},
+      { path: 'users/edit/:id', component: UserUpdateComponent },
+      { path: 'dashboard', component: DashboardComponent },
+      { path: 'workspaces', component: ListWorkspacesComponent },
+      { path: 'workspaces/add', component: WorkspaceFormComponent },
+      { path: 'workspaces/edit/:id', component: WorkspaceFormComponent },
+      { path: 'calender', component: CalendarComponent},
+      { path: 'workflows', component: WorkflowComponent },
+      { path: 'workflows/add', component: WorkflowFormComponent },
+      { path: 'workflows/edit/:id', component: WorkflowFormComponent },
+      { path: 'collaborations', component: CollaborationComponent },
+      { path: 'goals', component: ListGoalsComponent },
+      { path: 'goals/add', component: GoalFormComponent },
+      { path: 'goals/edit/:id', component: GoalFormComponent },
+      { path: 'goals/calender', component: CalendarComponent},
+      { path: 'rewards', component: ListRewardsComponent },
+      { path: 'rewards/add', component: RewardFormComponent },
+      { path: 'rewards/edit/:id', component: RewardFormComponent },
+      { path: 'projects', component: ProjectComponent },
+      { path: 'projects/add', component: ProjectFormComponent },
+      { path: 'projects/edit/:id', component: ProjectFormComponent },
+      { path: 'tasks', component: TaskComponent },
+      { path: 'tasks/add', component: TaskFormComponent },
+      { path: 'tasks/edit/:id', component: TaskFormComponent },
+      { path: 'columns', component: ColumnComponent },
+      { path: 'columns/add', component: ColumnFormComponent },
+      { path: 'columns/edit/:id', component: ColumnFormComponent },
+      { path: 'boards', component: ListBoardComponent },
+      { path: 'boards/add', component: FormBoardComponent },
+      { path: 'boards/edit/:id', component: FormBoardComponent },
+      { path: 'kanban/:id', component: BoardComponent },
+      { path: 'partnerships', component: ListPartnershipComponent },
+      { path: 'add-partnership', component: AddPartnershipComponent },
+      {path: 'partnerships/edit/:id', component: UpdatePartnershipComponent},
+      { path: 'calender', component: CalendarComponent},
+      { path: 'workflows/predict', component: PredictWorkflowComponent},
+      { path: 'workflows/stats', component: StatsComponent},
+      { path: 'workflows/calendar', component: WorkflowCalendarComponent},
+      { path: 'partnerships/calendar', component: StrategicPartenershipCalendarComponent},
+      { path: 'goals/calendar', component: GoalCalendarComponent},
+      { path: 'projects/calendar', component: ProjectCalendarComponent},
+      { path: 'partnerships/stats', component: StrategicPartenershipStatsComponent},
+      { path: 'goals/stats', component: GoalStatsComponent},
+      { path: 'projects/stats', component: ProjectStatsComponent},
+      { path: 'AllStats', component: AllStatsComponent},
+      { path: 'prediction', component: TimeForgePredectionComponent},
+      { path: 'payment', component: PaymentComponent},
+      { path: 'payment/success', component: PaymentSuccessComponent },
+      { path: 'payment/error', component: PaymentErrorComponent }
 
-        //GoalStatsComponent
-
-      ]
+    ]
   },
 
   // 404 Route

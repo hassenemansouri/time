@@ -29,7 +29,7 @@ export class ListGoalsComponent implements OnInit {
 
   ngOnInit(): void {
     this.loadGoals();
-    setTimeout(() => this.showAnimation = false, 6000);
+    setTimeout(() => this.showAnimation = false, 3000);
     this.goals.forEach(goal => this.verifierEtEnvoyerAlerte(goal));
   }
 
