@@ -288,9 +288,10 @@ h2 {
 .Workflow-animation {
   display : flex;
   position: relative;
-  height: 50%;
-  width: 50%;
-  left: 400px;
+  height: 45%;
+  width: 45%;
+  left: 26%;
+
 }
 .list{
  color: #007bff;
