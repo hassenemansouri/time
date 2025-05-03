@@ -65,6 +65,8 @@ import {ProjectsDashComponent} from './projects-dash/projects-dash.component';
 import {StrategicDashComponent} from './strategic-dash/strategic-dash.component';
 import {ProjectsManagementDashComponent} from './projects-management-dash/projects-management-dash.component';
 import {PerformanceManagementComponent} from './performance-management/performance-management.component';
+import {WorkflowDashComponent} from './workflow-dash/workflow-dash.component';
+import {WorkspaceDashComponent} from './workspace-dash/workspace-dash.component';
 
 
 export const routes: Routes = [
@@ -154,10 +156,14 @@ export const routes: Routes = [
         { path: 'StrategicDash', component: StrategicDashComponent},
         { path: 'PMPDash', component: ProjectsManagementDashComponent},
         { path: 'PerformanceManagement', component: PerformanceManagementComponent},
+        { path: 'WorkflowDash', component: WorkflowDashComponent},
+        { path: 'WorkspaceDash', component: WorkspaceDashComponent }
 
 
 
-        //PerformanceManagementComponent
+
+
+        //WorkspaceDashComponent
 
       ]
   },

@@ -22,11 +22,11 @@ export class MenuComponent {
     {link: '/AllStats', icon: 'fas fa-tachometer-alt', label: 'Dashboard'},
     {link: '/calender', icon: 'fas fa-calendar-check', label: 'Calendar Overview'},
     {link: '/prediction', icon: 'fas fa-robot', label: 'AI TimeForge'},
-    {link: '/workspaces', icon: 'fas fa-briefcase', label: 'Workspaces'},
-    {link: '/workflows', icon: 'fas fa-stream', label: 'Workflows'},
+    {link: '/WorkspaceDash', icon: 'fas fa-briefcase', label: 'Workspaces Dashboard'},
+    {link: '/WorkflowDash', icon: 'fas fa-stream', label: 'Workflows Dashboard'},
     {link: '/StrategicDash', icon: 'fas fa-users', label: 'Partnerships'},
     {link: '/PMPDash', icon: 'fas fa-project-diagram', label: 'Project Management'},
-    {link: '/PerformanceManagement', icon: 'fas fa-project-diagram', label: 'PerformanceManagement'},
+    {link: '/PerformanceManagement', icon: 'fas fa-project-diagram', label: 'Performance Management'},
     {link: '/collaborations', icon: 'fas fa-handshake', label: 'Collaborations'}
   ];
 

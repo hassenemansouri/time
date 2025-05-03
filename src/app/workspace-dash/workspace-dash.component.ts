@@ -9,20 +9,21 @@ interface NavItem {
 }
 
 @Component({
-  selector: 'app-process-management',
+  selector: 'app-workspace-dash',
   imports: [
     RouterLink,
     RouterLinkActive,
     NgForOf
   ],
-  templateUrl: './process-management.component.html',
+  templateUrl: './workspace-dash.component.html',
   standalone: true,
-  styleUrl: './process-management.component.css'
+  styleUrl: './workspace-dash.component.css'
 })
-export class ProcessManagementComponent {
+export class WorkspaceDashComponent {
 
   navItems: NavItem[] = [
-    {link: '/WorkflowDash', icon: 'fas fa-bullseye', label: 'Workflow Dashboard'},
-    {link: '/rewards', icon: 'fas fa-gift', label: 'Rewards'}
+    { link: '/workspaces', icon: 'fas fa-th-large', label: 'All Workspaces' },
+    { link: '/workspaces/add', icon: 'fas fa-plus-circle', label: 'Create Workspace' }
   ];
+
 }
