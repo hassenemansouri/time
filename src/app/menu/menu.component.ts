@@ -19,15 +19,16 @@ import {NgForOf} from '@angular/common';
 export class MenuComponent {
 
   navItems = [
-    {link: '/AllStats', icon: 'fas fa-tachometer-alt', label: 'Dashboard'},
-    {link: '/calender', icon: 'fas fa-calendar-check', label: 'Calendar Overview'},
-    {link: '/prediction', icon: 'fas fa-robot', label: 'AI TimeForge'},
-    {link: '/WorkspaceDash', icon: 'fas fa-briefcase', label: 'Workspaces Dashboard'},
-    {link: '/WorkflowDash', icon: 'fas fa-stream', label: 'Workflows Dashboard'},
-    {link: '/StrategicDash', icon: 'fas fa-users', label: 'Partnerships'},
-    {link: '/PMPDash', icon: 'fas fa-project-diagram', label: 'Project Management'},
-    {link: '/PerformanceManagement', icon: 'fas fa-project-diagram', label: 'Performance Management'},
-    {link: '/collaborations', icon: 'fas fa-handshake', label: 'Collaborations'}
+    { link: '/AllStats', icon: 'fas fa-chart-line', label: 'Global Dashboard' },
+    { link: '/calender', icon: 'fas fa-calendar-alt', label: 'Calendar Overview' },
+    { link: '/prediction', icon: 'fas fa-brain', label: 'AI Predictions' },
+    { link: '/WorkspaceDash', icon: 'fas fa-building', label: 'Workspace Insights' },
+    { link: '/WorkflowDash', icon: 'fas fa-cogs', label: 'Workflow Analytics' },
+    { link: '/StrategicDash', icon: 'fas fa-handshake', label: 'Strategic Partnerships' },
+    { link: '/PMPDash', icon: 'fas fa-tasks', label: 'Project Management' },
+    { link: '/PerformanceManagement', icon: 'fas fa-chart-pie', label: 'Performance Management' },
+    { link: '/collaborations', icon: 'fas fa-users-cog', label: 'Team Collaborations' }
   ];
+
 
 }
