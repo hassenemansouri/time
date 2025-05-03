@@ -26,8 +26,7 @@ export class MenuComponent {
     {link: '/workflows', icon: 'fas fa-stream', label: 'Workflows'},
     {link: '/StrategicDash', icon: 'fas fa-users', label: 'Partnerships'},
     {link: '/PMPDash', icon: 'fas fa-project-diagram', label: 'Project Management'},
-    {link: '/goalDash', icon: 'fas fa-bullseye', label: 'Goals'},
-    {link: '/rewards', icon: 'fas fa-gift', label: 'Rewards'},
+    {link: '/PerformanceManagement', icon: 'fas fa-project-diagram', label: 'PerformanceManagement'},
     {link: '/collaborations', icon: 'fas fa-handshake', label: 'Collaborations'}
   ];
 
