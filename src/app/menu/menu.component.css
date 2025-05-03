@@ -80,7 +80,7 @@ a:hover {
 }
 /* Conteneur principal avec dégradé animé */
 .container-fluid {
-  background: linear-gradient(45deg, #6e7fcd, #a7b5e2, #ff6f61, #f8b400);
+  background: linear-gradient(45deg, #6e7fcd, #a7b5e2, #edbebd, #e6d99c);
   background-size: 400% 400%;
   animation: gradientBG 10s ease infinite;
   padding-top: 40px;

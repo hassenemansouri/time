@@ -29,7 +29,7 @@ import {Router, RouterLink, RouterLinkActive} from '@angular/router';
       // Hide the animation after 5 seconds and show the workflow content
       setTimeout(() => {
         this.showAnimation = false;
-      }, 3000);
+      }, 2000);
     }
 
     loadRewards(): void {

@@ -21,13 +21,13 @@ searchText: string = '';
   constructor(private taskService: TaskService, private dialog: MatDialog,private router: Router) {}
 
 
-  showAnimation = true;  
+  showAnimation = true;
 
   ngOnInit(): void {
     this.loadTasks();
     setTimeout(() => {
       this.showAnimation = false;
-    }, 6000);
+    }, 2000);
   }
 
   loadTasks(): void {
@@ -35,7 +35,7 @@ searchText: string = '';
       this.tasks = data;
     });
   }
- 
+
   deleteTask(id: string | undefined): void {
     if (confirm('Are you sure you want to delete this task?')) {
       this.taskService.deleteTask(id).subscribe(() => {
@@ -48,7 +48,7 @@ searchText: string = '';
   this.router.navigate(['/task-details'], { state: { data: task } });
   }
 
-  
+
   exportToPDF(): void {
       if (!this.tasks || this.tasks.length === 0) {
         console.error("No projects available to export.");
