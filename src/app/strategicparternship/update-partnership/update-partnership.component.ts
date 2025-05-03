@@ -120,4 +120,11 @@ export class UpdatePartnershipComponent {
       }
     });
   }
+  isExpired(endDate: Date | null): boolean {
+    if (!endDate) return false;
+    const today = new Date();
+    const expirationDate = new Date(endDate);
+    // Consider partnership expired if end date is within 7 days or already passed
+    return expirationDate <= new Date(today.setDate(today.getDate()));
+  }
 }

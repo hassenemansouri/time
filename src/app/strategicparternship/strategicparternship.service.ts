@@ -9,6 +9,7 @@ export interface StrategicPartnership {
   description: string;
   participants: string[];
   creationDate?: Date;
+  endDate?: Date;
   blockchainHash?: string;
   blockchainTimestamp?: Date;
 }
