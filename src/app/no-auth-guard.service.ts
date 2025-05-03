@@ -14,7 +14,7 @@ export class NoAuthGuardService {
     return this.authService.isAuthenticated().pipe(
       map(isAuthenticated => {
         if (isAuthenticated) {
-          this.router.navigate(['/AllStats']); // Redirect to dashboard if logged in
+          this.router.navigate(['menu']); // Redirect to dashboard if logged in
           return false; // Block access to login page
         }
         return true; // Allow access if not authenticated

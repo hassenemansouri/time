@@ -57,6 +57,9 @@ import {
 } from './strategic-partenership-stats/strategic-partenership-stats.component';
 import {ProjectStatsComponent} from './project-stats/project-stats.component';
 import {TimeTrackerComponent} from './components/time-tracker/time-tracker/time-tracker.component';
+import {TimeForgePredectionComponent} from './time-forge-predection/time-forge-predection.component';
+import {AllStatsComponent} from './all-stats/all-stats.component';
+import {MenuComponent} from './menu/menu.component';
 
 
 export const routes: Routes = [
@@ -136,7 +139,12 @@ export const routes: Routes = [
         { path: 'projects/calendar', component: ProjectCalendarComponent},
         { path: 'partnerships/stats', component: StrategicPartenershipStatsComponent},
         { path: 'goals/stats', component: GoalStatsComponent},
-        { path: 'projects/stats', component: ProjectStatsComponent}
+        { path: 'projects/stats', component: ProjectStatsComponent},
+        { path: 'prediction', component: TimeForgePredectionComponent},
+        { path: 'AllStats', component: AllStatsComponent},
+        { path: 'workflows/prediction', component: PredictWorkflowComponent},
+        { path: 'menu', component: MenuComponent}
+
 
         //GoalStatsComponent
 
