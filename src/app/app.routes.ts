@@ -1,6 +1,5 @@
 import { NgModule } from '@angular/core';
 import { RouterModule, Routes } from '@angular/router';
-
 import { ListWorkspacesComponent } from './workspace/list-workspaces/list-workspaces.component';
 import { WorkspaceFormComponent } from './workspace/workspace-form/workspace-form.component';
 import { WorkflowFormComponent } from './workflow/workflow-form/workflow-form.component';
@@ -23,18 +22,15 @@ import { RewardFormComponent } from './reward/reward-form.component';
 import { ForgotPasswordComponent } from './forgot-password/forgot-password.component';
 import { ListPartnershipComponent } from './strategicparternship/partnership-list/partnership-list.component';
 import { AddPartnershipComponent } from './strategicparternship/add-partnership/add-partnership.component';
-
 // Layouts
 import { PublicLayoutComponent } from './layouts/public-layout/public-layout.component';
 import {PrivateLayoutComponent} from './layouts/private-layout/private-layout.component';
 import {CalendarComponent} from './app/calendar/calendar.component';
-
 import { ColumnComponent } from './column/column/column.component';
 import { ColumnFormComponent } from './column/column-form/column-form.component';
 import { ListBoardComponent } from './kanban/list-board/list-board.component';
 import { FormBoardComponent } from './kanban/form-board/form-board.component';
 import { BoardComponent } from './kanban/board/board.component';
-
 import {PredictWorkflowComponent} from './predict-workflow/predict-workflow.component';
 import {UserDetailComponent} from './user/user-detail/user-detail.component';
 import {
@@ -50,14 +46,15 @@ import {
 } from './strategic-partenership-calendar/strategic-partenership-calendar.component';
 import {GoalCalendarComponent} from './goal-calendar/goal-calendar.component';
 import {ProjectCalendarComponent} from './project-calendar/project-calendar.component';
-
 import {GoalStatsComponent} from './goal-stats/goal-stats.component';
 import {
   StrategicPartenershipStatsComponent
 } from './strategic-partenership-stats/strategic-partenership-stats.component';
 import {ProjectStatsComponent} from './project-stats/project-stats.component';
-import {AllStatsComponent} from './all-stats/all-stats.component';
+import {TimeTrackerComponent} from './components/time-tracker/time-tracker/time-tracker.component';
 import {TimeForgePredectionComponent} from './time-forge-predection/time-forge-predection.component';
+import {AllStatsComponent} from './all-stats/all-stats.component';
+import {MenuComponent} from './menu/menu.component';
 
 
 export const routes: Routes = [
@@ -92,6 +89,7 @@ export const routes: Routes = [
           canActivate: [NoAuthGuardService] // <-- Blocks if already logged in
         },
         { path: 'reset-password', component: ResetPasswordComponent },
+        {path: 'time-tracker',component: TimeTrackerComponent},
         { path: 'users', component: UserDetailComponent },
         {path: 'users/:id', component: UserDetailComponent, title: 'User Details'},
         { path: 'users/edit/:id', component: UserUpdateComponent },
@@ -137,9 +135,13 @@ export const routes: Routes = [
         { path: 'partnerships/stats', component: StrategicPartenershipStatsComponent},
         { path: 'goals/stats', component: GoalStatsComponent},
         { path: 'projects/stats', component: ProjectStatsComponent},
+        { path: 'prediction', component: TimeForgePredectionComponent},
         { path: 'AllStats', component: AllStatsComponent},
-        { path: 'prediction', component: TimeForgePredectionComponent}
+        { path: 'workflows/prediction', component: PredictWorkflowComponent},
+        { path: 'menu', component: MenuComponent}
 
+
+        //GoalStatsComponent
 
       ]
   },

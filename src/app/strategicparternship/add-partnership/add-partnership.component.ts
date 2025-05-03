@@ -39,7 +39,8 @@ export class AddPartnershipComponent {
   partnership: StrategicPartnership = {
     name: '',
     description: '',
-    participants: []
+    participants: [],
+    endDate: null,
   };
   participantControl = new FormControl();
   filteredUsers: Observable<any[]>;
@@ -83,7 +84,8 @@ export class AddPartnershipComponent {
     this.partnership = {
       name: '',
       description: '',
-      participants: []
+      participants: [],
+      endDate: null,
     };
     this.selectedUsers = [];
     this.participantControl.setValue('');
