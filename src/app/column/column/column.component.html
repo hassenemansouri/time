@@ -27,21 +27,23 @@
       ➕ Add column
     </button>
   </div>
-  
+
   <div class="table-responsive">
     <table class="table">
       <thead>
         <tr>
           <th>Name</th>
           <th>Order</th>
-      
+
+          <th>Actions</th>
+
         </tr>
       </thead>
       <tbody>
         <tr *ngFor="let column of columns">
           <td>{{ column.name }}</td>
           <td>{{ column.order }}</td>
-        
+
           <td data-label="Actions">
             <div class="btn-container">
               <button class="btn btn-warning btn-sm" [routerLink]="['/columns/edit', column._id]">

@@ -24,12 +24,9 @@ export class MenuComponent {
     {link: '/prediction', icon: 'fas fa-robot', label: 'AI TimeForge'},
     {link: '/workspaces', icon: 'fas fa-briefcase', label: 'Workspaces'},
     {link: '/workflows', icon: 'fas fa-stream', label: 'Workflows'},
-    {link: '/partnerships', icon: 'fas fa-users', label: 'Partnerships'},
-    {link: '/projects', icon: 'fas fa-project-diagram', label: 'Projects'},
-    {link: '/tasks', icon: 'fas fa-tasks', label: 'Tasks'},
-    {link: '/columns', icon: 'fas fa-columns', label: 'Columns'},
-    {link: '/boards', icon: 'fas fa-th-large', label: 'Kanban'},
-    {link: '/goals', icon: 'fas fa-bullseye', label: 'Goals'},
+    {link: '/StrategicDash', icon: 'fas fa-users', label: 'Partnerships'},
+    {link: '/PMPDash', icon: 'fas fa-project-diagram', label: 'Project Management'},
+    {link: '/goalDash', icon: 'fas fa-bullseye', label: 'Goals'},
     {link: '/rewards', icon: 'fas fa-gift', label: 'Rewards'},
     {link: '/collaborations', icon: 'fas fa-handshake', label: 'Collaborations'}
   ];
