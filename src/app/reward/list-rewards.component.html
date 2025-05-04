@@ -1,5 +1,5 @@
 <div class="container">
-  <h2>Liste des Rewards</h2>
+  <h2>List of Rewards</h2>
 
   <div class="reward-animation" *ngIf="showAnimation">
   <dotlottie-player
@@ -19,14 +19,14 @@
       type="text"
       class="search-input"
       [(ngModel)]="searchText"
-      placeholder="🔎 Rechercher une reward..."
+      placeholder="🔎 ........"
     />
     <button class="btn btn-danger" (click)="exportToPDF()">📝 Export to PDF</button>
   </div>
 
   <!-- Ajouter -->
   <button class="btn btn-primary" [routerLink]="['/rewards/add']">
-    ➕ Ajouter une Reward
+    ➕ Add a Reward
   </button>
 
   <!-- Tableau -->
@@ -35,7 +35,7 @@
     <tr>
       <th>Type</th>
       <th>Description</th>
-      <th>Date d'attribution</th>
+      <th>Date</th>
       <th>Actions</th>
     </tr>
     </thead>
@@ -46,8 +46,8 @@
       <td>{{ reward.dateAwarded | date:'shortDate' }}</td>
       <td>
         <div class="btn-container">
-          <button class="btn btn-warning btn-sm" [routerLink]="['/rewards/edit', reward.id]">✏️ Modifier</button>
-          <button class="btn btn-danger btn-sm" (click)="deleteReward(reward.id)">🗑️ Supprimer</button>
+          <button class="btn btn-warning btn-sm" [routerLink]="['/rewards/edit', reward.id]">✏️Update</button>
+          <button class="btn btn-danger btn-sm" (click)="deleteReward(reward.id)">🗑️ Delete</button>
         </div>
       </td>
     </tr>

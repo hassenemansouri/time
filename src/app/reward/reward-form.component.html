@@ -1,6 +1,6 @@
 <div class="container">
   <div class="card">
-    <h2 class="text-center mb-4">{{ isEdit ? 'Modifier' : 'Créer' }} une Reward</h2>
+    <h2 class="text-center mb-4">{{ isEdit ? 'Update' : 'Create' }} une Reward</h2>
 
     <form #rewardForm="ngForm" (ngSubmit)="onSubmit(rewardForm)" novalidate>
 
@@ -51,7 +51,7 @@
 
       <!-- Date -->
       <div class="mb-3">
-        <label for="dateAwarded" class="form-label fw-bold">Date d'attribution</label>
+        <label for="dateAwarded" class="form-label fw-bold">Date</label>
         <input
           type="date"
           id="dateAwarded"
@@ -73,8 +73,8 @@
 
       <!-- Boutons -->
       <div class="btn-container">
-        <button type="submit" class="btn btn-success" [disabled]="rewardForm.invalid || dateInFuture">💾 Enregistrer</button>
-        <button type="button" class="btn btn-secondary" (click)="router.navigate(['/rewards'])">❌ Annuler</button>
+        <button type="submit" class="btn btn-success" [disabled]="rewardForm.invalid || dateInFuture">💾 Save</button>
+        <button type="button" class="btn btn-secondary" (click)="router.navigate(['/rewards'])">❌ Delete</button>
       </div>
     </form>
   </div>
