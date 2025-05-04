@@ -15,29 +15,27 @@ export class BoardService {
       headers: new HttpHeaders({ 'Content-Type': 'application/json' })
     };
 
-    // Obtenir toutes les boards
     getAllBoards(): Observable<Board[]> {
       return this.http.get<Board[]>(this.apiUrl); 
     }
   
-    // Obtenir une board par son ID
     getBoardById(id: string): Observable<Board> {
       return this.http.get<Board>(`${this.apiUrl}/${id}`); // Utilisation de l'ID dans l'URL
     }
  
-    // Créer une nouvelle board
     createBoard(board: Board): Observable<Board> {
       return this.http.post<Board>(`${this.apiUrl}/create`, board,this.httpOptions); // Ajout de /create pour correspondre à la route Spring
     }
   
-    // Mettre à jour une board existante
     updateBoard(board: Board): Observable<Board> {
-      return this.http.put<Board>(`${this.apiUrl}/modify-board`, board, this.httpOptions); // Mettre à jour via la route /modify-board
+      return this.http.put<Board>(`${this.apiUrl}/modify-board`, board,this.httpOptions);
     }
   
-    // Supprimer une board par son ID
     deleteBoard(id: string): Observable<void> {
       return this.http.delete<void>(`${this.apiUrl}/${id}`);
+    }
+    getBoardsByProject(projectId: string): Observable<Board> {
+      return this.http.get<Board>(`${this.apiUrl}/project/${projectId}`);
     }
   }
   

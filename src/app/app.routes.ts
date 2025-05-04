@@ -1,6 +1,9 @@
 import { NgModule } from '@angular/core';
 import { RouterModule, Routes } from '@angular/router';
 
+import { ProjectDetailsComponent } from './project/project-details/project-details.component';
+import { ProjectEstimateComponent } from './project/project-estimate/project-estimate.component';
+import { TaskDetailsComponent } from './task/task-details/task-details.component';
 import { ListWorkspacesComponent } from './workspace/list-workspaces/list-workspaces.component';
 import { WorkspaceFormComponent } from './workspace/workspace-form/workspace-form.component';
 import { WorkflowFormComponent } from './workflow/workflow-form/workflow-form.component';
@@ -56,17 +59,18 @@ import {
   StrategicPartenershipStatsComponent
 } from './strategic-partenership-stats/strategic-partenership-stats.component';
 import {ProjectStatsComponent} from './project-stats/project-stats.component';
-import {TimeTrackerComponent} from './components/time-tracker/time-tracker/time-tracker.component';
-import {TimeForgePredectionComponent} from './time-forge-predection/time-forge-predection.component';
 import {AllStatsComponent} from './all-stats/all-stats.component';
-import {MenuComponent} from './menu/menu.component';
-import {GoalsDashComponent} from './goals-dash/goals-dash.component';
+import {TimeForgePredectionComponent} from './time-forge-predection/time-forge-predection.component';
+import {RewardPredictComponent} from './reward_predict/reward-predict/reward-predict.component';
 import {ProjectsDashComponent} from './projects-dash/projects-dash.component';
+import {GoalsDashComponent} from './goals-dash/goals-dash.component';
 import {StrategicDashComponent} from './strategic-dash/strategic-dash.component';
+import {MenuComponent} from './menu/menu.component';
 import {ProjectsManagementDashComponent} from './projects-management-dash/projects-management-dash.component';
 import {PerformanceManagementComponent} from './performance-management/performance-management.component';
 import {WorkflowDashComponent} from './workflow-dash/workflow-dash.component';
 import {WorkspaceDashComponent} from './workspace-dash/workspace-dash.component';
+import {RewardDashComponent} from './reward-dash/reward-dash.component';
 
 
 export const routes: Routes = [
@@ -101,7 +105,6 @@ export const routes: Routes = [
           canActivate: [NoAuthGuardService] // <-- Blocks if already logged in
         },
         { path: 'reset-password', component: ResetPasswordComponent },
-        {path: 'time-tracker',component: TimeTrackerComponent},
         { path: 'users', component: UserDetailComponent },
         {path: 'users/:id', component: UserDetailComponent, title: 'User Details'},
         { path: 'users/edit/:id', component: UserUpdateComponent },
@@ -123,7 +126,12 @@ export const routes: Routes = [
         { path: 'rewards/edit/:id', component: RewardFormComponent },
         { path: 'projects', component: ProjectComponent },
         { path: 'projects/add', component: ProjectFormComponent },
+        { path: 'projects/add', component: ProjectFormComponent },
         { path: 'projects/edit/:id', component: ProjectFormComponent },
+        { path: 'projects/estimate', component: ProjectEstimateComponent },
+        { path: 'projects/estimate/:id', component: ProjectEstimateComponent },
+        { path: 'task-details', component: TaskDetailsComponent },
+        { path: 'projects/view/:id', component: ProjectDetailsComponent},
         { path: 'tasks', component: TaskComponent },
         { path: 'tasks/add', component: TaskFormComponent },
         { path: 'tasks/edit/:id', component: TaskFormComponent },
@@ -147,8 +155,9 @@ export const routes: Routes = [
         { path: 'partnerships/stats', component: StrategicPartenershipStatsComponent},
         { path: 'goals/stats', component: GoalStatsComponent},
         { path: 'projects/stats', component: ProjectStatsComponent},
-        { path: 'prediction', component: TimeForgePredectionComponent},
         { path: 'AllStats', component: AllStatsComponent},
+        { path: 'prediction', component: TimeForgePredectionComponent},
+        { path: 'prediction_reward', component: RewardPredictComponent},
         { path: 'workflows/prediction', component: PredictWorkflowComponent},
         { path: 'menu', component: MenuComponent},
         { path: 'projectDash', component: ProjectsDashComponent},
@@ -157,13 +166,11 @@ export const routes: Routes = [
         { path: 'PMPDash', component: ProjectsManagementDashComponent},
         { path: 'PerformanceManagement', component: PerformanceManagementComponent},
         { path: 'WorkflowDash', component: WorkflowDashComponent},
-        { path: 'WorkspaceDash', component: WorkspaceDashComponent }
+        { path: 'WorkspaceDash', component: WorkspaceDashComponent },
+        { path: 'RewardDash', component: RewardDashComponent }
 
 
-
-
-
-        //WorkspaceDashComponent
+//RewardDashComponent
 
       ]
   },

@@ -22,10 +22,10 @@ export class MenuComponent {
     { link: '/AllStats', icon: 'fas fa-chart-line', label: 'Global Dashboard' },
     { link: '/calender', icon: 'fas fa-calendar-alt', label: 'Calendar Overview' },
     { link: '/prediction', icon: 'fas fa-brain', label: 'AI Predictions' },
+    { link: '/PMPDash', icon: 'fas fa-tasks', label: 'Project Management' },
     { link: '/WorkspaceDash', icon: 'fas fa-building', label: 'Workspace Insights' },
     { link: '/WorkflowDash', icon: 'fas fa-cogs', label: 'Workflow Analytics' },
     { link: '/StrategicDash', icon: 'fas fa-handshake', label: 'Strategic Partnerships' },
-    { link: '/PMPDash', icon: 'fas fa-tasks', label: 'Project Management' },
     { link: '/PerformanceManagement', icon: 'fas fa-chart-pie', label: 'Performance Management' },
     { link: '/collaborations', icon: 'fas fa-users-cog', label: 'Team Collaborations' }
   ];

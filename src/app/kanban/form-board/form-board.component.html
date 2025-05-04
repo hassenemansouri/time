@@ -1,40 +1,62 @@
 <div class="container">
-    <div class="card">
-      <h2 class="text-center mb-4">{{ isEdit ? 'Update' : 'Create' }} a board</h2>
-  
-      <form #boardForm="ngForm" (ngSubmit)="saveBoard()" novalidate>
-        <!-- Champ titre -->
-        <div class="mb-3">
-          <label for="title" class="form-label fw-bold">Board Title</label>
-          <input
-            type="text"
-            id="title"
-            class="form-control"
-            [(ngModel)]="board.title"
-            name="title"
-            required
-            minlength="3"
-            placeholder="Enter board title"
-          />
-        </div>
-  
-        <!-- Champ description -->
-        <div class="mb-3">
-          <label for="description" class="form-label fw-bold">Description</label>
-          <textarea
-            id="description"
-            class="form-control"
-            [(ngModel)]="board.description"
-            name="description"
-            placeholder="Enter board description"
-            required
-          ></textarea>
-        </div>
+  <div class="card">
+    <h2 class="text-center mb-4">{{ isEdit ? 'Update' : 'Create' }} a Board</h2>
 
-        <!-- Boutons d'action -->
+    <form #boardForm="ngForm" (ngSubmit)="saveBoard()" novalidate>
+      <!-- Projet lié -->
+      <div class="mb-3">
+        <label for="project" class="form-label fw-bold">Project</label>
+        <select
+          id="project"
+          class="form-control"
+          [(ngModel)]="board.project"
+          name="project"
+          required
+          [ngClass]="{'is-invalid': boardForm.submitted && !board.project}"
+        >
+          <option value="" disabled selected>Select a project</option>
+          <option *ngFor="let project of projects" [ngValue]="project">
+            {{ project.title }}
+          </option>
+        </select>
+      </div>
+
+      <!-- Titre -->
+      <div class="mb-3">
+        <label for="title" class="form-label fw-bold">Board Title</label>
+        <input
+          type="text"
+          id="title"
+          class="form-control"
+          [(ngModel)]="board.title"
+          name="title"
+          required
+          minlength="3"
+          placeholder="Enter board title"
+          [ngClass]="{'is-invalid': boardForm.submitted && !board.title}"
+        />
+      </div>
+
+      <!-- Description -->
+      <div class="mb-3">
+        <label for="description" class="form-label fw-bold">Description</label>
+        <textarea
+          id="description"
+          class="form-control"
+          [(ngModel)]="board.description"
+          name="description"
+          placeholder="Enter board description"
+          required
+          rows="4"
+          [ngClass]="{'is-invalid': boardForm.submitted && !board.description}"
+        ></textarea>
+      </div>
+
+      <!-- Boutons -->
+      <div class="btn-container">
         <button type="submit" class="btn btn-success" [disabled]="boardForm.invalid">💾 Save Board</button>
         <button type="button" class="btn btn-secondary" (click)="router.navigate(['/boards'])">❌ Cancel</button>
-      </form>
-    </div>
+      </div>
+    </form>
   </div>
-  
+</div>
