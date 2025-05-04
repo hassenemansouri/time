@@ -4,6 +4,8 @@ import { FormsModule, NgForm, ReactiveFormsModule } from '@angular/forms';
 import {CommonModule, NgForOf, NgIf} from '@angular/common';
 import { Project } from '../../models/project.model';
 import { ProjectService } from '../project.service';
+import { Task } from '../../models/task.model';
+import { TaskService } from '../../task/task.service';
 
 @Component({
   selector: 'app-project-form',
@@ -15,25 +17,35 @@ import { ProjectService } from '../project.service';
 
 export class ProjectFormComponent implements OnInit {
   project: Project = {
-    projet_id: '',
+    project_id: '',
     title: '',
     description: '',
-    category: 'DESIGN', // Valeur par défaut mise à jour
+    category: 'DESIGN',
     startDate: new Date(),
-    endDate: undefined
+    endDate: undefined,
+    task: [],
+    useAI: false // ➔ Ajouté
   };
   
+  selectedTasks: Task[] = [];
+  tasks: Task[] = [];
   isEdit: boolean = false;
 
   constructor(
     private projectService: ProjectService,
+    private taskService: TaskService,
     private route: ActivatedRoute,
     protected router: Router
   ) {}
 
   ngOnInit(): void {
+    this.taskService.getAllTasks().subscribe(data => {
+      this.tasks = data;
+    });
     const id = this.route.snapshot.paramMap.get('id');
-    if (id && id !== 'string') {
+    console.log("sdddddddsd",id);
+    
+    if (id) {
       this.isEdit = true;
       this.projectService.getProjectById(id).subscribe(data => {
         this.project = data;
@@ -41,27 +53,21 @@ export class ProjectFormComponent implements OnInit {
     }
   }
 
-  saveProject(projectForm: NgForm) {
+  
+  saveProject() {
+
     if (this.isEdit) {
-      if (!this.project.projet_id) {
-        console.error('❌ Error: Invalid ID');
-        return;
-      }
-      this.projectService.updateProject(this.project.projet_id, this.project).subscribe({
-        next: () => {
-          console.log('✅ Project updated successfully');
-          this.router.navigate(['/projects']);
-        },
-        error: (err) => console.error('❌ Error updating project:', err)
+      console.log("this.kkkkkkkkk",this.project)
+      this.projectService.updateProject(this.project).subscribe({
+        next: () => this.router.navigate(['/projects']),
+        error: err => console.error('❌ Erreur:', err)
       });
     } else {
       this.projectService.createProject(this.project).subscribe({
-        next: () => {
-          console.log('✅ Project created successfully');
-          this.router.navigate(['/projects']);
-        },
-        error: (err) => console.error('❌ Error creating project:', err)
+        next: () => this.router.navigate(['/projects']),
+        error: err => console.error('❌ Erreur:', err)
       });
     }
   }
+
 }

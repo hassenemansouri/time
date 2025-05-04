@@ -1,6 +1,9 @@
 import { NgModule } from '@angular/core';
 import { RouterModule, Routes } from '@angular/router';
 
+import { ProjectDetailsComponent } from './project/project-details/project-details.component';
+import { ProjectEstimateComponent } from './project/project-estimate/project-estimate.component';
+import { TaskDetailsComponent } from './task/task-details/task-details.component';
 import { ListWorkspacesComponent } from './workspace/list-workspaces/list-workspaces.component';
 import { WorkspaceFormComponent } from './workspace/workspace-form/workspace-form.component';
 import { WorkflowFormComponent } from './workflow/workflow-form/workflow-form.component';
@@ -123,7 +126,12 @@ export const routes: Routes = [
         { path: 'rewards/edit/:id', component: RewardFormComponent },
         { path: 'projects', component: ProjectComponent },
         { path: 'projects/add', component: ProjectFormComponent },
+        { path: 'projects/add', component: ProjectFormComponent },
         { path: 'projects/edit/:id', component: ProjectFormComponent },
+        { path: 'projects/estimate', component: ProjectEstimateComponent },
+        { path: 'projects/estimate/:id', component: ProjectEstimateComponent },
+        { path: 'task-details', component: TaskDetailsComponent },
+        { path: 'projects/view/:id', component: ProjectDetailsComponent},
         { path: 'tasks', component: TaskComponent },
         { path: 'tasks/add', component: TaskFormComponent },
         { path: 'tasks/edit/:id', component: TaskFormComponent },

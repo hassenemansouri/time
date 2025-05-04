@@ -21,13 +21,14 @@ searchText: string = '';
   constructor(private taskService: TaskService, private dialog: MatDialog,private router: Router) {}
 
 
-  showAnimation = true;
+  showAnimation = true;  // To control if the animation is visible
 
   ngOnInit(): void {
     this.loadTasks();
+    // Hide the animation after 5 seconds and show the workflow content
     setTimeout(() => {
       this.showAnimation = false;
-    }, 2000);
+    }, 6000);
   }
 
   loadTasks(): void {
@@ -35,7 +36,7 @@ searchText: string = '';
       this.tasks = data;
     });
   }
-
+ 
   deleteTask(id: string | undefined): void {
     if (confirm('Are you sure you want to delete this task?')) {
       this.taskService.deleteTask(id).subscribe(() => {
@@ -48,7 +49,7 @@ searchText: string = '';
   this.router.navigate(['/task-details'], { state: { data: task } });
   }
 
-
+  
   exportToPDF(): void {
       if (!this.tasks || this.tasks.length === 0) {
         console.error("No projects available to export.");
@@ -163,9 +164,9 @@ searchText: string = '';
     const ws: XLSX.WorkSheet = XLSX.utils.json_to_sheet(this.tasks.map(task => ({
       'Task Name': task.name,
       'Description': task.description,
-      'Created At': task.createdAt,
-      'Due Date': task.dueDate,
-      'Priority': task.priority,
+      'Created At': task.createdAt ? task.createdAt.toISOString().split('T')[0] : 'N/A',
+      'Due Date': task.dueDate ? task.dueDate.toISOString().split('T')[0] : 'N/A',
+      'Priority': task.priority.charAt(0).toUpperCase() + task.priority.slice(1)
     })));
 
     const wb: XLSX.WorkBook = XLSX.utils.book_new();
@@ -173,6 +174,4 @@ searchText: string = '';
     XLSX.writeFile(wb, 'tasks.xlsx');
   }
 }
-
-
 
