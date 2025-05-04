@@ -21,7 +21,7 @@ export class PerformanceManagementComponent {
 
   navItems: NavItem[] = [
     {link: '/goalDash', icon: 'fas fa-bullseye', label: 'Goals'},
-    {link: '/rewards', icon: 'fas fa-gift', label: 'Rewards'}
+    {link: '/RewardDash', icon: 'fas fa-gift', label: 'Rewards'}
   ];
 
 }

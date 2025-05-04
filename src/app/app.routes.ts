@@ -59,6 +59,15 @@ import {ProjectStatsComponent} from './project-stats/project-stats.component';
 import {AllStatsComponent} from './all-stats/all-stats.component';
 import {TimeForgePredectionComponent} from './time-forge-predection/time-forge-predection.component';
 import {RewardPredictComponent} from './reward_predict/reward-predict/reward-predict.component';
+import {ProjectsDashComponent} from './projects-dash/projects-dash.component';
+import {GoalsDashComponent} from './goals-dash/goals-dash.component';
+import {StrategicDashComponent} from './strategic-dash/strategic-dash.component';
+import {MenuComponent} from './menu/menu.component';
+import {ProjectsManagementDashComponent} from './projects-management-dash/projects-management-dash.component';
+import {PerformanceManagementComponent} from './performance-management/performance-management.component';
+import {WorkflowDashComponent} from './workflow-dash/workflow-dash.component';
+import {WorkspaceDashComponent} from './workspace-dash/workspace-dash.component';
+import {RewardDashComponent} from './reward-dash/reward-dash.component';
 
 
 export const routes: Routes = [
@@ -140,10 +149,20 @@ export const routes: Routes = [
         { path: 'projects/stats', component: ProjectStatsComponent},
         { path: 'AllStats', component: AllStatsComponent},
         { path: 'prediction', component: TimeForgePredectionComponent},
-        { path: 'prediction_reward', component: RewardPredictComponent}
+        { path: 'prediction_reward', component: RewardPredictComponent},
+        { path: 'workflows/prediction', component: PredictWorkflowComponent},
+        { path: 'menu', component: MenuComponent},
+        { path: 'projectDash', component: ProjectsDashComponent},
+        { path: 'goalDash', component: GoalsDashComponent},
+        { path: 'StrategicDash', component: StrategicDashComponent},
+        { path: 'PMPDash', component: ProjectsManagementDashComponent},
+        { path: 'PerformanceManagement', component: PerformanceManagementComponent},
+        { path: 'WorkflowDash', component: WorkflowDashComponent},
+        { path: 'WorkspaceDash', component: WorkspaceDashComponent },
+        { path: 'RewardDash', component: RewardDashComponent }
 
 
-
+//RewardDashComponent
 
       ]
   },
