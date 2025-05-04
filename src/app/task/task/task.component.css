@@ -1,4 +1,4 @@
-/* 🌟 Navbar principale */
+/* 🌟 NAVBAR PRINCIPALE */
 .navbar {
   display: flex;
   justify-content: space-between;
@@ -12,7 +12,6 @@
   z-index: 1000;
 }
 
-/* 🎯 Logo */
 .nav-logo .logo {
   font-size: 24px;
   font-weight: bold;
@@ -25,7 +24,6 @@
   transform: scale(1.05);
 }
 
-/* 📌 Liens */
 .nav-links {
   list-style: none;
   display: flex;
@@ -53,27 +51,7 @@
   transform: translateY(-2px);
 }
 
-/* 🎭 Responsive */
-@media (max-width: 768px) {
-  .navbar {
-    flex-direction: column;
-    align-items: flex-start;
-  }
-
-  .nav-links {
-    flex-direction: column;
-    width: 100%;
-    padding: 10px 0;
-  }
-
-  .nav-links a {
-    display: block;
-    width: 100%;
-    text-align: center;
-  }
-}
-
-/* 🌟 Conteneur principal */
+/* 🌟 CONTENEUR PRINCIPAL */
 .container {
   max-width: 900px;
   margin: 40px auto;
@@ -83,7 +61,14 @@
   box-shadow: 0 8px 20px rgba(0, 0, 0, 0.15);
 }
 
-/* 🎯 Titre */
+@media (max-width: 768px) {
+  .container {
+    max-width: 100%;
+    padding: 15px;
+  }
+}
+
+/* 🎯 TITRE */
 h2 {
   font-size: 28px;
   text-align: center;
@@ -92,113 +77,76 @@ h2 {
   text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.1);
 }
 
-/* ✨ Bouton "Ajouter un Workflow" */
+/* ✨ BOUTON PRINCIPAL */
 .btn-primary {
   display: block;
-  margin: 0 auto 20px auto;
-  width: 220px;
-  height: 50px;
-  font-size: 18px;
+  margin: 0 auto 30px;
+  width: 260px;
+  height: 60px;
+  font-size: 20px;
   font-weight: bold;
-  border-radius: 25px;
+  border-radius: 30px;
   background: linear-gradient(135deg, #007bff, #0056b3);
   color: white;
   border: none;
   transition: transform 0.3s ease, box-shadow 0.3s ease;
+  letter-spacing: 1px;
 }
 
 .btn-primary:hover {
-  transform: translateY(-3px);
-  box-shadow: 0 6px 20px rgba(0, 123, 255, 0.3);
+  transform: translateY(-4px) scale(1.03);
+  box-shadow: 0 8px 25px rgba(0, 123, 255, 0.35);
 }
 
-/* 🏆 Table plus compacte et esthétique */
+/* 🌟 TABLEAU ÉLÉGANT */
 .table {
   width: 100%;
-  border-radius: 10px;
+  border-collapse: collapse;
+  background-color: #fff;
+  border-radius: 12px;
   overflow: hidden;
-  box-shadow: 0 4px 15px rgba(0, 0, 0, 0.1);
+  box-shadow: 0 6px 18px rgba(0, 0, 0, 0.05);
 }
+
 
 .table thead th {
   background: linear-gradient(135deg, #007bff, #0056b3);
   color: white;
-  padding: 15px;
+  padding: 14px 16px;
+  font-size: 16px;
   text-align: center;
-  font-size: 18px;
 }
 
 .table tbody tr {
-  border-bottom: 1px solid #ddd;
-  transition: background 0.3s ease;
+  border-bottom: 1px solid #e9ecef;
+  transition: background-color 0.2s ease;
 }
 
 .table tbody tr:hover {
-  background: rgba(0, 123, 255, 0.05);
+  background-color: #f4f7fa;
 }
 
-.table tbody td {
+.table td {
+  padding: 12px 16px;
+  font-size: 15px;
+  color: #333;
   text-align: center;
-  padding: 12px;
-  font-size: 16px;
+  vertical-align: middle;
+  max-width: 300px;
+  word-wrap: break-word;
 }
 
-/* 🎭 Boutons "Modifier" & "Supprimer" bien alignés */
-.btn-container {
-  display: flex;
-  justify-content: center;
-  align-items: center;
-  gap: 10px;
+.table td[data-label="Actions"] {
+  min-width: 220px;
 }
 
-.btn {
-  font-size: 14px;
-  padding: 8px 16px;
-  border-radius: 25px;
-  height: 40px;
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  gap: 5px;
-  min-width: 100px;
-  transition: transform 0.3s ease, box-shadow 0.3s ease;
-}
-
-.btn:hover {
-  transform: translateY(-2px);
-  box-shadow: 0 4px 10px rgba(0, 0, 0, 0.2);
-}
-
-.btn-warning {
-  background: linear-gradient(135deg, #ffc107, #e0a800);
-  border: none;
-  color: black;
-}
-
-.btn-danger {
-  background: linear-gradient(135deg, #dc3545, #c82333);
-  border: none;
-  color: white;
-}
-
-/* 📱 Responsive */
+/* 📱 TABLEAU RESPONSIVE */
 @media (max-width: 768px) {
-  .container {
-    max-width: 100%;
-    padding: 15px;
-  }
-
-  .btn-primary {
-    width: 100%;
-  }
-
   .table thead {
     display: none;
   }
 
-  .table tbody,
-  .table tr,
-  .table td {
+  .table, .table tbody, .table tr, .table td {
     display: block;
     width: 100%;
   }
@@ -208,6 +156,7 @@ h2 {
     border: 1px solid #ddd;
     padding: 10px;
     border-radius: 10px;
+    background: white;
   }
 
   .table td {
@@ -222,8 +171,65 @@ h2 {
     left: 10px;
     font-weight: bold;
     text-transform: capitalize;
+    color: #004085;
   }
+}
 
+/* 🔘 BOUTONS */
+.btn-add {
+  font-size: 14px;
+  padding: 8px 16px;
+  border-radius: 25px;
+  height: 40px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 5px;
+  min-width: 100px;
+  transition: transform 0.3s ease, box-shadow 0.3s ease;
+  border: none;
+}
+.btn {
+  font-size: 14px;
+  padding: 8px 16px;
+  height: 40px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 5px;
+  width: 40px;
+  transition: transform 0.3s ease, box-shadow 0.3s ease;
+  border: none;
+}
+.btn:hover {
+  transform: translateY(-2px);
+  box-shadow: 0 4px 10px rgba(0, 0, 0, 0.2);
+}
+
+.btn-warning {
+  background: linear-gradient(135deg, #ffc107, #e0a800);
+  color: black;
+}
+
+.btn-danger {
+  background: linear-gradient(135deg, #dc3545, #c82333);
+  color: white;
+}
+
+.btn-success {
+  background: linear-gradient(135deg, #28a745, #218838);
+  color: white;
+}
+
+/* 🎛️ CONTAINER DE BOUTONS */
+.btn-container {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 8px;
+  justify-content: center;
+}
+
+@media (max-width: 768px) {
   .btn-container {
     flex-direction: column;
     gap: 5px;
@@ -232,11 +238,16 @@ h2 {
   .btn {
     width: 100%;
   }
+
+  .btn-primary {
+    width: 100%;
+  }
 }
 
-/* 🌟 Export Buttons */
+/* 📤 EXPORT & SEARCH */
 .export-buttons {
   display: flex;
+  flex-wrap: wrap;
   align-items: center;
   justify-content: center;
   gap: 15px;
@@ -253,17 +264,6 @@ h2 {
   font-weight: bold;
   padding: 12px 24px;
   border-radius: 25px;
-  transition: all 0.3s ease;
-  border: none;
-  color: white;
-}
-
-.export-buttons .btn-success {
-  background: linear-gradient(135deg, #28a745, #218838);
-}
-
-.export-buttons .btn-danger {
-  background: linear-gradient(135deg, #dc3545, #c82333);
 }
 
 .export-buttons .search-input {
@@ -286,12 +286,17 @@ h2 {
   box-shadow: 0 0 10px rgba(0, 123, 255, 0.3);
 }
 
+/* 🎞️ ANIMATION */
 .task-animation {
-  display : flex;
+  display: block;
+  justify-content: center; /* Centre horizontalement */
+  align-items: center;     /* Centre verticalement */
+  /* Utilise toute la hauteur de la fenêtre */
   position: relative;
-  height: 60%;
-  width: 60%;
-  left: 350px;
-  margin-top: -10%;
+  top: 0;
+  right: 0;
+  bottom: 0;
+  height: 810px;
+
 }
 

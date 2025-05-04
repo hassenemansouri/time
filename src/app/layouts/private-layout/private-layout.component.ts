@@ -23,6 +23,9 @@ export class PrivateLayoutComponent implements OnInit,OnDestroy {
 
   users: User[] = [];
 
+  currentTime: string = '';
+  private intervalId: any;
+
   constructor(private router: Router,
               private userService: UserService,
               private userStateService: UserStateService
@@ -45,9 +48,21 @@ export class PrivateLayoutComponent implements OnInit,OnDestroy {
     }
 
     this.loadUsers();
+
+    this.updateTime();
+    this.intervalId = setInterval(() => this.updateTime(), 1000);
   }
+
+  updateTime(): void {
+    const now = new Date();
+    this.currentTime = now.toLocaleTimeString(); // or customize
+  }
+
   ngOnDestroy(): void {
     this.userSubscription?.unsubscribe();
+    if (this.intervalId) {
+      clearInterval(this.intervalId);
+    }
   }
   private clearInvalidUserData(): void {
     localStorage.removeItem('user');

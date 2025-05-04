@@ -6,8 +6,7 @@ import { CommonModule } from '@angular/common';
 import jsPDF from 'jspdf';
 import * as XLSX from 'xlsx';
 import {FormsModule} from '@angular/forms';
-import { TaskDetailsComponent } from '../task-details/task-details.component';
-import { MatDialog, MatDialogModule } from '@angular/material/dialog';
+import { MatDialog } from '@angular/material/dialog';
 @Component({
   selector: 'app-task',
   imports: [RouterModule, CommonModule,FormsModule],
@@ -19,17 +18,16 @@ import { MatDialog, MatDialogModule } from '@angular/material/dialog';
 export class TaskComponent implements OnInit {
 tasks: Task[] = [];
 searchText: string = '';
-  constructor(private taskService: TaskService, private dialog: MatDialog) {}
+  constructor(private taskService: TaskService, private dialog: MatDialog,private router: Router) {}
 
 
-  showAnimation = true;  // To control if the animation is visible
+  showAnimation = true;
 
   ngOnInit(): void {
     this.loadTasks();
-    // Hide the animation after 5 seconds and show the workflow content
     setTimeout(() => {
       this.showAnimation = false;
-    }, 3000);
+    }, 2000);
   }
 
   loadTasks(): void {
@@ -37,25 +35,6 @@ searchText: string = '';
       this.tasks = data;
     });
   }
-  // Initialisation avec des valeurs undefined au lieu de ''
-// filters: {
-//   name?: string;
-//   priority?: string;
-//   assignedToId?: string;
-//   projectId?: string;
-// } = {};
-
-// // Applique les filtres automatiquement
-// applyFilters(): void {
-//   this.taskService.searchTasks(this.filters).subscribe(data => {
-//     this.tasks = data;
-//   });
-// }
-
-// clearFilter(filterName: keyof typeof this.filters): void {
-//   this.filters[filterName] = undefined;
-//   this.applyFilters();
-// }
 
   deleteTask(id: string | undefined): void {
     if (confirm('Are you sure you want to delete this task?')) {
@@ -65,10 +44,11 @@ searchText: string = '';
     }
   }
   onViewTask(task: Task): void {
-    this.dialog.open(TaskDetailsComponent, {
-      data: task,
-    });
+
+  this.router.navigate(['/task-details'], { state: { data: task } });
   }
+
+
   exportToPDF(): void {
       if (!this.tasks || this.tasks.length === 0) {
         console.error("No projects available to export.");
@@ -183,9 +163,9 @@ searchText: string = '';
     const ws: XLSX.WorkSheet = XLSX.utils.json_to_sheet(this.tasks.map(task => ({
       'Task Name': task.name,
       'Description': task.description,
-      'Created At': task.createdAt ? task.createdAt.toISOString().split('T')[0] : 'N/A',
-      'Due Date': task.dueDate ? task.dueDate.toISOString().split('T')[0] : 'N/A',
-      'Priority': task.priority.charAt(0).toUpperCase() + task.priority.slice(1)
+      'Created At': task.createdAt,
+      'Due Date': task.dueDate,
+      'Priority': task.priority,
     })));
 
     const wb: XLSX.WorkBook = XLSX.utils.book_new();
@@ -193,4 +173,6 @@ searchText: string = '';
     XLSX.writeFile(wb, 'tasks.xlsx');
   }
 }
+
+
 

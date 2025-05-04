@@ -48,7 +48,7 @@ export class LoginComponent implements OnInit {
         (response) => {
           this.authService.setCurrentUser(response.user);
           this.authService.storeToken(response.token);
-          this.router.navigate(['/AllStats'], { replaceUrl: true });
+          this.router.navigate(['/menu'], { replaceUrl: true });
         },
         (error) => {
           this.errorMessage = 'Invalid username or password';

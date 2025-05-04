@@ -11,7 +11,7 @@
     top: 0;
     z-index: 1000;
   }
-  
+
   /* 🎯 Logo */
   .nav-logo .logo {
     font-size: 24px;
@@ -20,11 +20,11 @@
     text-decoration: none;
     transition: transform 0.3s ease;
   }
-  
+
   .nav-logo .logo:hover {
     transform: scale(1.05);
   }
-  
+
   /* 📌 Liens */
   .nav-links {
     list-style: none;
@@ -33,11 +33,11 @@
     margin: 0;
     padding: 0;
   }
-  
+
   .nav-links li {
     display: inline;
   }
-  
+
   .nav-links a {
     text-decoration: none;
     color: white;
@@ -46,33 +46,33 @@
     border-radius: 5px;
     transition: background 0.3s ease, transform 0.3s ease;
   }
-  
+
   .nav-links a:hover,
   .nav-links a.active {
     background: rgba(255, 255, 255, 0.2);
     transform: translateY(-2px);
   }
-  
+
   /* 🎭 Responsive */
   @media (max-width: 768px) {
     .navbar {
       flex-direction: column;
       align-items: flex-start;
     }
-  
+
     .nav-links {
       flex-direction: column;
       width: 100%;
       padding: 10px 0;
     }
-  
+
     .nav-links a {
       display: block;
       width: 100%;
       text-align: center;
     }
   }
-  
+
   /* 🌟 Conteneur principal */
   .container {
     max-width: 900px;
@@ -82,7 +82,7 @@
     border-radius: 15px;
     box-shadow: 0 8px 20px rgba(0, 0, 0, 0.15);
   }
-  
+
   /* 🎯 Titre */
   h2 {
     font-size: 28px;
@@ -91,7 +91,7 @@
     color: #007bff;
     text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.1);
   }
-  
+
   /* ✨ Bouton "Ajouter un Workflow" */
   .btn-primary {
     display: block;
@@ -106,12 +106,12 @@
     border: none;
     transition: transform 0.3s ease, box-shadow 0.3s ease;
   }
-  
+
   .btn-primary:hover {
     transform: translateY(-3px);
     box-shadow: 0 6px 20px rgba(0, 123, 255, 0.3);
   }
-  
+
   /* 🏆 Table plus compacte et esthétique */
   .table {
     width: 100%;
@@ -119,7 +119,7 @@
     overflow: hidden;
     box-shadow: 0 4px 15px rgba(0, 0, 0, 0.1);
   }
-  
+
   .table thead th {
     background: linear-gradient(135deg, #007bff, #0056b3);
     color: white;
@@ -127,22 +127,22 @@
     text-align: center;
     font-size: 18px;
   }
-  
+
   .table tbody tr {
     border-bottom: 1px solid #ddd;
     transition: background 0.3s ease;
   }
-  
+
   .table tbody tr:hover {
     background: rgba(0, 123, 255, 0.05);
   }
-  
+
   .table tbody td {
     text-align: center;
     padding: 12px;
     font-size: 16px;
   }
-  
+
   /* 🎭 Boutons "Modifier" & "Supprimer" bien alignés */
   .btn-container {
     display: flex;
@@ -150,7 +150,7 @@
     align-items: center;
     gap: 10px;
   }
-  
+
   .btn {
     font-size: 14px;
     padding: 0 20px; /* horizontal only, évite le dépassement avec icônes */
@@ -164,66 +164,66 @@
     transition: transform 0.3s ease, box-shadow 0.3s ease;
     white-space: nowrap; /* empêche le retour à la ligne */
   }
-  
+
   .btn:hover {
     transform: translateY(-2px);
     box-shadow: 0 4px 10px rgba(0, 0, 0, 0.2);
   }
-  
+
   .btn-warning {
     background: linear-gradient(135deg, #ffc107, #e0a800);
     border: none;
     color: black;
   }
-  
+
   .btn-info {
     background: linear-gradient(135deg, #17a2b8, #138496);
     border: none;
     color: white;
   }
-  
+
   .btn-danger {
     background: linear-gradient(135deg, #dc3545, #c82333);
     border: none;
     color: white;
   }
-  
-  
+
+
   /* 📱 Responsive */
   @media (max-width: 768px) {
     .container {
       max-width: 100%;
       padding: 15px;
     }
-  
+
     .btn-primary {
       width: 100%;
     }
-  
+
     .table thead {
       display: none;
     }
-  
+
     .table tbody,
     .table tr,
     .table td {
       display: block;
       width: 100%;
     }
-  
+
     .table tr {
       margin-bottom: 15px;
       border: 1px solid #ddd;
       padding: 10px;
       border-radius: 10px;
     }
-  
+
     .table td {
       text-align: right;
       position: relative;
       padding-left: 50%;
     }
-  
+
     .table td::before {
       content: attr(data-label);
       position: absolute;
@@ -231,17 +231,17 @@
       font-weight: bold;
       text-transform: capitalize;
     }
-  
+
     .btn-container {
       flex-direction: column;
       gap: 5px;
     }
-  
+
     .btn {
       width: 100%;
     }
   }
-  
+
   /* 🌟 Export Buttons */
   .export-buttons {
     display: flex;
@@ -254,7 +254,7 @@
     box-shadow: 0 8px 20px rgba(0, 0, 0, 0.15);
     margin-bottom: 20px;
   }
-  
+
   .export-buttons .btn {
     flex: 1;
     font-size: 16px;
@@ -265,15 +265,15 @@
     border: none;
     color: white;
   }
-  
+
   .export-buttons .btn-success {
     background: linear-gradient(135deg, #28a745, #218838);
   }
-  
+
   .export-buttons .btn-danger {
     background: linear-gradient(135deg, #dc3545, #c82333);
   }
-  
+
   .export-buttons .search-input {
     flex: 2;
     padding: 12px 20px;
@@ -283,14 +283,17 @@
     color: #007bff;
     transition: all 0.3s ease;
   }
-  
+
   .export-buttons .search-input::placeholder {
     color: rgba(0, 123, 255, 0.7);
   }
-  
+
   .export-buttons .search-input:focus {
     background-color: rgba(255, 255, 255, 0.2);
     border-color: rgba(0, 123, 255, 0.5);
     box-shadow: 0 0 10px rgba(0, 123, 255, 0.3);
   }
-  
+
+  .list{
+    color: #007bff;
+  }

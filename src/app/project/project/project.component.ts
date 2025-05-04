@@ -30,7 +30,7 @@ projects: Project[] = [];
     // Hide the animation after 5 seconds and show the workflow content
     setTimeout(() => {
       this.showAnimation = false;
-    }, 3000);
+    }, 2000);
   }
 
   loadProjects(): void {

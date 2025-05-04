@@ -75,7 +75,7 @@
 
 /* 🌟 Conteneur principal */
 .container {
-  max-width: 900px;
+  max-width: 100%;
   margin: 40px auto;
   background: linear-gradient(135deg, #ffffff, #f8f9fa);
   padding: 25px;
@@ -301,10 +301,11 @@ h2 {
 .Workspace-animation {
   display : flex;
   position: relative;
-  height: 80%;
-  width: 80%;
-  left: 140px;
-  padding-top: 12%;
+  height: 50%;
+  width: 40%;
+  left: 30%;
+  margin-top: 4%;
+
 }
 /* Add this to your existing CSS */
 .pagination-container {

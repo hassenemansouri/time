@@ -65,7 +65,8 @@
           <th>Description</th>
           <th>Participants</th>
           <th>Created</th>
-          <th>Blockchain Status</th>
+          <th>End Date</th>
+          <th>Status</th>
           <th>Actions</th>
         </tr>
         </thead>
@@ -79,13 +80,13 @@
           <td class="align-middle">
             <div class="d-flex flex-wrap gap-1">
               <ng-container *ngIf="!isLoadingNames; else loadingNames">
-      <span *ngFor="let participantId of partnership.participants | slice:0:3"
-            class="badge bg-secondary">
-        {{ participantNamesMap[participantId] || participantId }}
-      </span>
+                <span *ngFor="let participantId of partnership.participants | slice:0:3"
+                      class="badge bg-secondary">
+                  {{ participantNamesMap[participantId] || participantId }}
+                </span>
                 <span *ngIf="partnership.participants.length > 3" class="badge bg-light text-dark">
-        +{{ partnership.participants.length - 3 }} more
-      </span>
+                  +{{ partnership.participants.length - 3 }} more
+                </span>
               </ng-container>
               <ng-template #loadingNames>
                 <span class="badge bg-info">Loading names...</span>
@@ -96,16 +97,25 @@
             {{ partnership.creationDate | date:'mediumDate' }}
           </td>
           <td class="align-middle">
-              <span class="badge"
-                    [ngClass]="{
-                      'bg-success': partnership.blockchainHash,
-                      'bg-warning': !partnership.blockchainHash
-                    }">
-                <i class="bi"
-                   [class.bi-check-circle-fill]="partnership.blockchainHash"
-                   [class.bi-clock-fill]="!partnership.blockchainHash"></i>
-                {{ partnership.blockchainHash ? 'Verified' : 'Pending' }}
-              </span>
+            <span *ngIf="partnership.endDate; else ongoing" class="text-nowrap">
+              {{ partnership.endDate | date:'mediumDate' }}
+              <span *ngIf="isExpired(partnership.endDate)" class="badge bg-danger ms-1">Expired</span>
+            </span>
+            <ng-template #ongoing>
+              <span class="text-muted">Ongoing</span>
+            </ng-template>
+          </td>
+          <td class="align-middle">
+            <span class="badge"
+                  [ngClass]="{
+                    'bg-success': partnership.blockchainHash,
+                    'bg-warning': !partnership.blockchainHash
+                  }">
+              <i class="bi"
+                 [class.bi-check-circle-fill]="partnership.blockchainHash"
+                 [class.bi-clock-fill]="!partnership.blockchainHash"></i>
+              {{ partnership.blockchainHash ? 'Verified' : 'Pending' }}
+            </span>
           </td>
           <td class="align-middle">
             <div class="btn-group btn-group-sm">
@@ -119,7 +129,6 @@
                       title="Edit">
                 <i class="bi bi-pencil-fill"></i>
               </button>
-              <!-- PDF Download Button -->
               <button class="btn btn-outline-info"
                       (click)="downloadPdf(partnership.id!)"
                       title="Download PDF">
