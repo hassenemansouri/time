@@ -25,6 +25,8 @@ export class ProjectsDashComponent {
   navItems: NavItem[] = [
     { link: '/projects', icon: 'fas fa-list', label: 'List' },
     { link: '/projects/add', icon: 'fas fa-plus-circle', label: 'Add a Project' },
+    { link: '/projects/estimate', icon: 'fas fa-lightbulb', label: 'Estimation' },
+
     { link: '/projects/calendar', icon: 'fas fa-calendar-alt', label: 'Projects Calendar' },
     { link: '/projects/stats', icon: 'fas fa-chart-bar', label: 'Projects Stats' }
   ];

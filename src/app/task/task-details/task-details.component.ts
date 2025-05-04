@@ -1,22 +1,32 @@
-import { Component, Inject } from '@angular/core';
+import { Component } from '@angular/core';
 import { Task } from '../../models/task.model';
 import { CommonModule } from '@angular/common';
-import { MAT_DIALOG_DATA, MatDialogModule, MatDialogRef } from '@angular/material/dialog';
+import { TaskEstimationComponent } from "../task-estimation/task-estimation.component";
+import {  Router } from '@angular/router';
 
 @Component({
   selector: 'app-task-details',
-  imports: [CommonModule, MatDialogModule],
+  imports: [CommonModule, TaskEstimationComponent],
   templateUrl: './task-details.component.html',
   styleUrl: './task-details.component.css'
 })
 export class TaskDetailsComponent {
+
+  data: Task
   constructor(
-    @Inject(MAT_DIALOG_DATA) public data: Task,
-    private dialogRef: MatDialogRef<TaskDetailsComponent>
-  ) {}
+    private router: Router
+  ) {
+    const navigation = history.state;
+    if (navigation && navigation.data) {
+      this.data = navigation.data;
+    } else {
+      this.router.navigate(['/tasks']);
+
+    }
+  }
 
   close(): void {
-    this.dialogRef.close();
+    this.router.navigate(['/tasks']);
   }
 
 }

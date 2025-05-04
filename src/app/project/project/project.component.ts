@@ -1,12 +1,11 @@
 import { ProjectService } from '../project.service';
 import {CommonModule, NgForOf} from '@angular/common';
 import {Component, CUSTOM_ELEMENTS_SCHEMA, OnInit} from '@angular/core';
-import {Router, RouterLink, RouterModule} from '@angular/router';
+import {Router, RouterModule} from '@angular/router';
 import { Project } from '../../models/project.model';
 import jsPDF from 'jspdf';
 import * as XLSX from 'xlsx';  // Importation pour l'exportation Excel
 import {FormsModule} from '@angular/forms';  // Importation pour l'exportation PDF
-import { of } from 'rxjs';
 
 @Component({
   selector: 'app-project',
@@ -21,28 +20,36 @@ projects: Project[] = [];
  searchText: string = ''; // Variable pour stocker la recherche
 
 
-  constructor(private projectService: ProjectService, private router: Router) {}
+  constructor(private projectService: ProjectService ) {}
 
-  showAnimation = true;  // To control if the animation is visible
-
+  showAnimation = true;  
   ngOnInit(): void {
     this.loadProjects();
-    // Hide the animation after 5 seconds and show the workflow content
     setTimeout(() => {
       this.showAnimation = false;
-    }, 2000);
+    }, 6000);
   }
-
   loadProjects(): void {
     this.projectService.getAllProjects().subscribe(data => {
+
       this.projects = data;
+      console.log("sdsdds.",this.projects);
+      
     });
+ 
   }
 
+  viewTasks(projectId: string): void {
+    this.projectService.getTasksByProject(projectId).subscribe({
+      next: tasks => console.log('✅ Tasks:', tasks),
+      error: err => console.error('❌ Erreur chargement tâches:', err)
+    });
+  }
+  
   deleteProject(id: string | undefined): void {
     if (confirm('Are you sure you want to delete this project?')) {
       this.projectService.deleteProject(id).subscribe(() => {
-        this.projects = this.projects.filter(p => p.projet_id !== id);
+        this.projects = this.projects.filter(p => p.project_id !== id);
       });
     }
   }

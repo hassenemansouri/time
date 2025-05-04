@@ -1,287 +1,166 @@
-/* 🌟 Navbar principale */
-.navbar {
-  display: flex;
-  justify-content: space-between;
-  align-items: center;
-  background: linear-gradient(135deg, #007bff, #0056b3);
-  padding: 15px 20px;
-  color: white;
-  box-shadow: 0 4px 15px rgba(0, 0, 0, 0.2);
-  position: sticky;
-  top: 0;
-  z-index: 1000;
-}
-
-/* 🎯 Logo */
-.nav-logo .logo {
-  font-size: 24px;
-  font-weight: bold;
-  color: white;
-  text-decoration: none;
-  transition: transform 0.3s ease;
-}
-
-.nav-logo .logo:hover {
-  transform: scale(1.05);
-}
-
-/* 📌 Liens */
-.nav-links {
-  list-style: none;
-  display: flex;
-  gap: 20px;
-  margin: 0;
-  padding: 0;
-}
-
-.nav-links li {
-  display: inline;
-}
-
-.nav-links a {
-  text-decoration: none;
-  color: white;
-  font-size: 16px;
-  padding: 8px 12px;
-  border-radius: 5px;
-  transition: background 0.3s ease, transform 0.3s ease;
-}
-
-.nav-links a:hover,
-.nav-links a.active {
-  background: rgba(255, 255, 255, 0.2);
-  transform: translateY(-2px);
-}
-
-/* 🎭 Responsive */
-@media (max-width: 768px) {
-  .navbar {
-    flex-direction: column;
-    align-items: flex-start;
-  }
-
-  .nav-links {
-    flex-direction: column;
-    width: 100%;
-    padding: 10px 0;
-  }
-
-  .nav-links a {
-    display: block;
-    width: 100%;
-    text-align: center;
-  }
-}
-
 /* 🌟 Conteneur principal */
 .container {
-  max-width: 900px;
-  margin: 40px auto;
-  background: linear-gradient(135deg, #ffffff, #f8f9fa);
-  padding: 25px;
+  width: 100%;
+  height: 100vh;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  background: linear-gradient(135deg, #66ccff, #ffffff); /* Balayage du bleu ciel au blanc */
+  padding: 30px;
+  overflow: hidden;
+}
+
+/* 📌 Formulaire */
+.card {
+  max-width: 600px;
+  width: 100%;
+  max-height: 80vh; /* Empêche la carte de grandir indéfiniment */
+  overflow-y: auto; /* Active le scroll interne si nécessaire */
   border-radius: 15px;
-  box-shadow: 0 8px 20px rgba(0, 0, 0, 0.15);
+  box-shadow: 0 8px 25px rgba(0, 0, 0, 0.3);
+  background: rgba(255, 255, 255, 0.2); /* Fond légèrement transparent */
+  backdrop-filter: blur(12px);
+  padding: 40px;
+  animation: fadeIn 0.6s ease-in-out;
 }
 
 /* 🎯 Titre */
 h2 {
-  font-size: 28px;
-  text-align: center;
-  margin-bottom: 20px;
-  color: #007bff;
-  text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.1);
-}
-
-/* ✨ Bouton "Ajouter un Workflow" */
-.btn-primary {
-  display: block;
-  margin: 0 auto 20px auto;
-  width: 220px;
-  height: 50px;
-  font-size: 18px;
+  font-size: 30px;
   font-weight: bold;
-  border-radius: 25px;
-  background: linear-gradient(135deg, #007bff, #0056b3);
-  color: white;
-  border: none;
-  transition: transform 0.3s ease, box-shadow 0.3s ease;
-}
-
-.btn-primary:hover {
-  transform: translateY(-3px);
-  box-shadow: 0 6px 20px rgba(0, 123, 255, 0.3);
-}
-
-/* 🏆 Table plus compacte et esthétique */
-.table {
-  width: 100%;
-  border-radius: 10px;
-  overflow: hidden;
-  box-shadow: 0 4px 15px rgba(0, 0, 0, 0.1);
-}
-
-.table thead th {
-  background: linear-gradient(135deg, #007bff, #0056b3);
-  color: white;
-  padding: 15px;
+  color: #0056b3; /* Bleu foncé pour le texte */
   text-align: center;
+  margin-bottom: 25px;
+}
+
+/* ✏️ Labels */
+.form-label {
+  font-weight: 700;
+  color: #0056b3; /* Bleu foncé */
   font-size: 18px;
 }
 
-.table tbody tr {
-  border-bottom: 1px solid #ddd;
-  transition: background 0.3s ease;
-}
-
-.table tbody tr:hover {
-  background: rgba(0, 123, 255, 0.05);
-}
-
-.table tbody td {
+/* ✨ Champs de texte */
+.form-control {
+  border: 2px solid #66ccff; /* Bordure bleu ciel */
+  border-radius: 10px;
+  padding: 14px;
+  font-size: 18px;
+  height: 55px;
+  width: 100%;
+  background: rgba(255, 255, 255, 0.3); /* Fond blanc semi-transparent */
+  color: #0056b3; /* Bleu foncé pour le texte */
   text-align: center;
-  padding: 12px;
-  font-size: 16px;
+  transition: 0.3s;
 }
 
-/* 🎭 Boutons "Modifier" & "Supprimer" bien alignés */
+.form-control::placeholder {
+  color: rgba(0, 0, 0, 0.5); /* Couleur des placeholders plus sombres pour plus de contraste */
+}
+
+.form-control:focus {
+  border-color: #0056b3;
+  box-shadow: 0 0 12px rgba(0, 86, 179, 0.5);
+  background: rgba(255, 255, 255, 0.4); /* Légère brillance au focus */
+}
+
+/* 🎭 Boutons */
 .btn-container {
   display: flex;
-  justify-content: center;
-  align-items: center;
-  gap: 10px;
+  flex-direction: column;
+  gap: 12px;
 }
 
-.btn {
-  font-size: 14px;
-  padding: 8px 16px;
-  border-radius: 25px;
-  height: 40px;
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  gap: 5px;
-  min-width: 100px;
-  transition: transform 0.3s ease, box-shadow 0.3s ease;
+button {
+  padding: 14px;
+  font-size: 18px;
+  font-weight: bold;
+  border-radius: 10px;
+  transition: all 0.3s ease-in-out;
+  width: 100%;
+  height: 55px;
 }
 
-.btn:hover {
-  transform: translateY(-2px);
-  box-shadow: 0 4px 10px rgba(0, 0, 0, 0.2);
-}
-
-.btn-warning {
-  background: linear-gradient(135deg, #ffc107, #e0a800);
+.btn-success {
+  background: linear-gradient(135deg, #66ccff, #0056b3); /* Dégradé bleu ciel à bleu foncé */
   border: none;
-  color: black;
+  color: white;
+}
+
+.btn-success:hover {
+  background: linear-gradient(135deg, #0056b3, #66ccff);
+  transform: scale(1.05);
+}
+
+.btn-secondary {
+  background: linear-gradient(135deg, #99ccff, #66ccff); /* Douce transition entre bleus clairs */
+  border: none;
+  color: white;
+}
+
+.btn-secondary:hover {
+  background: linear-gradient(135deg, #66ccff, #99ccff);
+  transform: scale(1.05);
 }
 
 .btn-danger {
-  background: linear-gradient(135deg, #dc3545, #c82333);
+  background: linear-gradient(135deg, #ffcccc, #ff6666); /* Dégradé pour un bouton d'alerte */
   border: none;
   color: white;
 }
 
-/* 📱 Responsive */
+.btn-danger:hover {
+  background: linear-gradient(135deg, #ff6666, #ffcccc);
+  transform: scale(1.05);
+}
+
+/* 🎭 Style du scroll (pour une meilleure UX) */
+.card::-webkit-scrollbar {
+  width: 6px;
+}
+
+.card::-webkit-scrollbar-thumb {
+  background: rgba(255, 255, 255, 0.5);
+  border-radius: 10px;
+}
+
+.card::-webkit-scrollbar-track {
+  background: rgba(255, 255, 255, 0.2);
+}
+
+/* 🎭 Responsive */
 @media (max-width: 768px) {
-  .container {
-    max-width: 100%;
-    padding: 15px;
+  .card {
+    width: 90%;
+    max-height: 75vh;
+    padding: 30px;
   }
 
-  .btn-primary {
-    width: 100%;
+  h2 {
+    font-size: 26px;
   }
 
-  .table thead {
-    display: none;
+  .form-control {
+    padding: 12px;
+    font-size: 16px;
+    height: 50px;
   }
 
-  .table tbody,
-  .table tr,
-  .table td {
-    display: block;
-    width: 100%;
-  }
-
-  .table tr {
-    margin-bottom: 15px;
-    border: 1px solid #ddd;
-    padding: 10px;
-    border-radius: 10px;
-  }
-
-  .table td {
-    text-align: right;
-    position: relative;
-    padding-left: 50%;
-  }
-
-  .table td::before {
-    content: attr(data-label);
-    position: absolute;
-    left: 10px;
-    font-weight: bold;
-    text-transform: capitalize;
-  }
-
-  .btn-container {
-    flex-direction: column;
-    gap: 5px;
-  }
-
-  .btn {
-    width: 100%;
+  button {
+    font-size: 16px;
+    padding: 12px;
+    height: 50px;
   }
 }
 
-/* 🌟 Export Buttons */
-.export-buttons {
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  gap: 15px;
-  padding: 20px;
-  background: linear-gradient(135deg, #ffffff, #f8f9fa);
-  border-radius: 15px;
-  box-shadow: 0 8px 20px rgba(0, 0, 0, 0.15);
-  margin-bottom: 20px;
-}
-
-.export-buttons .btn {
-  flex: 1;
-  font-size: 16px;
-  font-weight: bold;
-  padding: 12px 24px;
-  border-radius: 25px;
-  transition: all 0.3s ease;
-  border: none;
-  color: white;
-}
-
-.export-buttons .btn-success {
-  background: linear-gradient(135deg, #28a745, #218838);
-}
-
-.export-buttons .btn-danger {
-  background: linear-gradient(135deg, #dc3545, #c82333);
-}
-
-.export-buttons .search-input {
-  flex: 2;
-  padding: 12px 20px;
-  border-radius: 25px;
-  border: 2px solid rgba(0, 123, 255, 0.3);
-  background-color: rgba(255, 255, 255, 0.1);
-  color: #007bff;
-  transition: all 0.3s ease;
-}
-
-.export-buttons .search-input::placeholder {
-  color: rgba(0, 123, 255, 0.7);
-}
-
-.export-buttons .search-input:focus {
-  background-color: rgba(255, 255, 255, 0.2);
-  border-color: rgba(0, 123, 255, 0.5);
-  box-shadow: 0 0 10px rgba(0, 123, 255, 0.3);
+/* 🎬 Animation */
+@keyframes fadeIn {
+  from {
+    opacity: 0;
+    transform: translateY(-15px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
 }

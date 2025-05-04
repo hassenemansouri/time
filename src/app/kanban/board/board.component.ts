@@ -41,12 +41,13 @@ export class BoardComponent implements OnInit {
   selectedTaskIds: Set<string> = new Set();
 
   board: Board = {
-    title: 'Test Board',
-    description: 'Welcome to Board',
-    columns: []
+    title: '',
+    description: '',
+    columns: [],
   };
 
-  id: string
+  id_project: string
+  idBoard: string;
   constructor(
     private route: ActivatedRoute,
     private boardService: BoardService,
@@ -56,18 +57,32 @@ export class BoardComponent implements OnInit {
   ) { }
 
   ngOnInit(): void {
-    this.id = this.route.snapshot.paramMap.get('id');
-    if (this.id) this.getColumnBoard(this.id);
+    this.id_project = this.route.snapshot.paramMap.get('id');
+    console.log("idvvvvvvvvvvvvvvvv",this.id_project);
+    
+    if (this.id_project) this.getBoardByProjectId(this.id_project);//id board
   }
 
-  getColumnBoard(id: string): void {
-    this.columnService.getColumnByIdBoard(id).subscribe(data => {
+  getBoardByProjectId(id_projet){
+    this.boardService.getBoardsByProject(id_projet).subscribe(data => {
+      this.board = data;
+      if(this.board){
+        this.idBoard =  this.board._id
+        this.getColumnBoard(this.idBoard);
+
+      }
+    });
+  }
+  getColumnBoard(id_board: string): void {
+    this.columnService.getColumnByIdBoard(id_board).subscribe(data => {
+      console.log("daraaaaa",data);
+      
       this.board.columns = data;
     });
   }
 
   loadTasks(): void {
-    this.taskService.getAllTasks().subscribe(data => {
+    this.taskService.getTasksByProject(this.id_project).subscribe(data => {
       this.tasks = data;
     });
   }
@@ -89,10 +104,10 @@ export class BoardComponent implements OnInit {
 
   confirmSelection(): void {
     this.selectedColumns.forEach(col => {
-      col.board = this.id!;
+      col.board = this.idBoard; 
     });
     this.columnService.saveListColumn(this.selectedColumns).subscribe(() => {
-      this.getColumnBoard(this.id);
+      this.getColumnBoard(this.idBoard);
     });
     this.closeModal();
   }
@@ -114,7 +129,7 @@ export class BoardComponent implements OnInit {
       this.selectedCulumn.tasks = selectedTasks;
 
       this.columnService.addTaskToColumn(this.selectedCulumn).subscribe(() => {
-        this.getColumnBoard(this.id);
+        this.getColumnBoard(this.idBoard);
         this.closeTaskModal();
       });
     } else {
@@ -144,13 +159,13 @@ export class BoardComponent implements OnInit {
   removeTask(columnIndex: number, taskIndex: number): void {
     this.board.columns[columnIndex].tasks.splice(taskIndex, 1);
     this.columnService.updateColumn(this.board.columns[columnIndex]).subscribe(() => {
-      this.getColumnBoard(this.id);
+      this.getColumnBoard(this.idBoard);
     });
   }
 
   removeColumnFromBoard(column: Column): void {
     this.columnService.removeBoardFromColumn(column).subscribe(() => {
-      this.getColumnBoard(this.id);
+      this.getColumnBoard(this.idBoard);
     });
   }
 
@@ -169,7 +184,7 @@ export class BoardComponent implements OnInit {
       const movedTask = event.container.data[event.currentIndex];
       const destinationColumn = this.board.columns.find(col => col.tasks === event.container.data);
       this.columnService.moveTask(movedTask._id, fromColumn._id, destinationColumn._id).subscribe(() => {
-        this.getColumnBoard(this.id);
+        this.getColumnBoard(this.idBoard);
       });
     }
   }
