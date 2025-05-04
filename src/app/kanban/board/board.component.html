@@ -13,7 +13,7 @@
     <!-- Board Name with Export Buttons -->
     <div class="board-bar">
       <p class="board-name">
-        {{ board.title }}
+        {{ board?.title }}
         <button class="export-pdf-btn" (click)="exportBoardAsPDF()" aria-label="Export as PDF">
           <i class="fas fa-file-pdf"></i> Export PDF
         </button>
@@ -54,6 +54,7 @@
                 <th>Created Date</th>
                 <th>Due Date</th>
                 <th>Priority</th>
+            
               </tr>
             </thead>
             <tbody>
@@ -75,6 +76,7 @@
                   
                   </div>
                 </td>
+      
               </tr>
             </tbody>
           </table>
@@ -91,7 +93,7 @@
       <div class="board-columns" cdkDropListGroup>
         <!-- Iterate over columns -->
         <div
-          *ngFor="let column of board.columns; let i = index"
+          *ngFor="let column of board?.columns; let i = index"
           class="column"
           cdkDropList
           [cdkDropListData]="column.tasks"

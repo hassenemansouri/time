@@ -21,7 +21,6 @@ interface NavItem {
 export class ProjectsManagementDashComponent {
   navItems: NavItem[] = [
     {link: '/projectDash', icon: 'fas fa-project-diagram', label: 'Projects'},
-    { link: '/tasks', icon: 'fas fa-list', label: 'Tasks' },
     { link: '/columns', icon: 'fas fa-plus-circle', label: 'Columns' },
     { link: '/boards', icon: 'fas fa-calendar-alt', label: 'Kanban' }
 

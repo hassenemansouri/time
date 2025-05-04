@@ -1,27 +1,29 @@
-import { Component } from '@angular/core';
+import { Component, OnInit,CUSTOM_ELEMENTS_SCHEMA } from '@angular/core';
 import { Column } from '../../models/column.model';
-import { Router, RouterModule } from '@angular/router';
 import { ColumnService } from '../column.service';
 import jsPDF from 'jspdf';
 import * as XLSX from 'xlsx';  
 import { CommonModule } from '@angular/common';
 import { FormsModule } from '@angular/forms';
-
+import { RouterModule } from '@angular/router'; 
 @Component({
   selector: 'app-column',
-  imports: [RouterModule, CommonModule,FormsModule],
+  imports: [CommonModule,FormsModule,RouterModule],
   templateUrl: './column.component.html',
   standalone: true,
-  styleUrl: './column.component.css'
+  styleUrl: './column.component.css',
+
 })
-export class ColumnComponent {
+export class ColumnComponent implements OnInit{
     columns: Column[] = [];
     searchText: string = '';
-  
-    constructor(private columnService: ColumnService, private router: Router) {}
+    showAnimation = true;  
+
+    constructor(private columnService: ColumnService) {}
   
     ngOnInit(): void {
       this.loadColumns();
+      
     }
   
     loadColumns(): void {
