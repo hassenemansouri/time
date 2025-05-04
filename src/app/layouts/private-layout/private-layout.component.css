@@ -47,7 +47,7 @@
 
 .nav-link {
   text-decoration: none;
-  color: #ffffff;
+  color: rgba(0, 18, 41, 0.06);
   font-size: 24px;
   right: 300px;
 }
@@ -58,12 +58,12 @@
 .digital-clock {
   font-family: 'Courier New', monospace;
   font-size: 1.1rem;
-  color: #ffffff;
-  background: linear-gradient(135deg, #2a90e4, #d8ccf6);
+  color: rgb(5, 5, 5);
+  background: linear-gradient(135deg, #b8cbda, #d8ccf6);
   padding: 6px 14px;
   border-radius: 12px;
-  border: 1px solid rgba(255, 255, 255, 0.3);
-  box-shadow: 0 4px 12px rgba(13, 110, 253, 0.4), inset 0 0 8px rgba(255, 255, 255, 0.1);
+  border: 1px solid rgb(255, 255, 255);
+  box-shadow: 0 4px 12px rgb(60, 153, 241), inset 0 0 8px rgb(0, 187, 253);
   letter-spacing: 1.5px;
   animation: glowPulse 3s infinite ease-in-out;
   transition: all 0.3s ease-in-out;
@@ -72,12 +72,23 @@
 
 @keyframes glowPulse {
   0% {
-    box-shadow: 0 0 8px rgba(13, 110, 253, 0.6), inset 0 0 4px rgba(255, 255, 255, 0.1);
+    box-shadow: 0 0 8px rgba(234, 241, 251, 0.88), inset 0 0 4px rgb(0, 139, 252);
   }
   50% {
-    box-shadow: 0 0 16px rgba(102, 16, 242, 0.9), inset 0 0 10px rgba(255, 255, 255, 0.2);
+    box-shadow: 0 0 16px rgb(0, 139, 252), inset 0 0 10px rgba(255, 255, 255, 0.2);
   }
   100% {
-    box-shadow: 0 0 8px rgba(13, 110, 253, 0.6), inset 0 0 4px rgba(255, 255, 255, 0.1);
+    box-shadow: 0 0 8px rgba(13, 110, 253, 0.6), inset 0 0 4px rgb(255, 255, 255);
   }
+}
+.nav-link {
+  color: #ffffff;
+  font-size: 1.2rem;
+  margin-right: 1rem;
+  transition: transform 0.2s ease-in-out;
+}
+
+.nav-link:hover {
+  transform: scale(1.2);
+  color: #b3ddf4; /* Jaune doré au survol */
 }
