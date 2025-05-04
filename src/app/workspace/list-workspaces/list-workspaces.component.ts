@@ -35,7 +35,7 @@ export class ListWorkspacesComponent implements OnInit {
     // Hide the animation after 5 seconds and show the workflow content
     setTimeout(() => {
       this.showAnimation = false;
-    }, 3000);
+    }, 2000);
   }
 
   constructor(private workspaceService: WorkspaceService , protected router : Router) {}
