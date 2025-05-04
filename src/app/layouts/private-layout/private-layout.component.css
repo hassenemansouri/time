@@ -39,3 +39,45 @@
 .navbar .dropdown-menu {
   min-width: 200px;
 }
+.nav-icons {
+  display: flex;
+  gap: 20px;
+  align-items: center;
+}
+
+.nav-link {
+  text-decoration: none;
+  color: #ffffff;
+  font-size: 24px;
+  right: 300px;
+}
+
+.nav-link:hover {
+  color: #89c1df;
+}
+.digital-clock {
+  font-family: 'Courier New', monospace;
+  font-size: 1.1rem;
+  color: #ffffff;
+  background: linear-gradient(135deg, #2a90e4, #d8ccf6);
+  padding: 6px 14px;
+  border-radius: 12px;
+  border: 1px solid rgba(255, 255, 255, 0.3);
+  box-shadow: 0 4px 12px rgba(13, 110, 253, 0.4), inset 0 0 8px rgba(255, 255, 255, 0.1);
+  letter-spacing: 1.5px;
+  animation: glowPulse 3s infinite ease-in-out;
+  transition: all 0.3s ease-in-out;
+  display: inline-block;
+}
+
+@keyframes glowPulse {
+  0% {
+    box-shadow: 0 0 8px rgba(13, 110, 253, 0.6), inset 0 0 4px rgba(255, 255, 255, 0.1);
+  }
+  50% {
+    box-shadow: 0 0 16px rgba(102, 16, 242, 0.9), inset 0 0 10px rgba(255, 255, 255, 0.2);
+  }
+  100% {
+    box-shadow: 0 0 8px rgba(13, 110, 253, 0.6), inset 0 0 4px rgba(255, 255, 255, 0.1);
+  }
+}
