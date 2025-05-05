@@ -4,7 +4,7 @@
     <div>
       <label for="amount">Amount (TND)</label>
       <input id="amount" formControlName="amount" type="number" step="0.01" placeholder="e.g., 10.50" />
-      <div *ngIf="paymentForm.get('amount')?.touched && paymentForm.get('amount')?.invalid">
+      <div *ngIf="paymentForm.get('amount') && paymentForm.get('amount')?.invalid">
         <span *ngIf="paymentForm.get('amount')?.errors?.['required']">Amount is required.</span>
         <span *ngIf="paymentForm.get('amount')?.errors?.['min']">Amount must be at least 1 TND.</span>
         <span *ngIf="paymentForm.get('amount')?.errors?.['pattern']">Amount must have up to 2 decimal places.</span>
