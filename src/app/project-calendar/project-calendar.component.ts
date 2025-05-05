@@ -356,7 +356,7 @@ export class ProjectCalendarComponent {
           this.appointments.push({
             endTime: '',
             startTime: '',
-            id: `${project.projet_id}-${i}`,
+            id: `${project.project_id}-${i}`,
             title: `${project.title} (${project.category})`, // Ajoute la catégorie si utile
             date: date
           });

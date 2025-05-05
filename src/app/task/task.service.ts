@@ -3,6 +3,8 @@ import { HttpClient, HttpParams } from '@angular/common/http';
 import { Observable } from 'rxjs';
 import { HttpHeaders } from '@angular/common/http';
 import { Task } from '../models/task.model';
+import { TaskEstimation } from '../models/taskEstimation.model';
+import { Project } from '../models/project.model';
 @Injectable({
   providedIn: 'root'
 })
@@ -38,18 +40,20 @@ getAllTasks(): Observable<Task[]> {
    getTasksByColumnId(columnId: string): Observable<Task[]> {
     return this.http.get<Task[]>(`${this.apiUrl}/column/${columnId}`);
   }
-  // searchTasks(filters: {
-  //   name?: string;
-  //   priority?: string;
-  //   assignedToId?: string;
-  //   projectId?: string;
-  // }): Observable<Task[]> {
-  //   // Nettoie les paramètres avant envoi
-  //   const cleanedFilters = Object.fromEntries(
-  //     Object.entries(filters).filter(([_, v]) => !!v)
-  //   );
-    
-  //   const params = new HttpParams({ fromObject: cleanedFilters });
-  //   return this.http.get<Task[]>(`${this.apiUrl}/search`, { params });
-  // }
+  getTasksByProject(projectId: string): Observable<Task[]> {
+    return this.http.get<Task[]>(`${this.apiUrl}/projects/${projectId}`);
+  }
+ 
+  estimateTask(task: Task): Observable<TaskEstimation> {
+    const request = {
+      priority: task.priority,
+      dueDate: task.dueDate
+    };
+    return this.http.post<TaskEstimation>(`${this.apiUrl}/estimate`, request);
+  }
+
+  estimateExistingTask(id: string): Observable<TaskEstimation> {
+    return this.http.get<TaskEstimation>(`${this.apiUrl}/${id}/estimate`);
+  }
+
 }
