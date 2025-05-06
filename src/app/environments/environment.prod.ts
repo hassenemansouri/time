@@ -1,4 +1,5 @@
 export const environment = {
   production: true,
-  apiUrl: 'http://gateway:8222/api'
+  apiUrl:  'https://5cc4-102-31-147-197.ngrok-free.app'
 };
+

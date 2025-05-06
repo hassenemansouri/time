@@ -105,7 +105,7 @@ export class AuthService {
     const headers = new HttpHeaders({ 'Content-Type': 'application/json' });
 
     return this.http.post(
-      `http://localhost:8100/timeforge/auth/reset-password`,
+      `https://5cc4-102-31-147-197.ngrok-free.app/timeforge/auth/reset-password`,
       { token, password: newPassword },
       { headers, withCredentials: true }
     );
