@@ -6,7 +6,7 @@ import { Observable } from 'rxjs';
   providedIn: 'root',
 })
 export class EmailService {
-  private apiUrl = 'https://5cc4-102-31-147-197.ngrok-free.app/timeforge/api/email/send';  // URL to the email microservice
+  private apiUrl = 'https://5cc4-102-31-147-197.ngrok-free.app/timeforge/api/email/send ';  // URL to the email microservice
 
   constructor(private http: HttpClient) {}
 
